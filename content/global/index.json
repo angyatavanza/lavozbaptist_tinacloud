@@ -5,20 +5,48 @@
       "color": "orange",
       "style": "float"
     },
-    "name": "Tina Starter",
+    "name": "La Voz",
     "color": "default",
     "nav": [
       {
-        "href": "/",
-        "label": "Home"
+        "href": "home",
+        "label": "Casa"
       },
       {
         "href": "/about",
-        "label": "About"
+        "label": "Sobre Nosotros"
       },
       {
-        "href": "/posts",
-        "label": "Blog"
+        "href": "/messages",
+        "label": "Mensajes"
+      },
+      {
+        "href": "/groups",
+        "label": "Grupos"
+      },
+      {
+        "href": "/nextsteps",
+        "label": "Siguientes Pasos"
+      },
+      {
+        "href": "/contact",
+        "label": "Contacto"
+      },
+      {
+        "href": "/donations",
+        "label": "Donaciones"
+      },
+      {
+        "href": "/serve",
+        "label": "Servir"
+      },
+      {
+        "href": "/events",
+        "label": "Eventos"
+      },
+      {
+        "href": "/resources",
+        "label": "Recursos"
       }
     ]
   },
@@ -51,7 +79,7 @@
     ]
   },
   "theme": {
-    "color": "blue",
+    "color": "purple",
     "font": "sans",
     "darkMode": "light"
   }

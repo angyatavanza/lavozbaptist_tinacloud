@@ -114,7 +114,7 @@ export default function PostsClientPage(props: ClientPostProps) {
                           <Image
                             width={533}
                             height={300}
-                            src={post.heroImg}
+                            src={post.heroImg}                            
                             alt={post.title}
                             className="h-full w-full object-cover transition-opacity duration-200 fade-in hover:opacity-70"
                           />
