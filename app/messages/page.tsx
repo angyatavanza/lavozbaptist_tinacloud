@@ -5,27 +5,27 @@ import MessagesClientPage from './client-page';
 export const revalidate = 300;
 
 export default async function MessagesPage() {
-  let messages = await client.queries.postConnection({
+  let messages = await client.queries.messageConnection({
     sort: 'date',
     last: 1
   });
   const allMessages = messages;
 
-  if (!allMessages.data.postConnection.edges) {
+  if (!allMessages.data.messageConnection.edges) {
     return [];
   }
 
-  while (messages.data?.postConnection.pageInfo.hasPreviousPage) {
-    messages = await client.queries.postConnection({
+  while (messages.data?.messageConnection.pageInfo.hasPreviousPage) {
+    messages = await client.queries.messageConnection({
       sort: 'date',
-      before: messages.data.postConnection.pageInfo.endCursor,
+      before: messages.data.messageConnection.pageInfo.endCursor,
     });
 
-    if (!messages.data.postConnection.edges) {
+    if (!messages.data.messageConnection.edges) {
       break;
     }
 
-    allMessages.data.postConnection.edges.push(...messages.data.postConnection.edges.reverse());
+    allMessages.data.messageConnection.edges.push(...messages.data.messageConnection.edges.reverse());
   }
 
   return (

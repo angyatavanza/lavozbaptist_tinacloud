@@ -24,27 +24,27 @@ export default async function MessagePage({
 }
 
 export async function generateStaticParams() {
-  let messages = await client.queries.postConnection();
+  let messages = await client.queries.messageConnection();
   const allMessages = messages;
 
-  if (!allMessages.data.postConnection.edges) {
+  if (!allMessages.data.messageConnection.edges) {
     return [];
   }
 
-  while (messages.data?.postConnection.pageInfo.hasNextPage) {
-    messages = await client.queries.postConnection({
-      after: messages.data.postConnection.pageInfo.endCursor,
+  while (messages.data?.messageConnection.pageInfo.hasNextPage) {
+    messages = await client.queries.messageConnection({
+      after: messages.data.messageConnection.pageInfo.endCursor,
     });
 
-    if (!messages.data.postConnection.edges) {
+    if (!messages.data.messageConnection.edges) {
       break;
     }
 
-    allMessages.data.postConnection.edges.push(...messages.data.postConnection.edges);
+    allMessages.data.messageConnection.edges.push(...messages.data.messageConnection.edges);
   }
 
   const params =
-    allMessages.data?.postConnection.edges.map((edge) => ({
+    allMessages.data?.messageConnection.edges.map((edge) => ({
       urlSegments: edge?.node?._sys.breadcrumbs,
     })) || [];
 

@@ -4,21 +4,21 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { format } from 'date-fns';
 import { TinaMarkdown } from 'tinacms/dist/rich-text';
-import { PostConnectionQuery, PostConnectionQueryVariables } from '@/tina/__generated__/types';
+import { MessageConnectionQuery, MessageConnectionQueryVariables } from '@/tina/__generated__/types';
 import ErrorBoundary from '@/components/error-boundary';
 import { ArrowRight, UserRound } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { Section } from '@/components/layout/section';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
-interface ClientPostProps {
-  data: PostConnectionQuery;
-  variables: PostConnectionQueryVariables;
+interface ClientMessageProps {
+  data: MessageConnectionQuery;
+  variables: MessageConnectionQueryVariables;
   query: string;
 }
 
-export default function MessagesClientPage(props: ClientPostProps) {
-  const messages = props.data?.postConnection.edges!.map((messageData) => {
+export default function MessagesClientPage(props: ClientMessageProps) {
+  const messages = props.data?.messageConnection.edges!.map((messageData) => {
     const message = messageData!.node!;
     const date = new Date(message.date!);
     let formattedDate = '';

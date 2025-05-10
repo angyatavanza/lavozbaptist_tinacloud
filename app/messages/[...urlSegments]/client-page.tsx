@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { format } from 'date-fns';
 import { tinaField, useTina } from 'tinacms/dist/react';
 import { TinaMarkdown } from 'tinacms/dist/rich-text';
-import { PostQuery } from '@/tina/__generated__/types';
+import { MessageQuery } from '@/tina/__generated__/types';
 import { useLayout } from '@/components/layout/layout-context';
 import { Section } from '@/components/layout/section';
 import { components } from '@/components/mdx-components';
@@ -21,15 +21,15 @@ const titleColorClasses = {
   yellow: 'from-yellow-400 to-yellow-500 dark:from-yellow-300 dark:to-yellow-500',
 };
 
-interface ClientPostProps {
-  data: PostQuery;
+interface ClientMessageProps {
+  data: MessageQuery;
   variables: {
     relativePath: string;
   };
   query: string;
 }
 
-export default function MessageClientPage(props: ClientPostProps) {
+export default function MessageClientPage(props: ClientMessageProps) {
   const { theme } = useLayout();
   const { data } = useTina({ ...props });
   const message = data.message;
