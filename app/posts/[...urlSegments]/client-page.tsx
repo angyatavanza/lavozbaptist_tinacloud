@@ -29,12 +29,12 @@ interface ClientPostProps {
   query: string;
 }
 
-export default function PostClientPage(props: ClientPostProps) {
+export default function MessageClientPage(props: ClientPostProps) {
   const { theme } = useLayout();
   const { data } = useTina({ ...props });
-  const post = data.post;
+  const message = data.message;
 
-  const date = new Date(post.date!);
+  const date = new Date(message.date!);
   let formattedDate = '';
   if (!isNaN(date.getTime())) {
     formattedDate = format(date, 'MMM dd, yyyy');
@@ -43,48 +43,48 @@ export default function PostClientPage(props: ClientPostProps) {
   return (
     <ErrorBoundary>
       <Section>
-        <h2 data-tina-field={tinaField(post, 'title')} className={`w-full relative\tmb-8 text-6xl font-extrabold tracking-normal text-center title-font`}>
-          <span className={`bg-clip-text text-transparent bg-linear-to-r ${titleColorClasses[theme!.color!]}`}>{post.title}</span>
+        <h2 data-tina-field={tinaField(message, 'title')} className={`w-full relative\tmb-8 text-6xl font-extrabold tracking-normal text-center title-font`}>
+          <span className={`bg-clip-text text-transparent bg-linear-to-r ${titleColorClasses[theme!.color!]}`}>{message.title}</span>
         </h2>
-        <div data-tina-field={tinaField(post, 'author')} className='flex items-center justify-center mb-16'>
-          {post.author && (
+        <div data-tina-field={tinaField(message, 'author')} className='flex items-center justify-center mb-16'>
+          {message.author && (
             <>
-              {post.author.avatar && (
+              {message.author.avatar && (
                 <div className='shrink-0 mr-4'>
                   <Image
-                    data-tina-field={tinaField(post.author, 'avatar')}
+                    data-tina-field={tinaField(message.author, 'avatar')}
                     priority={true}
                     className='h-14 w-14 object-cover rounded-full shadow-xs'
-                    src={post.author.avatar}
-                    alt={post.author.name}
+                    src={message.author.avatar}
+                    alt={message.author.name}
                     width={500}
                     height={500}
                   />
                 </div>
               )}
               <p
-                data-tina-field={tinaField(post.author, 'name')}
+                data-tina-field={tinaField(message.author, 'name')}
                 className='text-base font-medium text-gray-600 group-hover:text-gray-800 dark:text-gray-200 dark:group-hover:text-white'
               >
-                {post.author.name}
+                {message.author.name}
               </p>
               <span className='font-bold text-gray-200 dark:text-gray-500 mx-2'>—</span>
             </>
           )}
           <p
-            data-tina-field={tinaField(post, 'date')}
+            data-tina-field={tinaField(message, 'date')}
             className='text-base text-gray-400 group-hover:text-gray-500 dark:text-gray-300 dark:group-hover:text-gray-150'
           >
             {formattedDate}
           </p>
         </div>
-        {post.heroImg && (
+        {message.heroImg && (
           <div className='px-4 w-full'>
-            <div data-tina-field={tinaField(post, 'heroImg')} className='relative max-w-4xl lg:max-w-5xl mx-auto'>
+            <div data-tina-field={tinaField(message, 'heroImg')} className='relative max-w-4xl lg:max-w-5xl mx-auto'>
               <Image
                 priority={true}
-                src={post.heroImg}
-                alt={post.title}
+                src={message.heroImg}
+                alt={message.title}
                 className='absolute block mx-auto rounded-lg w-full h-auto blur-2xl brightness-150 contrast-[0.9] dark:brightness-150 saturate-200 opacity-50 dark:opacity-30 mix-blend-multiply dark:mix-blend-hard-light'
                 aria-hidden='true'
                 width={500}
@@ -93,8 +93,8 @@ export default function PostClientPage(props: ClientPostProps) {
               />
               <Image
                 priority={true}
-                src={post.heroImg}
-                alt={post.title}
+                src={message.heroImg}
+                alt={message.title}
                 width={500}
                 height={500}
                 className='relative z-10 mb-14 mx-auto block rounded-lg w-full h-auto opacity-100'
@@ -103,9 +103,9 @@ export default function PostClientPage(props: ClientPostProps) {
             </div>
           </div>
         )}
-        <div data-tina-field={tinaField(post, '_body')} className='prose dark:prose-dark w-full max-w-none'>
+        <div data-tina-field={tinaField(message, '_body')} className='prose dark:prose-dark w-full max-w-none'>
           <TinaMarkdown
-            content={post._body}
+            content={message._body}
             components={{
               ...components,
             }}

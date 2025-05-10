@@ -1,50 +1,50 @@
 import React from 'react';
 import client from '@/tina/__generated__/client';
 import Layout from '@/components/layout/layout';
-import PostClientPage from './client-page';
+import MessageClientPage from './client-page';
 
 export const revalidate = 300;
 
-export default async function PostPage({
+export default async function MessagePage({
   params,
 }: {
   params: Promise<{ urlSegments: string[] }>;
 }) {
   const resolvedParams = await params;
   const filepath = resolvedParams.urlSegments.join('/');
-  const data = await client.queries.post({
+  const data = await client.queries.message({
     relativePath: `${filepath}.mdx`,
   });
 
   return (
     <Layout rawPageData={data}>
-      <PostClientPage {...data} />
+      <MessageClientPage {...data} />
     </Layout>
   );
 }
 
 export async function generateStaticParams() {
-  let posts = await client.queries.postConnection();
-  const allPosts = posts;
+  let messages = await client.queries.postConnection();
+  const allMessages = messages;
 
-  if (!allPosts.data.postConnection.edges) {
+  if (!allMessages.data.postConnection.edges) {
     return [];
   }
 
-  while (posts.data?.postConnection.pageInfo.hasNextPage) {
-    posts = await client.queries.postConnection({
-      after: posts.data.postConnection.pageInfo.endCursor,
+  while (messages.data?.postConnection.pageInfo.hasNextPage) {
+    messages = await client.queries.postConnection({
+      after: messages.data.postConnection.pageInfo.endCursor,
     });
 
-    if (!posts.data.postConnection.edges) {
+    if (!messages.data.postConnection.edges) {
       break;
     }
 
-    allPosts.data.postConnection.edges.push(...posts.data.postConnection.edges);
+    allMessages.data.postConnection.edges.push(...messages.data.postConnection.edges);
   }
 
   const params =
-    allPosts.data?.postConnection.edges.map((edge) => ({
+    allMessages.data?.postConnection.edges.map((edge) => ({
       urlSegments: edge?.node?._sys.breadcrumbs,
     })) || [];
 

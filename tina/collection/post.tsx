@@ -3,14 +3,14 @@ import { videoBlockSchema } from '@/components/blocks/video';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import type { Collection } from 'tinacms';
 
-const Post: Collection = {
-  label: 'Blog Posts',
-  name: 'post',
-  path: 'content/posts',
+const Message: Collection = {
+  label: 'Blog Messages',
+  name: 'message',
+  path: 'content/messages',
   format: 'mdx',
   ui: {
     router: ({ document }) => {
-      return `/posts/${document._sys.breadcrumbs.join('/')}`;
+      return `/messages/${document._sys.breadcrumbs.join('/')}`;
     },
   },
   fields: [
@@ -26,7 +26,7 @@ const Post: Collection = {
       name: 'heroImg',
       label: 'Hero Image',
       // @ts-ignore
-      uploadDir: () => "posts",
+      uploadDir: () => "messages",
     },
     {
       type: 'rich-text',
@@ -189,4 +189,4 @@ const Post: Collection = {
   ],
 };
 
-export default Post;
+export default Message;
