@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Border from "./Border";
+import { Border } from "./Border";
 import { FadeIn, FadeInStagger } from "./FadeIn";
 import React, { ReactNode, ReactElement } from "react";
 

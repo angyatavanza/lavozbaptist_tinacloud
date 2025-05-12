@@ -1,4 +1,10 @@
-const RadioInput = ({ label, ...props }) => {
+import { InputHTMLAttributes } from "react";
+
+interface RadioInputProps extends InputHTMLAttributes<HTMLInputElement> {
+  label: string;
+}
+
+export const RadioInput = ({ label, ...props }: RadioInputProps) => {
   return (
     <label className="flex gap-x-3">
       <input
@@ -11,4 +17,4 @@ const RadioInput = ({ label, ...props }) => {
   );
 };
 
-export default RadioInput;
+//export default RadioInput;

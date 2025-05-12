@@ -1,11 +1,21 @@
 import { navigation } from "@/constants";
 import Link from "next/link";
 
-const FooterNavigation = () => {
+type NavigationLink = {
+  title: string;
+  href: string;
+};
+
+type NavigationItem = {
+  title: string;
+  links: NavigationLink[];
+};
+
+export const FooterNavigation: React.FC = () => {
   return (
     <nav>
       <ul role="list" className="grid grid-cols-2 gap-8 sm:grid-cols-3">
-        {navigation.map((item) => (
+        {(navigation as NavigationItem[]).map((item) => (
           <li key={item.title}>
             <div className="font-display text-sm font-semibold tracking-wider text-neutral-950">
               {item.title}
@@ -29,4 +39,4 @@ const FooterNavigation = () => {
   );
 };
 
-export default FooterNavigation;
+//export default FooterNavigation;

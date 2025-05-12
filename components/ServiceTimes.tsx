@@ -1,6 +1,13 @@
 import clsx from "clsx";
+import { ReactNode, HTMLAttributes } from "react";
 
-function Office({ name, children, invert = false }) {
+type OfficeProps = {
+  name: string;
+  children: ReactNode;
+  invert?: boolean;
+};
+
+function Office({ name, children, invert = false }: OfficeProps): JSX.Element {
   return (
     <address
       className={clsx(
@@ -17,7 +24,14 @@ function Office({ name, children, invert = false }) {
   );
 }
 
-const ServiceTimes = ({ invert = false, ...props }) => {
+type ServiceTimesProps = {
+  invert?: boolean;
+} & HTMLAttributes<HTMLUListElement>;
+
+const ServiceTimes = ({
+  invert = false,
+  ...props
+}: ServiceTimesProps): JSX.Element => {
   return (
     <ul role="list" {...props}>
       <li>

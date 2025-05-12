@@ -1,8 +1,8 @@
 "use client";
 import { usePathname } from "next/navigation";
-import { useEffect, useId, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState, ReactNode, RefObject } from "react";
 import { motion, MotionConfig, useReducedMotion } from "framer-motion";
-import { Container }from "./Container";
+import { Container } from "./Container";
 import Link from "next/link";
 import Logo from "./Logo";
 import { HiMenuAlt4 } from "react-icons/hi";
@@ -13,50 +13,36 @@ import ServiceTimes from "./ServiceTimes";
 import SocialMedia from "./SocialMedia";
 import Footer from "./Footer";
 
-const Header = ({
-  panelId,
-  invert = false,
-  icon: Icon,
-  expanded,
-  onToggle,
-  toggleRef,
-}) => {
-  // Container
+type HeaderProps = {
+  panelId: string;
+  invert?: boolean;
+  icon: React.ElementType;
+  expanded: boolean;
+  onToggle: () => void;
+  toggleRef: RefObject<HTMLButtonElement>;
+};
+
+const Header = ({ panelId, invert = false, icon: Icon, expanded, onToggle, toggleRef }: HeaderProps) => {
   return (
     <Container>
       <div className="flex items-center justify-between">
-        {/* Logo */}
-        <Link href={"/"} aria-label="Home">
+        <Link href="/" aria-label="Home">
           <Logo invert={invert}>La Voz</Logo>
         </Link>
         <div className="flex items-center gap-x-8">
-          <Link
-            href={"/about"}
-            className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
-          >
+          <Link href="/about" className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">
             Sobre nosotros
           </Link>
-          <Link
-            href={"/messages"}
-            className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
-          >
+          <Link href="/messages" className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">
             Mensajes
           </Link>
-          <Link
-            href={"/groups"}
-            className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
-          >
+          <Link href="/groups" className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">
             Grupos
           </Link>
-          <Link
-            href={"/growth"}
-            className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
-          >
+          <Link href="/growth" className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">
             Tu Siguiente Paso
           </Link>
-          <Button href={"/contact"} invert={invert}>
-            Contacto
-          </Button>
+          <Button href="/contact" invert={invert}>Contacto</Button>
           <button
             ref={toggleRef}
             type="button"
@@ -69,21 +55,18 @@ const Header = ({
             )}
             aria-label="Toggle navigation"
           >
-            <Icon
-              className={clsx(
-                "h-6 w-6",
-                invert
-                  ? "fill-white group-hover:fill-neutral-200"
-                  : "fill-purple-800 group-hover:fill-neutral-500"
-              )}
-            />
+            <Icon className={clsx(
+              "h-6 w-6",
+              invert ? "fill-white group-hover:fill-neutral-200" : "fill-purple-800 group-hover:fill-neutral-500"
+            )} />
           </button>
         </div>
       </div>
     </Container>
   );
 };
-const NavigationRow = ({ children }) => {
+
+const NavigationRow = ({ children }: { children: ReactNode }) => {
   return (
     <div className="even:mt-px sm:bg-purple-800">
       <Container>
@@ -93,7 +76,7 @@ const NavigationRow = ({ children }) => {
   );
 };
 
-const NavigationItem = ({ href, children }) => {
+const NavigationItem = ({ href, children }: { href: string; children: ReactNode }) => {
   return (
     <Link
       href={href}
@@ -120,44 +103,40 @@ const Navigation = () => {
   );
 };
 
-const RootLayoutInner = ({ children }) => {
+type RootLayoutInnerProps = {
+  children: ReactNode;
+};
+
+const RootLayoutInner = ({ children }: RootLayoutInnerProps) => {
   const panelId = useId();
   const [expanded, setExpanded] = useState(false);
-  const openRef = useRef();
-  const closeRef = useRef();
-  const navRef = useRef();
+  const openRef = useRef<HTMLButtonElement>(null);
+  const closeRef = useRef<HTMLButtonElement>(null);
+  const navRef = useRef<HTMLDivElement>(null);
   const shouldReduceMotion = useReducedMotion();
+
   useEffect(() => {
-    function onClick(event) {
-      if (event.target.closest("a")?.href === window.location.href) {
+    function onClick(event: MouseEvent) {
+      if ((event.target as HTMLElement).closest("a")?.getAttribute("href") === window.location.href) {
         setExpanded(false);
       }
     }
     window.addEventListener("click", onClick);
-
-    return () => {
-      window.removeEventListener("click", onClick);
-    };
+    return () => window.removeEventListener("click", onClick);
   }, []);
+
   return (
     <MotionConfig transition={shouldReduceMotion ? { duration: 0 } : undefined}>
       <header>
-        <div
-          className="absolute left-0 right-0 top-2 z-40 pt-14"
-          aria-hidden={expanded ? "true" : undefined}
-          inert={expanded ? "" : undefined}
-        >
-          {/* Header */}
+        <div className="absolute left-0 right-0 top-2 z-40 pt-14" aria-hidden={expanded ? "true" : undefined} inert={expanded ? "" : undefined}>
           <Header
             panelId={panelId}
             icon={HiMenuAlt4}
             toggleRef={openRef}
             expanded={expanded}
             onToggle={() => {
-              setExpanded((expanded) => !expanded);
-              window.setTimeout(() =>
-                closeRef.current?.focus({ preventScroll: true })
-              );
+              setExpanded((prev) => !prev);
+              window.setTimeout(() => closeRef.current?.focus({ preventScroll: true }));
             }}
           />
         </div>
@@ -178,14 +157,11 @@ const RootLayoutInner = ({ children }) => {
                 toggleRef={closeRef}
                 expanded={expanded}
                 onToggle={() => {
-                  setExpanded((expanded) => !expanded);
-                  window.setTimeout(() =>
-                    openRef.current?.focus({ preventScroll: true })
-                  );
+                  setExpanded((prev) => !prev);
+                  window.setTimeout(() => openRef.current?.focus({ preventScroll: true }));
                 }}
               />
             </div>
-            {/* Navigation */}
             <Navigation />
             <div className="relative bg-purple-800 before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-purple-600">
               <Container>
@@ -194,10 +170,7 @@ const RootLayoutInner = ({ children }) => {
                     <h2 className="font-display text-base font-semibold text-white">
                       Nuestra ubicacion y tiempos de servicios
                     </h2>
-                    <ServiceTimes
-                      invert
-                      className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2"
-                    />
+                    <ServiceTimes invert className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2" />
                   </div>
                   <div className="sm:border-l sm:border-transparent sm:pl-16">
                     <h2 className="font-display text-base font-semibold text-white">
@@ -211,17 +184,9 @@ const RootLayoutInner = ({ children }) => {
           </motion.div>
         </motion.div>
       </header>
-      <motion.div
-        layout
-        style={{ borderTopLeftRadius: 40, borderTopRightRadius: 40 }}
-        className="relative flex flex-auto overflow-hidden bg-white pt-14"
-      >
-        <motion.div
-          layout
-          className="relative isolate flex w-full flex-col pt-9"
-        >
+      <motion.div layout style={{ borderTopLeftRadius: 40, borderTopRightRadius: 40 }} className="relative flex flex-auto overflow-hidden bg-white pt-14">
+        <motion.div layout className="relative isolate flex w-full flex-col pt-9">
           <main className="w-full flex-auto">{children}</main>
-          {/* Footer */}
           <Footer />
         </motion.div>
       </motion.div>
@@ -229,9 +194,13 @@ const RootLayoutInner = ({ children }) => {
   );
 };
 
-const RootLayout = ({ children }) => {
+type RootLayoutProps = {
+  children: ReactNode;
+};
+
+export const RootLayout = ({ children }: RootLayoutProps) => {
   const pathName = usePathname();
   return <RootLayoutInner key={pathName}>{children}</RootLayoutInner>;
 };
 
-export default RootLayout;
+//export default RootLayout;

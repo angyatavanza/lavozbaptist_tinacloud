@@ -7,9 +7,16 @@ import {
   BsYoutube,
   BsLinkedin,
   BsInstagram,
+  IconType,
 } from "react-icons/bs";
 
-export const SocialMediaProfiles = [
+type SocialMediaProfile = {
+  title: string;
+  href: string;
+  icon: IconType;
+};
+
+export const SocialMediaProfiles: SocialMediaProfile[] = [
   {
     title: "Youtube",
     href: "https://www.youtube.com/watch?v=eAswnbWptBM",
@@ -27,7 +34,12 @@ export const SocialMediaProfiles = [
   },
 ];
 
-const SocialMedia = ({ className, invert = false }) => {
+type SocialMediaProps = {
+  className?: string;
+  invert?: boolean;
+};
+
+export const SocialMedia = ({ className, invert = false }: SocialMediaProps): JSX.Element => {
   return (
     <ul
       role="list"
@@ -55,4 +67,4 @@ const SocialMedia = ({ className, invert = false }) => {
   );
 };
 
-export default SocialMedia;
+//export default SocialMedia;

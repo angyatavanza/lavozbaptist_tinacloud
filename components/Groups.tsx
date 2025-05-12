@@ -1,12 +1,12 @@
 import React from "react";
 import { SectionIntro } from "./layout/SectionIntro";
-import { Container }from "./Container";
-import FadeIn from "./FadeIn";
-import StylizedImage from "./StylizedImage";
+import { Container } from "./Container";
+import { FadeIn } from "./FadeIn";
+import { StylizedImage } from "./StylizedImage";
 import imageLaptop from "../images/church/congregation-IMG-1038.jpg";
-import List, { ListItem } from "./List";
+import {List, ListItem } from "./List";
 
-const Groups = () => {
+export const Groups: React.FC = () => {
   return (
     <>
       <SectionIntro
@@ -31,7 +31,6 @@ const Groups = () => {
               />
             </FadeIn>
           </div>
-          {/* List item */}
           <List className="mt-16 lg:mt-0 lg:w-1/2 lg:min-w-[33rem] lg:pl-4">
             <ListItem title="Misiones">
               El ministerio, Misiones La Voz, comparte el amor de Jesús, suple necesidades físicas y apoya el inicio de siembra de Iglesias en diferentes países.
@@ -55,4 +54,4 @@ const Groups = () => {
   );
 };
 
-export default Groups;
+//export default Groups;

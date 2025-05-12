@@ -1,8 +1,14 @@
-import FadeIn, { FadeInStagger } from "./FadeIn";
-import Border from "./Border";
+import React, { ReactNode } from "react";
+import { FadeIn, FadeInStagger } from "./FadeIn";
+import { Border } from "./Border";
 import clsx from "clsx";
 
-const List = ({ className, children }) => {
+interface ListProps {
+  className?: string;
+  children: ReactNode;
+}
+
+export const List = ({ className, children }: ListProps) => {
   return (
     <FadeInStagger>
       <ul role="list" className={clsx("text-base text-neutral-600", className)}>
@@ -12,7 +18,12 @@ const List = ({ className, children }) => {
   );
 };
 
-export const ListItem = ({ title, children }) => {
+interface ListItemProps {
+  title?: string;
+  children: ReactNode;
+}
+
+export const ListItem = ({ title, children }: ListItemProps) => {
   return (
     <li className="group mt-10 first:mt-0">
       <FadeIn>
@@ -27,4 +38,4 @@ export const ListItem = ({ title, children }) => {
   );
 };
 
-export default List;
+//export default List;
