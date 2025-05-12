@@ -8,7 +8,7 @@ import { PageBlocksHero, PageBlocksHeroImage } from '../../tina/__generated__/ty
 import { Button } from '../ui/button';
 import { iconSchema } from '@/tina/fields/icon';
 import { Icon } from '../icon';
-import { Section, sectionBlockSchemaField } from '../layout/section';
+import { Section, sectionBlockSchemaField } from '../layout/Section';
 import { AnimatedGroup } from '../motion-primitives/animated-group';
 import { TextEffect } from '../motion-primitives/text-effect';
 import HeroVideoDialog from '../ui/hero-video-dialog';

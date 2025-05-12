@@ -5,7 +5,7 @@ import { iconSchema } from '@/tina/fields/icon';
 import { Button } from '@/components/ui/button'
 import { PageBlocksCta } from '@/tina/__generated__/types';
 import { Icon } from '../icon';
-import { Section } from '../layout/section';
+import { Section } from '../layout/Section';
 
 export const CallToAction = ({ data }: { data: PageBlocksCta }) => {
     return (

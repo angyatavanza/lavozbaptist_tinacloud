@@ -1,8 +1,15 @@
 import Image from "next/image";
 import Border from "./Border";
-import FadeIn, { FadeInStagger } from "./FadeIn";
+import { FadeIn, FadeInStagger } from "./FadeIn";
+import React, { ReactNode, ReactElement } from "react";
 
-export function StatList({ children, ...props }) {
+// Props for StatList
+interface StatListProps {
+  children: ReactNode;
+  [key: string]: any; // Allow passing additional props to FadeInStagger
+}
+
+export function StatList({ children, ...props }: StatListProps): ReactElement {
   return (
     <FadeInStagger {...props}>
       <dl className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:auto-cols-fr lg:grid-flow-col lg:grid-cols-none">
@@ -12,7 +19,13 @@ export function StatList({ children, ...props }) {
   );
 }
 
-export function StatListItem({ label, value }) {
+// Props for StatListItem
+interface StatListItemProps {
+  label: ReactNode;
+  value: ReactNode;
+}
+
+export function StatListItem({ label, value }: StatListItemProps): ReactElement {
   return (
     <Border as={FadeIn} position="left" className="flex flex-col-reverse pl-8">
       <dt className="mt-2 text-base text-neutral-600">{label}</dt>

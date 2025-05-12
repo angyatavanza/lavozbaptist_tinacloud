@@ -1,7 +1,18 @@
 import Image from "next/image";
 import clsx from "clsx";
+import { ReactNode } from "react";
 
-export function TagList({ className, children }) {
+interface TagListProps {
+  className?: string;
+  children: ReactNode;
+}
+
+interface TagListItemProps {
+  className?: string;
+  children: ReactNode;
+}
+
+export function TagList({ className, children }: TagListProps) {
   return (
     <ul role="list" className={clsx(className, "flex flex-wrap gap-4")}>
       {children}
@@ -9,7 +20,7 @@ export function TagList({ className, children }) {
   );
 }
 
-export function TagListItem({ className, children }) {
+export function TagListItem({ className, children }: TagListItemProps) {
   return (
     <li
       className={clsx(

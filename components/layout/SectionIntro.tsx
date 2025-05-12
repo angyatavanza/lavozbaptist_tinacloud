@@ -1,6 +1,6 @@
 import React, { ReactNode, HTMLAttributes } from "react";
-import Container from "./Container";
-import FadeIn from "./FadeIn";
+import { Container } from "../Container";
+import { FadeIn } from "../FadeIn";
 import clsx from "clsx";
 
 // Define the props for the SectionIntro component
@@ -12,7 +12,7 @@ interface SectionIntroProps extends HTMLAttributes<HTMLDivElement> {
   invert?: boolean;
 }
 
-const SectionIntro: React.FC<SectionIntroProps> = ({
+export const SectionIntro: React.FC<SectionIntroProps> = ({
   eyebrow,
   title,
   children,
@@ -64,4 +64,4 @@ const SectionIntro: React.FC<SectionIntroProps> = ({
   );
 };
 
-export default SectionIntro;
+//export default SectionIntro;

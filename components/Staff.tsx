@@ -7,8 +7,8 @@ import logoMailSmirk from "../images/staff/mail-smirk/logo-light.svg";
 import logoNorthAdventures from "../images/staff/north-adventures/logo-light.svg";
 import logoPhobiaLight from "../images/staff/phobia/logo-light.svg";
 import logoUnseal from "../images/staff/unseal/logo-light.svg";
-import Container from "./Container";
-import FadeIn, { FadeInStagger } from "./FadeIn";
+import { Container }from "./Container";
+import { FadeIn, FadeInStagger } from "./FadeIn";
 
 const staffMembers = [
   ["Pastor Hugo", logoPhobiaLight],

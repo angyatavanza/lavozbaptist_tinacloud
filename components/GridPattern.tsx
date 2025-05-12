@@ -1,8 +1,16 @@
 "use client";
-
 import { useId, useRef, useState } from "react";
 import { motion } from "framer-motion";
-function Block({ x, y, ...props }) {
+import type { SVGProps } from "react";
+
+// Props for Block component
+interface BlockProps extends SVGProps<SVGPathElement> {
+  x: number;
+  y: number;
+}
+
+// Block component
+function Block({ x, y, ...props }: BlockProps) {
   return (
     <motion.path
       transform={`translate(${-32 * y + 96 * x} ${160 * y})`}
@@ -12,13 +20,22 @@ function Block({ x, y, ...props }) {
   );
 }
 
-const GridPattern = ({ yOffset = 0, interactive = false, ...props }) => {
-  let id = useId();
-  let ref = useRef();
-  let currentBlock = useRef();
-  let counter = useRef(0);
-  let [hoveredBlocks, setHoveredBlocks] = useState([]);
-  let staticBlocks = [
+// Props for GridPattern component
+interface GridPatternProps extends SVGProps<SVGSVGElement> {
+  yOffset?: number;
+  interactive?: boolean;
+}
+
+// GridPattern component
+const GridPattern = ({ yOffset = 0, interactive = false, ...props }: GridPatternProps) => {
+  const id = useId();
+  const ref = useRef<SVGSVGElement>(null);
+  const currentBlock = useRef<any>(null);
+  const counter = useRef<number>(0);
+
+  const [hoveredBlocks, setHoveredBlocks] = useState<[number, number, number][]>([]);
+
+  const staticBlocks: [number, number][] = [
     [1, 1],
     [2, 2],
     [4, 3],
@@ -26,24 +43,23 @@ const GridPattern = ({ yOffset = 0, interactive = false, ...props }) => {
     [7, 4],
     [5, 5],
   ];
+
   return (
     <svg ref={ref} aria-hidden="true" {...props}>
       <rect width="100%" height="100%" fill={`url(#${id})`} strokeWidth="0" />
       <svg x="50%" y={yOffset} strokeWidth="0" className="overflow-visible">
-        {staticBlocks.map((block) => (
-          <Block key={`${block}`} x={block[0]} y={block[1]} />
+        {staticBlocks.map(([x, y]) => (
+          <Block key={`${x}-${y}`} x={x} y={y} />
         ))}
-        {hoveredBlocks.map((block) => (
+        {hoveredBlocks.map(([x, y, key]) => (
           <Block
-            key={block[2]}
-            x={block[0]}
-            y={block[1]}
+            key={key}
+            x={x}
+            y={y}
             animate={{ opacity: [0, 1, 0] }}
             transition={{ duration: 1, times: [0, 0, 1] }}
             onAnimationComplete={() => {
-              setHoveredBlocks((blocks) =>
-                blocks.filter((b) => b[2] !== block[2])
-              );
+              setHoveredBlocks((blocks) => blocks.filter((b) => b[2] !== key));
             }}
           />
         ))}

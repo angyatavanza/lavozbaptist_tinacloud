@@ -1,20 +1,19 @@
-
 import Image from "next/image";
 import React from "react";
 import Section from "./Section";
 import imageMeeting from "@/images/church/Congregation-IMG-1140.jpg";
 import List, { ListItem } from "./List";
 
-const Step4 = () => {
+export const Step4: React.FC = () => {
   return (
     <Section title="Transforma tu vida" image={{ src: imageMeeting, shape: 1 }}>
       <div className="space-y-6 text-base text-neutral-600">
         <p>
-        Ayudará a desarrollar un estilo de vida que glorifique a Dios compartiendo su{" "}
-          <strong className="font-semibold text-neutral-950">
-            amor
-          </strong>
-          . También podrás descubrir el propósito de tu vida e integrarte al equipo de trabajo para llevar acabo tu misión de vida.
+          Ayudará a desarrollar un estilo de vida que glorifique a Dios
+          compartiendo su{" "}
+          <strong className="font-semibold text-neutral-950">amor</strong>.
+          También podrás descubrir el propósito de tu vida e integrarte al
+          equipo de trabajo para llevar acabo tu misión de vida.
         </p>
         {/* Longer description
         <p>
@@ -59,4 +58,4 @@ const Step4 = () => {
   );
 };
 
-export default Step4;
+//export default Step4;

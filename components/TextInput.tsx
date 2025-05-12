@@ -1,8 +1,14 @@
 import Image from "next/image";
-import React, { useId } from "react";
+import React, { useId, InputHTMLAttributes } from "react";
 
-const TextInput = ({ label, ...props }) => {
+// Extend standard input props and add custom `label` prop
+interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
+  label: string;
+}
+
+export const TextInput: React.FC<TextInputProps> = ({ label, ...props }) => {
   const id = useId();
+
   return (
     <div className="group relative z-0 transition-all focus-within:z-10">
       <input
@@ -21,5 +27,3 @@ const TextInput = ({ label, ...props }) => {
     </div>
   );
 };
-
-export default TextInput;

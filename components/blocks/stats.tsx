@@ -1,8 +1,8 @@
 import type { Template } from "tinacms";
 import { tinaField } from "tinacms/dist/react";
 import { PageBlocksStats } from "@/tina/__generated__/types";
-import { Section } from "../layout/section";
-import { sectionBlockSchemaField } from '../layout/section';
+import { Section } from "../layout/Section";
+import { sectionBlockSchemaField } from '../layout/Section';
 
 export const Stats = ({ data }: { data: PageBlocksStats }) => {
     return (

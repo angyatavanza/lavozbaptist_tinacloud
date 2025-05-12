@@ -9,8 +9,8 @@ import { TinaMarkdown } from "tinacms/dist/rich-text";
 import { Icon } from "../icon";
 import { iconSchema } from "../../tina/fields/icon";
 import { Card, CardContent, CardHeader } from "../ui/card";
-import { Section } from "../layout/section";
-import { sectionBlockSchemaField } from '../layout/section';
+import { Section } from "../layout/Section";
+import { sectionBlockSchemaField } from '../layout/Section';
 
 export const Features = ({ data }: { data: PageBlocksFeatures }) => {
   return (

@@ -5,8 +5,8 @@ import { format } from 'date-fns';
 import { tinaField, useTina } from 'tinacms/dist/react';
 import { TinaMarkdown } from 'tinacms/dist/rich-text';
 import { MessageQuery } from '@/tina/__generated__/types';
-import { useLayout } from '@/components/layout/layout-context';
-import { Section } from '@/components/layout/section';
+import { useLayout } from '@/components/layout/LayoutContext';
+import { Section } from '@/components/layout/Section';
 import { components } from '@/components/mdx-components';
 import ErrorBoundary from '@/components/error-boundary';
 

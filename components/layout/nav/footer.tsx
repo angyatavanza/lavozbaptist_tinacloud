@@ -2,7 +2,7 @@
 import React from "react";
 import Link from "next/link";
 import { Icon } from "../../icon";
-import { useLayout } from "../layout-context";
+import { useLayout } from "../LayoutContext";
 
 export const Footer = () => {
   const { globalSettings } = useLayout();

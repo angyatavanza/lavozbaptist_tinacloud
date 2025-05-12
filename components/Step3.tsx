@@ -1,10 +1,10 @@
 import Image from "next/image";
 import React from "react";
-import Section from "./Section";
+import { Section } from "./layout/Section";
 import imageMeeting from "@/images/church/Congregation-IMG-1140.jpg";
 import List, { ListItem } from "./List";
 
-const Step3 = () => {
+export const Step3: React.FC = () => {
   return (
     <Section title="Define tu proposito" image={{ src: imageMeeting, shape: 1 }}>
       <div className="space-y-6 text-base text-neutral-600">
@@ -57,4 +57,4 @@ const Step3 = () => {
   );
 };
 
-export default Step3;
+//export default Step3;

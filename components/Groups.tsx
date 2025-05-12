@@ -1,6 +1,6 @@
 import React from "react";
-import SectionIntro from "./SectionIntro";
-import Container from "./Container";
+import { SectionIntro } from "./layout/SectionIntro";
+import { Container }from "./Container";
 import FadeIn from "./FadeIn";
 import StylizedImage from "./StylizedImage";
 import imageLaptop from "../images/church/congregation-IMG-1038.jpg";

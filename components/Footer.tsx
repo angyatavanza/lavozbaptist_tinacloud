@@ -1,5 +1,5 @@
 import React from "react";
-import Container from "./Container";
+import { Container }from "./Container";
 import FadeIn from "./FadeIn";
 import FooterNavigation from "./FooterNavigation";
 import Logo from "./Logo";

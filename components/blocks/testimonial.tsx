@@ -1,10 +1,10 @@
 import type { Template } from "tinacms";
 import { PageBlocksTestimonial, PageBlocksTestimonialTestimonials } from "../../tina/__generated__/types";
-import { Section } from "../layout/section";
+import { Section } from "../layout/Section";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { Card, CardContent } from "../ui/card";
 import { tinaField } from "tinacms/dist/react";
-import { sectionBlockSchemaField } from '../layout/section';
+import { sectionBlockSchemaField } from '../layout/Section';
 
 export const Testimonial = ({ data }: { data: PageBlocksTestimonial }) => {
   return (

@@ -1,8 +1,8 @@
 import React, { PropsWithChildren } from "react";
-import { LayoutProvider } from "./layout-context";
+import { LayoutProvider } from "./LayoutContext";
 import client from "../../tina/__generated__/client";
-import { Header } from "./nav/header";
-import { Footer } from "./nav/footer";
+import { Header } from "./nav/Header";
+import { Footer } from "./nav/Footer";
 
 type LayoutProps = PropsWithChildren & {
   rawPageData?: any;

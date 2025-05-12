@@ -1,10 +1,10 @@
 import Image from "next/image";
 import React from "react";
-import Section from "./Section";
+import { Section } from "./layout/Section";
 import imageLaptop from "@/images/laptop.jpg";
 import Blockquote from "./Blockquote";
 
-const Step2 = () => {
+export const Step2: React.FC = () => {
   return (
     <Section title="Desarolla tu fe" image={{ src: imageLaptop, shape: 2 }}>
       <div className="space-y-6 text-base text-neutral-600">
@@ -39,4 +39,4 @@ const Step2 = () => {
   );
 };
 
-export default Step2;
+//export default Step2;

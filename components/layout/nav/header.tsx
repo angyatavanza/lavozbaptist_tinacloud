@@ -3,7 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { Icon } from "../../icon";
-import { useLayout } from "../layout-context";
+import { useLayout } from "../LayoutContext";
 import { Menu, X } from "lucide-react";
 
 export const Header = () => {

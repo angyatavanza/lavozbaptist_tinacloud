@@ -1,15 +1,15 @@
 import Image from "next/image";
 import React from "react";
-import Section from "./Section";
+import { Section } from "./layout/Section";
 import imageWhiteboard from "@/images/whiteboard.jpg";
 import { TagList, TagListItem } from "./TagList";
 
-const Step1 = () => {
+export const Step1: React.FC = () => {
   return (
     <Section title="Descubre" image={{ src: imageWhiteboard, shape: 1 }}>
       <div className="space-y-6 text-base text-neutral-600">
         <p>
-        Ayudará a entender el funcionamiento básico de LA VOZ. Está diseñada para descubrir la misión de la iglesia, los valores fundamentales, y estrategia; ambas cosas ayudan a comprometerse en la expansión del reino en esta comunidad de fe.We work closely with our staff to understand their{" "}
+          Ayudará a entender el funcionamiento básico de LA VOZ. Está diseñada para descubrir la misión de la iglesia, los valores fundamentales, y estrategia; ambas cosas ayudan a comprometerse en la expansión del reino en esta comunidad de fe. We work closely with our staff to understand their{" "}
           <strong className="font-semibold text-neutral-950">needs</strong> and
           goals, embedding ourselves in their every day operations to understand
           what makes their business tick.
@@ -24,7 +24,7 @@ const Step1 = () => {
           team.
         </p>
         <p>
-          Once the full audit is complete, we report back with a comprehensive
+          Once the full audit is complete, we report back with a comprehensive{" "}
           <strong className="font-semibold text-neutral-950">plan</strong> and,
           more importantly, a budget.
         </p>
@@ -44,4 +44,4 @@ const Step1 = () => {
   );
 };
 
-export default Step1;
+//export default Step1;
