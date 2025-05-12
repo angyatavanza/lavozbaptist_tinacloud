@@ -1,5 +1,8 @@
 import React, { ReactNode } from 'react';
 import { cn } from '../../lib/utils';
+import { FadeIn } from '../FadeIn';
+import { Container } from '../Container';
+import { StylizedImage } from '../StylizedImage';
 
 interface SectionProps extends React.HTMLProps<HTMLElement> {
   background?: string;

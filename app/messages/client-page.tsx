@@ -9,6 +9,7 @@ import ErrorBoundary from '@/components/error-boundary';
 import { ArrowRight, UserRound } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { Section } from '@/components/layout/section';
+import { PageIntro } from '@/components/PageIntro';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 interface ClientMessageProps {
@@ -43,11 +44,14 @@ export default function MessagesClientPage(props: ClientMessageProps) {
 
   return (
     <ErrorBoundary>
+      <PageIntro eyebrow="Contáctanos" title="Tiene preguntas? Contáctenos 👋">
+        <p>Nos encantaría escuchar de usted.</p>
+      </PageIntro>
       <Section>
         <div className="container flex flex-col items-center gap-16">
           <div className="text-center">
             <h2 className="mx-auto mb-6 text-pretty text-3xl font-semibold md:text-4xl lg:max-w-3xl">
-              Blog Messages
+              Mensajes Recientes
             </h2>
             <p className="mx-auto max-w-2xl text-muted-foreground md:text-lg">
               Discover the latest insights and tutorials about modern web development, UI design, and component-driven architecture.

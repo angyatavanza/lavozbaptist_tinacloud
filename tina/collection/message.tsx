@@ -4,7 +4,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import type { Collection } from 'tinacms';
 
 const Message: Collection = {
-  label: 'Blog Messages',
+  label: 'Mensajes Recientes',
   name: 'message',
   path: 'content/messages',
   format: 'mdx',
