@@ -1,12 +1,20 @@
 import clsx from "clsx";
+import React,  { ReactElement } from "react";
 
-const Border = ({
+interface BorderProps extends React.HTMLAttributes<HTMLElement> {
+  className?: string;
+  position?: "top" | "left";
+  invert?: boolean;
+  as?: React.ElementType;
+}
+
+export const Border = ({
   className,
   position = "top",
   invert = false,
   as: Component = "div",
   ...props
-}) => {
+}: BorderProps): ReactElement => {
   return (
     <Component
       className={clsx(
@@ -25,4 +33,4 @@ const Border = ({
   );
 };
 
-export default Border;
+//export default Border;

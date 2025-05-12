@@ -1,8 +1,8 @@
 import React from "react";
 import { Container }from "./Container";
-import FadeIn from "./FadeIn";
-import Button from "./Button";
-import ServiceTimes from "./ServiceTimes";
+import { FadeIn } from "./FadeIn";
+import { Button } from "./Button";
+import { ServiceTimes } from "./ServiceTimes";
 
 const ContactSection = () => {
   return (

@@ -1,8 +1,33 @@
-import Image from "next/image";
+import Image, { ImageProps } from "next/image";
 import clsx from "clsx";
-import Border from "./Border";
+import { Border } from "./Border";
+import React, { ReactNode, ReactElement } from "react";
 
-function BlockquoteWithImage({ author, image, children, className }) {
+// Shared author type
+interface Author {
+  name: string;
+  role: string;
+}
+
+// Props for both versions of the blockquote
+interface BaseBlockquoteProps {
+  author: Author;
+  children: ReactNode;
+  className?: string;
+}
+
+// Props for blockquote with image
+interface BlockquoteWithImageProps extends BaseBlockquoteProps {
+  image: ImageProps;
+}
+
+// Blockquote with image
+function BlockquoteWithImage({
+  author,
+  image,
+  children,
+  className,
+}: BlockquoteWithImageProps): ReactElement {
   return (
     <figure
       className={clsx(
@@ -31,7 +56,12 @@ function BlockquoteWithImage({ author, image, children, className }) {
   );
 }
 
-function BlockquoteWithoutImage({ author, children, className }) {
+// Blockquote without image
+function BlockquoteWithoutImage({
+  author,
+  children,
+  className,
+}: BaseBlockquoteProps): ReactElement {
   return (
     <Border position="left" className={clsx("pl-8", className)}>
       <figure className="text-sm">
@@ -46,11 +76,14 @@ function BlockquoteWithoutImage({ author, children, className }) {
   );
 }
 
-const Blockquote = (props) => {
+// Final Blockquote component
+type BlockquoteProps = BaseBlockquoteProps & Partial<Pick<BlockquoteWithImageProps, "image">>;
+
+export const Blockquote = (props: BlockquoteProps): ReactElement => {
   if (props.image) {
-    return <BlockquoteWithImage {...props} />;
+    return <BlockquoteWithImage {...(props as BlockquoteWithImageProps)} />;
   }
   return <BlockquoteWithoutImage {...props} />;
 };
 
-export default Blockquote;
+//export default Blockquote;
