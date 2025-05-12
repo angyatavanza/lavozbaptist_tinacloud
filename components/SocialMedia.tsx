@@ -9,6 +9,7 @@ import {
   BsInstagram,
   IconType,
 } from "react-icons/bs";
+import  React, { ReactElement } from "react";
 
 type SocialMediaProfile = {
   title: string;
@@ -39,7 +40,7 @@ type SocialMediaProps = {
   invert?: boolean;
 };
 
-export const SocialMedia = ({ className, invert = false }: SocialMediaProps): JSX.Element => {
+export const SocialMedia = ({ className, invert = false }: SocialMediaProps): ReactElement => {
   return (
     <ul
       role="list"

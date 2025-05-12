@@ -1,8 +1,8 @@
 import React from "react";
-import FadeIn from "./FadeIn";
-import TextInput from "./TextInput";
-import RadioInput from "./RadioInput";
-import Button from "./Button";
+import { FadeIn } from "./FadeIn";
+import { TextInput }from "./TextInput";
+import { RadioInput }from "./RadioInput";
+import { Button } from "./Button";
 
 export const ContactForm: React.FC = () => {
   return (

@@ -1,8 +1,8 @@
 import React from "react";
 import { Container } from "./Container";
-import FadeIn from "./FadeIn";
-import FooterNavigation from "./FooterNavigation";
-import Logo from "./Logo";
+import { FadeIn } from "./FadeIn";
+import { FooterNavigation } from "./FooterNavigation";
+import { Logo } from "./Logo";
 import Link from "next/link";
 
 type SVGProps = React.SVGProps<SVGSVGElement>;

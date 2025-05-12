@@ -2,7 +2,7 @@ import Image from "next/image";
 import React from "react";
 import { Section } from "./layout/Section";
 import imageMeeting from "@/images/church/Congregation-IMG-1140.jpg";
-import List, { ListItem } from "./List";
+import { List, ListItem } from "./List";
 
 export const Step3: React.FC = () => {
   return (

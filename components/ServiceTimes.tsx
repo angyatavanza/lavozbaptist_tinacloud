@@ -1,13 +1,13 @@
 import clsx from "clsx";
-import { ReactNode, HTMLAttributes } from "react";
+import React, {  ReactElement, ReactNode, HTMLAttributes } from "react";
 
-type OfficeProps = {
+type ServiceTimeProps = {
   name: string;
   children: ReactNode;
   invert?: boolean;
 };
 
-function Office({ name, children, invert = false }: OfficeProps): JSX.Element {
+function ServiceTime({ name, children, invert = false }: ServiceTimeProps): ReactElement {
   return (
     <address
       className={clsx(
@@ -28,28 +28,28 @@ type ServiceTimesProps = {
   invert?: boolean;
 } & HTMLAttributes<HTMLUListElement>;
 
-const ServiceTimes = ({
+export const ServiceTimes = ({
   invert = false,
   ...props
-}: ServiceTimesProps): JSX.Element => {
+}: ServiceTimesProps): ReactElement => {
   return (
     <ul role="list" {...props}>
       <li>
-        <Office name="Ubicación" invert={invert}>
+        <ServiceTime name="Ubicación" invert={invert}>
           7122 Robinson Church Rd
           <br />
           Charlotte, NC 28215
-        </Office>
+        </ServiceTime>
       </li>
       <li>
-        <Office name="Tiempos de servicios" invert={invert}>
+        <ServiceTime name="Tiempos de servicios" invert={invert}>
           Escuela Dominical 9:45AM
           <br />
           Culto General 11:00AM
-        </Office>
+        </ServiceTime>
       </li>
     </ul>
   );
 };
 
-export default ServiceTimes;
+//export default ServiceTimes;

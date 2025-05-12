@@ -4,14 +4,14 @@ import { useEffect, useId, useRef, useState, ReactNode, RefObject } from "react"
 import { motion, MotionConfig, useReducedMotion } from "framer-motion";
 import { Container } from "./Container";
 import Link from "next/link";
-import Logo from "./Logo";
+import { Logo } from "./Logo";
 import { HiMenuAlt4 } from "react-icons/hi";
 import { IoMdClose } from "react-icons/io";
-import Button from "./Button";
+import { Button } from "./Button";
 import clsx from "clsx";
-import ServiceTimes from "./ServiceTimes";
-import SocialMedia from "./SocialMedia";
-import Footer from "./Footer";
+import { ServiceTimes } from "./ServiceTimes";
+import { SocialMedia } from "./SocialMedia";
+import { Footer } from "./Footer";
 
 type HeaderProps = {
   panelId: string;

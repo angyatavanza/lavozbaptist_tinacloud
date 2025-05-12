@@ -2,7 +2,7 @@ import Image from "next/image";
 import React from "react";
 import { Section } from "./layout/Section";
 import imageLaptop from "@/images/laptop.jpg";
-import Blockquote from "./Blockquote";
+import { Blockquote }from "./Blockquote";
 
 export const Step2: React.FC = () => {
   return (

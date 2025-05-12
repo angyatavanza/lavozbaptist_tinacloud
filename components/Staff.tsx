@@ -9,6 +9,7 @@ import logoPhobiaLight from "../images/staff/phobia/logo-light.svg";
 import logoUnseal from "../images/staff/unseal/logo-light.svg";
 import { Container } from "./Container";
 import { FadeIn, FadeInStagger } from "./FadeIn";
+import React, { ReactElement } from "react";
 
 type StaffMember = [string, StaticImageData];
 
