@@ -4,7 +4,7 @@ import TextInput from "./TextInput";
 import RadioInput from "./RadioInput";
 import Button from "./Button";
 
-const ContactForm = () => {
+export const ContactForm: React.FC = () => {
   return (
     <FadeIn>
       <form>
@@ -24,7 +24,12 @@ const ContactForm = () => {
             name="email"
             autoComplete="email"
           />
-          <TextInput label="Número de teléfono" type="tel" name="phone" autoComplete="tel" />
+          <TextInput
+            label="Número de teléfono"
+            type="tel"
+            name="phone"
+            autoComplete="tel"
+          />
           <TextInput label="Mensaje" name="message" />
           <div className="border border-purple-300 px-6 py-8 first:rounded-t-2xl last:rounded-b-2xl">
             <fieldset>
@@ -46,4 +51,4 @@ const ContactForm = () => {
   );
 };
 
-export default ContactForm;
+//export default ContactForm;

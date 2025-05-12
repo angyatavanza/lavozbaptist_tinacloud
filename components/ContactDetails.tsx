@@ -5,7 +5,7 @@ import { Border } from "./Border";
 import Link from "next/link";
 import { SocialMedia } from "./SocialMedia";
 
-const ContactDetails = () => {
+export const ContactDetails: React.FC = () => {
   return (
     <FadeIn>
       <h2 className="font-display text-base font-semibold text-neutral-950">
@@ -20,10 +20,10 @@ const ContactDetails = () => {
           Ponte en contacto
         </h2>
         <dl className="mt-6 grid grid-cols-1 gap-8 text-sm sm:grid-cols-2">
-          {[
+          {([
             ["Correo electrónico", "info@ministerioslavoz.com"],
             ["Teléfono", "(704) 537-7133"],
-          ].map(([label, email]) => (
+          ] as [string, string][]).map(([label, email]) => (
             <div key={email}>
               <dt className="font-semibold text-neutral-950">{label}</dt>
               <dd>
@@ -48,4 +48,4 @@ const ContactDetails = () => {
   );
 };
 
-export default ContactDetails;
+//export default ContactDetails;

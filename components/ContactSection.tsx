@@ -1,10 +1,10 @@
 import React from "react";
-import { Container }from "./Container";
+import { Container } from "./Container";
 import { FadeIn } from "./FadeIn";
 import { Button } from "./Button";
 import { ServiceTimes } from "./ServiceTimes";
 
-const ContactSection = () => {
+export const ContactSection: React.FC = () => {
   return (
     <Container className="mt-24 sm:mt-32 lg:mt-40">
       <FadeIn className="-mx-6 rounded-4xl bg-purple-800 px-6 py-20 sm:mx-0 sm:py-32 md:px-12">
@@ -32,4 +32,4 @@ const ContactSection = () => {
   );
 };
 
-export default ContactSection;
+//export default ContactSection;
