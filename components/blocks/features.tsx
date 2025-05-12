@@ -10,11 +10,12 @@ import { Icon } from "../icon";
 import { iconSchema } from "../../tina/fields/icon";
 import { Card, CardContent, CardHeader } from "../ui/card";
 import { Section } from "../layout/Section";
+import imageWhiteboard from "@/images/whiteboard.jpg";
 import { sectionBlockSchemaField } from '../layout/Section';
 
 export const Features = ({ data }: { data: PageBlocksFeatures }) => {
   return (
-    <Section background={data.background!}>
+    <Section title="Transforma tu vida" image={{ src: imageWhiteboard, shape: 1 }} background={data.background!}>
       <div className="@container mx-auto max-w-5xl px-6">
         <div className="text-center">
           <h2 data-tina-field={tinaField(data, 'title')} className="text-balance text-4xl font-semibold lg:text-5xl">{data.title}</h2>

@@ -8,11 +8,12 @@ import { tinaField } from "tinacms/dist/react";
 import { Section } from "../layout/Section";
 import { mermaid } from "./mermaid";
 import { sectionBlockSchemaField } from '../layout/Section';
+import imageWhiteboard from "@/images/whiteboard.jpg";
 import { scriptCopyBlockSchema, ScriptCopyBtn } from "../magicui/script-copy-btn";
 
 export const Content = ({ data }: { data: PageBlocksContent }) => {
   return (
-    <Section background={data.background!}
+    <Section title="Transforma tu vida" image={{ src: imageWhiteboard, shape: 1 }} background={data.background!}
       className="prose prose-lg"
       data-tina-field={tinaField(data, "body")}
     >

@@ -8,6 +8,7 @@ import { MessageQuery } from '@/tina/__generated__/types';
 import { useLayout } from '@/components/layout/LayoutContext';
 import { Section } from '@/components/layout/Section';
 import { components } from '@/components/mdx-components';
+import imageWhiteboard from "@/images/whiteboard.jpg";
 import ErrorBoundary from '@/components/error-boundary';
 
 const titleColorClasses = {
@@ -42,7 +43,7 @@ export default function MessageClientPage(props: ClientMessageProps) {
 
   return (
     <ErrorBoundary>
-      <Section>
+      <Section title="Descubre" image={{ src: imageWhiteboard, shape: 1 }}>
         <h2 data-tina-field={tinaField(message, 'title')} className={`w-full relative\tmb-8 text-6xl font-extrabold tracking-normal text-center title-font`}>
           <span className={`bg-clip-text text-transparent bg-linear-to-r ${titleColorClasses[theme!.color!]}`}>{message.title}</span>
         </h2>

@@ -4,6 +4,7 @@ import client from '@/tina/__generated__/client';
 import Layout from '@/components/layout/Layout';
 import { Section } from '@/components/layout/Section';
 import ClientPage from './client-page';
+import imageWhiteboard from "@/images/whiteboard.jpg";
 
 export const revalidate = 300;
 
@@ -26,7 +27,7 @@ export default async function Page({
 
   return (
     <Layout rawPageData={data}>
-      <Section>
+      <Section title="Descubre" image={{ src: imageWhiteboard, shape: 1 }}>
         <ClientPage {...data} />
       </Section>
     </Layout>

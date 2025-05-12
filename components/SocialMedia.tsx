@@ -7,15 +7,14 @@ import {
   BsYoutube,
   BsLinkedin,
   BsInstagram,
-  IconType,
 } from "react-icons/bs";
-import  React, { ReactElement } from "react";
+import { ComponentType } from "react";
 
-type SocialMediaProfile = {
+export interface SocialMediaProfile {
   title: string;
   href: string;
-  icon: IconType;
-};
+  icon: ComponentType<{ className?: string }>;
+}
 
 export const SocialMediaProfiles: SocialMediaProfile[] = [
   {
@@ -35,12 +34,12 @@ export const SocialMediaProfiles: SocialMediaProfile[] = [
   },
 ];
 
-type SocialMediaProps = {
+interface SocialMediaProps {
   className?: string;
   invert?: boolean;
-};
+}
 
-export const SocialMedia = ({ className, invert = false }: SocialMediaProps): ReactElement => {
+const SocialMedia: React.FC<SocialMediaProps> = ({ className, invert = false }) => {
   return (
     <ul
       role="list"
@@ -68,4 +67,4 @@ export const SocialMedia = ({ className, invert = false }: SocialMediaProps): Re
   );
 };
 
-//export default SocialMedia;
+export default SocialMedia;

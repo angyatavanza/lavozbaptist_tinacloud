@@ -4,11 +4,12 @@ import { Section } from "../layout/Section";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { Card, CardContent } from "../ui/card";
 import { tinaField } from "tinacms/dist/react";
+import imageWhiteboard from "@/images/whiteboard.jpg";
 import { sectionBlockSchemaField } from '../layout/Section';
 
 export const Testimonial = ({ data }: { data: PageBlocksTestimonial }) => {
   return (
-    <Section background={data.background!}>
+    <Section title="Transforma tu vida" image={{ src: imageWhiteboard, shape: 1 }} background={data.background!}>
       <div className="text-center">
         <h2 className="text-title text-3xl font-semibold" data-tina-field={tinaField(data, 'title')}>{data.title}</h2>
         <p className="text-body mt-6" data-tina-field={tinaField(data, 'description')}>{data.description}</p>

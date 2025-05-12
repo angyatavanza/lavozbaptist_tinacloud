@@ -3,19 +3,12 @@ import { cn } from '../../lib/utils';
 import { FadeIn } from '../FadeIn';
 import { Container } from '../Container';
 import { StylizedImage } from '../StylizedImage';
-
-interface ImageProps {
-  src: string;
-  alt: string;
-  className?: string;
-  sizes?: string;
-  [key: string]: any; // Allow other image props
-}
+import { ImageProps } from "next/image";
 
 interface SectionProps extends React.HTMLProps<HTMLElement> {
   background?: string;
   title: string;
-  image: ImageProps;
+  image: { src: ImageProps["src"]; shape?: number };
   children: ReactNode;
 }
 
@@ -27,8 +20,9 @@ export const Section: React.FC<SectionProps> = ({ className, title, image, child
           <FadeIn className="w-[33.75rem] flex-none lg:w-[45rem]">
             <StylizedImage
               {...image}
-              sizes={image.sizes || "(min-width: 1024px) 41rem, 31rem"}
-              className={image.className || "justify-center lg:justify-end lg:group-even/section:justify-start"}
+              alt=""
+              sizes={"(min-width: 1024px) 41rem, 31rem"}
+              className={"justify-center lg:justify-end lg:group-even/section:justify-start"}
             />
           </FadeIn>
         </div>

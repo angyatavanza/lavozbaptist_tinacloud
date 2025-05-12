@@ -6,6 +6,7 @@ import { PageBlocksCallout } from "@/tina/__generated__/types";
 import { ArrowRight } from "lucide-react";
 import { AnimatedGroup } from "../motion-primitives/animated-group";
 import { Section, sectionBlockSchemaField } from '../layout/Section';
+import imageWhiteboard from "@/images/whiteboard.jpg";
 
 const transitionVariants = {
     item: {
@@ -29,7 +30,7 @@ const transitionVariants = {
 
 export const Callout = ({ data }: { data: PageBlocksCallout }) => {
     return (
-        <Section background={data.background!} className="py-6">
+        <Section background={data.background!} className="py-6"  title="Transforma tu vida" image={{ src: imageWhiteboard, shape: 1 }}>
             <AnimatedGroup variants={transitionVariants}>
                 <Link
                     data-tina-field={tinaField(data, "url")}

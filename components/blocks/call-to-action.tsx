@@ -5,11 +5,12 @@ import { iconSchema } from '@/tina/fields/icon';
 import { Button } from '@/components/ui/button'
 import { PageBlocksCta } from '@/tina/__generated__/types';
 import { Icon } from '../icon';
+import imageWhiteboard from "@/images/whiteboard.jpg";
 import { Section } from '../layout/Section';
 
 export const CallToAction = ({ data }: { data: PageBlocksCta }) => {
     return (
-        <Section>
+        <Section title="Descubre" image={{ src: imageWhiteboard, shape: 1 }}>
             <div className="text-center">
                 <h2 className="text-balance text-4xl font-semibold lg:text-5xl" data-tina-field={tinaField(data, 'title')}>{data.title}</h2>
                 <p className="mt-4" data-tina-field={tinaField(data, 'description')}>{data.description}</p>

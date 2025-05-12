@@ -10,6 +10,7 @@ import { ArrowRight, UserRound } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { Section } from '@/components/layout/Section';
 import { PageIntro } from '@/components/PageIntro';
+import imageWhiteboard from "@/images/whiteboard.jpg";
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 interface ClientMessageProps {
@@ -47,7 +48,7 @@ export default function MessagesClientPage(props: ClientMessageProps) {
       <PageIntro eyebrow="Contáctanos" title="Tiene preguntas? Contáctenos 👋">
         <p>Nos encantaría escuchar de usted.</p>
       </PageIntro>
-      <Section>
+      <Section title="Descubre" image={{ src: imageWhiteboard, shape: 1 }}>
         <div className="container flex flex-col items-center gap-16">
           <div className="text-center">
             <h2 className="mx-auto mb-6 text-pretty text-3xl font-semibold md:text-4xl lg:max-w-3xl">

@@ -4,6 +4,7 @@ import dynamic from 'next/dynamic';
 import type { Template } from 'tinacms';
 import { PageBlocksVideo } from '@/tina/__generated__/types';
 import { Section } from '../layout/Section';
+import imageWhiteboard from "@/images/whiteboard.jpg";
 import { sectionBlockSchemaField } from '../layout/Section';
 
 const ReactPlayer = dynamic(() => import('react-player'), { ssr: false });
@@ -13,7 +14,7 @@ export const Video = ({ data }: { data: PageBlocksVideo }) => {
     return null;
   }
   return (
-    <Section background={data.background!} className={`aspect-video ${data.color}`}>
+    <Section title="Transforma tu vida" image={{ src: imageWhiteboard, shape: 1 }} background={data.background!} className={`aspect-video ${data.color}`}>
       <ReactPlayer width='100%' height='100%' style={{ margin: 'auto' }} playing={!!data.autoPlay} loop={!!data.loop} controls={true} url={data.url} />
     </Section>
   );
