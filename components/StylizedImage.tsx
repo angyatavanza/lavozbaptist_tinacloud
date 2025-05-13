@@ -29,7 +29,7 @@ export const StylizedImage: React.FC<StylizedImageProps> = ({ shape = 0, classNa
   const id = useId();
   const { width, height, path } = shapes[shape];
   return (
-    <div
+      <div
       className={clsx(
         className,
         "relative flex aspect-[719/680] w-full grayscale"
@@ -40,7 +40,6 @@ export const StylizedImage: React.FC<StylizedImageProps> = ({ shape = 0, classNa
           <g className="origin-center scale-100 transition duration-500 motion-safe:group-hover:scale-105">
             <foreignObject width={width} height={height}>
               <Image
-                //alt=""
                 className="w-full bg-neutral-100 object-cover"
                 style={{ aspectRatio: `${width} / ${height}` }}
                 {...props}
@@ -50,7 +49,7 @@ export const StylizedImage: React.FC<StylizedImageProps> = ({ shape = 0, classNa
           <use
             href={`#${id}-shape`}
             strokeWidth="2"
-            className="stroke-purple-800/10"
+            className="stroke-neutral-950/10"
           />
         </g>
         <defs>

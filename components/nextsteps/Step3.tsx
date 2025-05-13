@@ -1,21 +1,21 @@
 import Image from "next/image";
 import React from "react";
-import { Section } from "./layout/Section";
+import { StepsSection } from "./StepsSection";
 import imageMeeting from "@/images/church/Congregation-IMG-1140.jpg";
-import { List, ListItem } from "./List";
+import { List, ListItem } from "../List";
 
-export const Step4: React.FC = () => {
+export const Step3: React.FC = () => {
   return (
-    <Section title="Transforma tu vida" image={{ src: imageMeeting, shape: 1 }}>
+    <StepsSection title="Define tu proposito" image={{ src: imageMeeting, shape: 1 }}>
       <div className="space-y-6 text-base text-neutral-600">
         <p>
-          Ayudará a desarrollar un estilo de vida que glorifique a Dios
-          compartiendo su{" "}
-          <strong className="font-semibold text-neutral-950">amor</strong>.
-          También podrás descubrir el propósito de tu vida e integrarte al
-          equipo de trabajo para llevar acabo tu misión de vida.
+          About halfway through the Build phase, we push each project out by 6
+          weeks due to a change in{" "}
+          <strong className="font-semibold text-neutral-950">
+            requirements
+          </strong>
+          . This allows us to increase the budget a final time before launch.
         </p>
-        {/* Longer description
         <p>
           Despite largely using pre-built components, most of the{" "}
           <strong className="font-semibold text-neutral-950">progress</strong>{" "}
@@ -35,7 +35,6 @@ export const Step4: React.FC = () => {
           </strong>{" "}
           retainer.
         </p>
-        */}
       </div>
       <h3 className="mt-12 font-display text-base font-semibold text-neutral-950">
         Included in this phase
@@ -54,8 +53,8 @@ export const Step4: React.FC = () => {
           uses, you can expect a lifetime of support, and invoices, from us.
         </ListItem>
       </List>
-    </Section>
+    </StepsSection>
   );
 };
 
-//export default Step4;
+//export default Step3;

@@ -1,12 +1,12 @@
 import Image from "next/image";
 import React from "react";
-import { Section } from "./layout/Section";
+import { StepsSection } from "./StepsSection";
 import imageLaptop from "@/images/laptop.jpg";
-import { Blockquote }from "./Blockquote";
+import { Blockquote }from "../Blockquote";
 
 export const Step2: React.FC = () => {
   return (
-    <Section title="Desarolla tu fe" image={{ src: imageLaptop, shape: 2 }}>
+    <StepsSection title="Desarolla tu fe" image={{ src: imageLaptop, shape: 2 }}>
       <div className="space-y-6 text-base text-neutral-600">
         <p>
           Based off of the discovery phase, we develop a comprehensive roadmap
@@ -35,7 +35,7 @@ export const Step2: React.FC = () => {
         Studio_clone were so regular with their progress updates we almost began
         to think they were automated!
       </Blockquote>
-    </Section>
+    </StepsSection>
   );
 };
 

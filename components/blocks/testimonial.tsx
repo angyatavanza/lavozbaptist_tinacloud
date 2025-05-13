@@ -9,7 +9,7 @@ import { sectionBlockSchemaField } from '../layout/Section';
 
 export const Testimonial = ({ data }: { data: PageBlocksTestimonial }) => {
   return (
-    <Section title="Transforma tu vida" image={{ src: imageWhiteboard, shape: 1 }} background={data.background!}>
+    <Section title="" image={{ src: imageWhiteboard, shape: 1 }} background={data.background!}>
       <div className="text-center">
         <h2 className="text-title text-3xl font-semibold" data-tina-field={tinaField(data, 'title')}>{data.title}</h2>
         <p className="text-body mt-6" data-tina-field={tinaField(data, 'description')}>{data.description}</p>
