@@ -1,6 +1,6 @@
 import type { Collection } from 'tinacms';
 import { heroBlockSchema } from '@/components/blocks/hero';
-import { aboutBlockSchema } from '@/components/blocks/aboutus';
+import { aboutBlockSchema } from '@/components/blocks/about';
 import { missionBlockSchema } from '@/components/blocks/mission';
 import { contentBlockSchema } from '@/components/blocks/content';
 import { sermonBlockSchema } from '@/components/blocks/sermon';

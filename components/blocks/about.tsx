@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import type { Template } from 'tinacms';
 import { tinaField } from 'tinacms/dist/react';
-import { PageBlocksAboutUs, PageBlocksAboutUsImage } from '../../tina/__generated__/types';
+import { PageBlocksAbout, PageBlocksAboutImage } from '../../tina/__generated__/types';
 import { Button } from '../ui/button';
 import { iconSchema } from '@/tina/fields/icon';
 import { Icon } from '../icon';
@@ -42,7 +42,7 @@ const transitionVariants = {
   },
 }
 
-export const AboutUs = ({ data }: { data: PageBlocksAboutUs }) => {
+export const About = ({ data }: { data: PageBlocksAbout }) => {
 
   // Extract the background style logic into a more readable format
   let gradientStyle: React.CSSProperties | undefined = undefined;
@@ -128,7 +128,7 @@ export const AboutUs = ({ data }: { data: PageBlocksAboutUs }) => {
   )
 };
 
-const ImageBlock = ({ image }: { image: PageBlocksAboutUsImage }) => {
+const ImageBlock = ({ image }: { image: PageBlocksAboutImage }) => {
 
   if (image.videoUrl) {
 
@@ -150,7 +150,7 @@ const ImageBlock = ({ image }: { image: PageBlocksAboutUsImage }) => {
       <HeroVideoDialog
         videoSrc={image.videoUrl}
         thumbnailSrc={thumbnailSrc}
-        thumbnailAlt="AboutUs Video"
+        thumbnailAlt="About Video"
       />
     )
   }
@@ -170,7 +170,7 @@ const ImageBlock = ({ image }: { image: PageBlocksAboutUsImage }) => {
 
 export const aboutBlockSchema: Template = {
   name: 'about',
-  label: 'AboutUs',
+  label: 'About',
   ui: {
     previewSrc: '/blocks/about.png',
     defaultItem: {
