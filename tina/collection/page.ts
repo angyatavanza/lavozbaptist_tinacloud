@@ -3,6 +3,7 @@ import { heroBlockSchema } from '@/components/blocks/hero';
 import { contentBlockSchema } from '@/components/blocks/content';
 import { sermonBlockSchema } from '@/components/blocks/sermon';
 import { featureBlockSchema } from '@/components/blocks/features';
+import { groupBlockSchema } from '@/components/blocks/groups';
 import { videoBlockSchema } from '@/components/blocks/video';
 import { calloutBlockSchema } from '@/components/blocks/callout';
 import { statsBlockSchema } from '@/components/blocks/stats';
@@ -35,6 +36,7 @@ const Page: Collection = {
         heroBlockSchema,
         calloutBlockSchema,
         featureBlockSchema,
+        groupBlockSchema,
         statsBlockSchema,
         ctaBlockSchema,
         contentBlockSchema,
