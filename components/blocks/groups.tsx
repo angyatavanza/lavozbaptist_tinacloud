@@ -6,8 +6,9 @@ import {
 import type { Template } from 'tinacms';
 import { tinaField } from "tinacms/dist/react";
 import { TinaMarkdown } from "tinacms/dist/rich-text";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { Icon } from "../icon";
-import { iconSchema } from "../../tina/fields/icon";
+//import { iconSchema } from "../../tina/fields/icon";
 import { Card, CardContent, CardHeader } from "../ui/card";
 import { Section } from "../layout/Section";
 import imageWhiteboard from "@/images/whiteboard.jpg";
@@ -45,11 +46,13 @@ export const Group: React.FC<PageBlocksGroupsItems> = (data) => {
     <div className="group shadow-zinc-950/5">
       <CardHeader className="pb-3">
         <CardDecorator>
-          {data.icon && (
-            <Icon
-              tinaField={tinaField(data, "icon")}
-              data={{ size: "large", ...data.icon }}
-            />
+          {data.cover && (
+            <Avatar className="size-9" data-tina-field={tinaField(data, 'cover')}>
+              {data.cover && (
+                <AvatarImage alt={data.title!} src={data.cover} loading="lazy" width="120" height="120" />
+              )}
+              <AvatarFallback>{data.title!.split(" ").map((word) => word[0]).join("")}</AvatarFallback>
+            </Avatar>
           )}
         </CardDecorator>
 
@@ -120,7 +123,12 @@ export const groupBlockSchema: Template = {
         },
       },
       fields: [
-        iconSchema as any,
+        //iconSchema as any,
+        {
+          type: "image",
+          label: "CoverImg",
+          name: "cover",
+        },
         {
           type: "string",
           label: "Title",

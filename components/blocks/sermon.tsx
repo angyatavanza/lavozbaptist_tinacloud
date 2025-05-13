@@ -4,7 +4,6 @@ import { Section } from "../layout/Section";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { Card, CardContent } from "../ui/card";
 import { tinaField } from "tinacms/dist/react";
-import imageWhiteboard from "@/images/whiteboard.jpg";
 import { sectionBlockSchemaField } from '../layout/Section';
 
 export const Sermon = ({ data }: { data: PageBlocksSermon }) => {
