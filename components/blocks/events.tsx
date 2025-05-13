@@ -1,11 +1,11 @@
 import type { Template } from "tinacms";
 import { tinaField } from "tinacms/dist/react";
-import { PageBlocksStats } from "@/tina/__generated__/types";
+import { PageBlocksEvents } from "@/tina/__generated__/types";
 import { Section } from "../layout/Section";
 import imageWhiteboard from "@/images/whiteboard.jpg";
 import { sectionBlockSchemaField } from '../layout/Section';
 
-export const Stats = ({ data }: { data: PageBlocksStats }) => {
+export const Events = ({ data }: { data: PageBlocksEvents }) => {
     return (
         <Section  background={data.background!}>
             <div className="mx-auto max-w-5xl space-y-8 px-6 md:space-y-16">
@@ -15,10 +15,10 @@ export const Stats = ({ data }: { data: PageBlocksStats }) => {
                 </div>
 
                 <div className="grid divide-y *:text-center md:grid-cols-3 md:divide-x md:divide-y-0">
-                    {data.stats?.map((stat) => (
-                        <div key={stat?.type} className="space-y-4 py-4">
-                            <div className="text-5xl font-bold" data-tina-field={tinaField(stat, 'stat')}>{stat!.stat}</div>
-                            <p data-tina-field={tinaField(stat, 'type')}>{stat!.type}</p>
+                    {data.events?.map((event) => (
+                        <div key={event?.type} className="space-y-4 py-4">
+                            <div className="text-5xl font-bold" data-tina-field={tinaField(event, 'event')}>{event!.event}</div>
+                            <p data-tina-field={tinaField(event, 'type')}>{event!.type}</p>
                         </div>
                     ))}
                 </div>
@@ -28,25 +28,25 @@ export const Stats = ({ data }: { data: PageBlocksStats }) => {
 }
 
 
-export const statsBlockSchema: Template = {
-    name: "stats",
-    label: "Stats",
+export const eventsBlockSchema: Template = {
+    name: "events",
+    label: "Events",
     ui: {
-        previewSrc: "/blocks/stats.png",
+        previewSrc: "/blocks/events.png",
         defaultItem: {
             title: "TinaCMS by the numbers",
             description: "TinaCMS is an open-source content management system that allows developers to create and manage content for their websites and applications. It provides a flexible and customizable framework for building content-driven applications.",
-            stats: [
+            events: [
                 {
-                    stat: "12K",
+                    event: "12K",
                     type: "Stars on GitHub",
                 },
                 {
-                    stat: "11K",
+                    event: "11K",
                     type: "Active Users",
                 },
                 {
-                    stat: "22K",
+                    event: "22K",
                     type: "Powered Apps",
                 },
             ],
@@ -66,25 +66,25 @@ export const statsBlockSchema: Template = {
         },
         {
             type: "object",
-            label: "Stats",
-            name: "stats",
+            label: "Events",
+            name: "events",
             list: true,
             ui: {
                 defaultItem: {
-                    stat: "12K",
+                    event: "12K",
                     type: "Stars on GitHub",
                 },
                 itemProps: (item) => {
                     return {
-                        label: `${item.stat} ${item.type}`,
+                        label: `${item.event} ${item.type}`,
                     };
                 },
             },
             fields: [
                 {
                     type: "string",
-                    label: "Stat",
-                    name: "stat",
+                    label: "Event",
+                    name: "event",
                 },
                 {
                     type: "string",

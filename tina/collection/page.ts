@@ -6,7 +6,7 @@ import { featureBlockSchema } from '@/components/blocks/features';
 import { groupBlockSchema } from '@/components/blocks/groups';
 import { videoBlockSchema } from '@/components/blocks/video';
 import { calloutBlockSchema } from '@/components/blocks/callout';
-import { statsBlockSchema } from '@/components/blocks/stats';
+import { eventsBlockSchema } from '@/components/blocks/events';
 import { ctaBlockSchema } from '@/components/blocks/call-to-action';
 
 const Page: Collection = {
@@ -37,7 +37,7 @@ const Page: Collection = {
         calloutBlockSchema,
         featureBlockSchema,
         groupBlockSchema,
-        statsBlockSchema,
+        eventsBlockSchema,
         ctaBlockSchema,
         contentBlockSchema,
         sermonBlockSchema,

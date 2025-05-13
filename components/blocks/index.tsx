@@ -7,7 +7,7 @@ import { Groups } from "./groups";
 import { Sermon } from "./sermon";
 import { Video } from "./video";
 import { Callout } from "./callout";
-import { Stats } from "./stats";
+import { Events } from "./events";
 import { CallToAction } from "./call-to-action";
 
 export const Blocks = (props: Omit<Page, "id" | "_sys" | "_values">) => {
@@ -33,8 +33,8 @@ const Block = (block: PageBlocks) => {
       return <Hero data={block} />;
     case "PageBlocksCallout":
       return <Callout data={block} />;
-    case "PageBlocksStats":
-      return <Stats data={block} />;
+    case "PageBlocksEvents":
+      return <Events data={block} />;
     case "PageBlocksContent":
       return <Content data={block} />;
     case "PageBlocksFeatures":
