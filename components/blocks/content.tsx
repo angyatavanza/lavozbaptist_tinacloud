@@ -13,7 +13,7 @@ import { scriptCopyBlockSchema, ScriptCopyBtn } from "../magicui/script-copy-btn
 
 export const Content = ({ data }: { data: PageBlocksContent }) => {
   return (
-    <Section title="" image={{ src: imageWhiteboard, shape: 1 }} background={data.background!}
+    <Section  background={data.background!}
       className="prose prose-lg"
       data-tina-field={tinaField(data, "body")}
     >

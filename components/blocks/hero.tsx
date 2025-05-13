@@ -56,7 +56,7 @@ export const Hero = ({ data }: { data: PageBlocksHero }) => {
   }
 
   return (
-    <Section title="" image={{ src: imageWhiteboard, shape: 1 }} background={data.background!}>
+    <Section  background={data.background!}>
       <div className="text-center sm:mx-auto lg:mr-auto lg:mt-0">
 
         {data.headline && (

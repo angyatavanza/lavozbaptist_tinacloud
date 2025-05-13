@@ -27,7 +27,7 @@ export default async function Page({
 
   return (
     <Layout rawPageData={data}>
-      <Section title="" image={{ src: imageWhiteboard, shape: 1 }}>
+      <Section >
         <ClientPage {...data} />
       </Section>
     </Layout>

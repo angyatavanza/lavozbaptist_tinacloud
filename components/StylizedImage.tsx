@@ -25,11 +25,15 @@ interface StylizedImageProps extends ImageProps {
   className?: string;
 }
 
-export const StylizedImage: React.FC<StylizedImageProps> = ({ shape = 0, className, ...props }) => {
+export const StylizedImage: React.FC<StylizedImageProps> = ({
+  shape = 0,
+  className,
+  ...props
+}) => {
   const id = useId();
   const { width, height, path } = shapes[shape];
   return (
-      <div
+    <div
       className={clsx(
         className,
         "relative flex aspect-[719/680] w-full grayscale"
@@ -49,7 +53,7 @@ export const StylizedImage: React.FC<StylizedImageProps> = ({ shape = 0, classNa
           <use
             href={`#${id}-shape`}
             strokeWidth="2"
-            className="stroke-neutral-950/10"
+            className="stroke-purple-800/10"
           />
         </g>
         <defs>
