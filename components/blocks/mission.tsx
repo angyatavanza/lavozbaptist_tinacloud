@@ -83,7 +83,19 @@ export const Mission = ({ data }: { data: PageBlocksMission }) => {
             </TextEffect>
           </div>
         )}
-
+        {data.description && (
+          <div data-tina-field={tinaField(data, 'description')}>
+            <TextEffect
+              per="line"
+              preset="fade-in-blur"
+              speedSegment={0.3}
+              delay={0.5}
+              as="p"
+              className="mx-auto mt-8 max-w-2xl text-balance text-lg">
+              {data.description!}
+            </TextEffect>
+          </div>
+        )}
         <AnimatedGroup
           variants={transitionVariants}
           className="mt-12 flex flex-col items-center justify-center gap-2 md:flex-row">
@@ -176,6 +188,7 @@ export const missionBlockSchema: Template = {
     defaultItem: {
       tagline: "Here's some text above the other text",
       headline: 'This Big Text is Totally Awesome',
+      description: 'This Desc is Totally Awesome',
       text: 'Phasellus scelerisque, libero eu finibus rutrum, risus risus accumsan libero, nec molestie urna dui a leo.',
     },
   },
@@ -190,6 +203,11 @@ export const missionBlockSchema: Template = {
       type: 'string',
       label: 'Tagline',
       name: 'tagline',
+    },
+    {
+      type: "string",
+      label: "Description",
+      name: "description",
     },
     {
       label: 'Actions',
