@@ -5,7 +5,7 @@ import { Icon } from "../../icon";
 import { useLayout } from "../LayoutContext";
 import { Container } from "../../Container";
 import { FadeIn } from "../../FadeIn";
-import { FooterNavigation } from "../../FooterNavigation";
+import { FooterNavigation } from "./FooterNavigation";
 import { Logo } from "../../Logo";
 
 type SVGProps = React.SVGProps<SVGSVGElement>;
@@ -80,9 +80,19 @@ export const Footer = () => {
               La Voz
             </Logo>
           </Link>
+          <div className="order-first flex justify-center gap-6 text-sm md:order-last md:justify-end">
+            {footer?.social?.map((link, index) => (
+              <Link key={`${link!.icon}${index}`} href={link!.url!} target="_blank" rel="noopener noreferrer" >
+                <Icon data={{ ...link!.icon, size: 'small' }} className="text-muted-foreground hover:text-primary block" />
+              </Link>
+            ))}
+          </div>
           <p className="text-sm text-neutral-700">
-            © {new Date().getFullYear()} La Voz De La Esperanza, All rights reserved
+            © {new Date().getFullYear()} Iglesia La Voz De La Esperanza. All rights reserved.
           </p>
+          <Link href="/privacy" className="transition hover:text-neutral-950">
+            Privacy Policy
+          </Link>
         </div>
       </FadeIn>
     </Container>
