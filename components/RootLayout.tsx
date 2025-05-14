@@ -11,7 +11,7 @@ import { Button } from "./Button";
 import clsx from "clsx";
 import { ServiceTimes } from "./ServiceTimes";
 import { SocialMedia } from "./SocialMedia";
-import { Footer } from "./Footer";
+import { Footer } from "./layout/nav/Footer";
 
 type HeaderProps = {
   panelId: string;
@@ -203,4 +203,3 @@ export const RootLayout = ({ children }: RootLayoutProps) => {
   return <RootLayoutInner key={pathName}>{children}</RootLayoutInner>;
 };
 
-//export default RootLayout;

@@ -10,12 +10,12 @@ interface PageIntroProps {
   centered?: boolean;
 }
 
-export const PageIntro <PageIntroProps> = ({
+export const PageIntro = ({
   eyebrow,
   title,
   children,
   centered = false,
-}) => {
+}: PageIntroProps) => {
   return (
     <Container
       className={clsx("mt-24 sm:mt-32 lg:mt-40", centered && "text-center")}
