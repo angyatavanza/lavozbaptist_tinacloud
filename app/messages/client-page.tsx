@@ -45,10 +45,10 @@ export default function MessagesClientPage(props: ClientMessageProps) {
 
   return (
     <ErrorBoundary>
-      <PageIntro eyebrow="Contáctanos" title="Tiene preguntas? Contáctenos 👋">
-        <p>Nos encantaría escuchar de usted.</p>
+      <PageIntro eyebrow="Mensajes Recientes" title="Mensajes Recientes">
+        <p>Mensajes Recientes.</p>
       </PageIntro>
-      <Section title="Mensajes" image={{ src: imageWhiteboard, shape: 1 }}>
+      <Section>
         <div className="container flex flex-col items-center gap-16">
           <div className="text-center">
             <h2 className="mx-auto mb-6 text-pretty text-3xl font-semibold md:text-4xl lg:max-w-3xl">

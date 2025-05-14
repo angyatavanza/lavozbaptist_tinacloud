@@ -1,16 +1,16 @@
 import clsx from "clsx";
 import Link from "next/link";
-import { HTMLAttributes, ReactNode } from "react";
+import { ReactNode } from "react";
 
-interface LogoProps extends HTMLAttributes<HTMLAnchorElement | HTMLHeadingElement> {
+interface LogoProps {
   invert?: boolean;
   href?: string;
   className?: string;
   children: ReactNode;
 }
 
-export const Logo = ({ invert, href, className, children, ...props }: LogoProps) => {
-  const combinedClassName = clsx(
+export const Logo = ({ invert, href, className, children }: LogoProps) => {
+  className = clsx(
     className,
     "black",
     invert ? "text-white hover:text-blue-600" : "text-black hover:text-blue-600"
@@ -20,7 +20,7 @@ export const Logo = ({ invert, href, className, children, ...props }: LogoProps)
 
   if (href) {
     return (
-      <Link href={href} className={combinedClassName} {...props}>
+      <Link href={href} className={className}>
         {inner}
       </Link>
     );
@@ -30,13 +30,10 @@ export const Logo = ({ invert, href, className, children, ...props }: LogoProps)
     <h2
       className={clsx(
         "cursor-pointer text-2xl font-semibold duration-300",
-        combinedClassName
+        className
       )}
-      {...props}
     >
       {inner}
     </h2>
   );
 };
-
-//export default Logo;
