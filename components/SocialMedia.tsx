@@ -39,7 +39,7 @@ interface SocialMediaProps {
   invert?: boolean;
 }
 
-export const SocialMedia <SocialMediaProps> = ({ className, invert = false }) => {
+export const SocialMedia = ({ className, invert = false }: SocialMediaProps) => {
   return (
     <ul
       role="list"

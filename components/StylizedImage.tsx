@@ -25,11 +25,7 @@ interface StylizedImageProps extends ImageProps {
   className?: string;
 }
 
-export const StylizedImage <StylizedImageProps> = ({
-  shape = 0,
-  className,
-  ...props
-}) => {
+export const StylizedImage = ({ shape = 0, className, ...props }: StylizedImageProps) => {
   const id = useId();
   const { width, height, path } = shapes[shape];
   return (

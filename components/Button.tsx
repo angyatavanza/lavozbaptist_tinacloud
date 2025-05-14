@@ -9,13 +9,13 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
 }
 
-export const Button <ButtonProps> = ({
+export const Button = ({
   invert,
   href,
   className,
   children,
   ...props
-}) => {
+}: ButtonProps) => {
   const combinedClassName = clsx(
     className,
     "inline-flex rounded-full px-4 py-1.5 text-sm font-semibold transition",

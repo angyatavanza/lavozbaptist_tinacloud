@@ -6,7 +6,7 @@ interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
   label: string;
 }
 
-export const TextInput <TextInputProps> = ({ label, ...props }) => {
+export const TextInput = ({ label, ...props }: TextInputProps) => {
   const id = useId();
 
   return (

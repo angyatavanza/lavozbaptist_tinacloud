@@ -2,9 +2,10 @@
 import { useId, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import type { SVGProps } from "react";
+import type { SVGMotionProps } from "framer-motion";
 
 // Props for Block component
-interface BlockProps extends SVGProps<SVGPathElement> {
+interface BlockProps extends SVGMotionProps<SVGPathElement> {
   x: number;
   y: number;
 }
@@ -27,7 +28,11 @@ interface GridPatternProps extends SVGProps<SVGSVGElement> {
 }
 
 // GridPattern component
-const GridPattern = ({ yOffset = 0, interactive = false, ...props }: GridPatternProps) => {
+export const GridPattern = ({
+  yOffset = 0,
+  interactive = false,
+  ...props
+}: GridPatternProps) => {
   const id = useId();
   const ref = useRef<SVGSVGElement>(null);
   const currentBlock = useRef<any>(null);
@@ -80,5 +85,3 @@ const GridPattern = ({ yOffset = 0, interactive = false, ...props }: GridPattern
     </svg>
   );
 };
-
-export default GridPattern;

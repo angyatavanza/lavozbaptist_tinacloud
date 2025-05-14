@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import GridPattern from "./GridPattern";
+import { GridPattern } from "./GridPattern";
 import clsx from "clsx";
 import { Container } from "./Container";
 import { FadeIn } from "./FadeIn";
@@ -17,7 +17,7 @@ interface ShortMissionProps {
   className?: string;
 }
 
-export const ShortMission <ShortMissionProps> = ({ children, staff, className }) => {
+export const ShortMission = ({ children, staff, className }: ShortMissionProps) => {
   return (
     <div
       className={clsx(
@@ -46,5 +46,3 @@ export const ShortMission <ShortMissionProps> = ({ children, staff, className })
     </div>
   );
 };
-
-export default ShortMission;
