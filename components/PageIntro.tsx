@@ -10,7 +10,7 @@ interface PageIntroProps {
   centered?: boolean;
 }
 
-export const PageIntro: React.FC<PageIntroProps> = ({
+export const PageIntro <PageIntroProps> = ({
   eyebrow,
   title,
   children,

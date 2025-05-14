@@ -12,7 +12,7 @@ interface SectionIntroProps extends HTMLAttributes<HTMLDivElement> {
   invert?: boolean;
 }
 
-export const SectionIntro: React.FC<SectionIntroProps> = ({
+export const SectionIntro <SectionIntroProps> = ({
   eyebrow,
   title,
   children,

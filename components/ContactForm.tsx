@@ -1,10 +1,9 @@
-import React from "react";
 import { FadeIn } from "./FadeIn";
-import { TextInput }from "./TextInput";
-import { RadioInput }from "./RadioInput";
+import { TextInput } from "./TextInput";
+import { RadioInput } from "./RadioInput";
 import { Button } from "./Button";
 
-export const ContactForm: React.FC = () => {
+export const ContactForm = () => {
   return (
     <FadeIn>
       <form>
@@ -13,11 +12,7 @@ export const ContactForm: React.FC = () => {
         </h2>
         <div className="isolate mt-6 -space-y-px rounded-2xl bg-white/50">
           <TextInput label="Nombre" name="name" autoComplete="name" />
-          <TextInput
-            label="Apellido"
-            name="company"
-            autoComplete="Apellido"
-          />
+          <TextInput label="Apellido" name="company" autoComplete="Apellido" />
           <TextInput
             label="Correo electrónico"
             type="email"
@@ -50,5 +45,3 @@ export const ContactForm: React.FC = () => {
     </FadeIn>
   );
 };
-
-//export default ContactForm;

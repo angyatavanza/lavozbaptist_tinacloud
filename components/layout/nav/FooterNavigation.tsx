@@ -11,7 +11,7 @@ type NavigationItem = {
   links: NavigationLink[];
 };
 
-export const FooterNavigation: React.FC = () => {
+export const FooterNavigation  = () => {
   return (
     <nav>
       <ul role="list" className="grid grid-cols-2 gap-8 sm:grid-cols-3">

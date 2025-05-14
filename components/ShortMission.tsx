@@ -17,7 +17,7 @@ interface ShortMissionProps {
   className?: string;
 }
 
-export const ShortMission: React.FC<ShortMissionProps> = ({ children, staff, className }) => {
+export const ShortMission <ShortMissionProps> = ({ children, staff, className }) => {
   return (
     <div
       className={clsx(

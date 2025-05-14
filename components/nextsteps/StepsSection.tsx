@@ -15,7 +15,7 @@ type StepsSectionProps = {
   children: ReactNode;
 };
 
-export const StepsSection: React.FC<StepsSectionProps> = ({ title, image, children }) => {
+export const StepsSection <StepsSectionProps> = ({ title, image, children }) => {
   return (
     <Container className="group/section [counter-increment:section]">
       <div className="lg:flex lg:items-center lg:justify-end lg:gap-x-8 lg:group-even/section:justify-start xl:gap-x-20">

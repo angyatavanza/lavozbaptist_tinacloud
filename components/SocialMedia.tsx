@@ -39,7 +39,7 @@ interface SocialMediaProps {
   invert?: boolean;
 }
 
-export const SocialMedia: React.FC<SocialMediaProps> = ({ className, invert = false }) => {
+export const SocialMedia <SocialMediaProps> = ({ className, invert = false }) => {
   return (
     <ul
       role="list"

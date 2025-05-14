@@ -6,7 +6,7 @@ import { Container } from "./Container";
 import { GridList, GridListItem } from "./GridList";
 
 // Define the functional component with React.FC
-export const Vision: React.FC = () => {
+export const Vision  = () => {
   return (
     <div className="relative mt-24 pt-24 sm:mt-32 sm:pt-32 lg:mt-40 lg:pt-40">
       <div className="absolute inset-x-0 top-0 -z-10 h-[884px] overflow-hidden rounded-t-4xl bg-gradient-to-b from-neutral-50">

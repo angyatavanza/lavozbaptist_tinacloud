@@ -6,7 +6,7 @@ import { StylizedImage } from "./StylizedImage";
 import imageLaptop from "../images/church/congregation-IMG-1038.jpg";
 import {List, ListItem } from "./List";
 
-export const Groups: React.FC = () => {
+export const Groups  = () => {
   return (
     <>
       <SectionIntro

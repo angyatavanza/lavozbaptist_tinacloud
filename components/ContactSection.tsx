@@ -1,10 +1,9 @@
-import React from "react";
 import { Container } from "./Container";
 import { FadeIn } from "./FadeIn";
 import { Button } from "./Button";
 import { ServiceTimes } from "./ServiceTimes";
 
-export const ContactSection: React.FC = () => {
+export const ContactSection = () => {
   return (
     <Container className="mt-24 sm:mt-32 lg:mt-40">
       <FadeIn className="-mx-6 rounded-4xl bg-purple-800 px-6 py-20 sm:mx-0 sm:py-32 md:px-12">
@@ -13,9 +12,11 @@ export const ContactSection: React.FC = () => {
             Comunícate con nuestro equipo
           </h2>
           <div className="mt-6 flex">
-            <Button href={"/contact"} invert>
+            <Button href="/contact" invert //href={"/contact"} 
+            >
               Say Hello
             </Button>
+            
           </div>
           <div className="mt-10 border-t border-white/10 pt-10">
             <h3 className="font-display text-base font-semibold text-white">
@@ -31,5 +32,3 @@ export const ContactSection: React.FC = () => {
     </Container>
   );
 };
-
-//export default ContactSection;

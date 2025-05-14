@@ -4,7 +4,7 @@ import { StepsSection } from "./StepsSection";
 import imageWhiteboard from "@/images/whiteboard.jpg";
 import { TagList, TagListItem } from "../TagList";
 
-export const Step1: React.FC = () => {
+export const Step1  = () => {
   return (
     <StepsSection title="Descubre" image={{ src: imageWhiteboard, shape: 1 }}>
       <div className="space-y-6 text-base text-neutral-600">

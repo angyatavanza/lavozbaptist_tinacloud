@@ -25,7 +25,7 @@ interface StylizedImageProps extends ImageProps {
   className?: string;
 }
 
-export const StylizedImage: React.FC<StylizedImageProps> = ({
+export const StylizedImage <StylizedImageProps> = ({
   shape = 0,
   className,
   ...props

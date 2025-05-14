@@ -1,11 +1,10 @@
-import React from "react";
 import { FadeIn } from "./FadeIn";
 import { ServiceTimes } from "./ServiceTimes";
 import { Border } from "./Border";
 import Link from "next/link";
 import { SocialMedia } from "./SocialMedia";
 
-export const ContactDetails: React.FC = () => {
+export const ContactDetails = () => {
   return (
     <FadeIn>
       <h2 className="font-display text-base font-semibold text-neutral-950">
@@ -47,5 +46,3 @@ export const ContactDetails: React.FC = () => {
     </FadeIn>
   );
 };
-
-//export default ContactDetails;

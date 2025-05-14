@@ -4,7 +4,7 @@ import { StepsSection } from "./StepsSection";
 import imageMeeting from "@/images/church/Congregation-IMG-1140.jpg";
 import { List, ListItem } from "../List";
 
-export const Step3: React.FC = () => {
+export const Step3  = () => {
   return (
     <StepsSection title="Define tu proposito" image={{ src: imageMeeting, shape: 1 }}>
       <div className="space-y-6 text-base text-neutral-600">

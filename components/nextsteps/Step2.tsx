@@ -4,7 +4,7 @@ import { StepsSection } from "./StepsSection";
 import imageLaptop from "@/images/laptop.jpg";
 import { Blockquote }from "../Blockquote";
 
-export const Step2: React.FC = () => {
+export const Step2  = () => {
   return (
     <StepsSection title="Desarolla tu fe" image={{ src: imageLaptop, shape: 2 }}>
       <div className="space-y-6 text-base text-neutral-600">
