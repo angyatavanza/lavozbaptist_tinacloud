@@ -1,9 +1,10 @@
 "use client";
+import React from "react";
 import Link from "next/link";
 import { Container } from "../../Container";
 import { Logo } from "../../Logo";
 import { Button } from "../../Button";
-//import { Icon } from "../../icon";
+import { Icon } from "../../icon";
 import { useLayout } from "../LayoutContext";
 import { Menu, X } from "lucide-react";
 import { usePathname } from "next/navigation";
@@ -17,60 +18,7 @@ import { Footer } from "./Footer";
 import clsx from "clsx";
 
 
-interface HeaderProps {
-  panelId: string;
-  invert?: boolean;
-  icon: React.ElementType;
-  expanded: boolean;
-  onToggle: () => void;
-  toggleRef: RefObject<HTMLButtonElement | null>;
-}
-
-export const Header = ({ panelId, invert = false, icon: Icon, expanded, onToggle, toggleRef }: HeaderProps) => {
-  return (
-    <Container>
-      <div className="flex items-center justify-between">
-        <Link href="/" aria-label="Home">
-          <Logo invert={invert}>La Voz</Logo>
-        </Link>
-        <div className="flex items-center gap-x-8">
-          <Link href="/about" className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">
-            Sobre nosotros
-          </Link>
-          <Link href="/messages" className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">
-            Mensajes
-          </Link>
-          <Link href="/groups" className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">
-            Grupos
-          </Link>
-          <Link href="/growth" className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">
-            Tu Siguiente Paso
-          </Link>
-          <Button href="/contact" invert={invert}>Contacto</Button>
-          <button
-            ref={toggleRef}
-            type="button"
-            onClick={onToggle}
-            aria-expanded={expanded}
-            aria-controls={panelId}
-            className={clsx(
-              "group -m-2.5 rounded-full p-2.5 transition",
-              invert ? "hover:bg-white/10" : "hover:bg-purple-800/10"
-            )}
-            aria-label="Toggle navigation"
-          >
-            <Icon className={clsx(
-              "h-6 w-6",
-              invert ? "fill-white group-hover:fill-neutral-200" : "fill-purple-800 group-hover:fill-neutral-500"
-            )} />
-          </button>
-        </div>
-      </div>
-    </Container>
-  );
-};
-
-/*export const Header = () => {
+export const Header = () => {
   const { globalSettings, theme } = useLayout();
   const header = globalSettings!.header!;
 
@@ -144,4 +92,4 @@ export const Header = ({ panelId, invert = false, icon: Icon, expanded, onToggle
     </header>
   )
 }
-*/
+

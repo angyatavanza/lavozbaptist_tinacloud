@@ -2,16 +2,16 @@
 import { usePathname } from "next/navigation";
 import { useEffect, useId, useRef, useState, ReactNode, RefObject } from "react";
 import { motion, MotionConfig, useReducedMotion } from "framer-motion";
-import { Container } from "./Container";
+import { Container } from "../Container";
 import Link from "next/link";
-import { Logo } from "./Logo";
+import { Logo } from "../Logo";
 import { HiMenuAlt4 } from "react-icons/hi";
 import { IoMdClose } from "react-icons/io";
-import { Button } from "./Button";
+import { Button } from "../Button";
 import clsx from "clsx";
-import { ServiceTimes } from "./ServiceTimes";
-import { SocialMedia } from "./SocialMedia";
-import { Footer } from "./layout/nav/Footer";
+import { ServiceTimes } from "../ServiceTimes";
+import { SocialMedia } from "../SocialMedia";
+import { Footer } from "./nav/Footer";
 
 interface HeaderProps {
   panelId: string;
@@ -19,8 +19,8 @@ interface HeaderProps {
   icon: React.ElementType;
   expanded: boolean;
   onToggle: () => void;
-  toggleRef: RefObject<HTMLButtonElement>;
-};
+  toggleRef: RefObject<HTMLButtonElement | null>;
+}
 
 const Header = ({ panelId, invert = false, icon: Icon, expanded, onToggle, toggleRef }: HeaderProps) => {
   return (
@@ -47,7 +47,7 @@ const Header = ({ panelId, invert = false, icon: Icon, expanded, onToggle, toggl
             ref={toggleRef}
             type="button"
             onClick={onToggle}
-            aria-expanded={expanded.toString()}
+            aria-expanded={expanded}
             aria-controls={panelId}
             className={clsx(
               "group -m-2.5 rounded-full p-2.5 transition",
@@ -128,7 +128,7 @@ const RootLayoutInner = ({ children }: RootLayoutInnerProps) => {
   return (
     <MotionConfig transition={shouldReduceMotion ? { duration: 0 } : undefined}>
       <header>
-        <div className="absolute left-0 right-0 top-2 z-40 pt-14" aria-hidden={expanded ? "true" : undefined} inert={expanded ? "" : undefined}>
+        <div className="absolute left-0 right-0 top-2 z-40 pt-14" aria-hidden={expanded ? true : undefined} inert={expanded ? true : undefined}>
           <Header
             panelId={panelId}
             icon={HiMenuAlt4}
@@ -145,8 +145,8 @@ const RootLayoutInner = ({ children }: RootLayoutInnerProps) => {
           id={panelId}
           style={{ height: expanded ? "auto" : "0.5rem" }}
           className="relative z-50 overflow-hidden bg-purple-800 pt-2"
-          aria-hidden={expanded ? undefined : "true"}
-          inert={expanded ? undefined : ""}
+          aria-hidden={expanded ? undefined : true}
+          inert={expanded ? undefined : true}
         >
           <motion.div layout className="bg-purple-600">
             <div ref={navRef} className="bg-purple-800 pb-16 pt-14">
@@ -197,7 +197,7 @@ const RootLayoutInner = ({ children }: RootLayoutInnerProps) => {
 type RootLayoutProps = {
   children: ReactNode;
 };
-
+//to-do: add this 
 export const RootLayout = ({ children }: RootLayoutProps) => {
   const pathName = usePathname();
   return <RootLayoutInner key={pathName}>{children}</RootLayoutInner>;
