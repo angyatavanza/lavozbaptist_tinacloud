@@ -27,26 +27,6 @@
       {
         "href": "/nextsteps",
         "label": "Siguientes Pasos"
-      },
-      {
-        "href": "/contact",
-        "label": "Contacto"
-      },
-      {
-        "href": "/donations",
-        "label": "Donaciones"
-      },
-      {
-        "href": "/serve",
-        "label": "Servir"
-      },
-      {
-        "href": "/events",
-        "label": "Eventos"
-      },
-      {
-        "href": "/resources",
-        "label": "Recursos"
       }
     ]
   },

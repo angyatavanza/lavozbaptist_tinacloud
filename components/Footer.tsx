@@ -2,6 +2,8 @@ import React from "react";
 import Link from "next/link";
 import { Container } from "./Container";
 import { FadeIn } from "./FadeIn";
+import { TinaIcon } from "./icon";
+import { useLayout } from "./layout/LayoutContext";
 import { FooterNavigation } from "./FooterNavigation";
 import { Logo } from "./Logo";
 
@@ -52,6 +54,9 @@ const NewsletterForm = () => {
 };
 
 export const Footer = () => {
+  const { globalSettings } = useLayout();
+  const { header, footer } = globalSettings!;
+  
   return (
     <Container as="footer" className="mt-24 w-full sm:mt-32 lg:mt-40">
       <FadeIn>
@@ -68,9 +73,22 @@ export const Footer = () => {
               La Voz
             </Logo>
           </Link>
+           <Link href="/" aria-label="go home">
+              <TinaIcon
+                parentColor={header!.color!}
+                data={header!.icon}
+              />
+            </Link>
           <p className="text-sm text-neutral-700">
             © La Voz Inc. {new Date().getFullYear()}
           </p>
+          <div className="order-first flex justify-center gap-6 text-sm md:order-last md:justify-end">
+            {footer?.social?.map((link, index) => (
+              <Link key={`${link!.icon}${index}`} href={link!.url!} target="_blank" rel="noopener noreferrer" >
+                <TinaIcon data={{ ...link!.icon, size: 'small' }} className="text-muted-foreground hover:text-primary block" />
+              </Link>
+            ))}
+          </div>
         </div>
       </FadeIn>
     </Container>

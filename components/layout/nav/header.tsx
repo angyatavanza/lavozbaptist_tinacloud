@@ -2,7 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
-import { Icon } from "../../icon";
+import { TinaIcon } from "../../icon";
 import { useLayout } from "../LayoutContext";
 import { Menu, X } from "lucide-react";
 
@@ -23,7 +23,7 @@ export const Header = () => {
                 href="/"
                 aria-label="home"
                 className="flex items-center space-x-2">
-                <Icon
+                <TinaIcon
                   parentColor={header.color!}
                   data={{
                     name: header.icon!.name,

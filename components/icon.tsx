@@ -89,7 +89,7 @@ const iconSizeClass = {
   custom: "",
 };
 
-export const Icon = ({
+export const TinaIcon = ({
   data,
   parentColor = "",
   className = "",

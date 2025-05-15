@@ -4,7 +4,7 @@ import { tinaField } from "tinacms/dist/react";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { Card, CardContent, CardHeader } from "../ui/card";
 import { iconSchema } from '@/tina/fields/icon';
-import { Icon } from '../icon';
+import { TinaIcon } from '../icon';
 import { Button } from '@/components/ui/button'
 import { PageBlocksEvents } from "@/tina/__generated__/types";
 import { Section } from "../layout/Section";
@@ -68,7 +68,7 @@ export const Events = ({ data }: { data: PageBlocksEvents }) => {
                                 variant={action!.type === 'link' ? 'ghost' : 'default'}
                                 className="rounded-xl px-5 text-base">
                                 <Link href={action!.link!}>
-                                    {action?.icon && (<Icon data={action?.icon} />)}
+                                    {action?.icon && (<TinaIcon data={action?.icon} />)}
                                     <span className="text-nowrap">{action!.label}</span>
                                 </Link>
                             </Button>

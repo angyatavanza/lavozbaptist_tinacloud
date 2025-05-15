@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import Link from "next/link";
-import { Icon } from "../../icon";
+import { TinaIcon } from "../../icon";
 import { useLayout } from "../LayoutContext";
 import { Container } from "../../Container";
 import { FadeIn } from "../../FadeIn";
@@ -19,7 +19,7 @@ export const Footer = () => {
 
           <div className="order-last flex justify-center md:order-first md:justify-start">
             <Link href="/" aria-label="go home">
-              <Icon
+              <TinaIcon
                 parentColor={header!.color!}
                 data={header!.icon}
               />
@@ -30,7 +30,7 @@ export const Footer = () => {
           <div className="order-first flex justify-center gap-6 text-sm md:order-last md:justify-end">
             {footer?.social?.map((link, index) => (
               <Link key={`${link!.icon}${index}`} href={link!.url!} target="_blank" rel="noopener noreferrer" >
-                <Icon data={{ ...link!.icon, size: 'small' }} className="text-muted-foreground hover:text-primary block" />
+                <TinaIcon data={{ ...link!.icon, size: 'small' }} className="text-muted-foreground hover:text-primary block" />
               </Link>
             ))}
           </div>

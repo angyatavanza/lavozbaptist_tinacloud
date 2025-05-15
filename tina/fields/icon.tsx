@@ -3,7 +3,7 @@ import React from "react";
 import { Button, wrapFieldsWithMeta } from "tinacms";
 import { BiChevronRight } from "react-icons/bi";
 import { GoCircleSlash } from "react-icons/go";
-import { Icon, IconOptions } from "../../components/icon";
+import { TinaIcon, IconOptions } from "../../components/icon";
 import {
   Popover,
   PopoverButton,
@@ -115,7 +115,7 @@ export const IconPickerInput = wrapFieldsWithMeta(({ input }) => {
                                   close();
                                 }}
                               >
-                                <Icon
+                                <TinaIcon
                                   data={{
                                     name: name,
                                     size: "custom",

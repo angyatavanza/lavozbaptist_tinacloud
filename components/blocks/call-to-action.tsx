@@ -4,7 +4,7 @@ import { tinaField } from 'tinacms/dist/react';
 import { iconSchema } from '@/tina/fields/icon';
 import { Button } from '@/components/ui/button'
 import { PageBlocksCta } from '@/tina/__generated__/types';
-import { Icon } from '../icon';
+import { TinaIcon } from '../icon';
 import imageWhiteboard from "@/images/whiteboard.jpg";
 import { Section } from '../layout/Section';
 
@@ -27,7 +27,7 @@ export const CallToAction = ({ data }: { data: PageBlocksCta }) => {
                                 variant={action!.type === 'link' ? 'ghost' : 'default'}
                                 className="rounded-xl px-5 text-base">
                                 <Link href={action!.link!}>
-                                    {action?.icon && (<Icon data={action?.icon} />)}
+                                    {action?.icon && (<TinaIcon data={action?.icon} />)}
                                     <span className="text-nowrap">{action!.label}</span>
                                 </Link>
                             </Button>

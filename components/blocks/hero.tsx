@@ -7,7 +7,7 @@ import { tinaField } from 'tinacms/dist/react';
 import { PageBlocksHero, PageBlocksHeroImage } from '../../tina/__generated__/types';
 import { Button } from '../ui/button';
 import { iconSchema } from '@/tina/fields/icon';
-import { Icon } from '../icon';
+import { TinaIcon } from '../icon';
 import { Section, sectionBlockSchemaField } from '../layout/Section';
 import imageWhiteboard from "@/images/whiteboard.jpg";
 import { AnimatedGroup } from '../motion-primitives/animated-group';
@@ -99,7 +99,7 @@ export const Hero = ({ data }: { data: PageBlocksHero }) => {
                 variant={action!.type === 'link' ? 'ghost' : 'default'}
                 className="rounded-xl px-5 text-base">
                 <Link href={action!.link!}>
-                  {action?.icon && (<Icon data={action?.icon} />)}
+                  {action?.icon && (<TinaIcon data={action?.icon} />)}
                   <span className="text-nowrap">{action!.label}</span>
                 </Link>
               </Button>
