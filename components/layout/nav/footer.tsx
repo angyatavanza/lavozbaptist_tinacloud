@@ -59,6 +59,7 @@ export const Footer = () => {
   const { header, footer } = globalSettings!;
 
   return (
+    /*
     <Container as="footer" className="mt-24 w-full sm:mt-32 lg:mt-40">
       <FadeIn>
         <div className="grid grid-cols-1 gap-x-8 gap-y-16 lg:grid-cols-2">
@@ -96,7 +97,7 @@ export const Footer = () => {
         </div>
       </FadeIn>
     </Container>
-    /*
+    */
     <footer className="border-b bg-white pt-20 dark:bg-transparent">
       <div className="mx-auto max-w-5xl px-6">
         <div className="mt-12 flex flex-wrap items-center gap-6 border-t py-6 flex-col md:flex-row md:justify-between">
@@ -122,6 +123,5 @@ export const Footer = () => {
         </div>
       </div>
     </footer>
-    */
   );
 }

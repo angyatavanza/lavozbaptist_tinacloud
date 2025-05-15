@@ -18,7 +18,6 @@ type LayoutProps = PropsWithChildren & {
 };
 
 export default async function Layout({ children, rawPageData }: LayoutProps) {
-  const pathName = usePathname();
   const { data: globalData } = await client.queries.global({
     relativePath: "index.json",
   },
