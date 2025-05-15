@@ -13,7 +13,7 @@ import { ServiceTimes } from "./ServiceTimes";
 import { SocialMedia } from "./SocialMedia";
 import { Footer } from "./layout/nav/Footer";
 
-type HeaderProps = {
+interface HeaderProps {
   panelId: string;
   invert?: boolean;
   icon: React.ElementType;
