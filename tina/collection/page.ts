@@ -1,4 +1,8 @@
 import type { Collection } from 'tinacms';
+import { herocontentBlockSchema } from '@/components/blocks/hero-content';
+import { bannerBlockSchema } from '@/components/blocks/banner';
+import { teammemberBlockSchema } from '@/components/blocks/our-team';
+import { profileBlockSchema } from '@/components/blocks/profile-section';
 import { heroBlockSchema } from '@/components/blocks/hero';
 import { aboutBlockSchema } from '@/components/blocks/about';
 import { missionBlockSchema } from '@/components/blocks/mission';
@@ -8,6 +12,9 @@ import { featureBlockSchema } from '@/components/blocks/features';
 import { groupBlockSchema } from '@/components/blocks/groups';
 import { videoBlockSchema } from '@/components/blocks/video';
 import { calloutBlockSchema } from '@/components/blocks/callout';
+import { contentwithlistBlockSchema } from '@/components/blocks/content-list';
+import { contentandimageBlockSchema } from '@/components/blocks/content-img';
+import { contentandimagevariantBlockSchema } from '@/components/blocks/content-img2';
 import { eventsBlockSchema } from '@/components/blocks/events';
 import { ctaBlockSchema } from '@/components/blocks/call-to-action';
 
@@ -36,6 +43,7 @@ const Page: Collection = {
       },
       templates: [
         heroBlockSchema,
+        bannerBlockSchema,
         aboutBlockSchema,
         missionBlockSchema,
         calloutBlockSchema,
@@ -46,6 +54,12 @@ const Page: Collection = {
         contentBlockSchema,
         sermonBlockSchema,
         videoBlockSchema,
+        herocontentBlockSchema,
+        profileBlockSchema,
+        teammemberBlockSchema,
+        contentandimagevariantBlockSchema,
+        contentwithlistBlockSchema,
+        contentandimageBlockSchema
       ],
     },
   ],

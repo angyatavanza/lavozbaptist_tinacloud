@@ -3,12 +3,12 @@ import type { Template } from 'tinacms';
 import { tinaField } from 'tinacms/dist/react';
 import { iconSchema } from '@/tina/fields/icon';
 import { Button } from '@/components/ui/button'
-import { PageBlocksCta } from '@/tina/__generated__/types';
+import { PageBlocksBanner } from '@/tina/__generated__/types';
 import { TinaIcon } from '../icon';
 import imageWhiteboard from "@/images/whiteboard.jpg";
 import { Section } from '../layout/Section';
 
-export const CallToAction = ({ data }: { data: PageBlocksCta }) => {
+export const Banner = ({ data }: { data: PageBlocksBanner }) => {
     return (
         <Section >
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" preserveAspectRatio="none">
@@ -47,11 +47,11 @@ export const CallToAction = ({ data }: { data: PageBlocksCta }) => {
 }
 
 
-export const ctaBlockSchema: Template = {
-    name: "cta",
-    label: "CTA",
+export const bannerBlockSchema: Template = {
+    name: "banner",
+    label: "Banner",
     ui: {
-        previewSrc: "/blocks/cta.png",
+        previewSrc: "/blocks/banner.png",
         defaultItem: {
             title: "Start Building",
             description: "Get started with TinaCMS today and take your content management to the next level.",

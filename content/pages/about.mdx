@@ -1,6 +1,209 @@
 ---
+title: Tina Cloud Starter
 blocks:
-  - body: "# What is this?\n\nThis is a [TinaCMS](https://tina.io)-enabled Next.js app, so you can edit your content on a live page. In this project the Tina file-based CMS is used via GraphQL: it's powered by a schema that *you* define. It not only serves content from Markdown files in your repository, but it also generates TinaCMS forms for you automatically ✨.\n\n## New to TinaCMS?\n\nTinaCMS is feature-rich, and leaves a lot of power up to the user on how it's configured.\n\nThere can be a learning curve as you get to grips with how it all fits together.\n\nThe tutorials in our docs will guide you through the basics, to the more advanced ways to use the tool.\n\nCheck out the [Learning Guide](https://tina.io/docs/beginner-tutorials/tutorial-overview) it covers all you need to get up and running with TinaCMS.\n\n## Requirements\n\n* Git\n* [Node.js Active LTS](https://nodejs.org/en/about/releases/)\n* NPM, Yarn, pnpm, or bun\n\n## Install\n\nInstall the project's dependencies:\n\n<scriptCopyBlock\n  codeLanguage=\"bash\"\n  lightTheme=\"catppuccin-latte\"\n  darkTheme=\"catppuccin-mocha\"\n  commandMap=\"npm|npm install\n  pnpm|pnpm install\n  yarn|yarn install\n  bun|bun install\"\n/>\n\n## Run the project locally\n\nTo run the local development server:\n\n<scriptCopyBlock\n  codeLanguage=\"bash\"\n  lightTheme=\"catppuccin-latte\"\n  darkTheme=\"catppuccin-mocha\"\n  commandMap=\"npm|npm run dev\n  pnpm|pnpm run dev\n  yarn|yarn dev\n  bun|bun run dev\"\n/>\n\nThis command starts the GraphQL server and the Next.js application in development mode. It also regenerates your schema types for TypeScript and GraphQL so changes to your `/tina/config.ts` are reflected immediately.\n\nOne of the most interesting aspects of the TinaCloud Content API is that it doesn't actually require anything from the cloud to work locally. Since TinaCMS is by default a Git-backed CMS, everything can be run from your local filesystem via the CLI. \U0001F60E\n\nThis is ideal for development workflows and the API is identical to the one used in TinaCloud, so once you're ready to deploy your application you won't face any challenges there.\n\nOpen [`http://localhost:3000`](http://localhost:3000) in your browser to see your file-based content being loaded from the GraphQL API.\n\nWant to learn more? Go through the [Learning Guide](https://tina.io/docs/beginner-tutorials/tutorial-overview) to understand how to customise your TinaCMS experience.\n\n## Connect to Tina Cloud\n\nWhile the fully-local development workflow is the recommended way for developers to work,\nyou'll obviously want other editors and collaborators to be able to make changes on a hosted website with authentication.\n\nCheck out the docs on how to connect to our hosted backend - [Going to Production with TinaCloud](https://tina.io/docs/tina-cloud/overview)\n\n## Deploy\n\nSites using TinaCMS and TinaCloud can be deployed to lots of hosting providers.\n\nWe have documented some of the popular ones:\n\n* [Vercel](https://tina.io/docs/tina-cloud/deployment-options/vercel)\n* [Netlify](https://tina.io/docs/tina-cloud/deployment-options/netlify)\n* [GitHub Pages](https://tina.io/docs/tina-cloud/deployment-options/github-pages)\n* [Alibaba Cloud](https://tina.io/docs/tina-cloud/deployment-options/alibaba-cloud)\n\nIf your favourite isn't listed here, it doesn't mean that it isn't supported - we just don't have documentation for it yet.\n\n***\n\n## Getting Help\n\nYou might face issues, want to provide feedback or get help with any challenges you may have:\n\n* Read the [TinaCloud documentation](https://tina.io/docs/tina-cloud/).\n* [Join our Discord](https://discord.gg/zumN63Ybpf).\n* Visit the [community forum](https://community.tinacms.org/) to ask questions.\n* Reach out to us on Twitter at [@TinaCMS](https://x.com/tinacms).\n* [Email us](mailto\\:support@tina.io) to schedule a call with our team and share more about your context and what you're trying to achieve.\n\n## LICENSE\n\nLicensed under the [Apache 2.0 license](./LICENSE).\n"
-    _template: content
+  - background: ''
+    text: Support for live editing and editorial workflow
+    url: 'https://tina.io/editorial-workflow'
+    _template: callout
+  - background: bg-orange-50/80
+    headline: Llevamos Esperanza a la Ciudad de Charlotte
+    tagline: Bienvenidos a La Voz De La Esperanza
+    actions:
+      - label: Conózcanos
+        type: button
+        icon:
+          name: Tina
+          color: white
+        link: /about
+      - label: Servicios Dominicales
+        type: link
+        link: /messages
+    image:
+      src: /uploads/exterior-IMG-1119.jpg
+      alt: Getting started with TinaCMS
+      videoUrl: ''
+    _template: hero
+  - background: bg-orange-50/80
+    headline: 'La Voz es una Iglesia Bautista en Charlotte, NC'
+    tagline: Sobre Nosotros
+    description: >-
+      La Iglesia Bautista La Voz de La Esperanza como su nombre lo indica, es
+      una Iglesia que lleva esperanza a la ciudad de Charlotte y sus
+      alrededores. Si tu estas buscando un lugar donde congregarte y alabar a
+      Dios, nuestra iglesia esta abierta para todos los visitantes
+    actions:
+      - label: Descubrir Más
+        type: button
+        icon:
+          name: Tina
+          color: white
+        link: /about
+    image:
+      src: ''
+      alt: Getting started with TinaCMS
+      videoUrl: ''
+    _template: about
+  - background: bg-orange-50/80
+    headline: Alcanzamos Personas para Cristo
+    tagline: Nuestra Misión
+    description: >-
+      Nos dedicamos a alcanzar personas para Cristo, guiarlos a servir, adorar y
+      tener una vida consagrada para Dios.
+    actions:
+      - label: Descubrir Más
+        type: button
+        icon:
+          name: Tina
+          color: white
+        link: /about
+    image:
+      src: ''
+      alt: Getting started with TinaCMS
+      videoUrl: 'https://youtu.be/embed/1OtgGIdzdC4'
+    _template: mission
+  - background: bg-zinc-50
+    title: TinaCMS by the numbers Event
+    description: >-
+      TinaCMS is an open-source content management system that allows developers
+      to create and manage content for their websites and applications. It
+      provides a flexible and customizable framework for building content-driven
+      applications.
+    events:
+      - event: 12K
+        type: Stars on GitHub
+      - event: 11K
+        type: Active Users
+      - event: 22K
+        type: Powered Apps
+    actions:
+      - label: View events
+        type: button
+        icon:
+          name: BiCalendarStar
+          color: purple
+          style: float
+        link: /events
+    _template: events
+  - title: Built to cover your needs
+    description: We have a lot of features to cover your needs
+    items:
+      - cover: /uploads/authors/llamantha.png
+        title: Check out the docs
+        text: >
+          Find everything you need to get started with TinaCMS in the [official
+          documentation](https://tina.io/docs/). Setup guides, API references,
+          and troubleshooting tips all in one place.
+      - title: Try TinaCloud
+        text: >
+          Sign up for [TinaCloud](https://app.tina.io/) to enable real-time
+          editing and Git-backed content management. Follow the [getting started
+          guide](https://tina.io/docs/tina-cloud/) to set up your project.
+      - title: Get support from Discord
+        text: >
+          Need help? Ask questions and get support from the community in our
+          [Discord server](https://discord.com/invite/zumN63Ybpf). Whether
+          you’re troubleshooting or looking for best practices, our team and
+          users are there to help.
+    _template: features
+  - title: Built to cover your needs
+    description: We have a lot of groups to cover your needs
+    items:
+      - title: Check out the docs
+        text: >
+          Find everything you need to get started with TinaCMS in the [official
+          documentation](https://tina.io/docs/). Setup guides, API references,
+          and troubleshooting tips all in one place.
+      - title: Try TinaCloud
+        text: >
+          Sign up for [TinaCloud](https://app.tina.io/) to enable real-time
+          editing and Git-backed content management. Follow the [getting started
+          guide](https://tina.io/docs/tina-cloud/) to set up your project.
+      - title: Get support from Discord
+        text: >
+          Need help? Ask questions and get support from the community in our
+          [Discord server](https://discord.com/invite/zumN63Ybpf). Whether
+          you’re troubleshooting or looking for best practices, our team and
+          users are there to help.
+    _template: groups
+  - title: 'Build by makers, loved by thousand developers'
+    description: >-
+      Gemini is evolving to be more than just the models. It supports an entire
+      to the APIs and platforms helping developers and businesses innovate.
+    sermons:
+      - quote: >-
+          Gosh! Most CMSs are like, the worst. TinaCMS? It’s pretty much the
+          liger of content management—majestic, powerful, and totally awesome.
+        author: Napoleon Dynamite AI
+        role: Meme-Fueled CTO
+        avatar: /uploads/sermons/napoleon.png
+      - quote: >-
+          Editing content used to feel like defusing a bomb. TinaCMS made it
+          feel like playing Mario Kart—fun, fast, and kinda addictive.
+        author: DevRel Luigi
+        role: Pixelated Evangelist of Speed
+        avatar: /uploads/sermons/luigi.png
+      - quote: >-
+          Our marketing team cried tears of joy. Actual tears. TinaCMS gave them
+          real-time editing like it was NBD.
+        author: Head of Hype @FakeCorp
+        role: Vibes Architect
+        avatar: /uploads/sermons/24.jpg
+      - quote: >-
+          I once tried to build a CMS from scratch. Then I met Tina. She's
+          prettier, smarter, and doesn't crash at 3AM.
+        author: Brogrammer Dan
+        role: Lead Coffee-to-Code Transpiler
+        avatar: /uploads/sermons/3.jpg
+      - quote: >-
+          My boss thinks I’m a genius now. All I did was install TinaCMS and sip
+          coffee.
+        author: Totally Not A Junior Dev
+        role: Senior Coffee Optimization Engineer
+        avatar: /uploads/sermons/50.jpg
+      - quote: >-
+          TinaCMS turned my spaghetti content into a Michelin-starred
+          experience.
+        author: Chef Coder
+        role: Culinary Code Alchemist
+        avatar: /uploads/sermons/8.jpg
+      - quote: >-
+          We replaced our enterprise CMS with Tina. Nobody noticed—except the
+          devs, who high-fived for 3 hours straight.
+        author: Director of ChillOps
+        role: VP of Zero-Outage Zen
+        avatar: /uploads/sermons/70.jpg
+      - quote: I asked ChatGPT for the best CMS. It said Tina. I don’t question gods.
+        author: GPT Whisperer
+        role: AI Summoner-in-Chief
+        avatar: /uploads/sermons/29.jpg
+      - quote: >-
+          TinaCMS is like having a content butler—polite, efficient, and always
+          in draft mode.
+        author: Lady Markdownsworth
+        role: Markdown Royalty and CMS Whisperer
+        avatar: /uploads/sermons/4.jpg
+      - quote: >-
+          Our site used to be haunted by broken previews. TinaCMS exorcised the
+          bugs.
+        author: Paranormal Webtivity Expert
+        role: Digital Exorcist
+        avatar: /uploads/sermons/92.jpg
+    _template: sermon
+  - title: Start Building
+    description: >-
+      Get started with TinaCMS today and take your content management to the
+      next level.
+    actions:
+      - label: Get Started
+        type: button
+        icon:
+          name: Tina
+          color: white
+          style: ''
+        link: /
+      - label: Book Demo
+        type: link
+        link: 'https://tina.io'
+    _template: cta
 ---
 

@@ -81,7 +81,7 @@ export const Footer = () => {
               />
             </Link>
           <p className="text-sm text-neutral-700">
-            © La Voz Inc. {new Date().getFullYear()}
+            © {new Date().getFullYear()} Iglesia La Voz de la Esperanza. All Rights Reserved.
           </p>
           <div className="order-first flex justify-center gap-6 text-sm md:order-last md:justify-end">
             {footer?.social?.map((link, index) => (

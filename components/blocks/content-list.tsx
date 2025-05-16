@@ -1,0 +1,51 @@
+"use client";
+import React from "react";
+
+import { TinaMarkdown } from "tinacms/dist/rich-text";
+import type { Template } from "tinacms";
+import { PageBlocksContentwithlist } from "../../tina/__generated__/types";
+import { tinaField } from "tinacms/dist/react";
+import { Section } from "../layout/Section";
+import { mermaid } from "./mermaid";
+import { sectionBlockSchemaField } from '../layout/Section';
+import imageWhiteboard from "@/images/whiteboard.jpg";
+import { scriptCopyBlockSchema, ScriptCopyBtn } from "../magicui/script-copy-btn";
+
+export const ContentwithList = ({ data }: { data: PageBlocksContentwithlist }) => {
+  return (
+    <Section  background={data.background!}
+      className="prose prose-lg"
+      data-tina-field={tinaField(data, "body")}
+    >
+      <TinaMarkdown
+        content={data.body}
+        components={{
+          mermaid,
+          scriptCopyBlock: (props: any) => <ScriptCopyBtn {...props} />,
+        }}
+      />
+    </Section>
+  );
+};
+
+export const contentwithlistBlockSchema: Template = {
+  name: "contentwithlist",
+  label: "Contentwithlist",
+  ui: {
+    previewSrc: "/blocks/contentwithlist.png",
+    defaultItem: {
+      body: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede.",
+    },
+  },
+  fields: [
+    sectionBlockSchemaField as any,
+    {
+      type: "rich-text",
+      label: "Body",
+      name: "body",
+      templates: [
+        scriptCopyBlockSchema,
+      ],
+    }
+  ],
+};

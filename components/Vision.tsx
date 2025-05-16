@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React, { ReactNode } from "react";
-import GridPattern from "./GridPattern";
+import { GridPattern } from "./GridPattern";
 import { SectionIntro } from "./layout/SectionIntro";
 import { Container } from "./Container";
 import { GridList, GridListItem } from "./GridList";
