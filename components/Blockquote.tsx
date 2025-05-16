@@ -81,9 +81,15 @@ type BlockquoteProps = BaseBlockquoteProps & Partial<Pick<BlockquoteWithImagePro
 
 export const Blockquote = (props: BlockquoteProps): ReactElement => {
   if (props.image) {
-    return <BlockquoteWithImage {...(props as BlockquoteWithImageProps)} />;
+    return (
+      <BlockquoteWithImage 
+        {...(props as BlockquoteWithImageProps)} 
+      />
+    )
   }
-  return <BlockquoteWithoutImage {...props} />;
+  return (
+    <BlockquoteWithoutImage 
+      {...props} 
+    />
+  )
 };
-
-//export default Blockquote;
