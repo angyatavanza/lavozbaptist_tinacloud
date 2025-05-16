@@ -3,7 +3,7 @@ import { LayoutProvider } from "./LayoutContext";
 import client from "../../tina/__generated__/client";
 import { Header } from "./nav/Header";
 import { Footer } from "./nav/Footer";
-
+import { RootLayout } from "./RootLayout";
 type LayoutProps = PropsWithChildren & {
   rawPageData?: any;
 };
@@ -23,11 +23,7 @@ export default async function Layout({ children, rawPageData }: LayoutProps) {
 
   return (
     <LayoutProvider globalSettings={globalData.global} pageData={rawPageData}>
-      <Header />
-      <main className="overflow-x-hidden pt-20">
-        {children}
-      </main>
-      <Footer />
+      <RootLayout>{children}</RootLayout>
     </LayoutProvider>
   );
 }

@@ -5,6 +5,8 @@ import { motion, MotionConfig, useReducedMotion } from "framer-motion";
 import { Container } from "./Container";
 import Link from "next/link";
 import { Logo } from "./Logo";
+import { useLayout } from "./layout/LayoutContext";
+import { TinaIcon } from "./icon";
 import { HiMenuAlt4 } from "react-icons/hi";
 import { IoMdClose } from "react-icons/io";
 import { Button } from "./Button";
@@ -23,25 +25,41 @@ interface HeaderProps {
 };
 
 const Header = ({ panelId, invert = false, icon: Icon, expanded, onToggle, toggleRef }: HeaderProps) => {
+  const { globalSettings, theme } = useLayout();
+  const header = globalSettings!.header!;
   return (
     <Container>
       <div className="flex items-center justify-between">
         <Link href="/" aria-label="Home">
           <Logo invert={invert}>La Voz</Logo>
         </Link>
+        <Link href="/" aria-label="home" className="flex items-center space-x-2">
+          <TinaIcon
+            parentColor={header.color!}
+            data={{
+              name: header.icon!.name,
+              color: header.icon!.color,
+              style: header.icon!.style,
+            }}
+          />{" "}
+          <span>
+            {header.name}
+          </span>
+        </Link>
+        <div className="hidden lg:block">
+          <ul className="flex gap-8 text-sm">
+            {header.nav!.map((item, index) => (
+              <li key={index}>
+                <Link
+                  href={item!.href!}
+                  className="text-muted-foreground hover:text-accent-foreground block duration-150">
+                  <span>{item!.label}</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
         <div className="flex items-center gap-x-8">
-          <Link href="/about" className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">
-            Sobre nosotros
-          </Link>
-          <Link href="/messages" className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">
-            Mensajes
-          </Link>
-          <Link href="/groups" className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">
-            Grupos
-          </Link>
-          <Link href="/growth" className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">
-            Tu Siguiente Paso
-          </Link>
           <Button href="/contact" invert={invert}>Contacto</Button>
           <button
             ref={toggleRef}
@@ -200,5 +218,7 @@ type RootLayoutProps = {
 
 export const RootLayout = ({ children }: RootLayoutProps) => {
   const pathName = usePathname();
-  return <RootLayoutInner key={pathName}>{children}</RootLayoutInner>;
+  return (
+      <RootLayoutInner key={pathName}>{children}</RootLayoutInner>
+  );
 };

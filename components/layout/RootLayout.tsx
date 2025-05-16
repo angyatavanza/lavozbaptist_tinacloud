@@ -220,5 +220,7 @@ type RootLayoutProps = {
 
 export const RootLayout = ({ children }: RootLayoutProps) => {
   const pathName = usePathname();
-  return <RootLayoutInner key={pathName}>{children}</RootLayoutInner>;
+  return (
+      <RootLayoutInner key={pathName}>{children}</RootLayoutInner>
+  );
 };
