@@ -2,7 +2,7 @@ import Image from "next/image";
 import React from "react";
 import { StepsSection } from "./StepsSection";
 import imageWhiteboard from "@/images/whiteboard.jpg";
-import { TagList, TagListItem } from "../TagList";
+import { TagList, TagListItem } from "./TagList";
 
 export const Step1  = () => {
   return (

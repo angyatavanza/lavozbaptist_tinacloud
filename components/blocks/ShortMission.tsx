@@ -4,7 +4,7 @@ import clsx from "clsx";
 import { Container } from "./Container";
 import { FadeIn } from "./FadeIn";
 import Image from "next/image";
-import { Button } from "./Button";
+import { Button } from "./ui_version2/Button2";
 
 interface Staff {
   logo: string;

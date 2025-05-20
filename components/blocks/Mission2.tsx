@@ -1,9 +1,9 @@
 import React from "react";
-import { SectionIntro } from "./layout/SectionIntro";
-import { Container } from "./Container";
+import { SectionIntro } from "../layout/SectionIntro";
+import { Container } from "../Container";
 import { GridList, GridListItem } from "./GridList";
 
-export const Mission  = () => {
+export const Mission2  = () => {
   return (
     <div className="mt-24 rounded-4xl bg-purple-800 py-24 sm:mt-32 lg:mt-40 lg:py-32">
       <SectionIntro

@@ -5,7 +5,7 @@ import { TinaIcon } from "../../icon";
 import { useLayout } from "../LayoutContext";
 import { Container } from "../../Container";
 import { FadeIn } from "../../FadeIn";
-import { FooterNavigation } from "../../FooterNavigation";
+import { FooterNavigation } from "../FooterNavigation";
 import { Logo } from "../../Logo";
 
 export const Footer = () => {

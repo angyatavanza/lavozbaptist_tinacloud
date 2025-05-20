@@ -1,6 +1,6 @@
 import { FadeIn } from "./FadeIn";
 import { ServiceTimes } from "./ServiceTimes";
-import { Border } from "./Border";
+import { Border } from "./ui/Border";
 import Link from "next/link";
 import { SocialMedia } from "./SocialMedia";
 

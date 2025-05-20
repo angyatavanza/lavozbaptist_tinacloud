@@ -1,6 +1,6 @@
 import { Container } from "./Container";
 import { FadeIn } from "./FadeIn";
-import { Button } from "./Button";
+import { Button } from "./ui/Button2";
 import { ServiceTimes } from "./ServiceTimes";
 
 export const ContactSection = () => {

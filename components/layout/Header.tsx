@@ -9,7 +9,7 @@ import { LayoutProvider } from "./layout/LayoutContext";
 import { useLayout } from "./layout/LayoutContext";
 import { TinaIcon } from "./icon";
 import { Logo } from "./Logo";
-import { Button } from "./Button";
+import { Button } from "./ui_version2/Button2";
 import clsx from "clsx";
 
 interface HeaderProps {

@@ -1,6 +1,6 @@
 import Image from "next/image";
-import { Border } from "./Border";
-import { FadeIn, FadeInStagger } from "./FadeIn";
+import { Border } from "../ui_version2/Border";
+import { FadeIn, FadeInStagger } from "../FadeIn";
 import React, { ReactNode, ReactElement } from "react";
 
 // Props for StatList

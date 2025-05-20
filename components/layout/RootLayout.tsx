@@ -11,11 +11,11 @@ import { TinaIcon } from "../icon";
 import { Logo } from "../Logo";
 import { HiMenuAlt4 } from "react-icons/hi";
 import { IoMdClose } from "react-icons/io";
-import { Button } from "../Button";
+import { Button } from "../ui_version2/Button2";
 import clsx from "clsx";
-import { ServiceTimes } from "../ServiceTimes";
+import { ServiceTimes } from "../blocks/ServiceTimes";
 import { SocialMedia } from "../SocialMedia";
-import { Footer } from "../Footer";
+import { Footer } from "./Footer";
 
 interface HeaderProps {
   panelId: string;
