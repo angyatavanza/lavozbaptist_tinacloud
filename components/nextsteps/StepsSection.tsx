@@ -3,7 +3,7 @@
 import React, { ReactNode } from "react";
 import { FadeIn } from '../FadeIn';
 import { Container } from '../Container';
-import { StylizedImage } from '../ui_version2/StylizedImage';
+import { StylizedImage } from '../ui/StylizedImage';
 import { ImageProps } from "next/image";
 
 

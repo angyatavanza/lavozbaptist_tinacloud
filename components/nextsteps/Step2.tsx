@@ -2,7 +2,7 @@ import Image from "next/image";
 import React from "react";
 import { StepsSection } from "./StepsSection";
 import imageLaptop from "@/images/laptop.jpg";
-import { Blockquote }from "../Blockquote";
+import { Blockquote }from "../blocks/Blockquote";
 
 export const Step2  = () => {
   return (

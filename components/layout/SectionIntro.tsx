@@ -1,10 +1,9 @@
-import React, { ReactNode, HTMLAttributes } from "react";
-import { Container } from "../Container";
+import React, { ReactNode } from "react";
+import { Container }from "../Container";
 import { FadeIn } from "../FadeIn";
 import clsx from "clsx";
 
-// Define the props for the SectionIntro component
-interface SectionIntroProps extends HTMLAttributes<HTMLDivElement> {
+interface SectionIntroProps extends React.HTMLAttributes<HTMLDivElement> {
   eyebrow?: string;
   title: string;
   children?: ReactNode;
@@ -12,14 +11,14 @@ interface SectionIntroProps extends HTMLAttributes<HTMLDivElement> {
   invert?: boolean;
 }
 
-export const SectionIntro <SectionIntroProps> = ({
+export const SectionIntro = ({
   eyebrow,
   title,
   children,
   smaller = false,
   invert = false,
   ...props
-}) => {
+}: SectionIntroProps) => {
   return (
     <Container {...props}>
       <FadeIn className="max-w-2xl">
@@ -63,5 +62,3 @@ export const SectionIntro <SectionIntroProps> = ({
     </Container>
   );
 };
-
-//export default SectionIntro;

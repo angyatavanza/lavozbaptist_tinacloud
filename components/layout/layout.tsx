@@ -3,7 +3,7 @@ import { LayoutProvider } from "./LayoutContext";
 import client from "../../tina/__generated__/client";
 import { Header } from "./nav/Header";
 import { Footer } from "./nav/Footer";
-import { RootLayout } from "./RootLayout";
+import { RootLayout } from "../layout/RootLayout";
 type LayoutProps = PropsWithChildren & {
   rawPageData?: any;
 };

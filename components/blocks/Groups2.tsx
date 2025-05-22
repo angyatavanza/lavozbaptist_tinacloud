@@ -2,7 +2,7 @@ import React from "react";
 import { SectionIntro } from "../layout/SectionIntro";
 import { Container } from "../Container";
 import { FadeIn } from "../FadeIn";
-import { StylizedImage } from "../ui_version2/StylizedImage";
+import { StylizedImage } from "../ui/StylizedImage";
 import imageLaptop from "../images/church/congregation-IMG-1038.jpg";
 import {List, ListItem } from "./List";
 
