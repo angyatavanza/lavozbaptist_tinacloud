@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import {Container} from "../Container";
+import { Container } from "../Container";
 import clsx from "clsx";
 import { FadeIn } from "../FadeIn";
 

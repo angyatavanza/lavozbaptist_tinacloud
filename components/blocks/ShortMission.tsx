@@ -1,10 +1,10 @@
 import React, { ReactNode } from "react";
-import { GridPattern } from "./GridPattern";
+import { GridPattern } from "../GridPattern";
 import clsx from "clsx";
-import { Container } from "./Container";
-import { FadeIn } from "./FadeIn";
+import { Container } from "../Container";
+import { FadeIn } from "../FadeIn";
 import Image from "next/image";
-import { Button } from "./ui_version2/Button2";
+import { Button } from "../ui_version2/Button2";
 
 interface Staff {
   logo: string;
