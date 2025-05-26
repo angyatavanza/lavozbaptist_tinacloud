@@ -1,12 +1,12 @@
 "use client";
 import React from "react";
 import Link from "next/link";
-import { Container } from "../Container";
-import { FadeIn } from "../FadeIn";
+import { Container } from "../container";
+import { FadeIn } from "../fade-in";
 import { TinaIcon } from "../icon";
-import { useLayout } from "../layout/LayoutContext";
-import { FooterNavigation } from "../layout/FooterNavigation";
-import { Logo } from "../Logo";
+import { useLayout } from "./layout-context";
+import { FooterNavigation } from "./footer-navigation";
+import { Logo } from "../logo";
 
 type SVGProps = React.SVGProps<SVGSVGElement>;
 

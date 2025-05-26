@@ -1,6 +1,6 @@
-import { FadeIn, FadeInStagger } from "../FadeIn";
+import { FadeIn, FadeInStagger } from "./fade-in";
 import clsx from "clsx";
-import { Border } from "../ui/Border";
+import { Border } from "./ui/border";
 import { ReactNode } from "react";
 
 interface GridListProps {

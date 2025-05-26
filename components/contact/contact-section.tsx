@@ -1,7 +1,7 @@
-import { Container } from "../Container";
-import { FadeIn } from "../FadeIn";
-import { Button } from "../ui_version2/Button2";
-import { ServiceTimes } from "../blocks/ServiceTimes";
+import { Container } from "../container";
+import { FadeIn } from "../fade-in";
+import { Button } from "../ui/second-button";
+import { ServiceTimes } from "../service-times";
 
 export const ContactSection = () => {
   return (

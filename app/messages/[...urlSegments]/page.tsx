@@ -1,6 +1,6 @@
 import React from 'react';
 import client from '@/tina/__generated__/client';
-import Layout from '@/components/layout/Layout';
+import Layout from '@/components/layout/layout';
 import MessageClientPage from './client-page';
 
 export const revalidate = 300;

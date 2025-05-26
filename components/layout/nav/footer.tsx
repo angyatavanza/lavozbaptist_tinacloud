@@ -2,11 +2,11 @@
 import React from "react";
 import Link from "next/link";
 import { TinaIcon } from "../../icon";
-import { useLayout } from "../LayoutContext";
-import { Container } from "../../Container";
-import { FadeIn } from "../../FadeIn";
-import { FooterNavigation } from "../FooterNavigation";
-import { Logo } from "../../Logo";
+import { useLayout } from "../layout-context";
+import { Container } from "../../container";
+import { FadeIn } from "../../fade-in";
+import { FooterNavigation } from "../footer-navigation";
+import { Logo } from "../../logo";
 
 export const Footer = () => {
   const { globalSettings } = useLayout();

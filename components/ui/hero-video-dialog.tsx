@@ -2,7 +2,7 @@
 
 import { Play } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { useVideoDialog } from "./VideoDialogContext";
+import { useVideoDialog } from "./video-dialog-context";
 
 interface HeroVideoProps {
   videoSrc: string;

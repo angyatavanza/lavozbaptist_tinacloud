@@ -1,6 +1,6 @@
 import React, { ReactNode } from "react";
-import { Container }from "../Container";
-import { FadeIn } from "../FadeIn";
+import { Container }from "../container";
+import { FadeIn } from "../fade-in";
 import clsx from "clsx";
 
 interface SectionIntroProps extends React.HTMLAttributes<HTMLDivElement> {

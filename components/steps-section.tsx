@@ -1,21 +1,19 @@
-
-// StepsSection.tsx
-import React, { ReactNode } from "react";
-import { FadeIn } from '../FadeIn';
-import { Container } from '../Container';
-import { StylizedImage } from '../ui/StylizedImage';
+import { ReactNode } from "react";
+import { FadeIn } from "./fade-in";
+import { Container } from "./container";
+import { StylizedImage } from "./ui/stylized-image";
 import { ImageProps } from "next/image";
-
 
 type StepsSectionProps = {
   title: string;
-  image: { 
+  image: {
     src: ImageProps["src"];
-    shape?: number }; 
+    shape?: number;
+  };
   children: ReactNode;
 };
 
-export const StepsSection <StepsSectionProps> = ({ title, image, children }) => {
+export const StepsSection = ({ title, image, children }: StepsSectionProps) => {
   return (
     <Container className="group/section [counter-increment:section]">
       <div className="lg:flex lg:items-center lg:justify-end lg:gap-x-8 lg:group-even/section:justify-start xl:gap-x-20">
@@ -23,8 +21,7 @@ export const StepsSection <StepsSectionProps> = ({ title, image, children }) => 
           <FadeIn className="w-[33.75rem] flex-none lg:w-[45rem]">
             <StylizedImage
               {...image}
-              //added alt
-              alt="" 
+              alt=""
               sizes="(min-width: 1024px) 41rem, 31rem"
               className="justify-center lg:justify-end lg:group-even/section:justify-start"
             />

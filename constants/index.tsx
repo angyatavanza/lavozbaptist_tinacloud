@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { SocialMediaProfiles } from "../components/SocialMedia";
+import { SocialMediaProfiles } from "../components/social-media";
 
 interface NavigationLink {
   title: string | ReactNode;

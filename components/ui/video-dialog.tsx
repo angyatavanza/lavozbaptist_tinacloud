@@ -2,7 +2,7 @@
 
 import { AnimatePresence, motion } from "motion/react";
 import { XIcon } from "lucide-react";
-import { useVideoDialog } from "./VideoDialogContext";
+import { useVideoDialog } from "./video-dialog-context";
 
 const VideoDialog = () => {
     const { isVideoOpen, videoUrl, closeVideo } = useVideoDialog();

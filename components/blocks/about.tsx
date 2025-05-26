@@ -3,12 +3,14 @@ import * as React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import type { Template } from 'tinacms';
+import { Container } from '../container';
+import { StatList, StatListItem } from '../stat-list';
 import { tinaField } from 'tinacms/dist/react';
 import { PageBlocksAbout, PageBlocksAboutImage } from '../../tina/__generated__/types';
 import { Button } from '../ui/button';
 import { iconSchema } from '@/tina/fields/icon';
 import { TinaIcon } from '../icon';
-import { Section, sectionBlockSchemaField } from '../layout/Section';
+import { Section, sectionBlockSchemaField } from '../layout/section';
 import imageWhiteboard from "@/images/whiteboard.jpg";
 import { AnimatedGroup } from '../motion-primitives/animated-group';
 import { TextEffect } from '../motion-primitives/text-effect';
@@ -137,6 +139,13 @@ export const About = ({ data }: { data: PageBlocksAbout }) => {
           </div>
         </AnimatedGroup>
       )}
+       <Container className="mt-16">
+        <StatList>
+          <StatListItem value="→" label="Nuestro Propósito, Visión y Valores" />
+          <StatListItem value="→" label="Nuestro Equipo" />
+          <StatListItem value="→" label="Nuestro Pastor" />
+        </StatList>
+      </Container>
     </Section>
   )
 };

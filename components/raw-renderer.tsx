@@ -6,7 +6,7 @@ import {
   TransitionChild,
   DialogPanel,
 } from "@headlessui/react";
-import { useLayout } from "./layout/LayoutContext";
+import { useLayout } from "./layout/layout-context";
 
 export const RawRenderer = ({ rawData, parentColor }) => {
   const { theme } = useLayout();

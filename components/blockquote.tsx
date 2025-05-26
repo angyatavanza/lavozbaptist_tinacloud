@@ -1,6 +1,6 @@
 import Image, { ImageProps } from "next/image";
 import clsx from "clsx";
-import { Border } from "../ui/Border";
+import { Border } from "./ui/border";
 import React, { ReactNode, ReactElement } from "react";
 
 // Shared author type

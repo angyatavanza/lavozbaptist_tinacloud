@@ -1,8 +1,8 @@
-import { FadeIn } from "../FadeIn";
-import { ServiceTimes } from "../blocks/ServiceTimes";
-import { Border } from "../ui/Border";
+import { FadeIn } from "../fade-in";
+import { ServiceTimes } from "../service-times";
+import { Border } from "../ui/border";
 import Link from "next/link";
-import { SocialMedia } from "../SocialMedia";
+import { SocialMedia } from "../social-media";
 
 export const ContactDetails = () => {
   return (

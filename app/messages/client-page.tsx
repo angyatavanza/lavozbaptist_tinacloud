@@ -8,8 +8,8 @@ import { MessageConnectionQuery, MessageConnectionQueryVariables } from '@/tina/
 import ErrorBoundary from '@/components/error-boundary';
 import { ArrowRight, UserRound } from 'lucide-react';
 import { Card } from '@/components/ui/card';
-import { Section } from '@/components/layout/Section';
-import { PageIntro } from '@/components/PageIntro';
+import { Section } from '@/components/layout/section';
+import { PageIntro } from '@/components/page-intro';
 import imageWhiteboard from "@/images/whiteboard.jpg";
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 

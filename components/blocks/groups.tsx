@@ -9,9 +9,9 @@ import { TinaMarkdown } from "tinacms/dist/rich-text";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 //import { iconSchema } from "../../tina/fields/icon";
 import { Card, CardContent, CardHeader } from "../ui/card";
-import { Section } from "../layout/Section";
+import { Section } from "../layout/section";
 import imageWhiteboard from "@/images/whiteboard.jpg";
-import { sectionBlockSchemaField } from '../layout/Section';
+import { sectionBlockSchemaField } from '../layout/section';
 
 export const Groups = ({ data }: { data: PageBlocksGroups }) => {
   return (

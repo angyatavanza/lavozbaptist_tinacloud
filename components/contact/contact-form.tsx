@@ -1,7 +1,7 @@
-import { FadeIn } from "../FadeIn";
-import { TextInput } from "./TextInput";
-import { RadioInput } from "./RadioInput";
-import { Button } from "../ui_version2/Button2";
+import { FadeIn } from "../fade-in";
+import { TextInput } from "./text-input";
+import { RadioInput } from "./radio-input";
+import { Button } from "../ui/second-button";
 
 export const ContactForm = () => {
   return (

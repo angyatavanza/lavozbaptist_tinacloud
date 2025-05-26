@@ -1,10 +1,10 @@
 import type { Template } from "tinacms";
 import { PageBlocksSermon, PageBlocksSermonSermons } from "../../tina/__generated__/types";
-import { Section } from "../layout/Section";
+import { Section } from "../layout/section";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { Card, CardContent } from "../ui/card";
 import { tinaField } from "tinacms/dist/react";
-import { sectionBlockSchemaField } from '../layout/Section';
+import { sectionBlockSchemaField } from '../layout/section';
 
 export const Sermon = ({ data }: { data: PageBlocksSermon }) => {
   return (

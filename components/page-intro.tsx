@@ -1,7 +1,7 @@
 import React, { ReactNode } from "react";
-import { Container } from "../Container";
+import { Container } from "./container";
 import clsx from "clsx";
-import { FadeIn } from "../FadeIn";
+import { FadeIn } from "./fade-in";
 
 interface PageIntroProps {
   eyebrow: ReactNode;

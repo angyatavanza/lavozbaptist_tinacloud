@@ -9,7 +9,7 @@ import {
 } from "react-icons/fa6";
 import { AiFillInstagram } from "react-icons/ai";
 import React from "react";
-import { useLayout } from "./layout/LayoutContext";
+import { useLayout } from "./layout/layout-context";
 
 export const IconOptions = {
   Tina: (props) => (

@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button'
 import { PageBlocksCta } from '@/tina/__generated__/types';
 import { TinaIcon } from '../icon';
 import imageWhiteboard from "@/images/whiteboard.jpg";
-import { Section } from '../layout/Section';
+import { Section } from '../layout/section';
 
 export const CallToAction = ({ data }: { data: PageBlocksCta }) => {
     return (
@@ -31,7 +31,7 @@ export const CallToAction = ({ data }: { data: PageBlocksCta }) => {
                             <Button
                                 asChild
                                 size="lg"
-                                variant={action!.type === 'link' ? 'ghost' : 'default'}
+                                variant={action!.type === 'link' ? 'outline' : 'default'}
                                 className="rounded-xl px-5 text-base">
                                 <Link href={action!.link!}>
                                     {action?.icon && (<TinaIcon data={action?.icon} />)}

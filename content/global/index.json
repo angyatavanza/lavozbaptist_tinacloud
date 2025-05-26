@@ -60,7 +60,7 @@
   },
   "theme": {
     "color": "purple",
-    "font": "sans",
+    "font": "lato",
     "darkMode": "light"
   }
 }

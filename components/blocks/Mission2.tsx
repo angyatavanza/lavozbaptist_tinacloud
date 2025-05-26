@@ -1,9 +1,14 @@
 import React from "react";
-import { SectionIntro } from "../layout/SectionIntro";
-import { Container } from "../Container";
-import { GridList, GridListItem } from "./GridList";
+import { SectionIntro } from "../layout/section-intro";
+import { Container } from "../container";
+import type { Template } from 'tinacms';
+import { iconSchema } from '@/tina/fields/icon';
+import { tinaField } from "tinacms/dist/react";
+import { PageBlocksMission2 } from '@/tina/__generated__/types';
+import { TinaIcon } from '../icon';
+import { GridList, GridListItem } from "../grid-list";
 
-export const Mission2  = () => {
+export const Mission2  = ({ data }: { data: PageBlocksMission2 }) => {
   return (
     <div className="mt-24 rounded-4xl bg-purple-800 py-24 sm:mt-32 lg:mt-40 lg:py-32">
       <SectionIntro
@@ -85,4 +90,78 @@ export const Mission2  = () => {
   );
 };
 
-//export default Mission;
+export const mission2BlockSchema: Template = {
+    name: "mission2",
+    label: "Mission2",
+    ui: {
+        previewSrc: "/blocks/mission2.png",
+        defaultItem: {
+            title: "Start Building",
+            description: "Get started with TinaCMS today and take your content management to the next level.",
+            actions: [
+                {
+                    label: 'Get Started',
+                    type: 'button',
+                    link: '/',
+                },
+                {
+                    label: 'Book Demo',
+                    type: 'link',
+                    link: '/',
+                },
+            ],
+        },
+    },
+    fields: [
+        {
+            type: "string",
+            label: "Title",
+            name: "title",
+        },
+        {
+            type: "string",
+            label: "Description",
+            name: "description",
+            ui: {
+                component: "textarea",
+            },
+        },
+        {
+            label: 'Actions',
+            name: 'actions',
+            type: 'object',
+            list: true,
+            ui: {
+                defaultItem: {
+                    label: 'Action Label',
+                    type: 'button',
+                    icon: true,
+                    link: '/',
+                },
+                itemProps: (item) => ({ label: item.label }),
+            },
+            fields: [
+                {
+                    label: 'Label',
+                    name: 'label',
+                    type: 'string',
+                },
+                {
+                    label: 'Type',
+                    name: 'type',
+                    type: 'string',
+                    options: [
+                        { label: 'Button', value: 'button' },
+                        { label: 'Link', value: 'link' },
+                    ],
+                },
+                iconSchema as any,
+                {
+                    label: 'Link',
+                    name: 'link',
+                    type: 'string',
+                },
+            ],
+        },
+    ],
+};

@@ -3,7 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { TinaIcon } from "../../icon";
-import { useLayout } from "../LayoutContext";
+import { useLayout } from "../layout-context";
 import { Menu, X } from "lucide-react";
 
 export const Header = () => {

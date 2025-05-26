@@ -18,6 +18,14 @@ import { Profile } from "./profile-section";
 import { Teammember } from "./our-team";
 import { Events } from "./events";
 import { CallToAction } from "./call-to-action";
+import { Vision } from "./vision";
+import { Step1 } from "./step1";
+import { Step2 } from "./step2";
+import { Step3 } from "./step3";
+import { Step4 } from "./step4";
+import { Mission2 } from "./mission2";
+import { Staff } from "./staff";
+import { Connect } from "./connect";
 
 export const Blocks = (props: Omit<Page, "id" | "_sys" | "_values">) => {
   if (!props.blocks) return null;
@@ -72,6 +80,22 @@ const Block = (block: PageBlocks) => {
       return <Sermon data={block} />;
     case "PageBlocksCta":
       return <CallToAction data={block} />;
+    case "PageBlocksVision":
+      return <Vision data={block} />;
+    case "PageBlocksStaff":
+      return <Staff data={block} />;
+    case "PageBlocksConnect":
+      return <Connect data={block} />;
+    case "PageBlocksStep1":
+      return <Step1 data={block} />;
+    case "PageBlocksStep2":
+      return <Step2 data={block} />;
+    case "PageBlocksStep3":
+      return <Step3 data={block} />;
+    case "PageBlocksStep4":
+      return <Step4 data={block} />;
+    case "PageBlocksMission2":
+      return <Mission2 data={block} />; 
     default:
       return null;
   }

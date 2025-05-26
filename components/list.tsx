@@ -1,6 +1,6 @@
 import React, { ReactNode } from "react";
-import { FadeIn, FadeInStagger } from "../FadeIn";
-import { Border } from "../ui/Border";
+import { FadeIn, FadeInStagger } from "./fade-in";
+import { Border } from "./ui/border";
 import clsx from "clsx";
 
 interface ListProps {

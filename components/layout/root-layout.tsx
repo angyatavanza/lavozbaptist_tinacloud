@@ -2,20 +2,20 @@
 import { usePathname } from "next/navigation";
 import { useEffect, useId, useRef, useState, ReactNode, RefObject } from "react";
 import { motion, MotionConfig, useReducedMotion } from "framer-motion";
-import { Container } from "../Container";
+import { Container } from "../container";
 import client from "../../tina/__generated__/client";
 import Link from "next/link";
-import { LayoutProvider } from "./LayoutContext";
-import { useLayout } from "./LayoutContext";
+import { LayoutProvider } from "./layout-context";
+import { useLayout } from "./layout-context";
 import { TinaIcon } from "../icon";
-import { Logo } from "../Logo";
+import { Logo } from "../logo";
 import { HiMenuAlt4 } from "react-icons/hi";
 import { IoMdClose } from "react-icons/io";
-import { Button } from "../ui_version2/Button2";
+import { Button } from "../ui/second-button";
 import clsx from "clsx";
-import { ServiceTimes } from "../blocks/ServiceTimes";
-import { SocialMedia } from "../SocialMedia";
-import { Footer } from "./Footer";
+import { ServiceTimes } from "../service-times";
+import { SocialMedia } from "../social-media";
+import { Footer } from "./footer";
 
 interface HeaderProps {
   panelId: string;
