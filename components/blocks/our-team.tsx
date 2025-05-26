@@ -6,7 +6,7 @@ import { Card, CardContent } from "../ui/card";
 import { tinaField } from "tinacms/dist/react";
 import { sectionBlockSchemaField } from '../layout/section';
 
-export const Teammember = ({ data }: { data: PageBlocksTeammember }) => {
+export const TeamMember = ({ data }: { data: PageBlocksTeammember }) => {
   return (
     <Section  background={data.background!}>
       <div className="text-center">

@@ -15,7 +15,7 @@ import { ContentwithList } from "./content-list";
 import { ContentAndImage } from "./content-img";
 import { ContentAndImageVariant } from "./content-img2";
 import { Profile } from "./profile-section";
-import { Teammember } from "./our-team";
+import { TeamMember } from "./our-team";
 import { Events } from "./events";
 import { CallToAction } from "./call-to-action";
 import { Vision } from "./vision";
@@ -26,6 +26,7 @@ import { Step4 } from "./step4";
 import { Mission2 } from "./mission2";
 import { Staff } from "./staff";
 import { Connect } from "./connect";
+import { ContactSection } from "./contact-section";
 
 export const Blocks = (props: Omit<Page, "id" | "_sys" | "_values">) => {
   if (!props.blocks) return null;
@@ -57,7 +58,7 @@ const Block = (block: PageBlocks) => {
     case "PageBlocksAbout":
       return <About data={block} />;
     case "PageBlocksTeammember":
-      return <Teammember data={block} />;  
+      return <TeamMember data={block} />;  
     case "PageBlocksMission":
       return <Mission data={block} />;    
     case "PageBlocksCallout":
@@ -95,7 +96,9 @@ const Block = (block: PageBlocks) => {
     case "PageBlocksStep4":
       return <Step4 data={block} />;
     case "PageBlocksMission2":
-      return <Mission2 data={block} />; 
+      return <Mission2 data={block} />;
+    case "PageBlocksContactsection":
+      return <ContactSection data={block} />; 
     default:
       return null;
   }

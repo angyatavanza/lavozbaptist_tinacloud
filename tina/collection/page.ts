@@ -25,6 +25,7 @@ import { step1BlockSchema } from '@/components/blocks/step1';
 import { step2BlockSchema } from '@/components/blocks/step2';
 import { step3BlockSchema } from '@/components/blocks/step3';
 import { step4BlockSchema } from '@/components/blocks/step4';
+import { contactsectionBlockSchema } from '@/components/blocks/contact-section';
 
 const Page: Collection = {
   label: 'Pages',
@@ -76,6 +77,7 @@ const Page: Collection = {
         step2BlockSchema, 
         step3BlockSchema,
         step4BlockSchema,
+        contactsectionBlockSchema,
       ],
     },
   ],
