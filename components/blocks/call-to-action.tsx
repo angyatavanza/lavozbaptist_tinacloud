@@ -8,6 +8,8 @@ import { TinaIcon } from '../icon';
 import imageWhiteboard from "@/images/whiteboard.jpg";
 import { Section } from '../layout/section';
 
+//to-do 15:change the color of the wave in call to action
+
 export const CallToAction = ({ data }: { data: PageBlocksCta }) => {
     return (
         <Section >

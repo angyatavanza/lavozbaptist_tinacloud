@@ -21,8 +21,10 @@ import { TextEffect } from "../motion-primitives/text-effect";
 import HeroVideoDialog from "../ui/hero-video-dialog";
 import { cn } from "@/lib/utils";
 import { ContactSection } from "./contact-section";
-
-//to-do add contactsection
+//this about block is in /about page
+//to-do 38: add contactsection
+//to-do 37 : change background colors to all sections
+//to-do 36:  change about section --currently there are 2 sections. 
 const transitionVariants = {
   container: {
     visible: {

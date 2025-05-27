@@ -17,6 +17,25 @@ import { ServiceTimes } from "../service-times";
 import { SocialMedia } from "../social-media";
 import { Footer } from "./footer";
 
+//to-do 22: add contact page to /app
+//done : remove tina icon 
+/*
+<Link href="/" aria-label="home" className="flex items-center space-x-2">
+  <TinaIcon
+  parentColor={header.color!}
+  data={{
+  name: header.icon!.name,
+  color: header.icon!.color,
+  style: header.icon!.style,
+  }}
+  />{" "}
+  <span>
+  {header.name}
+  </span>
+ </Link>
+*/
+//to-do 23: add la voz logo png or svg
+
 interface HeaderProps {
   panelId: string;
   invert?: boolean;
@@ -32,21 +51,8 @@ const Header = ({ panelId, invert = false, icon: Icon, expanded, onToggle, toggl
   return (
     <Container>
       <div className="flex items-center justify-between">
-        <Link href="/" aria-label="Home">
-          <Logo invert={invert}>La Voz</Logo>
-        </Link>
         <Link href="/" aria-label="home" className="flex items-center space-x-2">
-          <TinaIcon
-            parentColor={header.color!}
-            data={{
-              name: header.icon!.name,
-              color: header.icon!.color,
-              style: header.icon!.style,
-            }}
-          />{" "}
-          <span>
-            {header.name}
-          </span>
+          <Logo invert={invert}>{header.name}</Logo>
         </Link>
         <div className="hidden lg:block">
           <ul className="flex gap-8 text-sm">

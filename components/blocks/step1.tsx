@@ -8,7 +8,7 @@ import { iconSchema } from '@/tina/fields/icon';
 import { tinaField } from "tinacms/dist/react";
 import { PageBlocksStep1 } from '@/tina/__generated__/types';
 import { TinaIcon } from '../icon';
-
+//to-do 25:fix stylized image
 export const Step1  = ({ data }: { data: PageBlocksStep1 }) => {
   return (
     <StepsSection title="Descubre" image={{ src: imageWhiteboard, shape: 1 }}>

@@ -5,7 +5,8 @@ import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { Card, CardContent } from "../ui/card";
 import { tinaField } from "tinacms/dist/react";
 import { sectionBlockSchemaField } from '../layout/section';
-
+//to-do 39: add text to sermon in homepage
+//to-do 40: add fb video API to messages
 export const Sermon = ({ data }: { data: PageBlocksSermon }) => {
   return (
     <Section  background={data.background!}>

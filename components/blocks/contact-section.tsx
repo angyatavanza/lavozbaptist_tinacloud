@@ -7,7 +7,7 @@ import { tinaField } from "tinacms/dist/react";
 import type { Template } from 'tinacms';
 import { PageBlocksContactsection } from "@/tina/__generated__/types";
 
-//to-do: add data.code 
+//to-do 16: add data.code 
 
 export const ContactSection = ({ data }: { data: PageBlocksContactsection}) => {
   return (

@@ -2,10 +2,10 @@
   "header": {
     "icon": {
       "name": "Tina",
-      "color": "orange",
+      "color": "purple",
       "style": "float"
     },
-    "name": "La Voz",
+    "name": "La Voz de la Esperanza",
     "color": "default",
     "nav": [
       {

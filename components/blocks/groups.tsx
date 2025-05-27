@@ -12,7 +12,7 @@ import { Card, CardContent, CardHeader } from "../ui/card";
 import { Section } from "../layout/section";
 import imageWhiteboard from "@/images/whiteboard.jpg";
 import { sectionBlockSchemaField } from '../layout/section';
-
+//to-do 12: add text to sermon in homepage
 export const Groups = ({ data }: { data: PageBlocksGroups }) => {
   return (
     <Section background={data.background!}>

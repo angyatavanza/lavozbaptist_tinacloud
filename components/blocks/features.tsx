@@ -12,7 +12,7 @@ import { Card, CardContent, CardHeader } from "../ui/card";
 import { Section } from "../layout/section";
 import imageWhiteboard from "@/images/whiteboard.jpg";
 import { sectionBlockSchemaField } from '../layout/section';
-
+//to-do 11: add text to features in homepage
 export const Features = ({ data }: { data: PageBlocksFeatures }) => {
   return (
     <Section background={data.background!}>

@@ -5,7 +5,7 @@ import { teammemberBlockSchema } from '@/components/blocks/our-team';
 import { profileBlockSchema } from '@/components/blocks/profile-section';
 import { heroBlockSchema } from '@/components/blocks/hero';
 import { aboutBlockSchema } from '@/components/blocks/about';
-import { missionBlockSchema } from '@/components/blocks/mission';
+import { shortaboutusBlockSchema } from '@/components/blocks/short-about-us';
 import { contentBlockSchema } from '@/components/blocks/content';
 import { sermonBlockSchema } from '@/components/blocks/sermon';
 import { featureBlockSchema } from '@/components/blocks/features';
@@ -54,7 +54,7 @@ const Page: Collection = {
         heroBlockSchema,
         bannerBlockSchema,
         aboutBlockSchema,
-        missionBlockSchema,
+        shortaboutusBlockSchema,
         calloutBlockSchema,
         featureBlockSchema,
         groupBlockSchema,

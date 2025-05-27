@@ -10,7 +10,8 @@ import { PageBlocksEvents } from "@/tina/__generated__/types";
 import { Section } from "../layout/section";
 import imageWhiteboard from "@/images/whiteboard.jpg";
 import { sectionBlockSchemaField } from '../layout/section';
-
+//to-do 9: add more sections to events template such as date, time, details,
+//to-do 10: change layout of event photo  
 const CardDecorator = ({ children }: { children: React.ReactNode }) => (
   <div className="relative mx-auto size-36 duration-200 [--color-border:color-mix(in_oklab,var(--color-zinc-950)10%,transparent)] group-hover:[--color-border:color-mix(in_oklab,var(--color-zinc-950)20%,transparent)] dark:[--color-border:color-mix(in_oklab,var(--color-white)15%,transparent)] dark:group-hover:bg-white/5 dark:group-hover:[--color-border:color-mix(in_oklab,var(--color-white)20%,transparent)]">
     <div aria-hidden className="absolute inset-0 bg-[linear-gradient(to_right,var(--color-border)_1px,transparent_1px),linear-gradient(to_bottom,var(--color-border)_1px,transparent_1px)] bg-[size:24px_24px]" />

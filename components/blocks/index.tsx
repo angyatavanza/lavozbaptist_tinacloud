@@ -2,7 +2,7 @@ import { tinaField } from "tinacms/dist/react";
 import { Page, PageBlocks } from "../../tina/__generated__/types";
 import { Hero } from "./hero";
 import { About } from "./about";
-import { Mission } from "./mission";
+import { ShortAboutUs } from "./short-about-us";
 import { Content } from "./content";
 import { Features } from "./features";
 import { Groups } from "./groups";
@@ -59,8 +59,8 @@ const Block = (block: PageBlocks) => {
       return <About data={block} />;
     case "PageBlocksTeammember":
       return <TeamMember data={block} />;  
-    case "PageBlocksMission":
-      return <Mission data={block} />;    
+    case "PageBlocksShortaboutus":
+      return <ShortAboutUs data={block} />;    
     case "PageBlocksCallout":
       return <Callout data={block} />;
     case "PageBlocksEvents":

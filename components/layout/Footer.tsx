@@ -8,6 +8,8 @@ import { useLayout } from "./layout-context";
 import { FooterNavigation } from "./footer-navigation";
 import { Logo } from "../logo";
 
+//to-do 20: remove tina icon from footer
+//to-do 21: add paypalAPI to donations
 type SVGProps = React.SVGProps<SVGSVGElement>;
 
 const ArrowIcon = (props: SVGProps) => {
