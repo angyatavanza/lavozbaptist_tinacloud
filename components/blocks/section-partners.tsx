@@ -1,24 +1,24 @@
 import Image, { StaticImageData } from "next/image";
-import logoBrightPath from "../../images/staff/bright-path/logo-light.svg";
-import logoFamilyFund from "../../images/staff/family-fund/logo-light.svg";
-import logoGreenLife from "../../images/staff/green-life/logo-light.svg";
-import logoHomeWork from "../../images/staff/home-work/logo-light.svg";
-import logoMailSmirk from "../../images/staff/mail-smirk/logo-light.svg";
-import logoNorthAdventures from "../../images/staff/north-adventures/logo-light.svg";
-import logoPhobiaLight from "../../images/staff/phobia/logo-light.svg";
-import logoUnseal from "../../images/staff/unseal/logo-light.svg";
+import logoBrightPath from "../../images/partner/bright-path/logo-light.svg";
+import logoFamilyFund from "../../images/partner/family-fund/logo-light.svg";
+import logoGreenLife from "../../images/partner/green-life/logo-light.svg";
+import logoHomeWork from "../../images/partner/home-work/logo-light.svg";
+import logoMailSmirk from "../../images/partner/mail-smirk/logo-light.svg";
+import logoNorthAdventures from "../../images/partner/north-adventures/logo-light.svg";
+import logoPhobiaLight from "../../images/partner/phobia/logo-light.svg";
+import logoUnseal from "../../images/partner/unseal/logo-light.svg";
 import { Container } from "../container";
 import { FadeIn, FadeInStagger } from "../fade-in";
 import React, { ReactElement } from "react";
 import type { Template } from 'tinacms';
 import { iconSchema } from '@/tina/fields/icon';
 import { tinaField } from "tinacms/dist/react";
-import { PageBlocksStaff } from "@/tina/__generated__/types";
+import { PageBlocksPartner } from "@/tina/__generated__/types";
 import { TinaIcon } from '../icon';
 //to-do 18: add data.code 
-type StaffMember = [string, StaticImageData];
+type PartnerMember = [string, StaticImageData];
 
-const staffMembers: StaffMember[] = [
+const partnerMembers: PartnerMember[] = [
   ["Pastor Hugo", logoPhobiaLight],
   ["Family Fund", logoFamilyFund],
   ["Unseal", logoUnseal],
@@ -29,7 +29,7 @@ const staffMembers: StaffMember[] = [
   ["North Adventures", logoNorthAdventures],
 ];
 
-export const Staff = ({ data }: { data: PageBlocksStaff }) => {
+export const Partner = ({ data }: { data: PageBlocksPartner }) => {
   return (
     <div className="mt-24 rounded-4xl bg-purple-800 py-20 sm:mt-32 sm:py-32 lg:mt-56">
       <Container>
@@ -47,10 +47,10 @@ export const Staff = ({ data }: { data: PageBlocksStaff }) => {
             role="list"
             className="mt-10 grid grid-cols-2 gap-x-8 gap-y-10 lg:grid-cols-4"
           >
-            {staffMembers.map(([staff, logo]) => (
-              <li key={staff}>
+            {partnerMembers.map(([partner, logo]) => (
+              <li key={partner}>
                 <FadeIn>
-                  <Image src={logo} alt={staff} unoptimized />
+                  <Image src={logo} alt={partner} unoptimized />
                 </FadeIn>
               </li>
             ))}
@@ -61,11 +61,11 @@ export const Staff = ({ data }: { data: PageBlocksStaff }) => {
   );
 };
 
-export const staffBlockSchema: Template = {
-    name: "staff",
-    label: "Staff",
+export const partnerBlockSchema: Template = {
+    name: "partner",
+    label: "Partner",
     ui: {
-        previewSrc: "/blocks/staff.png",
+        previewSrc: "/blocks/partner.png",
         defaultItem: {
             title: "Start Building",
             description: "Get started with TinaCMS today and take your content management to the next level.",

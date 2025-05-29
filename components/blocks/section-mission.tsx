@@ -4,12 +4,12 @@ import { Container } from "../container";
 import type { Template } from 'tinacms';
 import { iconSchema } from '@/tina/fields/icon';
 import { tinaField } from "tinacms/dist/react";
-import { PageBlocksMission2 } from '@/tina/__generated__/types';
+import { PageBlocksMission } from '@/tina/__generated__/types';
 import { TinaIcon } from '../icon';
 import { GridList, GridListItem } from "../grid-list";
 
 //to-do 19: add data.code 
-export const Mission2  = ({ data }: { data: PageBlocksMission2 }) => {
+export const Mission  = ({ data }: { data: PageBlocksMission }) => {
   return (
     <div className="mt-24 rounded-4xl bg-purple-800 py-24 sm:mt-32 lg:mt-40 lg:py-32">
       <SectionIntro
@@ -91,11 +91,11 @@ export const Mission2  = ({ data }: { data: PageBlocksMission2 }) => {
   );
 };
 
-export const mission2BlockSchema: Template = {
-    name: "mission2",
-    label: "Mission2",
+export const missionBlockSchema: Template = {
+    name: "mission",
+    label: "Mission",
     ui: {
-        previewSrc: "/blocks/mission2.png",
+        previewSrc: "/blocks/mission.png",
         defaultItem: {
             title: "Start Building",
             description: "Get started with TinaCMS today and take your content management to the next level.",

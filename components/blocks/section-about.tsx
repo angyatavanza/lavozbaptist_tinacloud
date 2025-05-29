@@ -7,8 +7,8 @@ import { Container } from "../container";
 import { StatList, StatListItem } from "../stat-list";
 import { tinaField } from "tinacms/dist/react";
 import {
-  PageBlocksAbout,
-  PageBlocksAboutImage,
+  PageBlocksAboutsection,
+  PageBlocksAboutsectionImage,
 } from "../../tina/__generated__/types";
 import { Button } from "../ui/button";
 import { iconSchema } from "@/tina/fields/icon";
@@ -20,12 +20,13 @@ import { AnimatedGroup } from "../motion-primitives/animated-group";
 import { TextEffect } from "../motion-primitives/text-effect";
 import HeroVideoDialog from "../ui/hero-video-dialog";
 import { cn } from "@/lib/utils";
-import { ContactSection } from "./contact-section";
-//this about block is in /about page
-//to-do 26:  change about section --currently there are 2 sections. 
+import { ContactSection } from "./section-contact";
+//this aboutsection block is in /aboutsection page
+//to-do 26:  change aboutsection page --currently there are 2 sections. 
 //to-do 27: add contactsection
 //to-do 28: change background colors to all sections
-//to-do 29: make sure to change the ui of the about section
+//to-do 29a: make sure to change the ui of the aboutsection section
+// to-do 29b: add faq section to block Tina schema
 const transitionVariants = {
   container: {
     visible: {
@@ -54,7 +55,7 @@ const transitionVariants = {
   },
 };
 
-export const About = ({ data }: { data: PageBlocksAbout }) => {
+export const Aboutsection = ({ data }: { data: PageBlocksAboutsection }) => {
   // Extract the background style logic into a more readable format
   let gradientStyle: React.CSSProperties | undefined = undefined;
   if (data.background) {
@@ -184,7 +185,7 @@ export const About = ({ data }: { data: PageBlocksAbout }) => {
   );
 };
 
-const ImageBlock = ({ image }: { image: PageBlocksAboutImage }) => {
+const ImageBlock = ({ image }: { image: PageBlocksAboutsectionImage }) => {
   if (image.videoUrl) {
     let videoId = "";
     if (image.videoUrl) {
@@ -206,7 +207,7 @@ const ImageBlock = ({ image }: { image: PageBlocksAboutImage }) => {
       <HeroVideoDialog
         videoSrc={image.videoUrl}
         thumbnailSrc={thumbnailSrc}
-        thumbnailAlt="About Video"
+        thumbnailAlt="Aboutsection Video"
       />
     );
   }
@@ -224,11 +225,11 @@ const ImageBlock = ({ image }: { image: PageBlocksAboutImage }) => {
   }
 };
 
-export const aboutBlockSchema: Template = {
-  name: "about",
-  label: "About",
+export const aboutsectionBlockSchema: Template = {
+  name: "aboutsection",
+  label: "Aboutsection",
   ui: {
-    previewSrc: "/blocks/about.png",
+    previewSrc: "/blocks/aboutsection.png",
     defaultItem: {
       tagline: "Here's some text above the other text",
       headline: "This Big Text is Totally Awesome",

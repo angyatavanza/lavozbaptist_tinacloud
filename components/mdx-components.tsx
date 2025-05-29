@@ -3,7 +3,7 @@ import React from 'react';
 import { Components, TinaMarkdown, TinaMarkdownContent } from 'tinacms/dist/rich-text';
 import Image from 'next/image';
 import { Prism } from 'tinacms/dist/rich-text/prism';
-import { Video } from './blocks/video';
+import { Video } from './blocks/section-video';
 import { PageBlocksVideo } from '@/tina/__generated__/types';
 import { mermaid } from './blocks/mermaid';
 

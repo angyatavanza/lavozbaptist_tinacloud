@@ -1,33 +1,33 @@
 import { tinaField } from "tinacms/dist/react";
 import { Page, PageBlocks } from "../../tina/__generated__/types";
-import { Hero } from "./hero";
-import { About } from "./about";
-import { ShortAboutUs } from "./short-about-us";
-import { Content } from "./content";
-import { Features } from "./features";
-import { Variantfeatures } from "./features2";
-import { Groups } from "./groups";
-import { Sermon } from "./sermon";
-import { Video } from "./video";
-import { Callout } from "./callout";
-import { Herocontent } from "./hero-content";
-import { Banner } from "./banner";
-import { ContentwithList } from "./content-list";
-import { ContentAndImage } from "./content-img";
-import { ContentAndImageVariant } from "./content-img2";
-import { Profile } from "./profile-section";
-import { TeamMember } from "./our-team";
-import { Events } from "./events";
-import { CallToAction } from "./call-to-action";
-import { Vision } from "./vision";
-import { Step1 } from "./step1";
-import { Step2 } from "./step2";
-import { Step3 } from "./step3";
-import { Step4 } from "./step4";
-import { Mission2 } from "./mission2";
-import { Staff } from "./staff";
-import { Connect } from "./connect";
-import { ContactSection } from "./contact-section";
+import { Hero } from "./landing-hero";
+import { Aboutsection } from "./section-about";
+import { AboutUs } from "./landing-about-us";
+import { Content } from "./section-content";
+import { Connections } from "./landing-connect";
+import { Features } from "./section-features";
+import { Groups } from "./landing-groups";
+import { Sermon } from "./landing-sermons";
+import { Video } from "./section-video";
+import { Callout } from "./section-callout";
+import { Herocontent } from "./section-herocontent";
+import { Banner } from "./section-banner";
+import { FreqAskedQuestions } from "./section-faqcontent";
+import { ContentAndImage } from "./section-imgcontent";
+import { ContentAndImageVariant } from "./section-imgcontent2";
+import { Profile } from "./section-profile";
+import { TeamMember } from "./section-our-team";
+import { Events } from "./landing-events";
+import { CallToAction } from "./section-call-to-action";
+import { Vision } from "./section-vision";
+import { Step1 } from "./section-step1";
+import { Step2 } from "./section-step2";
+import { Step3 } from "./section-step3";
+import { Step4 } from "./section-step4";
+import { Mission } from "./section-mission";
+import { Partner } from "./section-partners";
+import { Listcontent } from "./section-listcontent";
+import { ContactSection } from "./section-contact";
 
 export const Blocks = (props: Omit<Page, "id" | "_sys" | "_values">) => {
   if (!props.blocks) return null;
@@ -56,12 +56,12 @@ const Block = (block: PageBlocks) => {
       return <Hero data={block} />;
     case "PageBlocksHerocontent":
       return <Herocontent data={block} />;    
-    case "PageBlocksAbout":
-      return <About data={block} />;
+    case "PageBlocksAboutsection":
+      return <Aboutsection data={block} />;
     case "PageBlocksTeammember":
       return <TeamMember data={block} />;  
-    case "PageBlocksShortaboutus":
-      return <ShortAboutUs data={block} />;    
+    case "PageBlocksAboutus":
+      return <AboutUs data={block} />;    
     case "PageBlocksCallout":
       return <Callout data={block} />;
     case "PageBlocksEvents":
@@ -72,12 +72,12 @@ const Block = (block: PageBlocks) => {
       return <ContentAndImageVariant data={block} />;
     case "PageBlocksContentandimage":
       return <ContentAndImage data={block} />;  
-    case "PageBlocksContentwithlist":
-      return <ContentwithList data={block} />;  
+    case "PageBlocksFreqaskedquestions":
+      return <FreqAskedQuestions data={block} />;  
+    case "PageBlocksConnections":
+      return <Connections data={block} />;
     case "PageBlocksFeatures":
       return <Features data={block} />;
-    case "PageBlocksVariantfeatures":
-      return <Variantfeatures data={block} />;
     case "PageBlocksGroups":
       return <Groups data={block} />;  
     case "PageBlocksSermon":
@@ -86,10 +86,10 @@ const Block = (block: PageBlocks) => {
       return <CallToAction data={block} />;
     case "PageBlocksVision":
       return <Vision data={block} />;
-    case "PageBlocksStaff":
-      return <Staff data={block} />;
-    case "PageBlocksConnect":
-      return <Connect data={block} />;
+    case "PageBlocksPartner":
+      return <Partner data={block} />;
+    case "PageBlocksListcontent":
+      return <Listcontent data={block} />;
     case "PageBlocksStep1":
       return <Step1 data={block} />;
     case "PageBlocksStep2":
@@ -98,8 +98,8 @@ const Block = (block: PageBlocks) => {
       return <Step3 data={block} />;
     case "PageBlocksStep4":
       return <Step4 data={block} />;
-    case "PageBlocksMission2":
-      return <Mission2 data={block} />;
+    case "PageBlocksMission":
+      return <Mission data={block} />;
     case "PageBlocksContactsection":
       return <ContactSection data={block} />; 
     default:

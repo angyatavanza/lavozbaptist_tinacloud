@@ -9,9 +9,9 @@ import type { Template } from 'tinacms';
 import { iconSchema } from '@/tina/fields/icon';
 import { tinaField } from "tinacms/dist/react";
 import { TinaIcon } from '../icon';
-import { PageBlocksConnect } from "@/tina/__generated__/types";
+import { PageBlocksListcontent } from "@/tina/__generated__/types";
 
-export const Connect  = ({ data }: { data: PageBlocksConnect }) => {
+export const Listcontent  = ({ data }: { data: PageBlocksListcontent }) => {
   return (
     <>
       <SectionIntro
@@ -60,11 +60,11 @@ export const Connect  = ({ data }: { data: PageBlocksConnect }) => {
   );
 };
 
-export const connectBlockSchema: Template = {
-    name: "connect",
-    label: "Connect",
+export const listcontentBlockSchema: Template = {
+    name: "listcontent",
+    label: "Listcontent",
     ui: {
-        previewSrc: "/blocks/connect.png",
+        previewSrc: "/blocks/listcontent.png",
         defaultItem: {
             title: "Start Building",
             description: "Get started with TinaCMS today and take your content management to the next level.",

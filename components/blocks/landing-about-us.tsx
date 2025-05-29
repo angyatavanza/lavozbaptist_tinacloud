@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import type { Template } from 'tinacms';
 import { tinaField } from 'tinacms/dist/react';
-import { PageBlocksShortaboutus, PageBlocksShortaboutusImage } from '../../tina/__generated__/types';
+import { PageBlocksAboutus, PageBlocksAboutusImage } from '../../tina/__generated__/types';
 import { Button } from '../ui/button';
 import { iconSchema } from '@/tina/fields/icon';
 import { TinaIcon } from '../icon';
@@ -15,7 +15,7 @@ import { TextEffect } from '../motion-primitives/text-effect';
 import HeroVideoDialog from '../ui/hero-video-dialog';
 import { cn } from '@/lib/utils';
 //to-do 7: add text to aboutus in homepage
-//to-do 8: ask if short shortaboutus or short mission should be on the homepage
+//to-do 8: ask if short aboutus or short mission should be on the homepage
 
 const transitionVariants = {
   container: {
@@ -45,7 +45,7 @@ const transitionVariants = {
   },
 }
 
-export const ShortAboutUs = ({ data }: { data: PageBlocksShortaboutus }) => {
+export const AboutUs = ({ data }: { data: PageBlocksAboutus }) => {
 
   // Extract the background style logic into a more readable format
   let gradientStyle: React.CSSProperties | undefined = undefined;
@@ -143,7 +143,7 @@ export const ShortAboutUs = ({ data }: { data: PageBlocksShortaboutus }) => {
   )
 };
 
-const ImageBlock = ({ image }: { image: PageBlocksShortaboutusImage }) => {
+const ImageBlock = ({ image }: { image: PageBlocksAboutusImage }) => {
 
   if (image.videoUrl) {
 
@@ -165,7 +165,7 @@ const ImageBlock = ({ image }: { image: PageBlocksShortaboutusImage }) => {
       <HeroVideoDialog
         videoSrc={image.videoUrl}
         thumbnailSrc={thumbnailSrc}
-        thumbnailAlt="Shortaboutus Video"
+        thumbnailAlt="Aboutus Video"
       />
     )
   }
@@ -183,11 +183,11 @@ const ImageBlock = ({ image }: { image: PageBlocksShortaboutusImage }) => {
   }
 }
 
-export const shortaboutusBlockSchema: Template = {
-  name: 'shortaboutus',
-  label: 'Shortaboutus',
+export const aboutusBlockSchema: Template = {
+  name: 'aboutus',
+  label: 'Aboutus',
   ui: {
-    previewSrc: '/blocks/shortaboutus.png',
+    previewSrc: '/blocks/aboutus.png',
     defaultItem: {
       tagline: "Here's some text above the other text",
       headline: 'This Big Text is Totally Awesome',

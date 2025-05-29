@@ -1,7 +1,7 @@
 "use client";
 import {
-  PageBlocksVariantfeatures,
-  PageBlocksVariantfeaturesItems,
+  PageBlocksFeatures,
+  PageBlocksFeaturesItems,
 } from "../../tina/__generated__/types";
 import type { Template } from 'tinacms';
 import { tinaField } from "tinacms/dist/react";
@@ -12,7 +12,7 @@ import { Card, CardContent, CardHeader } from "../ui/card";
 import { Section } from "../layout/section";
 import { sectionBlockSchemaField } from '../layout/section';
 
-export const Variantfeatures = ({ data }: { data: PageBlocksVariantfeatures }) => {
+export const Features = ({ data }: { data: PageBlocksFeatures }) => {
   return (
     <Section background={data.background!}>
       <div className="@container mx-auto max-w-5xl px-6">
@@ -23,7 +23,7 @@ export const Variantfeatures = ({ data }: { data: PageBlocksVariantfeatures }) =
         <Card className="@min-4xl:max-w-full @min-4xl:grid-cols-3 @min-4xl:divide-x @min-4xl:divide-y-0 mx-auto mt-8 grid max-w-sm divide-y overflow-hidden shadow-zinc-950/5 *:text-center md:mt-16">
           {data.items &&
             data.items.map(function (block, i) {
-              return <Variantfeature key={i} {...block!} />;
+              return <Feature key={i} {...block!} />;
             })}
         </Card>
       </div>
@@ -39,7 +39,7 @@ const CardDecorator = ({ children }: { children: React.ReactNode }) => (
   </div>
 )
 
-export const Variantfeature: React.FC<PageBlocksVariantfeaturesItems> = (data) => {
+export const Feature: React.FC<PageBlocksFeaturesItems> = (data) => {
   return (
     <div className="group shadow-zinc-950/5">
       <CardHeader className="pb-3">
@@ -70,9 +70,9 @@ export const Variantfeature: React.FC<PageBlocksVariantfeaturesItems> = (data) =
   );
 };
 
-const defaultVariantfeature = {
-  title: "Here's Another Variantfeature",
-  text: "This is where you might talk about the variantfeature, if this wasn't just filler text.",
+const defaultFeature = {
+  title: "Here's Another Feature",
+  text: "This is where you might talk about the feature, if this wasn't just filler text.",
   icon: {
     color: "",
     style: "float",
@@ -80,15 +80,15 @@ const defaultVariantfeature = {
   },
 };
 
-export const variantfeatureBlockSchema: Template = {
-  name: "variantfeatures",
-  label: "Variantfeatures",
+export const featureBlockSchema: Template = {
+  name: "features",
+  label: "Features",
   ui: {
-    previewSrc: "/blocks/variantfeatures.png",
+    previewSrc: "/blocks/features.png",
     defaultItem: {
       title: 'Built to cover your needs',
-      description: 'We have a lot of variantfeatures to cover your needs',
-      items: [defaultVariantfeature, defaultVariantfeature, defaultVariantfeature],
+      description: 'We have a lot of features to cover your needs',
+      items: [defaultFeature, defaultFeature, defaultFeature],
     },
   },
   fields: [
@@ -105,7 +105,7 @@ export const variantfeatureBlockSchema: Template = {
     },
     {
       type: "object",
-      label: "Variantfeature Items",
+      label: "Feature Items",
       name: "items",
       list: true,
       ui: {
@@ -115,7 +115,7 @@ export const variantfeatureBlockSchema: Template = {
           };
         },
         defaultItem: {
-          ...defaultVariantfeature,
+          ...defaultFeature,
         },
       },
       fields: [

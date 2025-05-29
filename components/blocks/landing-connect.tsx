@@ -1,7 +1,7 @@
 "use client";
 import {
-  PageBlocksFeatures,
-  PageBlocksFeaturesItems,
+  PageBlocksConnections,
+  PageBlocksConnectionsItems,
 } from "../../tina/__generated__/types";
 import type { Template } from 'tinacms';
 import { tinaField } from "tinacms/dist/react";
@@ -12,8 +12,8 @@ import { Card, CardContent, CardHeader } from "../ui/card";
 import { Section } from "../layout/section";
 import imageWhiteboard from "@/images/whiteboard.jpg";
 import { sectionBlockSchemaField } from '../layout/section';
-//to-do 11: add text to features in homepage
-export const Features = ({ data }: { data: PageBlocksFeatures }) => {
+//to-do 11: add text to connections in homepage
+export const Connections = ({ data }: { data: PageBlocksConnections }) => {
   return (
     <Section background={data.background!}>
       <div className="@container mx-auto max-w-5xl px-6">
@@ -24,7 +24,7 @@ export const Features = ({ data }: { data: PageBlocksFeatures }) => {
         <Card className="@min-4xl:max-w-full @min-4xl:grid-cols-3 @min-4xl:divide-x @min-4xl:divide-y-0 mx-auto mt-8 grid max-w-sm divide-y overflow-hidden shadow-zinc-950/5 *:text-center md:mt-16">
           {data.items &&
             data.items.map(function (block, i) {
-              return <Feature key={i} {...block!} />;
+              return <Connection key={i} {...block!} />;
             })}
         </Card>
       </div>
@@ -40,7 +40,7 @@ const CardDecorator = ({ children }: { children: React.ReactNode }) => (
   </div>
 )
 
-export const Feature: React.FC<PageBlocksFeaturesItems> = (data) => {
+export const Connection: React.FC<PageBlocksConnectionsItems> = (data) => {
   return (
     <div className="group shadow-zinc-950/5">
       <CardHeader className="pb-3">
@@ -73,9 +73,9 @@ export const Feature: React.FC<PageBlocksFeaturesItems> = (data) => {
   );
 };
 
-const defaultFeature = {
-  title: "Here's Another Feature",
-  text: "This is where you might talk about the feature, if this wasn't just filler text.",
+const defaultConnection = {
+  title: "Here's Another Connection",
+  text: "This is where you might talk about the connection, if this wasn't just filler text.",
   icon: {
     color: "",
     style: "float",
@@ -83,15 +83,15 @@ const defaultFeature = {
   },
 };
 
-export const featureBlockSchema: Template = {
-  name: "features",
-  label: "Features",
+export const connectionBlockSchema: Template = {
+  name: "connections",
+  label: "Connections",
   ui: {
-    previewSrc: "/blocks/features.png",
+    previewSrc: "/blocks/connections.png",
     defaultItem: {
       title: 'Built to cover your needs',
-      description: 'We have a lot of features to cover your needs',
-      items: [defaultFeature, defaultFeature, defaultFeature],
+      description: 'We have a lot of connections to cover your needs',
+      items: [defaultConnection, defaultConnection, defaultConnection],
     },
   },
   fields: [
@@ -108,7 +108,7 @@ export const featureBlockSchema: Template = {
     },
     {
       type: "object",
-      label: "Feature Items",
+      label: "Connection Items",
       name: "items",
       list: true,
       ui: {
@@ -118,7 +118,7 @@ export const featureBlockSchema: Template = {
           };
         },
         defaultItem: {
-          ...defaultFeature,
+          ...defaultConnection,
         },
       },
       fields: [
