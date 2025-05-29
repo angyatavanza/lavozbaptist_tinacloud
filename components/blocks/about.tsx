@@ -22,9 +22,10 @@ import HeroVideoDialog from "../ui/hero-video-dialog";
 import { cn } from "@/lib/utils";
 import { ContactSection } from "./contact-section";
 //this about block is in /about page
-//to-do 38: add contactsection
-//to-do 37 : change background colors to all sections
-//to-do 36:  change about section --currently there are 2 sections. 
+//to-do 26:  change about section --currently there are 2 sections. 
+//to-do 27: add contactsection
+//to-do 28: change background colors to all sections
+//to-do 29: make sure to change the ui of the about section
 const transitionVariants = {
   container: {
     visible: {

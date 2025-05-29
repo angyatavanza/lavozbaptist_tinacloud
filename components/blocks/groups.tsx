@@ -13,6 +13,8 @@ import { Section } from "../layout/section";
 import imageWhiteboard from "@/images/whiteboard.jpg";
 import { sectionBlockSchemaField } from '../layout/section';
 //to-do 12: add text to sermon in homepage
+//to-do 13: add buttons to each card
+//to-do 14: change layout of card
 export const Groups = ({ data }: { data: PageBlocksGroups }) => {
   return (
     <Section background={data.background!}>

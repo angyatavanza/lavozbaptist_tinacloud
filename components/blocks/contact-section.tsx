@@ -8,6 +8,7 @@ import type { Template } from 'tinacms';
 import { PageBlocksContactsection } from "@/tina/__generated__/types";
 
 //to-do 16: add data.code 
+//to-do 17: change button and text
 
 export const ContactSection = ({ data }: { data: PageBlocksContactsection}) => {
   return (

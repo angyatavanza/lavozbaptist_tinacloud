@@ -6,6 +6,8 @@ import { Card, CardContent } from "../ui/card";
 import { tinaField } from "tinacms/dist/react";
 import { sectionBlockSchemaField } from '../layout/section';
 
+//to-do 36: serve page
+//to-do 37:  groups page
 export const ContentAndImage = ({ data }: { data: PageBlocksContentandimage }) => {
   return (
     <Section  background={data.background!}>

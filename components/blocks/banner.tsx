@@ -8,8 +8,8 @@ import { TinaIcon } from '../icon';
 import imageWhiteboard from "@/images/whiteboard.jpg";
 import { Section } from '../layout/section';
 
-//to-do 37: add data.image to the side of the banner 
-//to-do 38: add banner component to messages?, groups -done, our-team, nextsteps, events
+//to-do 23: add data.image to the side of the banner 
+//to-do 24: add banner component to messages?, groups -done, our-team, nextsteps, events
 export const Banner = ({ data }: { data: PageBlocksBanner }) => {
     return (
         <Section >

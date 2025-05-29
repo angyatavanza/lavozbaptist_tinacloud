@@ -8,7 +8,7 @@ import { PageBlocksMission2 } from '@/tina/__generated__/types';
 import { TinaIcon } from '../icon';
 import { GridList, GridListItem } from "../grid-list";
 
-//to-do 13: add data.code 
+//to-do 19: add data.code 
 export const Mission2  = ({ data }: { data: PageBlocksMission2 }) => {
   return (
     <div className="mt-24 rounded-4xl bg-purple-800 py-24 sm:mt-32 lg:mt-40 lg:py-32">

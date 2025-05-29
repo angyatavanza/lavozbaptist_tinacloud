@@ -17,7 +17,7 @@ import { ServiceTimes } from "../service-times";
 import { SocialMedia } from "../social-media";
 import { Footer } from "./footer";
 
-//to-do 22: add contact page to /app
+
 //done : remove tina icon 
 /*
 <Link href="/" aria-label="home" className="flex items-center space-x-2">
@@ -34,7 +34,8 @@ import { Footer } from "./footer";
   </span>
  </Link>
 */
-//to-do 23: add la voz logo png or svg
+//to-do 25a: add contact page to /app and add la voz logo png or svg
+//to-do 25b: replace images for all templates
 
 interface HeaderProps {
   panelId: string;

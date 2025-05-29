@@ -15,7 +15,7 @@ import { iconSchema } from '@/tina/fields/icon';
 import { tinaField } from "tinacms/dist/react";
 import { PageBlocksStaff } from "@/tina/__generated__/types";
 import { TinaIcon } from '../icon';
-//to-do 14: add data.code 
+//to-do 18: add data.code 
 type StaffMember = [string, StaticImageData];
 
 const staffMembers: StaffMember[] = [
