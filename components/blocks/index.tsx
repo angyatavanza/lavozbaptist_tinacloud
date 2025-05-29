@@ -5,6 +5,7 @@ import { About } from "./about";
 import { ShortAboutUs } from "./short-about-us";
 import { Content } from "./content";
 import { Features } from "./features";
+import { Variantfeatures } from "./features2";
 import { Groups } from "./groups";
 import { Sermon } from "./sermon";
 import { Video } from "./video";
@@ -75,6 +76,8 @@ const Block = (block: PageBlocks) => {
       return <ContentwithList data={block} />;  
     case "PageBlocksFeatures":
       return <Features data={block} />;
+    case "PageBlocksVariantfeatures":
+      return <Variantfeatures data={block} />;
     case "PageBlocksGroups":
       return <Groups data={block} />;  
     case "PageBlocksSermon":

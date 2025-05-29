@@ -6,7 +6,7 @@ import { Card, CardContent } from "../ui/card";
 import { tinaField } from "tinacms/dist/react";
 import { sectionBlockSchemaField } from '../layout/section';
 
-//to-do 36: serve page
+//to-do 36: serve page: add button to missions, change the fields in the template for contentwimage
 //to-do 37:  groups page
 export const ContentAndImage = ({ data }: { data: PageBlocksContentandimage }) => {
   return (

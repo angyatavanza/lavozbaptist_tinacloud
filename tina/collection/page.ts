@@ -9,6 +9,7 @@ import { shortaboutusBlockSchema } from '@/components/blocks/short-about-us';
 import { contentBlockSchema } from '@/components/blocks/content';
 import { sermonBlockSchema } from '@/components/blocks/sermon';
 import { featureBlockSchema } from '@/components/blocks/features';
+import { variantfeatureBlockSchema } from '@/components/blocks/features2';
 import { staffBlockSchema } from '@/components/blocks/staff';
 import { visionBlockSchema } from '@/components/blocks/vision';
 import { groupBlockSchema } from '@/components/blocks/groups';
@@ -57,6 +58,7 @@ const Page: Collection = {
         shortaboutusBlockSchema,
         calloutBlockSchema,
         featureBlockSchema,
+        variantfeatureBlockSchema,
         groupBlockSchema,
         eventsBlockSchema,
         ctaBlockSchema,
