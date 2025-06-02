@@ -21,12 +21,14 @@ import { TextEffect } from "../motion-primitives/text-effect";
 import HeroVideoDialog from "../ui/hero-video-dialog";
 import { cn } from "@/lib/utils";
 import { ContactSection } from "./section-contact";
-//this aboutsection block is in /aboutsection page
-//to-do 26:  change aboutsection page --currently there are 2 sections. 
-//to-do 27: add contactsection
-//to-do 28: change background colors to all sections
-//to-do 29a: make sure to change the ui of the aboutsection section
-// to-do 29b: add faq section to block Tina schema
+
+
+//done TINA CONTENT 26: add contactsection to sections
+//to-do TINA CONTENT 27:  merge aboutsection page --currently there are 2 descriptions
+//to-do TINA BACKEND 28: add faq section to block Tina schema
+//to-do UI 29: update the ui of the about page; blocks: Herocontent, banner?, aboutsection, mission, vision, teammembers, faq, cta, contact
+
+
 const transitionVariants = {
   container: {
     visible: {
