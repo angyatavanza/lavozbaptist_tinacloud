@@ -22,7 +22,7 @@ import { cn } from "@/lib/utils";
 //done 3: change video type to be vimeo + make video autoplay
 //done 4: fix thumbnail errors + move both headline and tagline to be an overlay over video + move tagline so it is above the headline
 //done 5: update herocontent component to match landing-hero
-//to-do 6: remove the white looking border around the video + fix the section width of the section background of the blocks when the url goes to /home or /about
+//to-do 6: extend the width of the div for the hero video to be full-width + remove the white looking border around the video + fix the section width of the section background of the blocks when the url goes to /home or /about
 
 const transitionVariants = {
   container: {

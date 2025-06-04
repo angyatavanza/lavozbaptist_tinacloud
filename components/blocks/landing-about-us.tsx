@@ -17,9 +17,10 @@ import { AnimatedGroup } from "../motion-primitives/animated-group";
 import { TextEffect } from "../motion-primitives/text-effect";
 import HeroVideoDialog from "../ui/hero-video-dialog";
 import { cn } from "@/lib/utils";
-//to-do 7: add text to aboutus in homepage
+//done 7: add text to aboutus in homepage
 //done 8: decide if short aboutus or short mission should be on the homepage
-//to-do 22: Error: Failed to assertShape - this must be a `object` type, but the final value was: `true`.
+//to-do 22: extend the width of the div for the about-us image to be full-width
+//to-do 22?: Error: Failed to assertShape - this must be a `object` type, but the final value was: `true`.
 const transitionVariants = {
   container: {
     visible: {

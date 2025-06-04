@@ -24,7 +24,7 @@ import { ContactSection } from "./section-contact";
 
 
 //done 26: add contactsection to sections
-//to-do 27:  merge aboutsection page --currently there are 2 descriptions
+//to-do 27: merge aboutsection component --currently there are 2 descriptions, add an image to the left of the div
 //to-do 28: add faq section to block Tina schema
 //to-do 29: update the ui of the about page; blocks: Herocontent, banner?, aboutsection, mission, vision, teammembers, faq, cta, contact
 
@@ -98,18 +98,6 @@ export const Aboutsection = ({ data }: { data: PageBlocksAboutsection }) => {
         </StatList>
       </Container>
       <div className="text-center sm:mx-auto lg:mr-auto lg:mt-0">
-        {data.headline && (
-          <div data-tina-field={tinaField(data, "headline")}>
-            <TextEffect
-              preset="fade-in-blur"
-              speedSegment={0.3}
-              as="h1"
-              className="mt-8 text-balance text-6xl md:text-7xl xl:text-[5.25rem]"
-            >
-              {data.headline!}
-            </TextEffect>
-          </div>
-        )}
         {data.tagline && (
           <div data-tina-field={tinaField(data, "tagline")}>
             <TextEffect
@@ -121,6 +109,18 @@ export const Aboutsection = ({ data }: { data: PageBlocksAboutsection }) => {
               className="mx-auto mt-8 max-w-2xl text-balance text-lg"
             >
               {data.tagline!}
+            </TextEffect>
+          </div>
+        )}
+        {data.headline && (
+          <div data-tina-field={tinaField(data, "headline")}>
+            <TextEffect
+              preset="fade-in-blur"
+              speedSegment={0.3}
+              as="h1"
+              className="mt-8 text-balance text-6xl md:text-7xl xl:text-[5.25rem]"
+            >
+              {data.headline!}
             </TextEffect>
           </div>
         )}
