@@ -18,7 +18,7 @@ import { SocialMedia } from "../social-media";
 import { Footer } from "./footer";
 
 
-//done : remove tina icon 
+//done 0: remove tina icon 
 /*
 <Link href="/" aria-label="home" className="flex items-center space-x-2">
   <TinaIcon

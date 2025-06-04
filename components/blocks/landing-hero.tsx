@@ -18,11 +18,11 @@ import { TextEffect } from "../motion-primitives/text-effect";
 import HeroVideoDialog from "../ui/hero-video-dialog";
 import { cn } from "@/lib/utils";
 
-//to-do 2: embed video from YT
-//to-do 3: fix when the url goes to /home or /about, the section isnt full-width
-//to-do 4: move headline and tagline to be over video, done-move tagline so it is above the headline
-//to-do 5: make video autoplay
-//to-do 6:  remove border from youtube video 
+//done 2: embed video from vimeo
+//done 3: change video type to be vimeo + make video autoplay
+//done 4: fix thumbnail errors + move both headline and tagline to be an overlay over video + move tagline so it is above the headline
+//to-do 5: adjust the styling of the border around the video
+//to-do 6: fix the section width of the section background of the blocks when the url goes to /home or /about
 
 const transitionVariants = {
   container: {
@@ -70,6 +70,7 @@ export const Hero = ({ data }: { data: PageBlocksHero }) => {
 
   return (
     <Section background={data.background!}>
+
       {data.image && (
         <AnimatedGroup variants={transitionVariants}>
           <div
@@ -83,65 +84,68 @@ export const Hero = ({ data }: { data: PageBlocksHero }) => {
             />
             <div className="inset-shadow-2xs ring-background dark:inset-shadow-white/20 bg-background relative mx-auto max-w-6xl overflow-hidden rounded-2xl border p-4 shadow-lg shadow-zinc-950/15 ring-1">
               <ImageBlock image={data.image} />
+              {/* Overlay content */}
+              <div className="absolute inset-0 z-20 flex flex-col items-center justify-center text-center px-6 py-12 text-white">
+                
+                {data.tagline && (
+                  <div data-tina-field={tinaField(data, "tagline")}>
+                    <TextEffect
+                      per="line"
+                      preset="fade-in-blur"
+                      speedSegment={0.3}
+                      delay={0.5}
+                      as="p"
+                      className="mx-auto mt-8 max-w-2xl text-balance text-lg"
+                    >
+                      {data.tagline!}
+                    </TextEffect>
+                  </div>
+                )}
+                {data.headline && (
+                  <div data-tina-field={tinaField(data, "headline")}>
+                    <TextEffect
+                      preset="fade-in-blur"
+                      speedSegment={0.3}
+                      as="h1"
+                      className="mt-8 text-balance text-6xl md:text-7xl xl:text-[5.25rem]"
+                    >
+                      {data.headline!}
+                    </TextEffect>
+                  </div>
+                )}
+
+                <AnimatedGroup
+                  variants={transitionVariants}
+                  className="mt-12 flex flex-col items-center justify-center gap-2 md:flex-row"
+                >
+                  {data.actions &&
+                    data.actions.map((action) => (
+                      <div
+                        key={action!.label}
+                        data-tina-field={tinaField(action)}
+                        className="bg-foreground/10 rounded-[calc(var(--radius-xl)+0.125rem)] border p-0.5"
+                      >
+                        <Button
+                          asChild
+                          size="lg"
+                          variant={
+                            action!.type === "link" ? "ghost" : "default"
+                          }
+                          className="rounded-xl px-5 text-base"
+                        >
+                          <Link href={action!.link!}>
+                            {action?.icon && <TinaIcon data={action?.icon} />}
+                            <span className="text-nowrap">{action!.label}</span>
+                          </Link>
+                        </Button>
+                      </div>
+                    ))}
+                </AnimatedGroup>
+              </div>
             </div>
           </div>
         </AnimatedGroup>
       )}
-
-      <div className="text-center sm:mx-auto lg:mr-auto lg:mt-0">
-        {data.tagline && (
-          <div data-tina-field={tinaField(data, "tagline")}>
-            <TextEffect
-              per="line"
-              preset="fade-in-blur"
-              speedSegment={0.3}
-              delay={0.5}
-              as="p"
-              className="mx-auto mt-8 max-w-2xl text-balance text-lg"
-            >
-              {data.tagline!}
-            </TextEffect>
-          </div>
-        )}
-        {data.headline && (
-          <div data-tina-field={tinaField(data, "headline")}>
-            <TextEffect
-              preset="fade-in-blur"
-              speedSegment={0.3}
-              as="h1"
-              className="mt-8 text-balance text-6xl md:text-7xl xl:text-[5.25rem]"
-            >
-              {data.headline!}
-            </TextEffect>
-          </div>
-        )}
-        
-        <AnimatedGroup
-          variants={transitionVariants}
-          className="mt-12 flex flex-col items-center justify-center gap-2 md:flex-row"
-        >
-          {data.actions &&
-            data.actions.map((action) => (
-              <div
-                key={action!.label}
-                data-tina-field={tinaField(action)}
-                className="bg-foreground/10 rounded-[calc(var(--radius-xl)+0.125rem)] border p-0.5"
-              >
-                <Button
-                  asChild
-                  size="lg"
-                  variant={action!.type === "link" ? "ghost" : "default"}
-                  className="rounded-xl px-5 text-base"
-                >
-                  <Link href={action!.link!}>
-                    {action?.icon && <TinaIcon data={action?.icon} />}
-                    <span className="text-nowrap">{action!.label}</span>
-                  </Link>
-                </Button>
-              </div>
-            ))}
-        </AnimatedGroup>
-      </div>
     </Section>
   );
 };
@@ -167,8 +171,8 @@ const ImageBlock = ({ image }: { image: PageBlocksHeroImage }) => {
     return (
       <HeroVideoDialog
         videoSrc={image.videoUrl}
-        //thumbnailSrc={thumbnailSrc}
-        //thumbnailAlt="Hero Video"
+        thumbnailSrc={thumbnailSrc}
+        thumbnailAlt="Hero Video"
       />
     );
   }

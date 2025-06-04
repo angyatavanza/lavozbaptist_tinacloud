@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import { VideoDialogProvider } from "@/components/ui/video-dialog-context";
 import VideoDialog from "@/components/ui/video-dialog";
 import "@/styles.css";
+import 'video.js/dist/video-js.css';
 import { TailwindIndicator } from "@/components/ui/breakpoint-indicator";
 
 const fontSans = FontSans({

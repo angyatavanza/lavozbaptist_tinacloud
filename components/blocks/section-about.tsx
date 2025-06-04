@@ -23,10 +23,10 @@ import { cn } from "@/lib/utils";
 import { ContactSection } from "./section-contact";
 
 
-//done TINA CONTENT 26: add contactsection to sections
-//to-do TINA CONTENT 27:  merge aboutsection page --currently there are 2 descriptions
-//to-do TINA BACKEND 28: add faq section to block Tina schema
-//to-do UI 29: update the ui of the about page; blocks: Herocontent, banner?, aboutsection, mission, vision, teammembers, faq, cta, contact
+//done 26: add contactsection to sections
+//to-do 27:  merge aboutsection page --currently there are 2 descriptions
+//to-do 28: add faq section to block Tina schema
+//to-do 29: update the ui of the about page; blocks: Herocontent, banner?, aboutsection, mission, vision, teammembers, faq, cta, contact
 
 
 const transitionVariants = {
