@@ -21,8 +21,8 @@ import { cn } from "@/lib/utils";
 //done 2: embed video from vimeo
 //done 3: change video type to be vimeo + make video autoplay
 //done 4: fix thumbnail errors + move both headline and tagline to be an overlay over video + move tagline so it is above the headline
-//to-do 5: adjust the styling of the border around the video
-//to-do 6: fix the section width of the section background of the blocks when the url goes to /home or /about
+//done 5: update herocontent component to match landing-hero
+//to-do 6: remove the white looking border around the video + fix the section width of the section background of the blocks when the url goes to /home or /about
 
 const transitionVariants = {
   container: {
@@ -70,7 +70,6 @@ export const Hero = ({ data }: { data: PageBlocksHero }) => {
 
   return (
     <Section background={data.background!}>
-
       {data.image && (
         <AnimatedGroup variants={transitionVariants}>
           <div
@@ -85,8 +84,7 @@ export const Hero = ({ data }: { data: PageBlocksHero }) => {
             <div className="inset-shadow-2xs ring-background dark:inset-shadow-white/20 bg-background relative mx-auto max-w-6xl overflow-hidden rounded-2xl border p-4 shadow-lg shadow-zinc-950/15 ring-1">
               <ImageBlock image={data.image} />
               {/* Overlay content */}
-              <div className="absolute inset-0 z-20 flex flex-col items-center justify-center text-center px-6 py-12 text-white">
-                
+              <div className="absolute inset-0 z-20 flex flex-col items-center justify-center text-center px-6 py-12 text-white sm:mx-auto lg:mr-auto lg:mt-0">
                 {data.tagline && (
                   <div data-tina-field={tinaField(data, "tagline")}>
                     <TextEffect
@@ -134,7 +132,7 @@ export const Hero = ({ data }: { data: PageBlocksHero }) => {
                           className="rounded-xl px-5 text-base"
                         >
                           <Link href={action!.link!}>
-                            {action?.icon && <TinaIcon data={action?.icon} />}
+                            {action?.icon && (<TinaIcon data={action?.icon} />)}
                             <span className="text-nowrap">{action!.label}</span>
                           </Link>
                         </Button>
