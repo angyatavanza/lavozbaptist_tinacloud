@@ -3,25 +3,68 @@ import {
   PageBlocksGroups,
   PageBlocksGroupsItems,
 } from "../../tina/__generated__/types";
-import type { Template } from 'tinacms';
+import type { Template } from "tinacms";
 import { tinaField } from "tinacms/dist/react";
 import { TinaMarkdown } from "tinacms/dist/rich-text";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
-//import { iconSchema } from "../../tina/fields/icon";
 import { Card, CardContent, CardHeader } from "../ui/card";
 import { Section } from "../layout/section";
+import { TinaIcon } from "../icon";
+import { Button } from "../ui/button";
+import Link from "next/link";
+import { iconSchema } from "@/tina/fields/icon";
+import { AnimatedGroup } from "../motion-primitives/animated-group";
+import { sectionBlockSchemaField } from "../layout/section";
 import imageWhiteboard from "@/images/whiteboard.jpg";
-import { sectionBlockSchemaField } from '../layout/section';
-//to-do 12: add text to sermon in homepage
-//to-do 13: add buttons to each card
-//to-do 14: change layout of card
+
+//to-do 12a: create a latestmessages component that extract the latest 3 messages in homepage
+//to-do 12b: change layout of latest message card in homepage
+//done 13: add buttons to each card in groups component
+//to-do 14: change layout of each group card: Image with overlay text of the group name
+//to-do 57: change layout of group items cards in landing-groups page DESIGN/FRONTEND 
+
+const transitionVariants = {
+  container: {
+    visible: {
+      transition: {
+        staggerChildren: 0.05,
+        delayChildren: 0.75,
+      },
+    },
+  },
+  item: {
+    hidden: {
+      opacity: 0,
+      filter: "blur(12px)",
+      y: 12,
+    },
+    visible: {
+      opacity: 1,
+      filter: "blur(0px)",
+      y: 0,
+      transition: {
+        type: "spring",
+        bounce: 0.3,
+        duration: 1.5,
+      },
+    },
+  },
+};
+
 export const Groups = ({ data }: { data: PageBlocksGroups }) => {
   return (
     <Section background={data.background!}>
       <div className="@container mx-auto max-w-5xl px-6">
         <div className="text-center">
-          <h2 data-tina-field={tinaField(data, 'title')} className="text-balance text-4xl font-semibold lg:text-5xl">{data.title}</h2>
-          <p data-tina-field={tinaField(data, 'description')} className="mt-4">{data.description}</p>
+          <h2
+            data-tina-field={tinaField(data, "title")}
+            className="text-balance text-4xl font-semibold lg:text-5xl"
+          >
+            {data.title}
+          </h2>
+          <p data-tina-field={tinaField(data, "description")} className="mt-4">
+            {data.description}
+          </p>
         </div>
         <Card className="@min-4xl:max-w-full @min-4xl:grid-cols-3 @min-4xl:divide-x @min-4xl:divide-y-0 mx-auto mt-8 grid max-w-sm divide-y overflow-hidden shadow-zinc-950/5 *:text-center md:mt-16">
           {data.items &&
@@ -31,16 +74,24 @@ export const Groups = ({ data }: { data: PageBlocksGroups }) => {
         </Card>
       </div>
     </Section>
-  )
-}
+  );
+};
 
 const CardDecorator = ({ children }: { children: React.ReactNode }) => (
   <div className="relative mx-auto size-36 duration-200 [--color-border:color-mix(in_oklab,var(--color-zinc-950)10%,transparent)] group-hover:[--color-border:color-mix(in_oklab,var(--color-zinc-950)20%,transparent)] dark:[--color-border:color-mix(in_oklab,var(--color-white)15%,transparent)] dark:group-hover:bg-white/5 dark:group-hover:[--color-border:color-mix(in_oklab,var(--color-white)20%,transparent)]">
-    <div aria-hidden className="absolute inset-0 bg-[linear-gradient(to_right,var(--color-border)_1px,transparent_1px),linear-gradient(to_bottom,var(--color-border)_1px,transparent_1px)] bg-[size:24px_24px]" />
-    <div aria-hidden className="bg-radial to-background absolute inset-0 from-transparent to-75%" />
-    <div className="bg-background absolute inset-0 m-auto flex size-12 items-center justify-center border-l border-t">{children}</div>
+    <div
+      aria-hidden
+      className="absolute inset-0 bg-[linear-gradient(to_right,var(--color-border)_1px,transparent_1px),linear-gradient(to_bottom,var(--color-border)_1px,transparent_1px)] bg-[size:24px_24px]"
+    />
+    <div
+      aria-hidden
+      className="bg-radial to-background absolute inset-0 from-transparent to-75%"
+    />
+    <div className="bg-background absolute inset-0 m-auto flex size-12 items-center justify-center border-l border-t">
+      {children}
+    </div>
   </div>
-)
+);
 
 export const Group: React.FC<PageBlocksGroupsItems> = (data) => {
   return (
@@ -48,13 +99,52 @@ export const Group: React.FC<PageBlocksGroupsItems> = (data) => {
       <CardHeader className="pb-3">
         <CardDecorator>
           {data.cover && (
-            <Avatar className="size-9" data-tina-field={tinaField(data, 'cover')}>
+            <Avatar
+              className="size-9"
+              data-tina-field={tinaField(data, "cover")}
+            >
               {data.cover && (
-                <AvatarImage alt={data.title!} src={data.cover} loading="lazy" width="120" height="120" />
+                <AvatarImage
+                  alt={data.title!}
+                  src={data.cover}
+                  loading="lazy"
+                  width="120"
+                  height="120"
+                />
               )}
-              <AvatarFallback>{data.title!.split(" ").map((word) => word[0]).join("")}</AvatarFallback>
+              <AvatarFallback>
+                {data
+                  .title!.split(" ")
+                  .map((word) => word[0])
+                  .join("")}
+              </AvatarFallback>
             </Avatar>
           )}
+          <AnimatedGroup
+            variants={transitionVariants}
+            className="mt-12 flex flex-col items-center justify-center gap-2 md:flex-row"
+          >
+            {data.actions &&
+              data.actions.map((action) => (
+                <div
+                  key={action!.label}
+                  data-tina-field={tinaField(action)}
+                  className="bg-foreground/10 rounded-[calc(var(--radius-xl)+0.125rem)] border p-0.5"
+                >
+                  <Button
+                    asChild
+                    size="lg"
+                    variant={action!.type === "link" ? "ghost" : "default"}
+                    className="rounded-xl px-5 text-base"
+                  >
+                    <Link href={action!.link!}>
+                      {action?.icon && <TinaIcon data={action?.icon} />}
+                      <span className="text-nowrap">{action!.label}</span>
+                    </Link>
+                  </Button>
+                </div>
+              ))}
+          </AnimatedGroup>
         </CardDecorator>
 
         <h3
@@ -76,8 +166,8 @@ export const Group: React.FC<PageBlocksGroupsItems> = (data) => {
 };
 
 const defaultGroup = {
-  title: "Here's Another Group",
-  text: "This is where you might talk about the group, if this wasn't just filler text.",
+  title: "Aquí hay otro grupo",
+  text: "Aquí puedes proveer más información sobre un grupo.",
   icon: {
     color: "",
     style: "float",
@@ -91,8 +181,9 @@ export const groupBlockSchema: Template = {
   ui: {
     previewSrc: "/blocks/groups.png",
     defaultItem: {
-      title: 'Built to cover your needs',
-      description: 'We have a lot of groups to cover your needs',
+      title: "Grupos",
+      description:
+        "En La Iglesia La Voz, hay algo para todos. Ofrecemos los siguientes Ministerios: Varones, Mujeres, Jovenes, y Niños",
       items: [defaultGroup, defaultGroup, defaultGroup],
     },
   },
@@ -139,6 +230,43 @@ export const groupBlockSchema: Template = {
           type: "rich-text",
           label: "Text",
           name: "text",
+        },
+        {
+          label: "Actions",
+          name: "actions",
+          type: "object",
+          list: true,
+          ui: {
+            defaultItem: {
+              label: "Action Label",
+              type: "button",
+              icon: true,
+              link: "/",
+            },
+            itemProps: (item) => ({ label: item.label }),
+          },
+          fields: [
+            {
+              label: "Label",
+              name: "label",
+              type: "string",
+            },
+            {
+              label: "Type",
+              name: "type",
+              type: "string",
+              options: [
+                { label: "Button", value: "button" },
+                { label: "Link", value: "link" },
+              ],
+            },
+            iconSchema as any,
+            {
+              label: "Link",
+              name: "link",
+              type: "string",
+            },
+          ],
         },
       ],
     },

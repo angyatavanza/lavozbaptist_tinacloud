@@ -7,7 +7,7 @@ import { Content } from "./section-content";
 import { Connections } from "./landing-connect";
 import { Features } from "./section-features";
 import { Groups } from "./landing-groups";
-import { Sermon } from "./landing-latest-sermons";
+import { Sermon } from "./landing-sermons";
 import { Video } from "./section-video";
 import { Callout } from "./section-callout";
 import { Herocontent } from "./section-herocontent";

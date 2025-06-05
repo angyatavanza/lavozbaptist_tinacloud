@@ -7,7 +7,7 @@ import { heroBlockSchema } from '@/components/blocks/landing-hero';
 import { aboutsectionBlockSchema } from '@/components/blocks/section-about';
 import { aboutusBlockSchema } from '@/components/blocks/landing-about-us';
 import { contentBlockSchema } from '@/components/blocks/section-content';
-import { sermonBlockSchema } from '@/components/blocks/landing-latest-sermons';
+import { sermonBlockSchema } from '@/components/blocks/landing-sermons';
 import { connectionBlockSchema } from '@/components/blocks/landing-connect';
 import { featureBlockSchema } from '@/components/blocks/section-features';
 import { partnerBlockSchema } from '@/components/blocks/section-partners';

@@ -2,8 +2,12 @@ import { FadeIn } from "../fade-in";
 import { TextInput } from "./text-input";
 import { RadioInput } from "./radio-input";
 import { Button } from "../ui/second-button";
+//to-do 42: add functionality to resources-form
+//to-do 43: add functionality to serve-form
+//to-do 44: add functionality to newmember-form
+//to-do 47: add functionality to contact-form (add states to mail-sent to contact-form ?) TINA CMS/BACKEND
+//to-do 48: create privacy page and add content blocks to privacy page TINA CMS/BACKEND
 
-//to-do 47: add functionality to contact-form
 export const ContactForm = () => {
   return (
     <FadeIn>

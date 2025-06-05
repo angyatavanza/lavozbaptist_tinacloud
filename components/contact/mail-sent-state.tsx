@@ -1,5 +1,4 @@
 import { Wrapper } from "@/components/wrapper";
-//to-do 48: add states to mail-sent to contact-form
 export default function MailSentState() {
   return (
     <Wrapper>

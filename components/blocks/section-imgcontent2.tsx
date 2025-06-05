@@ -5,10 +5,9 @@ import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { Card, CardContent } from "../ui/card";
 import { tinaField } from "tinacms/dist/react";
 import { sectionBlockSchemaField } from '../layout/section';
-//to-do 30: add fb video API to messages
-//to-do 31: messages page + archive page
-//to-do 32:  
-//to-do 33:  
+//to-do 30: create a messages-home page DESIGN/FRONTEND 
+//to-do 31: create an message-archive page TINA CMS/BACKEND DESIGN/FRONTEND 
+
 
 
 export const ContentAndImageVariant = ({ data }: { data: PageBlocksContentandimagevariant }) => {

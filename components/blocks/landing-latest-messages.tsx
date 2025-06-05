@@ -14,13 +14,8 @@ import { Section } from "../layout/section";
 import Link from "next/link";
 import Image from "next/image";
 
-//done 9a: figure out how to link the 3 latest events in the landing page
-//done 9b: fix the url of root page b/c sometimes the latest 3 events load only when the url is without "/home" after it
-//done 9c: add eventdate tina field to display in the frontend
-//to-do 9d?: add actions and addressurl to props of latest events ?
-//to-do 10a: change layout of event card: date as a bookmark top left, photo centered, event title +event date/time + location undernead photo
-//to-do 10b: extract the time from "date" tina field and display in the event card
-//to-do 10c: figure out if adding this line of code broke anything : ".filter((block): block is PageBlocks => block !== null". This line was added because "You just need to filter out null or undefined blocks before calling Block"
+//to-do 32: add fb video API to messages page or add tina field to accept a link to Vimeo video in messages page TINA CMS/BACKEND
+//to-do 33: change layout of all messages card in messages page DESIGN/FRONTEND 
 
 interface Author {
   name?: string;

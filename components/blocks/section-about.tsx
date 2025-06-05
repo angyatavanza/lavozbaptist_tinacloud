@@ -24,7 +24,8 @@ import { ContactSection } from "./section-contact";
 
 
 //done 26: add contactsection to sections
-//to-do 27: merge aboutsection component --currently there are 2 descriptions, add an image to the left of the div
+//to-do 27a: merge aboutsection component --currently there are 2 descriptions
+//to-do 27b: add an image to the left of the div
 //to-do 28: add faq section to block Tina schema
 //to-do 29: update the ui of the about page; blocks: Herocontent, banner?, aboutsection, mission, vision, teammembers, faq, cta, contact
 

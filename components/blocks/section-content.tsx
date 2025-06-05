@@ -12,9 +12,6 @@ import { scriptCopyBlockSchema, ScriptCopyBtn } from "../magicui/script-copy-btn
 
 //to-do 40: create content for resources page
 //to-do 41: add paypalAPI to donations
-//to-do 42
-//to-do 43
-//to-do 44
 
 export const Content = ({ data }: { data: PageBlocksContent }) => {
   return (

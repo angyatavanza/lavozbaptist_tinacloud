@@ -4,7 +4,6 @@ import { Border } from "../ui/border";
 import Link from "next/link";
 import { SocialMedia } from "../social-media";
 
-//to-do 45:
 //to-do 46: add contact-details component to /contact page 
 export const ContactDetails = () => {
   return (
