@@ -7,7 +7,7 @@ import { Content } from "./section-content";
 import { Connections } from "./landing-connect";
 import { Features } from "./section-features";
 import { Groups } from "./landing-groups";
-import { Sermon } from "./landing-sermons";
+import { Sermon } from "./landing-latest-sermons";
 import { Video } from "./section-video";
 import { Callout } from "./section-callout";
 import { Herocontent } from "./section-herocontent";
@@ -17,7 +17,8 @@ import { ContentAndImage } from "./section-imgcontent";
 import { ContentAndImageVariant } from "./section-imgcontent2";
 import { Profile } from "./section-profile";
 import { TeamMember } from "./section-our-team";
-import { Events } from "./landing-events";
+import { Stats } from "./landing-stats";
+import { LatestEvents } from "./landing-latest-events";
 import { CallToAction } from "./section-call-to-action";
 import { Vision } from "./section-vision";
 import { Step1 } from "./section-step1";
@@ -29,14 +30,16 @@ import { Partner } from "./section-partners";
 import { Listcontent } from "./section-listcontent";
 import { ContactSection } from "./section-contact";
 
-export const Blocks = (props: Omit<Page, "id" | "_sys" | "_values">) => {
+export const Blocks = (props: Omit<Page, "id" | "_sys" | "_values">& { events?: Event[] }) => {
   if (!props.blocks) return null;
   return (
     <>
-      {props.blocks.map(function (block, i) {
+      {props.blocks
+      .filter((block): block is PageBlocks => block !== null)
+      .map(function (block, i) {
         return (
           <div key={i} data-tina-field={tinaField(block)}>
-            <Block {...block} />
+            <Block block={block} events={props.events} />
           </div>
         );
       })}
@@ -44,7 +47,7 @@ export const Blocks = (props: Omit<Page, "id" | "_sys" | "_values">) => {
   );
 };
 
-const Block = (block: PageBlocks) => {
+const Block = ({block, events,}: {block: PageBlocks; events?: any[];}) => {
   switch (block.__typename) {
     case "PageBlocksVideo":
       return <Video data={block} />;
@@ -64,8 +67,10 @@ const Block = (block: PageBlocks) => {
       return <AboutUs data={block} />;    
     case "PageBlocksCallout":
       return <Callout data={block} />;
-    case "PageBlocksEvents":
-      return <Events data={block} />;
+    case "PageBlocksStats":
+      return <Stats data={block} />;
+    case "PageBlocksLatestevents":
+        return <LatestEvents data={block} events={events ?? []} />;
     case "PageBlocksContent":
       return <Content data={block} />;
     case "PageBlocksContentandimagevariant":

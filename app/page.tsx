@@ -10,9 +10,16 @@ export default async function Home() {
     relativePath: `home.mdx`,
   });
 
+  const eventRes = await client.queries.eventConnection();
+  const events = eventRes.data.eventConnection.edges!
+    .map((edge) => edge!.node!)
+    .filter((event) => !!event.date)
+    .sort((a, b) => new Date(b.date!).getTime() - new Date(a.date!).getTime());
+
   return (
     <Layout rawPageData={data}>
-      <ClientPage {...data} />
+      <ClientPage {...data} 
+       events={events}/>
     </Layout>
   );
 }

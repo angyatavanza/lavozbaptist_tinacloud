@@ -9,7 +9,7 @@
     "color": "default",
     "nav": [
       {
-        "href": "home",
+        "href": "/",
         "label": "Casa"
       },
       {

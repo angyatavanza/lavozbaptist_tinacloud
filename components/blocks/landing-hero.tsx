@@ -7,7 +7,7 @@ import { tinaField } from "tinacms/dist/react";
 import {
   PageBlocksHero,
   PageBlocksHeroImage,
-} from "../../tina/__generated__/types";
+} from "@/tina/__generated__/types";
 import { Button } from "../ui/button";
 import { iconSchema } from "@/tina/fields/icon";
 import { TinaIcon } from "../icon";

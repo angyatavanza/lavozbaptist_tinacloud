@@ -41,27 +41,9 @@ blocks:
       alt: About
       videoUrl: ''
     _template: aboutus
-  - background: bg-zinc-50
-    title: Nuestros Próximos Eventos
-    description: >-
-      Entérese de nuestros próximos eventos haciendo clic en los botones de
-      abajo. 
-    events:
-      - event: Celebración del Día del Padre
-        type: Celebración
-        cover: /uploads/exterior-IMG-1119.jpg
-      - event: Celebración del Día del Padre
-        type: 'Compañerismo '
-        cover: /uploads/exterior-IMG-1119.jpg
-    actions:
-      - label: Ver todos los eventos
-        type: button
-        icon:
-          name: BiCalendar
-          color: purple
-          style: float
-        link: /events
-    _template: events
+  - title: Próximos Eventos
+    limit: 3
+    _template: latestevents
   - title: Fuiste creado para estar en comunidad.
     description: >-
       Fuimos diseñados para la relación y la conexión. La Voz ofrece tres
