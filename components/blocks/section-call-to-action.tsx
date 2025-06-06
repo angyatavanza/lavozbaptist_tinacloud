@@ -2,7 +2,7 @@ import Link from 'next/link'
 import type { Template } from 'tinacms';
 import { tinaField } from 'tinacms/dist/react';
 import { iconSchema } from '@/tina/fields/icon';
-import { Button } from '@/components/ui/button'
+import { Button } from '@/components/ui/button';
 import { PageBlocksCta } from '@/tina/__generated__/types';
 import { TinaIcon } from '../icon';
 import imageWhiteboard from "@/images/whiteboard.jpg";

@@ -1,12 +1,14 @@
 "use client";
 import React from "react";
 import { client } from "@/tina/__generated__/client";
-import {
-  PageBlocksLatestmessages,
-} from "@/tina/__generated__/types";
+import { PageBlocksLatestmessages } from "@/tina/__generated__/types";
 import type { Template } from "tinacms";
 import { Card } from "@/components/ui/card";
 import { TinaMarkdown } from "tinacms/dist/rich-text";
+import { tinaField } from 'tinacms/dist/react';
+import { iconSchema } from "@/tina/fields/icon";
+import { Button } from '@/components/ui/button';
+import { TinaIcon } from '../icon';
 import { ArrowRight, UserRound } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { format } from "date-fns";
@@ -15,7 +17,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 //to-do 32: add fb video API to messages page or add tina field to accept a link to Vimeo video in messages page TINA CMS/BACKEND
-//to-do 33: change layout of all messages card in messages page DESIGN/FRONTEND 
+//to-do 33: change layout of all messages card in messages page DESIGN/FRONTEND
 
 interface Author {
   name?: string;
@@ -46,14 +48,11 @@ export const LatestMessages = ({
   // Filter future or recent messages by date and sort descending by date
   const filteredMessages = messages
     .filter((e) => e.date)
-    .sort(
-      (a, b) =>
-        new Date(b.date!).getTime() - new Date(a.date!).getTime()
-    )
+    .sort((a, b) => new Date(b.date!).getTime() - new Date(a.date!).getTime())
     .slice(0, limit);
 
   return (
-     <Section>
+    <Section>
       <div className="container flex flex-col items-center gap-16">
         <div className="text-center">
           <h2 className="mx-auto mb-6 text-pretty text-3xl font-semibold md:text-4xl lg:max-w-3xl">
@@ -62,6 +61,28 @@ export const LatestMessages = ({
           <p className="mx-auto max-w-2xl text-muted-foreground md:text-lg">
             Manténgase al tanto de lo que está sucediendo en la Iglesia La Voz
           </p>
+          <div className="mt-12 flex flex-wrap justify-center gap-4">
+            {data.actions &&
+              data.actions.map((action) => (
+                <div
+                  key={action!.label}
+                  data-tina-field={tinaField(action)}
+                  className="bg-foreground/10 rounded-[calc(var(--radius-xl)+0.125rem)] border p-0.5"
+                >
+                  <Button
+                    asChild
+                    size="lg"
+                    variant={action!.type === "link" ? "outline" : "default"}
+                    className="rounded-xl px-5 text-base"
+                  >
+                    <Link href={action!.link!}>
+                      {action?.icon && <TinaIcon data={action?.icon} />}
+                      <span className="text-nowrap">{action!.label}</span>
+                    </Link>
+                  </Button>
+                </div>
+              ))}
+          </div>
         </div>
 
         <div className="grid gap-y-10 sm:grid-cols-12 sm:gap-y-12 md:gap-y-16 lg:gap-y-20">
@@ -85,12 +106,17 @@ export const LatestMessages = ({
                       </div>
                     </div>
                     <h3 className="text-xl font-semibold md:text-2xl lg:text-3xl">
-                      <Link href={`/messages/${message._sys.breadcrumbs.join("/")}`} className="hover:underline">
+                      <Link
+                        href={`/messages/${message._sys.breadcrumbs.join("/")}`}
+                        className="hover:underline"
+                      >
                         {message.title}
                       </Link>
                     </h3>
                     <div className="mt-4 text-muted-foreground md:mt-5">
-                      {message.excerpt && <TinaMarkdown content={message.excerpt} />}
+                      {message.excerpt && (
+                        <TinaMarkdown content={message.excerpt} />
+                      )}
                     </div>
                     <div className="mt-6 flex items-center space-x-4 text-sm md:mt-8">
                       <Avatar>
@@ -111,9 +137,13 @@ export const LatestMessages = ({
                           </AvatarFallback>
                         )}
                       </Avatar>
-                      <span className="text-muted-foreground">{message.author?.name || "Anonymous"}</span>
+                      <span className="text-muted-foreground">
+                        {message.author?.name || "Anonymous"}
+                      </span>
                       <span className="text-muted-foreground">•</span>
-                      <span className="text-muted-foreground">{postedDate}</span>
+                      <span className="text-muted-foreground">
+                        {postedDate}
+                      </span>
                     </div>
                     <div className="mt-6 flex items-center space-x-2 md:mt-8">
                       <Link
@@ -128,7 +158,10 @@ export const LatestMessages = ({
 
                   {message.heroImg && (
                     <div className="order-first sm:order-last sm:col-span-5">
-                      <Link href={`/messages/${message._sys.breadcrumbs.join("/")}`} className="block">
+                      <Link
+                        href={`/messages/${message._sys.breadcrumbs.join("/")}`}
+                        className="block"
+                      >
                         <div className="aspect-[16/9] overflow-clip rounded-lg border border-border">
                           <Image
                             width={533}
@@ -149,12 +182,12 @@ export const LatestMessages = ({
       </div>
     </Section>
   );
-}
+};
 
 export const latestmessagesBlockSchema: Template = {
   name: "latestmessages",
   label: "Latest Messages",
-   ui: {
+  ui: {
     previewSrc: "/blocks/latest-messages.png",
     defaultItem: {
       title: "Upcoming Messages",
@@ -171,6 +204,43 @@ export const latestmessagesBlockSchema: Template = {
       type: "number",
       label: "Number of Messages to Show",
       name: "limit",
+    },
+    {
+      label: "Actions",
+      name: "actions",
+      type: "object",
+      list: true,
+      ui: {
+        defaultItem: {
+          label: "Action Label",
+          type: "button",
+          icon: true,
+          link: "/",
+        },
+        itemProps: (item) => ({ label: item.label }),
+      },
+      fields: [
+        {
+          label: "Label",
+          name: "label",
+          type: "string",
+        },
+        {
+          label: "Type",
+          name: "type",
+          type: "string",
+          options: [
+            { label: "Button", value: "button" },
+            { label: "Link", value: "link" },
+          ],
+        },
+        iconSchema as any,
+        {
+          label: "Link",
+          name: "link",
+          type: "string",
+        },
+      ],
     },
   ],
 };
