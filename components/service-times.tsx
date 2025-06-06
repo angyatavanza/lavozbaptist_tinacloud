@@ -51,5 +51,3 @@ export const ServiceTimes = ({
     </ul>
   );
 };
-
-//export default ServiceTimes;

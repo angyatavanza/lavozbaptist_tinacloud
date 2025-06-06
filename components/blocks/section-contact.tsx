@@ -1,33 +1,59 @@
 import { Container } from "../container";
+import Link from "next/link";
 import { FadeIn } from "../fade-in";
-import { Button } from "../ui/second-button";
+//import { Button } from "../ui/second-button";
+import { Button } from "@/components/ui/button";
 import { ServiceTimes } from "../service-times";
-import { iconSchema } from '@/tina/fields/icon';
+import { TextEffect } from "../motion-primitives/text-effect";
+import { iconSchema } from "@/tina/fields/icon";
 import { tinaField } from "tinacms/dist/react";
-import type { Template } from 'tinacms';
+import { TinaIcon } from "../icon";
+import type { Template } from "tinacms";
 import { PageBlocksContactsection } from "@/tina/__generated__/types";
 
-//to-do 16: add data.code 
+//done 16: add data.title and data.actions to section-contact
 //to-do 17: change button and text
 
-export const ContactSection = ({ data }: { data: PageBlocksContactsection}) => {
+export const ContactSection = ({
+  data,
+}: {
+  data: PageBlocksContactsection;
+}) => {
   return (
     <Container className="mt-24 sm:mt-32 lg:mt-40">
       <FadeIn className="-mx-6 rounded-4xl bg-purple-800 px-6 py-20 sm:mx-0 sm:py-32 md:px-12">
         <div className="max-w-4xl mx-auto">
-          <h2 className="font-display text-3xl font-medium text-white [text-wrap:balance] sm:text-4xl">
-            Comunícate con nuestro equipo
+          <h2
+            className="font-display text-3xl font-medium text-white [text-wrap:balance] sm:text-4xl"
+            data-tina-field={tinaField(data, "title")}
+          >
+            {data.title}
           </h2>
           <div className="mt-6 flex">
-            <Button href="/contact" invert //href={"/contact"} 
-            >
-              Say Hello
-            </Button>
-            
+            {data.actions &&
+              data.actions.map((action) => (
+                <div
+                  key={action!.label}
+                  data-tina-field={tinaField(action)}
+                  className="bg-foreground/10 rounded-[calc(var(--radius-xl)+0.125rem)] border p-0.5"
+                >
+                  <Button
+                    asChild
+                    size="lg"
+                    variant={action!.type === "link" ? "outline" : "default"}
+                    className="rounded-xl px-5 text-base"
+                  >
+                    <Link href={action!.link!}>
+                      {action?.icon && <TinaIcon data={action?.icon} />}
+                      <span className="text-nowrap">{action!.label}</span>
+                    </Link>
+                  </Button>
+                </div>
+              ))}
           </div>
           <div className="mt-10 border-t border-white/10 pt-10">
             <h3 className="font-display text-base font-semibold text-white">
-              Nuestra ubicacion y tiempos de servicios
+              Nuestra ubicacion y horarios de servicios
             </h3>
             <ServiceTimes
               invert
@@ -40,79 +66,71 @@ export const ContactSection = ({ data }: { data: PageBlocksContactsection}) => {
   );
 };
 
-
 export const contactsectionBlockSchema: Template = {
-    name: "contactsection",
-    label: "Contactsection",
-    ui: {
-        previewSrc: "/blocks/contactsection.png",
-        defaultItem: {
-            title: "Start Building",
-            description: "Get started with TinaCMS today and take your content management to the next level.",
-            actions: [
-                {
-                    label: 'Get Started',
-                    type: 'button',
-                    link: '/',
-                },
-                {
-                    label: 'Book Demo',
-                    type: 'link',
-                    link: '/',
-                },
-            ],
+  name: "contactsection",
+  label: "Contactsection",
+  ui: {
+    previewSrc: "/blocks/contactsection.png",
+    defaultItem: {
+      title: "Start Building",
+      description:
+        "Get started with TinaCMS today and take your content management to the next level.",
+      actions: [
+        {
+          label: "Get Started",
+          type: "button",
+          link: "/",
         },
+        {
+          label: "Book Demo",
+          type: "link",
+          link: "/",
+        },
+      ],
     },
-    fields: [
+  },
+  fields: [
+    {
+      type: "string",
+      label: "Title",
+      name: "title",
+    },
+    {
+      label: "Actions",
+      name: "actions",
+      type: "object",
+      list: true,
+      ui: {
+        defaultItem: {
+          label: "Action Label",
+          type: "button",
+          icon: true,
+          link: "/",
+        },
+        itemProps: (item) => ({ label: item.label }),
+      },
+      fields: [
         {
-            type: "string",
-            label: "Title",
-            name: "title",
+          label: "Label",
+          name: "label",
+          type: "string",
         },
         {
-            type: "string",
-            label: "Description",
-            name: "description",
-            ui: {
-                component: "textarea",
-            },
+          label: "Type",
+          name: "type",
+          type: "string",
+          options: [
+            { label: "Button", value: "button" },
+            { label: "Link", value: "link" },
+          ],
         },
+        iconSchema as any,
         {
-            label: 'Actions',
-            name: 'actions',
-            type: 'object',
-            list: true,
-            ui: {
-                defaultItem: {
-                    label: 'Action Label',
-                    type: 'button',
-                    icon: true,
-                    link: '/',
-                },
-                itemProps: (item) => ({ label: item.label }),
-            },
-            fields: [
-                {
-                    label: 'Label',
-                    name: 'label',
-                    type: 'string',
-                },
-                {
-                    label: 'Type',
-                    name: 'type',
-                    type: 'string',
-                    options: [
-                        { label: 'Button', value: 'button' },
-                        { label: 'Link', value: 'link' },
-                    ],
-                },
-                iconSchema as any,
-                {
-                    label: 'Link',
-                    name: 'link',
-                    type: 'string',
-                },
-            ],
+          label: "Link",
+          name: "link",
+          type: "string",
         },
-    ],
+      ],
+    },
+  ],
 };

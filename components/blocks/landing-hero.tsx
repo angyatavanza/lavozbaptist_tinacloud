@@ -25,6 +25,7 @@ import { cn } from "@/lib/utils";
 //to-do 6: extend the width of the div for the hero video to be full-width + remove the white looking border around the video + fix the section width of the section background of the blocks when the url goes to /home or /about
 //to-do 58: take screenshots of all of the blocks and upload to the blocks folder TINA CMS CONTENT
 //to-do 59: change the default text in each block component TINA CMS CONTENT
+//to-do 60: figure out if adding this line of code broke anything : ".filter((block): block is PageBlocks => block !== null". This line was added because "You just need to filter out null or undefined blocks before calling Block”/ index.tsx error: Cannot find name 'Message'. And “type 'Event[]' is not assignable to type 'Event[]'. Two different types with this name exist, but they are unrelated.”  TINA CMS/BACKEND
 const transitionVariants = {
   container: {
     visible: {

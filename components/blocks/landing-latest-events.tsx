@@ -22,7 +22,6 @@ import Image from "next/image";
 //done 9d: add actions as a field of latest events component
 //to-do 10a: change layout of event card: date as a bookmark top left, photo centered, event title +event date/time + location undernead photo
 //done 10b: extract the time from "date" tina field and display in the event card
-//to-do 10c: figure out if adding this line of code broke anything : ".filter((block): block is PageBlocks => block !== null". This line was added because "You just need to filter out null or undefined blocks before calling Block"
 
 interface Author {
   name?: string;
