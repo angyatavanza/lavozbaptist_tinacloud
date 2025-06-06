@@ -130,8 +130,8 @@ const Event: Collection = {
     },
     {
       type: 'datetime',
-      label: 'Posted Date',
-      name: 'posteddate',
+      label: 'End Date',
+      name: 'enddate',
       ui: {
         dateFormat: 'MMMM DD YYYY',
         timeFormat: 'hh:mm A',

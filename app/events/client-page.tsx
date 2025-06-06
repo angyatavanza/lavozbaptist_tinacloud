@@ -31,20 +31,22 @@ interface ClientEventProps {
 export default function EventsClientPage(props: ClientEventProps) {
   const events = props.data?.eventConnection.edges!.map((eventData) => {
     const event = eventData!.node!;
-    const posteddate = new Date(event.posteddate!);
-    let formattedpostedDate = '';
-    if (!isNaN(posteddate.getTime())) {
-      formattedpostedDate = format(posteddate, 'MMM dd, yyyy');
+    
+    const enddate = new Date(event.enddate!);
+    let formattedendDate = '';
+    if (!isNaN(enddate.getTime())) {
+      formattedendDate = format(enddate, 'h:mm a');
     }
 
      const date = new Date(event.date!);
     let formattedDate = '';
     if (!isNaN(date.getTime())) {
-      formattedDate = format(date, 'MMM dd, yyyy');
+      formattedDate = format(date, 'MMM dd, yyyy h:mm a');
     }
     return {
       id: event.id,
       published: formattedDate,
+      endpublished: formattedendDate,
       title: event.title,
       tags: event.tags?.map((tag) => tag?.tag?.name) || [],
       url: `/events/${event._sys.breadcrumbs.join('/')}`,
@@ -117,7 +119,11 @@ export default function EventsClientPage(props: ClientEventProps) {
                       <span className="text-muted-foreground">{event.author.name}</span>
                       <span className="text-muted-foreground">•</span>
                       <span className="text-muted-foreground">
-                        {event.published}
+                        {event.published} 
+                      </span>
+                      <span className="text-muted-foreground">-</span>
+                      <span className="text-muted-foreground">
+                        {event.endpublished}
                       </span>
                     </div>
                     <div className="mt-6 flex items-center space-x-2 md:mt-8">
