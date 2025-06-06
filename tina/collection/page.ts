@@ -20,6 +20,7 @@ import { contentandimageBlockSchema } from '@/components/blocks/section-imgconte
 import { contentandimagevariantBlockSchema } from '@/components/blocks/section-imgcontent2';
 import { statsBlockSchema } from '@/components/blocks/landing-stats';
 import { latesteventsBlockSchema } from '@/components/blocks/landing-latest-events';
+import { latestmessagesBlockSchema } from '@/components/blocks/landing-latest-messages';
 import { ctaBlockSchema } from '@/components/blocks/section-call-to-action';
 import { missionBlockSchema} from '@/components/blocks/section-mission';
 import { listcontentBlockSchema } from '@/components/blocks/section-listcontent';
@@ -63,6 +64,7 @@ const Page: Collection = {
         groupBlockSchema,
         statsBlockSchema,
         latesteventsBlockSchema,
+        latestmessagesBlockSchema,
         ctaBlockSchema,
         contentBlockSchema,
         sermonBlockSchema,

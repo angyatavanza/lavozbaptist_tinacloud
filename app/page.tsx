@@ -16,10 +16,17 @@ export default async function Home() {
     .filter((event) => !!event.date)
     .sort((a, b) => new Date(b.date!).getTime() - new Date(a.date!).getTime());
 
+  const messageRes = await client.queries.messageConnection();
+  const messages = messageRes.data.messageConnection.edges!
+    .map((edge) => edge!.node!)
+    .filter((message) => !!message.date)
+    .sort((a, b) => new Date(b.date!).getTime() - new Date(a.date!).getTime());
+
   return (
     <Layout rawPageData={data}>
       <ClientPage {...data} 
-       events={events}/>
+       events={events}
+       messages={messages}/>
     </Layout>
   );
 }

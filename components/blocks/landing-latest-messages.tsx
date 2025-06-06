@@ -2,7 +2,7 @@
 import React from "react";
 import { client } from "@/tina/__generated__/client";
 import {
-  PageBlocksLatestevents,
+  PageBlocksLatestmessages,
 } from "@/tina/__generated__/types";
 import type { Template } from "tinacms";
 import { Card } from "@/components/ui/card";
@@ -22,31 +22,29 @@ interface Author {
   avatar?: string;
 }
 
-interface Event {
+interface Message {
   id: string;
   title: string;
   date?: string;
-  posteddate?: string;
-  description?: any;
-  location?: any;
+  excerpt?: any;
   heroImg?: string;
   author?: Author;
   tags?: { tag?: { name?: string } }[];
   _sys: { breadcrumbs: string[] };
 }
 
-export const LatestEvents = ({
+export const LatestMessages = ({
   data,
-  events,
+  messages,
 }: {
-  data: PageBlocksLatestevents;
-  events: Event[];
+  data: PageBlocksLatestmessages;
+  messages: Message[];
 }) => {
   const limit = Math.min(Math.max(data.limit ?? 3, 1), 10);
-  const title = data.title || "Eventos";
+  const title = data.title || "Mensajes";
 
-  // Filter future or recent events by date and sort descending by date
-  const filteredEvents = events
+  // Filter future or recent messages by date and sort descending by date
+  const filteredMessages = messages
     .filter((e) => e.date)
     .sort(
       (a, b) =>
@@ -67,46 +65,39 @@ export const LatestEvents = ({
         </div>
 
         <div className="grid gap-y-10 sm:grid-cols-12 sm:gap-y-12 md:gap-y-16 lg:gap-y-20">
-          {filteredEvents.map((event) => {
-            const eventDate = event.date
-              ? format(new Date(event.date), "MMM dd, yyyy")
-              : "";
-
-            const posted = event.posteddate
-              ? format(new Date(event.posteddate), "MMM dd, yyyy")
+          {filteredMessages.map((message) => {
+            const postedDate = message.date
+              ? format(new Date(message.date), "MMM dd, yyyy")
               : "";
 
             return (
               <Card
-                key={event.id}
+                key={message.id}
                 className="order-last border-0 bg-transparent shadow-none sm:order-first sm:col-span-12 lg:col-span-10 lg:col-start-2"
               >
                 <div className="grid gap-y-6 sm:grid-cols-10 sm:gap-x-5 sm:gap-y-0 md:items-center md:gap-x-8 lg:gap-x-12">
                   <div className="sm:col-span-5">
                     <div className="mb-4 md:mb-6">
                       <div className="flex flex-wrap gap-3 text-xs uppercase tracking-wider text-muted-foreground md:gap-5 lg:gap-6">
-                        {event.tags?.map((tag, i) => (
+                        {message.tags?.map((tag, i) => (
                           <span key={i}>{tag?.tag?.name}</span>
                         ))}
                       </div>
                     </div>
                     <h3 className="text-xl font-semibold md:text-2xl lg:text-3xl">
-                      <Link href={`/events/${event._sys.breadcrumbs.join("/")}`} className="hover:underline">
-                        {event.title}
+                      <Link href={`/messages/${message._sys.breadcrumbs.join("/")}`} className="hover:underline">
+                        {message.title}
                       </Link>
                     </h3>
                     <div className="mt-4 text-muted-foreground md:mt-5">
-                      {event.location && <TinaMarkdown content={event.location} />}
-                    </div>
-                    <div className="mt-4 text-muted-foreground md:mt-5">
-                      {event.description && <TinaMarkdown content={event.description} />}
+                      {message.excerpt && <TinaMarkdown content={message.excerpt} />}
                     </div>
                     <div className="mt-6 flex items-center space-x-4 text-sm md:mt-8">
                       <Avatar>
-                        {event.author?.avatar ? (
+                        {message.author?.avatar ? (
                           <AvatarImage
-                            src={event.author.avatar}
-                            alt={event.author.name || "Author avatar"}
+                            src={message.author.avatar}
+                            alt={message.author.name || "Author avatar"}
                             className="h-8 w-8"
                           />
                         ) : (
@@ -120,30 +111,30 @@ export const LatestEvents = ({
                           </AvatarFallback>
                         )}
                       </Avatar>
-                      <span className="text-muted-foreground">{event.author?.name || "Anonymous"}</span>
+                      <span className="text-muted-foreground">{message.author?.name || "Anonymous"}</span>
                       <span className="text-muted-foreground">•</span>
-                      <span className="text-muted-foreground">{eventDate}</span>
+                      <span className="text-muted-foreground">{postedDate}</span>
                     </div>
                     <div className="mt-6 flex items-center space-x-2 md:mt-8">
                       <Link
-                        href={`/events/${event._sys.breadcrumbs.join("/")}`}
+                        href={`/messages/${message._sys.breadcrumbs.join("/")}`}
                         className="inline-flex items-center font-semibold hover:underline md:text-base"
                       >
-                        <span>Ver Evento</span>
+                        <span>Ver Mensaje</span>
                         <ArrowRight className="ml-2 size-4 transition-transform" />
                       </Link>
                     </div>
                   </div>
 
-                  {event.heroImg && (
+                  {message.heroImg && (
                     <div className="order-first sm:order-last sm:col-span-5">
-                      <Link href={`/events/${event._sys.breadcrumbs.join("/")}`} className="block">
+                      <Link href={`/messages/${message._sys.breadcrumbs.join("/")}`} className="block">
                         <div className="aspect-[16/9] overflow-clip rounded-lg border border-border">
                           <Image
                             width={533}
                             height={300}
-                            src={event.heroImg}
-                            alt={event.title}
+                            src={message.heroImg}
+                            alt={message.title}
                             className="h-full w-full object-cover transition-opacity duration-200 fade-in hover:opacity-70"
                           />
                         </div>
@@ -160,13 +151,13 @@ export const LatestEvents = ({
   );
 }
 
-export const latesteventsBlockSchema: Template = {
-  name: "latestevents",
-  label: "Latest Events",
+export const latestmessagesBlockSchema: Template = {
+  name: "latestmessages",
+  label: "Latest Messages",
    ui: {
-    previewSrc: "/blocks/latest-events.png",
+    previewSrc: "/blocks/latest-messages.png",
     defaultItem: {
-      title: "Upcoming Events",
+      title: "Upcoming Messages",
       limit: 3,
     },
   },
@@ -178,7 +169,7 @@ export const latesteventsBlockSchema: Template = {
     },
     {
       type: "number",
-      label: "Number of Events to Show",
+      label: "Number of Messages to Show",
       name: "limit",
     },
   ],

@@ -19,6 +19,7 @@ import { Profile } from "./section-profile";
 import { TeamMember } from "./section-our-team";
 import { Stats } from "./landing-stats";
 import { LatestEvents } from "./landing-latest-events";
+import { LatestMessages } from "./landing-latest-messages";
 import { CallToAction } from "./section-call-to-action";
 import { Vision } from "./section-vision";
 import { Step1 } from "./section-step1";
@@ -30,7 +31,7 @@ import { Partner } from "./section-partners";
 import { Listcontent } from "./section-listcontent";
 import { ContactSection } from "./section-contact";
 
-export const Blocks = (props: Omit<Page, "id" | "_sys" | "_values">& { events?: Event[] }) => {
+export const Blocks = (props: Omit<Page, "id" | "_sys" | "_values">& { messages?: Message[] }& { events?: Event[] }) => {
   if (!props.blocks) return null;
   return (
     <>
@@ -39,7 +40,7 @@ export const Blocks = (props: Omit<Page, "id" | "_sys" | "_values">& { events?: 
       .map(function (block, i) {
         return (
           <div key={i} data-tina-field={tinaField(block)}>
-            <Block block={block} events={props.events} />
+            <Block block={block} events={props.events} messages={props.messages} />
           </div>
         );
       })}
@@ -47,7 +48,7 @@ export const Blocks = (props: Omit<Page, "id" | "_sys" | "_values">& { events?: 
   );
 };
 
-const Block = ({block, events,}: {block: PageBlocks; events?: any[];}) => {
+const Block = ({block, events, messages,}: {block: PageBlocks; events?: Event[]; messages?: Message[];}) => {
   switch (block.__typename) {
     case "PageBlocksVideo":
       return <Video data={block} />;
@@ -71,6 +72,8 @@ const Block = ({block, events,}: {block: PageBlocks; events?: any[];}) => {
       return <Stats data={block} />;
     case "PageBlocksLatestevents":
         return <LatestEvents data={block} events={events ?? []} />;
+    case "PageBlocksLatestmessages":
+        return <LatestMessages data={block} messages={messages ?? []} />; 
     case "PageBlocksContent":
       return <Content data={block} />;
     case "PageBlocksContentandimagevariant":
