@@ -22,13 +22,11 @@ import HeroVideoDialog from "../ui/hero-video-dialog";
 import { cn } from "@/lib/utils";
 import { ContactSection } from "./section-contact";
 
-
 //done 26: add contactsection to sections
-//to-do 27a: merge aboutsection component --currently there are 2 descriptions
+//done 27a: merge aboutsection component --currently there are 2 descriptions
 //to-do 27b: add an image to the left of the div
 //to-do 28: add faq section to block Tina schema
 //to-do 29: update the ui of the about page; blocks: Herocontent, banner?, aboutsection, mission, vision, teammembers, faq, cta, contact
-
 
 const transitionVariants = {
   container: {
@@ -77,17 +75,53 @@ export const Aboutsection = ({ data }: { data: PageBlocksAboutsection }) => {
   return (
     <Section background={data.background!}>
       <PageIntro
-        eyebrow="Sobre Nosotros"
-        title="Somos Una Iglesia Comprometida a Ser Una Voz de Esperanza"
+        eyebrow={
+          data.tagline && (
+            <div data-tina-field={tinaField(data, "tagline")}>
+              <TextEffect
+                per="line"
+                preset="fade-in-blur"
+                speedSegment={0.3}
+                delay={0.5}
+                as="p"
+                className="mx-auto mt-8 max-w-2xl text-balance text-lg"
+              >
+                {data.tagline!}
+              </TextEffect>
+            </div>
+          )
+        }
+        title={
+          data.headline && (
+            <div data-tina-field={tinaField(data, "headline")}>
+              <TextEffect
+                preset="fade-in-blur"
+                speedSegment={0.3}
+                as="h1"
+                className="mt-8 text-balance text-6xl md:text-7xl xl:text-[5.25rem]"
+              >
+                {data.headline!}
+              </TextEffect>
+            </div>
+          )
+        }
       >
-        <p>
-          La Iglesia Bautista La Voz de La Esperanza como su nombre lo indica,
-          es una Iglesia que lleva esperanza a la ciudad de Charlotte y sus
-          alrededores. Si tu estas buscando un lugar donde congregarte y alabar
-          a Dios, nuestra iglesia esta abierta para todos los visitantes.
-        </p>
+        <p></p>
         <div className="mt-10 max-w-2xl space-y-6 text-base">
-          <p></p>
+          {data.description && (
+            <div data-tina-field={tinaField(data, "description")}>
+              <TextEffect
+                per="line"
+                preset="fade-in-blur"
+                speedSegment={0.3}
+                delay={0.5}
+                as="p"
+                className="mx-auto mt-8 max-w-2xl text-balance text-lg"
+              >
+                {data.description!}
+              </TextEffect>
+            </div>
+          )}
           <p></p>
         </div>
       </PageIntro>
@@ -99,47 +133,6 @@ export const Aboutsection = ({ data }: { data: PageBlocksAboutsection }) => {
         </StatList>
       </Container>
       <div className="text-center sm:mx-auto lg:mr-auto lg:mt-0">
-        {data.tagline && (
-          <div data-tina-field={tinaField(data, "tagline")}>
-            <TextEffect
-              per="line"
-              preset="fade-in-blur"
-              speedSegment={0.3}
-              delay={0.5}
-              as="p"
-              className="mx-auto mt-8 max-w-2xl text-balance text-lg"
-            >
-              {data.tagline!}
-            </TextEffect>
-          </div>
-        )}
-        {data.headline && (
-          <div data-tina-field={tinaField(data, "headline")}>
-            <TextEffect
-              preset="fade-in-blur"
-              speedSegment={0.3}
-              as="h1"
-              className="mt-8 text-balance text-6xl md:text-7xl xl:text-[5.25rem]"
-            >
-              {data.headline!}
-            </TextEffect>
-          </div>
-        )}
-        {data.description && (
-          <div data-tina-field={tinaField(data, "description")}>
-            <TextEffect
-              per="line"
-              preset="fade-in-blur"
-              speedSegment={0.3}
-              delay={0.5}
-              as="p"
-              className="mx-auto mt-8 max-w-2xl text-balance text-lg"
-            >
-              {data.description!}
-            </TextEffect>
-          </div>
-        )}
-
         <AnimatedGroup
           variants={transitionVariants}
           className="mt-12 flex flex-col items-center justify-center gap-2 md:flex-row"

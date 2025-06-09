@@ -56,8 +56,7 @@ export const Mission = ({ data }: { data: PageBlocksMission }) => {
           {data.title}
         </h2>
         <p data-tina-field={tinaField(data, "description")} className="mt-4">
-          {data.description}Nos dedicamos a alcanzar personas para Cristo,
-          guiarlos a servir, adorar y tener una vida consagrada para Dios.
+          {data.description}
         </p>
       </SectionIntro>
 
