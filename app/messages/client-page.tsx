@@ -13,6 +13,11 @@ import { PageIntro } from '@/components/page-intro';
 import imageWhiteboard from "@/images/whiteboard.jpg";
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
+//to-do 30: create a messages-home page DESIGN/FRONTEND 
+//to-do 31a: create an message-archive page DESIGN/FRONTEND 
+//to-do 31b: redesign the all messages page DESIGN/FRONTEND 
+//to-do 31c: redesign messages-latest-message page DESIGN/FRONTEND 
+
 interface ClientMessageProps {
   data: MessageConnectionQuery;
   variables: MessageConnectionQueryVariables;
