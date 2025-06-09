@@ -21,7 +21,7 @@ import imageWhiteboard from "@/images/whiteboard.jpg";
 //to-do 12b: change layout of latest message card in homepage
 //done 13: add buttons to each card in groups component
 //to-do 14: change layout of each group card: Image with overlay text of the group name
-//to-do 57: change layout of group items cards in landing-groups page DESIGN/FRONTEND 
+//to-do 18: change layout of group items cards in landing-groups page DESIGN/FRONTEND 
 
 const transitionVariants = {
   container: {

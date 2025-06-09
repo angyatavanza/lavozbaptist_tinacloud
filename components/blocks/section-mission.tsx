@@ -1,15 +1,47 @@
 import React from "react";
 import { SectionIntro } from "../layout/section-intro";
 import { Container } from "../container";
-import type { Template } from 'tinacms';
-import { iconSchema } from '@/tina/fields/icon';
+import type { Template } from "tinacms";
+import { iconSchema } from "@/tina/fields/icon";
 import { tinaField } from "tinacms/dist/react";
-import { PageBlocksMission } from '@/tina/__generated__/types';
-import { TinaIcon } from '../icon';
+import { PageBlocksMission } from "@/tina/__generated__/types";
+import { TinaIcon } from "../icon";
+import Link from "next/link";
+import { Button } from "../ui/button";
+import { AnimatedGroup } from "../motion-primitives/animated-group";
 import { GridList, GridListItem } from "../grid-list";
 
-//to-do 19: add data.code 
-export const Mission  = ({ data }: { data: PageBlocksMission }) => {
+//Done 19: add data.code
+
+const transitionVariants = {
+  container: {
+    visible: {
+      transition: {
+        staggerChildren: 0.05,
+        delayChildren: 0.75,
+      },
+    },
+  },
+  item: {
+    hidden: {
+      opacity: 0,
+      filter: "blur(12px)",
+      y: 12,
+    },
+    visible: {
+      opacity: 1,
+      filter: "blur(0px)",
+      y: 0,
+      transition: {
+        type: "spring",
+        bounce: 0.3,
+        duration: 1.5,
+      },
+    },
+  },
+};
+
+export const Mission = ({ data }: { data: PageBlocksMission }) => {
   return (
     <div className="mt-24 rounded-4xl bg-purple-800 py-24 sm:mt-32 lg:mt-40 lg:py-32">
       <SectionIntro
@@ -17,9 +49,15 @@ export const Mission  = ({ data }: { data: PageBlocksMission }) => {
         title="Alcanzamos Personas para Cristo"
         invert
       >
-        <p>
-          Nos dedicamos a alcanzar personas para Cristo, guiarlos a servir,
-          adorar y tener una vida consagrada para Dios.
+        <h2
+          data-tina-field={tinaField(data, "title")}
+          className="text-balance text-4xl font-semibold lg:text-5xl"
+        >
+          {data.title}
+        </h2>
+        <p data-tina-field={tinaField(data, "description")} className="mt-4">
+          {data.description}Nos dedicamos a alcanzar personas para Cristo,
+          guiarlos a servir, adorar y tener una vida consagrada para Dios.
         </p>
       </SectionIntro>
 
@@ -44,6 +82,31 @@ export const Mission  = ({ data }: { data: PageBlocksMission }) => {
             1:6).
           </GridListItem>
         </GridList>
+        <AnimatedGroup
+            variants={transitionVariants}
+            className="mt-12 flex flex-col items-center justify-center gap-2 md:flex-row"
+          >
+            {data.actions &&
+              data.actions.map((action) => (
+                <div
+                  key={action!.label}
+                  data-tina-field={tinaField(action)}
+                  className="bg-foreground/10 rounded-[calc(var(--radius-xl)+0.125rem)] border p-0.5"
+                >
+                  <Button
+                    asChild
+                    size="lg"
+                    variant={action!.type === "link" ? "ghost" : "default"}
+                    className="rounded-xl px-5 text-base"
+                  >
+                    <Link href={action!.link!}>
+                      {action?.icon && <TinaIcon data={action?.icon} />}
+                      <span className="text-nowrap">{action!.label}</span>
+                    </Link>
+                  </Button>
+                </div>
+              ))}
+          </AnimatedGroup>
       </Container>
 
       <Container className="mt-16">
@@ -92,77 +155,78 @@ export const Mission  = ({ data }: { data: PageBlocksMission }) => {
 };
 
 export const missionBlockSchema: Template = {
-    name: "mission",
-    label: "Mission",
-    ui: {
-        previewSrc: "/blocks/mission.png",
-        defaultItem: {
-            title: "Start Building",
-            description: "Get started with TinaCMS today and take your content management to the next level.",
-            actions: [
-                {
-                    label: 'Get Started',
-                    type: 'button',
-                    link: '/',
-                },
-                {
-                    label: 'Book Demo',
-                    type: 'link',
-                    link: '/',
-                },
-            ],
+  name: "mission",
+  label: "Mission",
+  ui: {
+    previewSrc: "/blocks/mission.png",
+    defaultItem: {
+      title: "Start Building",
+      description:
+        "Get started with TinaCMS today and take your content management to the next level.",
+      actions: [
+        {
+          label: "Get Started",
+          type: "button",
+          link: "/",
         },
+        {
+          label: "Book Demo",
+          type: "link",
+          link: "/",
+        },
+      ],
     },
-    fields: [
+  },
+  fields: [
+    {
+      type: "string",
+      label: "Title",
+      name: "title",
+    },
+    {
+      type: "string",
+      label: "Description",
+      name: "description",
+      ui: {
+        component: "textarea",
+      },
+    },
+    {
+      label: "Actions",
+      name: "actions",
+      type: "object",
+      list: true,
+      ui: {
+        defaultItem: {
+          label: "Action Label",
+          type: "button",
+          icon: true,
+          link: "/",
+        },
+        itemProps: (item) => ({ label: item.label }),
+      },
+      fields: [
         {
-            type: "string",
-            label: "Title",
-            name: "title",
+          label: "Label",
+          name: "label",
+          type: "string",
         },
         {
-            type: "string",
-            label: "Description",
-            name: "description",
-            ui: {
-                component: "textarea",
-            },
+          label: "Type",
+          name: "type",
+          type: "string",
+          options: [
+            { label: "Button", value: "button" },
+            { label: "Link", value: "link" },
+          ],
         },
+        iconSchema as any,
         {
-            label: 'Actions',
-            name: 'actions',
-            type: 'object',
-            list: true,
-            ui: {
-                defaultItem: {
-                    label: 'Action Label',
-                    type: 'button',
-                    icon: true,
-                    link: '/',
-                },
-                itemProps: (item) => ({ label: item.label }),
-            },
-            fields: [
-                {
-                    label: 'Label',
-                    name: 'label',
-                    type: 'string',
-                },
-                {
-                    label: 'Type',
-                    name: 'type',
-                    type: 'string',
-                    options: [
-                        { label: 'Button', value: 'button' },
-                        { label: 'Link', value: 'link' },
-                    ],
-                },
-                iconSchema as any,
-                {
-                    label: 'Link',
-                    name: 'link',
-                    type: 'string',
-                },
-            ],
+          label: "Link",
+          name: "link",
+          type: "string",
         },
-    ],
+      ],
+    },
+  ],
 };

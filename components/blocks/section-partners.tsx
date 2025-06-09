@@ -15,7 +15,7 @@ import { iconSchema } from '@/tina/fields/icon';
 import { tinaField } from "tinacms/dist/react";
 import { PageBlocksPartner } from "@/tina/__generated__/types";
 import { TinaIcon } from '../icon';
-//to-do 18: add data.code 
+//to-do 57: add data.title + data.description + data.actions
 type PartnerMember = [string, StaticImageData];
 
 const partnerMembers: PartnerMember[] = [
