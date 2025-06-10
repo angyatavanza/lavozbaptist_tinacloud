@@ -34,9 +34,9 @@ import { Footer } from "./footer";
   </span>
  </Link>
 */
-//to-do 25a: add contact page to /app 
-//to-do 25b: replace images for all templates
-//to-do 25c: add la voz logo png or svg
+//to-do 25a: replace images for all block templates TINA CMS CONTENT
+//to-do 25b: add la voz logo png or svg
+
 interface HeaderProps {
   panelId: string;
   invert?: boolean;

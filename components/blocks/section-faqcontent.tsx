@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { TinaMarkdown } from "tinacms/dist/rich-text";
+import { Line } from "../line"
 import type { Template } from "tinacms";
 import { PageBlocksFreqaskedquestions, PageBlocksFreqaskedquestionsItems } from "../../tina/__generated__/types";
 import { tinaField } from "tinacms/dist/react";
@@ -17,13 +18,6 @@ import { sectionBlockSchemaField } from "../layout/section";
 //to-do 28a: Implement faq section design DESIGN/FRONTEND 
 
 export const FreqAskedQuestions = ({ data }: { data: PageBlocksFreqaskedquestions }) => {
-  const [indexopen, setIndexOpen] = useState<number>(99999);
-
-  const handleClick = (index: number) => {
-    setIndexOpen(index === indexopen ? 9999 : index);
-  };
-
-  const itemsOndData = data.items?.length ?? 0;
 
   return (
     <Section background={data.background!}>
@@ -45,6 +39,7 @@ export const FreqAskedQuestions = ({ data }: { data: PageBlocksFreqaskedquestion
               return <FreqAskedQuestion key={i} {...block!} />;
             })}
         </div>
+       
       </div>
     </Section>
   );
@@ -56,8 +51,11 @@ export const FreqAskedQuestion: React.FC<PageBlocksFreqaskedquestionsItems> = (d
   const handleClick = () => {
     setOpen((prev) => !prev);
   };
+
   return (
+    <>
     <AccordionItem
+      key={data.title}
       title={data.title || ""}
       open={open}
       onClick={handleClick}
@@ -69,6 +67,8 @@ export const FreqAskedQuestion: React.FC<PageBlocksFreqaskedquestionsItems> = (d
         <TinaMarkdown content={data.text} />
       </div>
     </AccordionItem>
+    <Line />
+    </>
   );
 };
 

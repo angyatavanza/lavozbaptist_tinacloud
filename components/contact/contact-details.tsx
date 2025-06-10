@@ -4,7 +4,7 @@ import { Border } from "../ui/border";
 import Link from "next/link";
 import { SocialMedia } from "../social-media";
 
-//to-do 46: add contact-details component to /contact page 
+//to-do 46:  add contact page to /app + add contact-details component to /contact page  
 export const ContactDetails = () => {
   return (
     <FadeIn>

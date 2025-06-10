@@ -12,7 +12,6 @@ import { Section } from '@/components/layout/section';
 import { tinaField } from 'tinacms/dist/react';
 import { AnimatedGroup } from '@/components/motion-primitives/animated-group';
 import { PageIntro } from '@/components/page-intro';
-import imageWhiteboard from "@/images/whiteboard.jpg";
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 //done 35a: create events page tina collection 

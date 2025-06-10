@@ -42,7 +42,7 @@ export const AccordionItem = ({
         )}
       </div>
       {open && (
-        <div className="text-palePurple pt-6 text-sm font-normal leading-[21px]">
+        <div className="">
           {children}
         </div>
       )}
