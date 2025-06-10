@@ -17,7 +17,6 @@ import Link from "next/link";
 import Image from "next/image";
 
 //to-do 32: add fb video API to messages page or add tina field to accept a link to Vimeo video in messages page TINA CMS/BACKEND
-//to-do 33: change layout of all messages card in messages page DESIGN/FRONTEND
 
 interface Author {
   name?: string;

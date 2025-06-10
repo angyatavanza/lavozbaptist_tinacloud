@@ -15,7 +15,7 @@ import { PageIntro } from '@/components/page-intro';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 //done 35a: create events page tina collection 
-//to-do 35b: add more sections to events template such as date, time, details,
+//done 35b: add more sections to events template such as date, time, details,
 //to-do 35c: add data.address + data.actions [add link to a form] to events page.
 //to-do 35d: replace content/mdx files with relevant events
 //to-do 35e: edit ui of the individual event page

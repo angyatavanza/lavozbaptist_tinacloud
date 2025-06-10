@@ -15,8 +15,9 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 //to-do 30: create a messages-home page DESIGN/FRONTEND 
 //to-do 31a: create an message-archive page DESIGN/FRONTEND 
-//to-do 31b: redesign the all messages page DESIGN/FRONTEND 
-//to-do 31c: redesign messages-latest-message page DESIGN/FRONTEND 
+//to-do 31b: redesign messages-latest-message page DESIGN/FRONTEND 
+//to-do 33: redesign the all messages page + change layout of all messages card in messages page DESIGN/FRONTEND
+//to-do 34: implement design ui of indiv message
 
 interface ClientMessageProps {
   data: MessageConnectionQuery;

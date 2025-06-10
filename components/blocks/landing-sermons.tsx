@@ -6,7 +6,7 @@ import { Card, CardContent } from "../ui/card";
 import { tinaField } from "tinacms/dist/react";
 import { sectionBlockSchemaField } from '../layout/section';
 //to-do 20: add text to sermon in homepage
-//to-do 34: implement design ui of  messages
+
 
 export const Sermon = ({ data }: { data: PageBlocksSermon }) => {
   return (

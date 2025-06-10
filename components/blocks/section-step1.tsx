@@ -10,7 +10,7 @@ import { PageBlocksStep1 } from '@/tina/__generated__/types';
 import { TinaIcon } from '../icon';
 
 //to-do 38: complete steps page
-//to-do 39: add data.code + fix stylized image
+//to-do 39: add data.code + fix stylized image in steps page
 
 export const Step1  = ({ data }: { data: PageBlocksStep1 }) => {
   return (
