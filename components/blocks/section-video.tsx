@@ -4,7 +4,6 @@ import dynamic from 'next/dynamic';
 import type { Template } from 'tinacms';
 import { PageBlocksVideo } from '@/tina/__generated__/types';
 import { Section } from '../layout/section';
-import imageWhiteboard from "@/images/whiteboard.jpg";
 import { sectionBlockSchemaField } from '../layout/section';
 
 const ReactPlayer = dynamic(() => import('react-player'), { ssr: false });

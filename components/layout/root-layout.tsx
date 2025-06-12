@@ -195,7 +195,7 @@ const RootLayoutInner = ({ children }: RootLayoutInnerProps) => {
                 <div className="grid grid-cols-1 gap-y-10 pb-16 pt-10 sm:grid-cols-2 sm:pt-16">
                   <div>
                     <h2 className="font-display text-base font-semibold text-white">
-                      Nuestra ubicacion y tiempos de servicios
+                      Nuestra ubicacion y horario de servicios
                     </h2>
                     <ServiceTimes invert className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2" />
                   </div>

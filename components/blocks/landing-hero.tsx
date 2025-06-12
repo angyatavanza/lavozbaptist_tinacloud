@@ -11,7 +11,10 @@ import {
 import { Button } from "../ui/button";
 import { iconSchema } from "@/tina/fields/icon";
 import { TinaIcon } from "../icon";
-import { Section, sectionBlockSchemaField } from "../layout/section";
+import {
+  SectionHero,
+  sectionheroBlockSchemaField,
+} from "../layout/hero-section";
 import imageWhiteboard from "@/images/whiteboard.jpg";
 import { AnimatedGroup } from "../motion-primitives/animated-group";
 import { TextEffect } from "../motion-primitives/text-effect";
@@ -71,11 +74,11 @@ export const Hero = ({ data }: { data: PageBlocksHero }) => {
   }
 
   return (
-    <Section background={data.background!}>
+    <SectionHero background={data.background!}>
       {data.image && (
         <AnimatedGroup variants={transitionVariants}>
           <div
-            className="relative -mr-56 mt-8 overflow-hidden px-2 sm:mr-0 sm:mt-12 md:mt-20 max-w-full"
+            className="relative overflow-hidden px-2 sm:mr-0 sm:mt-12 max-w-full"
             data-tina-field={tinaField(data, "image")}
           >
             <div
@@ -83,7 +86,7 @@ export const Hero = ({ data }: { data: PageBlocksHero }) => {
               className="bg-linear-to-b absolute inset-0 z-10 from-transparent from-35% pointer-events-none"
               style={gradientStyle}
             />
-            <div className="inset-shadow-2xs ring-background dark:inset-shadow-white/20 bg-background relative mx-auto max-w-6xl overflow-hidden rounded-2xl border p-4 shadow-lg shadow-zinc-950/15 ring-1">
+            <div className="relative mx-auto max-w-full min-h-screen overflow-hidden">
               <ImageBlock image={data.image} />
               {/* Overlay content */}
               <div className="absolute inset-0 z-20 flex flex-col items-center justify-center text-center px-6 py-12 text-white sm:mx-auto lg:mr-auto lg:mt-0">
@@ -134,7 +137,7 @@ export const Hero = ({ data }: { data: PageBlocksHero }) => {
                           className="rounded-xl px-5 text-base"
                         >
                           <Link href={action!.link!}>
-                            {action?.icon && (<TinaIcon data={action?.icon} />)}
+                            {action?.icon && <TinaIcon data={action?.icon} />}
                             <span className="text-nowrap">{action!.label}</span>
                           </Link>
                         </Button>
@@ -146,7 +149,7 @@ export const Hero = ({ data }: { data: PageBlocksHero }) => {
           </div>
         </AnimatedGroup>
       )}
-    </Section>
+    </SectionHero>
   );
 };
 
@@ -202,7 +205,7 @@ export const heroBlockSchema: Template = {
     },
   },
   fields: [
-    sectionBlockSchemaField as any,
+    sectionheroBlockSchemaField as any,
     {
       type: "string",
       label: "Headline",

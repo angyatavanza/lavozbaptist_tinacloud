@@ -1,46 +1,85 @@
-import React from 'react';
-import { videoBlockSchema } from '@/components/blocks/section-video';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import type { Collection } from 'tinacms';
+import React from "react";
+import { videoBlockSchema } from "@/components/blocks/section-video";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import type { Collection } from "tinacms";
 
 const Message: Collection = {
-  label: 'Mensajes Recientes',
-  name: 'message',
-  path: 'content/messages',
-  format: 'mdx',
+  label: "Mensajes Recientes",
+  name: "message",
+  path: "content/messages",
+  format: "mdx",
   ui: {
     router: ({ document }) => {
-      return `/messages/${document._sys.breadcrumbs.join('/')}`;
+      return `/messages/${document._sys.breadcrumbs.join("/")}`;
     },
   },
   fields: [
     {
       type: 'string',
-      label: 'Title',
-      name: 'title',
+      label: 'Color',
+      name: 'color',
+      options: [
+        { label: 'Default', value: 'default' },
+        { label: 'Tint', value: 'tint' },
+        { label: 'Primary', value: 'primary' },
+      ],
+    },
+    {
+      type: "string",
+      label: "Title",
+      name: "title",
       isTitle: true,
       required: true,
     },
     {
-      type: 'image',
-      name: 'heroImg',
-      label: 'Hero Image',
+      type: "object",
+      label: "Image",
+      name: "image",
       // @ts-ignore
       uploadDir: () => "messages",
+      fields: [
+        {
+          name: "src",
+          label: "Image Source",
+          type: "image",
+        },
+        {
+          name: "alt",
+          label: "Alt Text",
+          type: "string",
+        },
+        {
+          name: "videoUrl",
+          label: "Video URL",
+          type: "string",
+          description:
+            "If using a YouTube video, make sure to use the embed version of the video URL",
+        },
+        {
+          type: 'boolean',
+          label: 'Auto Play',
+          name: 'autoPlay',
+        },
+        {
+          type: 'boolean',
+          label: 'Loop',
+          name: 'loop',
+        },
+      ],
     },
     {
-      type: 'rich-text',
-      label: 'Excerpt',
-      name: 'excerpt',
+      type: "rich-text",
+      label: "Excerpt",
+      name: "excerpt",
       overrides: {
-        toolbar: ['bold', 'italic', 'link'],
+        toolbar: ["bold", "italic", "link"],
       },
     },
     {
-      type: 'reference',
-      label: 'Author',
-      name: 'author',
-      collections: ['author'],
+      type: "reference",
+      label: "Author",
+      name: "author",
+      collections: ["author"],
       ui: {
         optionComponent: (
           props: {
@@ -55,52 +94,47 @@ const Message: Collection = {
           return (
             <p className="flex min-h-8 items-center gap-4">
               <Avatar>
-                {avatar && (
-                  <AvatarImage
-                    src={avatar}
-                    alt={`${name} Profile`}
-                  />
-                )}
+                {avatar && <AvatarImage src={avatar} alt={`${name} Profile`} />}
                 <AvatarFallback>
                   {name
-                    .split(' ')
-                    .map((part) => part[0]?.toUpperCase() || '')
-                    .join('')}
+                    .split(" ")
+                    .map((part) => part[0]?.toUpperCase() || "")
+                    .join("")}
                 </AvatarFallback>
               </Avatar>
               {name}
             </p>
           );
         },
-      }
-    },
-    {
-      type: 'datetime',
-      label: 'Posted Date',
-      name: 'date',
-      ui: {
-        dateFormat: 'MMMM DD YYYY',
-        timeFormat: 'hh:mm A',
       },
     },
     {
-      type: 'object',
-      label: 'Tags',
-      name: 'tags',
+      type: "datetime",
+      label: "Posted Date",
+      name: "date",
+      ui: {
+        dateFormat: "MMMM DD YYYY",
+        timeFormat: "hh:mm A",
+      },
+    },
+    {
+      type: "object",
+      label: "Tags",
+      name: "tags",
       list: true,
       fields: [
         {
-          type: 'reference',
-          label: 'Tag',
-          name: 'tag',
-          collections: ['tag'],
+          type: "reference",
+          label: "Tag",
+          name: "tag",
+          collections: ["tag"],
           ui: {
             optionComponent: (
               props: {
                 name?: string;
               },
               _internalSys: { path: string }
-            ) => props.name || _internalSys.path
+            ) => props.name || _internalSys.path,
           },
         },
       ],
@@ -108,77 +142,77 @@ const Message: Collection = {
         itemProps: (item) => {
           return { label: item?.tag };
         },
-      }
+      },
     },
     {
-      type: 'rich-text',
-      label: 'Body',
-      name: '_body',
+      type: "rich-text",
+      label: "Body",
+      name: "_body",
       templates: [
         {
-          name: 'BlockQuote',
-          label: 'Block Quote',
+          name: "BlockQuote",
+          label: "Block Quote",
           fields: [
             {
-              name: 'children',
-              label: 'Quote',
-              type: 'rich-text',
+              name: "children",
+              label: "Quote",
+              type: "rich-text",
               overrides: {
-                toolbar: ['bold', 'italic', 'link'],
+                toolbar: ["bold", "italic", "link"],
               },
             },
             {
-              name: 'authorName',
-              label: 'Author',
-              type: 'string',
+              name: "authorName",
+              label: "Author",
+              type: "string",
             },
           ],
         },
         {
-          name: 'DateTime',
-          label: 'Date & Time',
+          name: "DateTime",
+          label: "Date & Time",
           inline: true,
           fields: [
             {
-              name: 'format',
-              label: 'Format',
-              type: 'string',
-              options: ['utc', 'iso', 'local'],
+              name: "format",
+              label: "Format",
+              type: "string",
+              options: ["utc", "iso", "local"],
             },
           ],
         },
         {
-          name: 'NewsletterSignup',
-          label: 'Newsletter Sign Up',
+          name: "NewsletterSignup",
+          label: "Newsletter Sign Up",
           fields: [
             {
-              name: 'children',
-              label: 'CTA',
-              type: 'rich-text',
+              name: "children",
+              label: "CTA",
+              type: "rich-text",
             },
             {
-              name: 'placeholder',
-              label: 'Placeholder',
-              type: 'string',
+              name: "placeholder",
+              label: "Placeholder",
+              type: "string",
             },
             {
-              name: 'buttonText',
-              label: 'Button Text',
-              type: 'string',
+              name: "buttonText",
+              label: "Button Text",
+              type: "string",
             },
             {
-              name: 'disclaimer',
-              label: 'Disclaimer',
-              type: 'rich-text',
+              name: "disclaimer",
+              label: "Disclaimer",
+              type: "rich-text",
               overrides: {
-                toolbar: ['bold', 'italic', 'link'],
+                toolbar: ["bold", "italic", "link"],
               },
             },
           ],
           ui: {
             defaultItem: {
-              placeholder: 'Enter your email',
-              buttonText: 'Notify Me',
+              placeholder: "Enter your email",
+              buttonText: "Notify Me",
             },
           },
         },

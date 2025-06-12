@@ -27,18 +27,14 @@ export default function HeroVideoDialog({
   const videoId = extractVideoId(videoSrc);
 
   return (
-    <div className={cn("relative min-h-screen w-full overflow-hidden", className)}>
-      <div
-        className="absolute inset-0 z-0" 
-      >
-        <iframe
-              src={`${videoSrc}&autoplay=1&hideinfo=1&controls=0&mute=1&loop=1&modestbranding=1&rel=0&badge=0&autopause=0&player_id=0&app_id=58479&playlist=${videoId}`}
-              allowFullScreen
-              title="YouTube video player"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              className="h-full w-full object-cover rounded-md border shadow-lg transition-all duration-200 ease-out group-hover:brightness-[0.8]"
-            />
-      </div>
+    <div className={cn("relative w-full min-h-screen overflow-hidden", className)}>
+      <iframe
+        src={`${videoSrc}&autoplay=1&hideinfo=1&controls=0&mute=1&loop=1&modestbranding=1&rel=0&badge=0&autopause=0&player_id=0&app_id=58479&playlist=${videoId}`}
+        allowFullScreen
+        title="YouTube video player"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        className="absolute inset-0 h-full w-full object-cover"
+      />
     </div>
   );
 }

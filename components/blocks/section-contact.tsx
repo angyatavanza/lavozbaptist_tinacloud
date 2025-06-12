@@ -53,7 +53,7 @@ export const ContactSection = ({
           </div>
           <div className="mt-10 border-t border-white/10 pt-10">
             <h3 className="font-display text-base font-semibold text-white">
-              Nuestra ubicacion y horarios de servicios
+              Nuestra ubicacion y horario de servicios
             </h3>
             <ServiceTimes
               invert

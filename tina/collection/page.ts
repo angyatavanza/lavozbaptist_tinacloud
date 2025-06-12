@@ -7,7 +7,7 @@ import { heroBlockSchema } from '@/components/blocks/landing-hero';
 import { aboutsectionBlockSchema } from '@/components/blocks/section-about';
 import { aboutusBlockSchema } from '@/components/blocks/landing-about-us';
 import { contentBlockSchema } from '@/components/blocks/section-content';
-import { sermonBlockSchema } from '@/components/blocks/landing-sermons';
+import { ctaBlockSchema } from '@/components/blocks/landing-call-to-action';
 import { connectionBlockSchema } from '@/components/blocks/landing-connect';
 import { featureBlockSchema } from '@/components/blocks/section-features';
 import { partnerBlockSchema } from '@/components/blocks/section-partners';
@@ -21,7 +21,7 @@ import { contentandimagevariantBlockSchema } from '@/components/blocks/section-i
 import { statsBlockSchema } from '@/components/blocks/landing-stats';
 import { latesteventsBlockSchema } from '@/components/blocks/landing-latest-events';
 import { latestmessagesBlockSchema } from '@/components/blocks/landing-latest-messages';
-import { ctaBlockSchema } from '@/components/blocks/section-call-to-action';
+import { testimonialBlockSchema } from '@/components/blocks/section-testimonial';
 import { missionBlockSchema} from '@/components/blocks/section-mission';
 import { listcontentBlockSchema } from '@/components/blocks/section-listcontent';
 import { step1BlockSchema } from '@/components/blocks/section-step1';
@@ -65,9 +65,9 @@ const Page: Collection = {
         statsBlockSchema,
         latesteventsBlockSchema,
         latestmessagesBlockSchema,
-        ctaBlockSchema,
         contentBlockSchema,
-        sermonBlockSchema,
+        ctaBlockSchema,
+        testimonialBlockSchema,
         videoBlockSchema,
         herocontentBlockSchema,
         profileBlockSchema,

@@ -7,7 +7,8 @@ import { Content } from "./section-content";
 import { Connections } from "./landing-connect";
 import { Features } from "./section-features";
 import { Groups } from "./landing-groups";
-import { Sermon } from "./landing-sermons";
+import { CallToAction } from "./landing-call-to-action";
+import { Testimonial } from "./section-testimonial";
 import { Video } from "./section-video";
 import { Callout } from "./section-callout";
 import { Herocontent } from "./section-herocontent";
@@ -20,7 +21,6 @@ import { TeamMember } from "./section-our-team";
 import { Stats } from "./landing-stats";
 import { LatestEvents } from "./landing-latest-events";
 import { LatestMessages } from "./landing-latest-messages";
-import { CallToAction } from "./section-call-to-action";
 import { Vision } from "./section-vision";
 import { Step1 } from "./section-step1";
 import { Step2 } from "./section-step2";
@@ -63,7 +63,9 @@ const Block = ({block, events, messages,}: {block: PageBlocks; events?: Event[];
     case "PageBlocksAboutsection":
       return <Aboutsection data={block} />;
     case "PageBlocksTeammember":
-      return <TeamMember data={block} />;  
+      return <TeamMember data={block} />; 
+     case "PageBlocksTestimonial":
+      return <Testimonial data={block} />;   
     case "PageBlocksAboutus":
       return <AboutUs data={block} />;    
     case "PageBlocksCallout":
@@ -88,8 +90,6 @@ const Block = ({block, events, messages,}: {block: PageBlocks; events?: Event[];
       return <Features data={block} />;
     case "PageBlocksGroups":
       return <Groups data={block} />;  
-    case "PageBlocksSermon":
-      return <Sermon data={block} />;
     case "PageBlocksCta":
       return <CallToAction data={block} />;
     case "PageBlocksVision":

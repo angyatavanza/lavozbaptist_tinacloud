@@ -9,7 +9,7 @@ export const ContactDetails = () => {
   return (
     <FadeIn>
       <h2 className="font-display text-base font-semibold text-neutral-950">
-        Nuestra ubicacion y tiempos de servicios
+        Nuestra ubicacion y horario de servicios
       </h2>
       <p className="mt-6 text-base text-neutral-600">
         Le invitamos a unirse a nuestros estudios bíblicos entre semana y al servicio general del Domingo.

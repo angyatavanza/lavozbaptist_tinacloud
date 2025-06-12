@@ -42,7 +42,7 @@ export const ServiceTimes = ({
         </ServiceTime>
       </li>
       <li>
-        <ServiceTime name="Tiempos de servicios" invert={invert}>
+        <ServiceTime name="Horario de servicios" invert={invert}>
           Escuela Dominical 9:45AM
           <br />
           Culto General 11:00AM

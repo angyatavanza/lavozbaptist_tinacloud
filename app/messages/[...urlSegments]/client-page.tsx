@@ -1,5 +1,6 @@
 'use client';
-import React from 'react';
+import * as React from "react";
+import dynamic from "next/dynamic";
 import Image from 'next/image';
 import { format } from 'date-fns';
 import { tinaField, useTina } from 'tinacms/dist/react';
@@ -79,12 +80,12 @@ export default function MessageClientPage(props: ClientMessageProps) {
             {formattedDate}
           </p>
         </div>
-        {message.heroImg && (
+        {message.image?.src && (
           <div className='px-4 w-full'>
-            <div data-tina-field={tinaField(message, 'heroImg')} className='relative max-w-4xl lg:max-w-5xl mx-auto'>
+            <div data-tina-field={tinaField(message, 'image')} className='relative max-w-4xl lg:max-w-5xl mx-auto'>
               <Image
                 priority={true}
-                src={message.heroImg}
+                src={message.image.src}
                 alt={message.title}
                 className='absolute block mx-auto rounded-lg w-full h-auto blur-2xl brightness-150 contrast-[0.9] dark:brightness-150 saturate-200 opacity-50 dark:opacity-30 mix-blend-multiply dark:mix-blend-hard-light'
                 aria-hidden='true'
@@ -94,7 +95,7 @@ export default function MessageClientPage(props: ClientMessageProps) {
               />
               <Image
                 priority={true}
-                src={message.heroImg}
+                src={message.image.src}
                 alt={message.title}
                 width={500}
                 height={500}
