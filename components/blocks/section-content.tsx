@@ -7,7 +7,7 @@ import { tinaField } from "tinacms/dist/react";
 import { Section } from "../layout/section";
 import { mermaid } from "./mermaid";
 import { sectionBlockSchemaField } from '../layout/section';
-import imageWhiteboard from "@/images/whiteboard.jpg";
+
 import { scriptCopyBlockSchema, ScriptCopyBtn } from "../magicui/script-copy-btn";
 
 //to-do 40: create content for resources page

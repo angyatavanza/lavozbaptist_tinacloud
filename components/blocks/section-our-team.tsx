@@ -28,13 +28,13 @@ const TeammemberCard = ({ teammember }: { teammember: PageBlocksTeammemberTeamme
       <CardContent className="grid grid-cols-[auto_1fr] gap-3 pt-6">
         <Avatar className="size-9" data-tina-field={tinaField(teammember, 'avatar')}>
           {teammember.avatar && (
-            <AvatarImage alt={teammember.author!} src={teammember.avatar} loading="lazy" width="120" height="120" />
+            <AvatarImage alt={teammember.coordinator!} src={teammember.avatar} loading="lazy" width="120" height="120" />
           )}
-          <AvatarFallback>{teammember.author!.split(" ").map((word) => word[0]).join("")}</AvatarFallback>
+          <AvatarFallback>{teammember.coordinator!.split(" ").map((word) => word[0]).join("")}</AvatarFallback>
         </Avatar>
 
         <div>
-          <h3 className="font-medium" data-tina-field={tinaField(teammember, 'author')}>{teammember.author}</h3>
+          <h3 className="font-medium" data-tina-field={tinaField(teammember, 'coordinator')}>{teammember.coordinator}</h3>
 
           <span className="text-muted-foreground block text-sm tracking-wide" data-tina-field={tinaField(teammember, 'role')}>{teammember.role}</span>
 
@@ -57,7 +57,7 @@ export const teammemberBlockSchema: Template = {
         {
           quote:
             "There are only two hard things in Computer Science: cache invalidation and naming things.",
-          author: "Phil Karlton",
+          coordinator: "Phil Karlton",
         },
       ],
     },
@@ -85,11 +85,11 @@ export const teammemberBlockSchema: Template = {
       ui: {
         defaultItem: {
           quote: "There are only two hard things in Computer Science: cache invalidation and naming things.",
-          author: "Phil Karlton",
+          coordinator: "Phil Karlton",
         },
         itemProps: (item) => {
           return {
-            label: `${item.quote} - ${item.author}`,
+            label: `${item.quote} - ${item.coordinator}`,
           };
         },
       },
@@ -104,8 +104,8 @@ export const teammemberBlockSchema: Template = {
         },
         {
           type: "string",
-          label: "Author",
-          name: "author",
+          label: "Coordinator",
+          name: "coordinator",
         },
         {
           type: "string",

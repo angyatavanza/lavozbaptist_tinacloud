@@ -36,7 +36,7 @@ function extractFacebookVideoId(url: string): string | null {
   }
 }
 
-interface Author {
+interface Coordinator {
   name?: string;
   avatar?: string;
 }
@@ -53,7 +53,7 @@ interface Message {
     autoPlay?: boolean;     
     loop?: boolean;         
   };
-  author?: Author;
+  coordinator?: Coordinator;
   tags?: { tag?: { name?: string } }[];
   _sys: { breadcrumbs: string[] };
 }
@@ -154,10 +154,10 @@ export const LatestMessages = ({
                     </div>
                     <div className="mt-6 flex items-center space-x-4 text-sm md:mt-8">
                       <Avatar>
-                        {message.author?.avatar ? (
+                        {message.coordinator?.avatar ? (
                           <AvatarImage
-                            src={message.author.avatar}
-                            alt={message.author.name || "Author avatar"}
+                            src={message.coordinator.avatar}
+                            alt={message.coordinator.name || "Coordinator avatar"}
                             className="h-8 w-8"
                           />
                         ) : (
@@ -172,7 +172,7 @@ export const LatestMessages = ({
                         )}
                       </Avatar>
                       <span className="text-muted-foreground">
-                        {message.author?.name || "Anonymous"}
+                        {message.coordinator?.name || "Anonymous"}
                       </span>
                       <span className="text-muted-foreground">•</span>
                       <span className="text-muted-foreground">

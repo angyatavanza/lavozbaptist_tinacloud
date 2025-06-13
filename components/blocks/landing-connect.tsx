@@ -10,7 +10,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 //import { iconSchema } from "../../tina/fields/icon";
 import { Card, CardContent, CardHeader } from "../ui/card";
 import { Section } from "../layout/section";
-import imageWhiteboard from "@/images/whiteboard.jpg";
+
 import { sectionBlockSchemaField } from '../layout/section';
 //to-do 11: add text to connections in homepage
 export const Connections = ({ data }: { data: PageBlocksConnections }) => {

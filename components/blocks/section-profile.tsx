@@ -28,13 +28,13 @@ const ProfileCard = ({ profile }: { profile: PageBlocksProfileProfiles }) => {
       <CardContent className="grid grid-cols-[auto_1fr] gap-3 pt-6">
         <Avatar className="size-9" data-tina-field={tinaField(profile, 'avatar')}>
           {profile.avatar && (
-            <AvatarImage alt={profile.author!} src={profile.avatar} loading="lazy" width="120" height="120" />
+            <AvatarImage alt={profile.coordinator!} src={profile.avatar} loading="lazy" width="120" height="120" />
           )}
-          <AvatarFallback>{profile.author!.split(" ").map((word) => word[0]).join("")}</AvatarFallback>
+          <AvatarFallback>{profile.coordinator!.split(" ").map((word) => word[0]).join("")}</AvatarFallback>
         </Avatar>
 
         <div>
-          <h3 className="font-medium" data-tina-field={tinaField(profile, 'author')}>{profile.author}</h3>
+          <h3 className="font-medium" data-tina-field={tinaField(profile, 'coordinator')}>{profile.coordinator}</h3>
 
           <span className="text-muted-foreground block text-sm tracking-wide" data-tina-field={tinaField(profile, 'role')}>{profile.role}</span>
 
@@ -57,7 +57,7 @@ export const profileBlockSchema: Template = {
         {
           quote:
             "There are only two hard things in Computer Science: cache invalidation and naming things.",
-          author: "Phil Karlton",
+          coordinator: "Phil Karlton",
         },
       ],
     },
@@ -85,11 +85,11 @@ export const profileBlockSchema: Template = {
       ui: {
         defaultItem: {
           quote: "There are only two hard things in Computer Science: cache invalidation and naming things.",
-          author: "Phil Karlton",
+          coordinator: "Phil Karlton",
         },
         itemProps: (item) => {
           return {
-            label: `${item.quote} - ${item.author}`,
+            label: `${item.quote} - ${item.coordinator}`,
           };
         },
       },
@@ -104,8 +104,8 @@ export const profileBlockSchema: Template = {
         },
         {
           type: "string",
-          label: "Author",
-          name: "author",
+          label: "Coordinator",
+          name: "coordinator",
         },
         {
           type: "string",

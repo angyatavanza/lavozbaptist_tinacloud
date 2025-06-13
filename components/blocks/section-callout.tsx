@@ -6,7 +6,7 @@ import { PageBlocksCallout } from "@/tina/__generated__/types";
 import { ArrowRight } from "lucide-react";
 import { AnimatedGroup } from "../motion-primitives/animated-group";
 import { Section, sectionBlockSchemaField } from '../layout/section';
-import imageWhiteboard from "@/images/whiteboard.jpg";
+
 //done 1:fix url link to /service-times
 const transitionVariants = {
     item: {

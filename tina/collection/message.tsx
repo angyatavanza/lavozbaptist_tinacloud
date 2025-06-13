@@ -77,9 +77,9 @@ const Message: Collection = {
     },
     {
       type: "reference",
-      label: "Author",
-      name: "author",
-      collections: ["author"],
+      label: "Coordinator",
+      name: "coordinator",
+      collections: ["coordinator"],
       ui: {
         optionComponent: (
           props: {
@@ -162,8 +162,8 @@ const Message: Collection = {
               },
             },
             {
-              name: "authorName",
-              label: "Author",
+              name: "coordinatorName",
+              label: "Coordinator",
               type: "string",
             },
           ],

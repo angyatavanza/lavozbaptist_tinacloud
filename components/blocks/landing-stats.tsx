@@ -9,7 +9,7 @@ import { TinaIcon } from '../icon';
 import { Button } from '@/components/ui/button'
 import { PageBlocksStats } from "@/tina/__generated__/types";
 import { Section } from "../layout/section";
-import imageWhiteboard from "@/images/whiteboard.jpg";
+
 import { sectionBlockSchemaField } from '../layout/section';
 
 const CardDecorator = ({ children }: { children: React.ReactNode }) => (

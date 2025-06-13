@@ -7,9 +7,9 @@ query pageQuery {
         date
         title
         excerpt
-        author {
-          ... on Author {
-            ...AuthorParts
+        coordinator {
+          ... on Coordinator {
+            ...CoordinatorParts
           }
         }
         _sys {
@@ -31,8 +31,8 @@ query blogMessageQuery($relativePath: String!) {
   ...LayoutQueryFragment
   message(relativePath: $relativePath) {
     ...MessageParts
-    author {
-      ... on Author {
+    coordinator {
+      ... on Coordinator {
         name
         avatar
       }

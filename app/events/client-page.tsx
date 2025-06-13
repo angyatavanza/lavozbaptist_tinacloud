@@ -31,30 +31,37 @@ export default function EventsClientPage(props: ClientEventProps) {
   const events = props.data?.eventConnection.edges!.map((eventData) => {
     const event = eventData!.node!;
     
+    const date = new Date(event.date!);
+    let formattedDate = '';
+    let formattedTime = '';
+    if (!isNaN(date.getTime())) {
+      formattedDate = format(date, 'MMM dd, yyyy');
+      formattedTime = format(date, 'h:mm a');
+    }
+    
     const enddate = new Date(event.enddate!);
     let formattedendDate = '';
+    let formattedendTime = '';
     if (!isNaN(enddate.getTime())) {
-      formattedendDate = format(enddate, 'h:mm a');
+      formattedendDate = format(enddate, 'MMM dd, yyyy');
+      formattedendTime = format(enddate, 'h:mm a');
     }
 
-     const date = new Date(event.date!);
-    let formattedDate = '';
-    if (!isNaN(date.getTime())) {
-      formattedDate = format(date, 'MMM dd, yyyy h:mm a');
-    }
     return {
       id: event.id,
       published: formattedDate,
       endpublished: formattedendDate,
+      publishedtime: formattedTime,
+      endpublishedtime: formattedendTime,
       title: event.title,
       tags: event.tags?.map((tag) => tag?.tag?.name) || [],
       url: `/events/${event._sys.breadcrumbs.join('/')}`,
       description: event.description,
-      location: event.location,
+      locationdetails: event.locationdetails?.map((locationdetail) => locationdetail?.location) || [],
       heroImg: event.heroImg,
-      author: {
-        name: event.author?.name || 'Anonymous',
-        avatar: event.author?.avatar,
+      coordinator: {
+        name: event.coordinator?.name || 'Anonymous',
+        avatar: event.coordinator?.avatar,
       }
     }
   });
@@ -62,7 +69,7 @@ export default function EventsClientPage(props: ClientEventProps) {
   return (
     <ErrorBoundary>
       <PageIntro eyebrow="Eventos" title="Eventos Recientes">
-        <p>Eventos.</p>
+        <p>Eventos</p>
       </PageIntro>
       <Section>
         <div className="container flex flex-col items-center gap-16">
@@ -97,17 +104,14 @@ export default function EventsClientPage(props: ClientEventProps) {
                       </Link>
                     </h3>
                     <div className="mt-4 text-muted-foreground md:mt-5">
-                      <TinaMarkdown content={event.location} />
-                    </div>
-                    <div className="mt-4 text-muted-foreground md:mt-5">
                       <TinaMarkdown content={event.description} />
                     </div>
                     <div className="mt-6 flex items-center space-x-4 text-sm md:mt-8">
                       <Avatar>
-                        {event.author.avatar && (
+                        {event.coordinator.avatar && (
                           <AvatarImage
-                            src={event.author.avatar}
-                            alt={event.author.name}
+                            src={event.coordinator.avatar}
+                            alt={event.coordinator.name}
                             className="h-8 w-8"
                           />
                         )}
@@ -115,7 +119,7 @@ export default function EventsClientPage(props: ClientEventProps) {
                           <UserRound size={16} strokeWidth={2} className="opacity-60" aria-hidden="true" />
                         </AvatarFallback>
                       </Avatar>
-                      <span className="text-muted-foreground">{event.author.name}</span>
+                      <span className="text-muted-foreground">{event.coordinator.name}</span>
                       <span className="text-muted-foreground">•</span>
                       <span className="text-muted-foreground">
                         {event.published} 
@@ -123,6 +127,14 @@ export default function EventsClientPage(props: ClientEventProps) {
                       <span className="text-muted-foreground">-</span>
                       <span className="text-muted-foreground">
                         {event.endpublished}
+                      </span>
+                      <span className="text-muted-foreground">•</span>
+                      <span className="text-muted-foreground">
+                        {event.publishedtime} 
+                      </span>
+                      <span className="text-muted-foreground">-</span>
+                      <span className="text-muted-foreground">
+                        {event.endpublishedtime}
                       </span>
                     </div>
                     <div className="mt-6 flex items-center space-x-2 md:mt-8">

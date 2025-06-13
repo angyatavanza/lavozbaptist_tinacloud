@@ -63,9 +63,9 @@ export default function MessagesClientPage(props: ClientMessageProps) {
       url: `/messages/${message._sys.breadcrumbs.join("/")}`,
       excerpt: message.excerpt,
       image: message.image,
-      author: {
-        name: message.author?.name || "Anonymous",
-        avatar: message.author?.avatar,
+      coordinator: {
+        name: message.coordinator?.name || "Anonymous",
+        avatar: message.coordinator?.avatar,
       },
     };
   });
@@ -128,10 +128,10 @@ export default function MessagesClientPage(props: ClientMessageProps) {
                       </div>
                       <div className="mt-6 flex items-center space-x-4 text-sm md:mt-8">
                         <Avatar>
-                          {message.author.avatar && (
+                          {message.coordinator.avatar && (
                             <AvatarImage
-                              src={message.author.avatar}
-                              alt={message.author.name}
+                              src={message.coordinator.avatar}
+                              alt={message.coordinator.name}
                               className="h-8 w-8"
                             />
                           )}
@@ -145,7 +145,7 @@ export default function MessagesClientPage(props: ClientMessageProps) {
                           </AvatarFallback>
                         </Avatar>
                         <span className="text-muted-foreground">
-                          {message.author.name}
+                          {message.coordinator.name}
                         </span>
                         <span className="text-muted-foreground">•</span>
                         <span className="text-muted-foreground">

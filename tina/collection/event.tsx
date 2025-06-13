@@ -38,42 +38,47 @@ const Event: Collection = {
       },
     },
     {
-          label: 'Actions',
-          name: 'actions',
-          type: 'object',
-          list: true,
-          ui: {
-            defaultItem: {
-              label: 'Action Label',
-              type: 'button',
-              icon: true,
-              link: '/',
-            },
-            itemProps: (item) => ({ label: item.label }),
-          },
-          fields: [
-            {
-              label: 'Label',
-              name: 'label',
-              type: 'string',
-            },
-            {
-              label: 'Type',
-              name: 'type',
-              type: 'string',
-              options: [
-                { label: 'Button', value: 'button' },
-                { label: 'Link', value: 'link' },
-              ],
-            },
-            iconSchema as any,
-            {
-              label: 'Link',
-              name: 'link',
-              type: 'string',
-            },
-          ],
+      label: 'Actions',
+      name: 'actions',
+      type: 'object',
+      list: true,
+      ui: {
+        defaultItem: {
+        label: 'Action Label',
+        type: 'button',
+        icon: true,
+        link: '/',
+      },
+      itemProps: (item) => ({ label: item.label }),
+    },
+    fields: [
+      {
+        label: 'Label',
+        name: 'label',
+        type: 'string',
+      },
+      {
+        label: 'Type',
+        name: 'type',
+        type: 'string',
+        options: [
+          { label: 'Button', value: 'button' },
+          { label: 'Link', value: 'link' },
+        ],
+      },
+       iconSchema as any,
+       {
+          label: 'Link',
+          name: 'link',
+          type: 'string',
         },
+      ],
+    },
+    {
+      type: 'boolean',
+      label: 'Recurring Event',
+      name: 'recurring',
+    },
     {
       type: 'datetime',
       label: 'Event Date',
@@ -83,18 +88,11 @@ const Event: Collection = {
         timeFormat: 'hh:mm A',
       },
     },
-
-    {
-      type: 'rich-text',
-      label: 'Location',
-      name: 'location',
-      required: true,
-    },
     {
       type: 'reference',
-      label: 'Author',
-      name: 'author',
-      collections: ['author'],
+      label: 'Coordinator',
+      name: 'coordinator',
+      collections: ['coordinator'],
       ui: {
         optionComponent: (
           props: {
@@ -138,9 +136,48 @@ const Event: Collection = {
       },
     },
     {
+      label: 'Location Details',
+      name: 'locationdetails',
+      type: 'object',
+      list: true,
+      ui: {
+        defaultItem: {
+        location: 'La Voz de la Esperanza',
+        label: 'Address Label',
+        type: 'button',
+        icon: true,
+        link: '/',
+      },
+      itemProps: (item) => ({ label: item.label }),
+    },
+    fields: [
+      {
       type: 'string',
-      label: 'Address Url',
-      name: 'addressurl',
+      label: 'Location',
+      name: 'location',
+      required: true,
+      },
+      {
+        label: 'Label',
+        name: 'label',
+        type: 'string',
+      },
+      {
+        label: 'Type',
+        name: 'type',
+        type: 'string',
+        options: [
+          { label: 'Button', value: 'button' },
+          { label: 'Link', value: 'link' },
+        ],
+      },
+       iconSchema as any,
+       {
+          label: 'Link',
+          name: 'link',
+          type: 'string',
+        },
+      ],
     },
     {
       type: 'object',
@@ -187,8 +224,8 @@ const Event: Collection = {
               },
             },
             {
-              name: 'authorName',
-              label: 'Author',
+              name: 'coordinatorName',
+              label: 'Coordinator',
               type: 'string',
             },
           ],

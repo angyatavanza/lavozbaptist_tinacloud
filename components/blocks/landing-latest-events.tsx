@@ -23,7 +23,7 @@ import Image from "next/image";
 //to-do 10a: change layout of event card: date as a bookmark top left, photo centered, event title +event date/time + location undernead photo
 //done 10b: extract the time from "date" tina field and display in the event card
 
-interface Author {
+interface Coordinator {
   name?: string;
   avatar?: string;
 }
@@ -36,7 +36,7 @@ interface Event {
   description?: any;
   location?: any;
   heroImg?: string;
-  author?: Author;
+  coordinator?: Coordinator;
   tags?: { tag?: { name?: string } }[];
   _sys: { breadcrumbs: string[] };
 }
@@ -93,111 +93,117 @@ export const LatestEvents = ({
 
         <div className="grid gap-y-10 sm:grid-cols-12 sm:gap-y-12 md:gap-y-16 lg:gap-y-20">
           {filteredEvents.map((event) => {
-            const eventDate = event.date
-              ? format(new Date(event.date), "MMM dd, yyyy")
-              : "";
-            
-            const eventTime = event.date
-              ? format(new Date(event.date), "h:mm a")
-              : "";
+             const eventdate = new Date(event.date!);
+              let formattedDate = '';
+              let formattedTime = '';
+              if (!isNaN(eventdate.getTime())) {
+                formattedDate = format(eventdate, 'MMM dd, yyyy');
+                formattedTime = format(eventdate, 'h:mm a');
+              }
+              
+              const eventenddate = new Date(event.enddate!);
+              let formattedendDate = '';
+              let formattedendTime = '';
+              if (!isNaN(eventenddate.getTime())) {
+                formattedendDate = format(eventenddate, 'MMM dd, yyyy');
+                formattedendTime = format(eventenddate, 'h:mm a');
+              }
 
-            const eventEndTime = event.enddate
-              ? format(new Date(event.enddate), "h:mm a")
-              : "";
-
-            return (
-              <Card
-                key={event.id}
-                className="order-last border-0 bg-transparent shadow-none sm:order-first sm:col-span-12 lg:col-span-10 lg:col-start-2"
-              >
-                <div className="grid gap-y-6 sm:grid-cols-10 sm:gap-x-5 sm:gap-y-0 md:items-center md:gap-x-8 lg:gap-x-12">
-                  <div className="sm:col-span-5">
-                    <div className="mb-4 md:mb-6">
-                      <div className="flex flex-wrap gap-3 text-xs uppercase tracking-wider text-muted-foreground md:gap-5 lg:gap-6">
-                        {event.tags?.map((tag, i) => (
-                          <span key={i}>{tag?.tag?.name}</span>
-                        ))}
+              return (
+                <Card
+                  key={event.id}
+                  className="order-last border-0 bg-transparent shadow-none sm:order-first sm:col-span-12 lg:col-span-10 lg:col-start-2"
+                >
+                  <div className="grid gap-y-6 sm:grid-cols-10 sm:gap-x-5 sm:gap-y-0 md:items-center md:gap-x-8 lg:gap-x-12">
+                    <div className="sm:col-span-5">
+                      <div className="mb-4 md:mb-6">
+                        <div className="flex flex-wrap gap-3 text-xs uppercase tracking-wider text-muted-foreground md:gap-5 lg:gap-6">
+                          {event.tags?.map((tag, i) => (
+                            <span key={i}>{tag?.tag?.name}</span>
+                          ))}
+                        </div>
+                      </div>
+                      <h3 className="text-xl font-semibold md:text-2xl lg:text-3xl">
+                        <Link
+                          href={`/events/${event._sys.breadcrumbs.join("/")}`}
+                          className="hover:underline"
+                        >
+                          {event.title}
+                        </Link>
+                      </h3>
+                      <div className="mt-4 text-muted-foreground md:mt-5">
+                        {event.location && (
+                          <TinaMarkdown content={event.location} />
+                        )}
+                      </div>
+                      <div className="mt-4 text-muted-foreground md:mt-5">
+                        {event.description && (
+                          <TinaMarkdown content={event.description} />
+                        )}
+                      </div>
+                      <div className="mt-6 flex items-center space-x-4 text-sm md:mt-8">
+                        <Avatar>
+                          {event.coordinator?.avatar ? (
+                            <AvatarImage
+                              src={event.coordinator.avatar}
+                              alt={event.coordinator.name || "Coordinator avatar"}
+                              className="h-8 w-8"
+                            />
+                          ) : (
+                            <AvatarFallback>
+                              <UserRound
+                                size={16}
+                                strokeWidth={2}
+                                className="opacity-60"
+                                aria-hidden="true"
+                              />
+                            </AvatarFallback>
+                          )}
+                        </Avatar>
+                        <span className="text-muted-foreground">
+                          {event.coordinator?.name || "Anonymous"}
+                        </span>
+                        <span className="text-muted-foreground">•</span>
+                        <span className="text-muted-foreground">{formattedDate}</span>
+                        <span className="text-muted-foreground">-</span>
+                        <span className="text-muted-foreground">{formattedendDate}</span>
+                        <span className="text-muted-foreground">•</span>
+                        <span className="text-muted-foreground">{formattedTime}</span>
+                        <span className="text-muted-foreground">-</span>
+                        <span className="text-muted-foreground">{formattedendTime}</span>
+                      </div>
+                      <div className="mt-6 flex items-center space-x-2 md:mt-8">
+                        <Link
+                          href={`/events/${event._sys.breadcrumbs.join("/")}`}
+                          className="inline-flex items-center font-semibold hover:underline md:text-base"
+                        >
+                          <span>Ver Evento</span>
+                          <ArrowRight className="ml-2 size-4 transition-transform" />
+                        </Link>
                       </div>
                     </div>
-                    <h3 className="text-xl font-semibold md:text-2xl lg:text-3xl">
-                      <Link
-                        href={`/events/${event._sys.breadcrumbs.join("/")}`}
-                        className="hover:underline"
-                      >
-                        {event.title}
-                      </Link>
-                    </h3>
-                    <div className="mt-4 text-muted-foreground md:mt-5">
-                      {event.location && (
-                        <TinaMarkdown content={event.location} />
-                      )}
-                    </div>
-                    <div className="mt-4 text-muted-foreground md:mt-5">
-                      {event.description && (
-                        <TinaMarkdown content={event.description} />
-                      )}
-                    </div>
-                    <div className="mt-6 flex items-center space-x-4 text-sm md:mt-8">
-                      <Avatar>
-                        {event.author?.avatar ? (
-                          <AvatarImage
-                            src={event.author.avatar}
-                            alt={event.author.name || "Author avatar"}
-                            className="h-8 w-8"
-                          />
-                        ) : (
-                          <AvatarFallback>
-                            <UserRound
-                              size={16}
-                              strokeWidth={2}
-                              className="opacity-60"
-                              aria-hidden="true"
-                            />
-                          </AvatarFallback>
-                        )}
-                      </Avatar>
-                      <span className="text-muted-foreground">
-                        {event.author?.name || "Anonymous"}
-                      </span>
-                      <span className="text-muted-foreground">•</span>
-                      <span className="text-muted-foreground">{eventDate}</span>
-                      <span className="text-muted-foreground">•</span>
-                      <span className="text-muted-foreground">{eventTime}</span>
-                      <span className="text-muted-foreground">-</span>
-                      <span className="text-muted-foreground">{eventEndTime}</span>
-                    </div>
-                    <div className="mt-6 flex items-center space-x-2 md:mt-8">
-                      <Link
-                        href={`/events/${event._sys.breadcrumbs.join("/")}`}
-                        className="inline-flex items-center font-semibold hover:underline md:text-base"
-                      >
-                        <span>Ver Evento</span>
-                        <ArrowRight className="ml-2 size-4 transition-transform" />
-                      </Link>
-                    </div>
-                  </div>
 
-                  {event.heroImg && (
-                    <div className="order-first sm:order-last sm:col-span-5">
-                      <Link
-                        href={`/events/${event._sys.breadcrumbs.join("/")}`}
-                        className="block"
-                      >
-                        <div className="aspect-[16/9] overflow-clip rounded-lg border border-border">
-                          <Image
-                            width={533}
-                            height={300}
-                            src={event.heroImg}
-                            alt={event.title}
-                            className="h-full w-full object-cover transition-opacity duration-200 fade-in hover:opacity-70"
-                          />
-                        </div>
-                      </Link>
-                    </div>
-                  )}
-                </div>
-              </Card>
-            );
+                    {event.heroImg && (
+                      <div className="order-first sm:order-last sm:col-span-5">
+                        <Link
+                          href={`/events/${event._sys.breadcrumbs.join("/")}`}
+                          className="block"
+                        >
+                          <div className="aspect-[16/9] overflow-clip rounded-lg border border-border">
+                            <Image
+                              width={533}
+                              height={300}
+                              src={event.heroImg}
+                              alt={event.title}
+                              className="h-full w-full object-cover transition-opacity duration-200 fade-in hover:opacity-70"
+                            />
+                          </div>
+                        </Link>
+                      </div>
+                    )}
+                  </div>
+                </Card>
+              );
           })}
         </div>
       </div>

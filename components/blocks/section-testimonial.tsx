@@ -70,7 +70,7 @@ const TestimonialCard = ({ testimonial }: { testimonial: PageBlocksTestimonialTe
         >
           {testimonial.avatar && (
             <AvatarImage
-              alt={testimonial.author!}
+              alt={testimonial.coordinator!}
               src={testimonial.avatar}
               loading="lazy"
               width="120"
@@ -79,7 +79,7 @@ const TestimonialCard = ({ testimonial }: { testimonial: PageBlocksTestimonialTe
           )}
           <AvatarFallback>
             {testimonial
-              .author!.split(" ")
+              .coordinator!.split(" ")
               .map((word) => word[0])
               .join("")}
           </AvatarFallback>
@@ -88,9 +88,9 @@ const TestimonialCard = ({ testimonial }: { testimonial: PageBlocksTestimonialTe
         <div>
           <h3
             className="font-medium"
-            data-tina-field={tinaField(testimonial, "author")}
+            data-tina-field={tinaField(testimonial, "coordinator")}
           >
-            {testimonial.author}
+            {testimonial.coordinator}
           </h3>
 
           <span
@@ -122,7 +122,7 @@ export const testimonialBlockSchema: Template = {
         {
           quote:
             "There are only two hard things in Computer Science: cache invalidation and naming things.",
-          author: "Phil Karlton",
+          coordinator: "Phil Karlton",
         },
       ],
     },
@@ -151,11 +151,11 @@ export const testimonialBlockSchema: Template = {
         defaultItem: {
           quote:
             "There are only two hard things in Computer Science: cache invalidation and naming things.",
-          author: "Phil Karlton",
+          coordinator: "Phil Karlton",
         },
         itemProps: (item) => {
           return {
-            label: `${item.quote} - ${item.author}`,
+            label: `${item.quote} - ${item.coordinator}`,
           };
         },
       },
@@ -170,8 +170,8 @@ export const testimonialBlockSchema: Template = {
         },
         {
           type: "string",
-          label: "Author",
-          name: "author",
+          label: "Coordinator",
+          name: "coordinator",
         },
         {
           type: "string",

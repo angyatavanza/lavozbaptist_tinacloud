@@ -15,7 +15,7 @@ import Link from "next/link";
 import { iconSchema } from "@/tina/fields/icon";
 import { AnimatedGroup } from "../motion-primitives/animated-group";
 import { sectionBlockSchemaField } from "../layout/section";
-import imageWhiteboard from "@/images/whiteboard.jpg";
+
 
 //to-do 12a: create a latestmessages component that extract the latest 3 messages in homepage
 //to-do 12b: change layout of latest message card in homepage

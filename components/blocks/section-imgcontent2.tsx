@@ -29,13 +29,13 @@ const ContentandimagevariantCard = ({ contentandimagevariant }: { contentandimag
       <CardContent className="grid grid-cols-[auto_1fr] gap-3 pt-6">
         <Avatar className="size-9" data-tina-field={tinaField(contentandimagevariant, 'avatar')}>
           {contentandimagevariant.avatar && (
-            <AvatarImage alt={contentandimagevariant.author!} src={contentandimagevariant.avatar} loading="lazy" width="120" height="120" />
+            <AvatarImage alt={contentandimagevariant.coordinator!} src={contentandimagevariant.avatar} loading="lazy" width="120" height="120" />
           )}
-          <AvatarFallback>{contentandimagevariant.author!.split(" ").map((word) => word[0]).join("")}</AvatarFallback>
+          <AvatarFallback>{contentandimagevariant.coordinator!.split(" ").map((word) => word[0]).join("")}</AvatarFallback>
         </Avatar>
 
         <div>
-          <h3 className="font-medium" data-tina-field={tinaField(contentandimagevariant, 'author')}>{contentandimagevariant.author}</h3>
+          <h3 className="font-medium" data-tina-field={tinaField(contentandimagevariant, 'coordinator')}>{contentandimagevariant.coordinator}</h3>
 
           <span className="text-muted-foreground block text-sm tracking-wide" data-tina-field={tinaField(contentandimagevariant, 'role')}>{contentandimagevariant.role}</span>
 
@@ -58,7 +58,7 @@ export const contentandimagevariantBlockSchema: Template = {
         {
           quote:
             "There are only two hard things in Computer Science: cache invalidation and naming things.",
-          author: "Phil Karlton",
+          coordinator: "Phil Karlton",
         },
       ],
     },
@@ -86,11 +86,11 @@ export const contentandimagevariantBlockSchema: Template = {
       ui: {
         defaultItem: {
           quote: "There are only two hard things in Computer Science: cache invalidation and naming things.",
-          author: "Phil Karlton",
+          coordinator: "Phil Karlton",
         },
         itemProps: (item) => {
           return {
-            label: `${item.quote} - ${item.author}`,
+            label: `${item.quote} - ${item.coordinator}`,
           };
         },
       },
@@ -105,8 +105,8 @@ export const contentandimagevariantBlockSchema: Template = {
         },
         {
           type: "string",
-          label: "Author",
-          name: "author",
+          label: "Coordinator",
+          name: "coordinator",
         },
         {
           type: "string",

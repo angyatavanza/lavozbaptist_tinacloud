@@ -15,7 +15,7 @@ import {
   SectionHero,
   sectionheroBlockSchemaField,
 } from "../layout/hero-section";
-import imageWhiteboard from "@/images/whiteboard.jpg";
+
 import { AnimatedGroup } from "../motion-primitives/animated-group";
 import { TextEffect } from "../motion-primitives/text-effect";
 import HeroVideoDialog from "../ui/hero-video-dialog";

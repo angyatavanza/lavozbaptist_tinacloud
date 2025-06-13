@@ -10,7 +10,7 @@ import { mermaid } from './blocks/mermaid';
 export const components: Components<{
   BlockQuote: {
     children: TinaMarkdownContent;
-    authorName: string;
+    coordinatorName: string;
   };
   DateTime: {
     format?: string;
@@ -31,13 +31,13 @@ export const components: Components<{
   },
   BlockQuote: (props: {
     children: TinaMarkdownContent;
-    authorName: string;
+    coordinatorName: string;
   }) => {
     return (
       <div>
         <blockquote>
           <TinaMarkdown content={props.children} />
-          {props.authorName}
+          {props.coordinatorName}
         </blockquote>
       </div>
     );

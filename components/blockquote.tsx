@@ -3,15 +3,15 @@ import clsx from "clsx";
 import { Border } from "./ui/border";
 import React, { ReactNode, ReactElement } from "react";
 
-// Shared author type
-interface Author {
+// Shared coordinator type
+interface Coordinator {
   name: string;
   role: string;
 }
 
 // Props for both versions of the blockquote
 interface BaseBlockquoteProps {
-  author: Author;
+  coordinator: Coordinator;
   children: ReactNode;
   className?: string;
 }
@@ -23,7 +23,7 @@ interface BlockquoteWithImageProps extends BaseBlockquoteProps {
 
 // Blockquote with image
 function BlockquoteWithImage({
-  author,
+  coordinator,
   image,
   children,
   className,
@@ -47,10 +47,10 @@ function BlockquoteWithImage({
         />
       </div>
       <figcaption className="text-sm text-neutral-950 sm:col-span-7 sm:row-start-3 sm:text-base">
-        <span className="font-semibold">{author.name}</span>
+        <span className="font-semibold">{coordinator.name}</span>
         <span className="hidden font-semibold sm:inline">, </span>
         <br className="sm:hidden" />
-        <span className="sm:font-semibold">{author.role}</span>
+        <span className="sm:font-semibold">{coordinator.role}</span>
       </figcaption>
     </figure>
   );
@@ -58,7 +58,7 @@ function BlockquoteWithImage({
 
 // Blockquote without image
 function BlockquoteWithoutImage({
-  author,
+  coordinator,
   children,
   className,
 }: BaseBlockquoteProps): ReactElement {
@@ -69,7 +69,7 @@ function BlockquoteWithoutImage({
           {typeof children === "string" ? <p>{children}</p> : children}
         </blockquote>
         <figcaption className="mt-6 font-semibold text-neutral-950">
-          {author.name}, {author.role}
+          {coordinator.name}, {coordinator.role}
         </figcaption>
       </figure>
     </Border>

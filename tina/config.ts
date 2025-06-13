@@ -4,7 +4,7 @@ import nextConfig from '../next.config'
 import Message from "./collection/message";
 import Event from "./collection/event";
 import Global from "./collection/global";
-import Author from "./collection/author";
+import Coordinator from "./collection/coordinator";
 import Page from "./collection/page";
 import Tag from "./collection/tag";
 
@@ -33,7 +33,7 @@ const config = defineConfig({
     basePath: nextConfig.basePath?.replace(/^\//, '') || '', // The base path of the app (could be /blog)
   },
   schema: {
-    collections: [Page, Message, Event, Author, Tag, Global],
+    collections: [Page, Message, Event, Coordinator, Tag, Global],
   },
 });
 

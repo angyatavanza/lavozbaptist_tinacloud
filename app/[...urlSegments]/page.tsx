@@ -4,7 +4,7 @@ import client from '@/tina/__generated__/client';
 import Layout from '@/components/layout/layout';
 import { Section } from '@/components/layout/section';
 import ClientPage from './client-page';
-import imageWhiteboard from "@/images/whiteboard.jpg";
+
 
 export const revalidate = 300;
 

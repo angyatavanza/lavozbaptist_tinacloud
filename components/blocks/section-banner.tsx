@@ -8,7 +8,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { PageBlocksBanner } from "@/tina/__generated__/types";
 import { TinaIcon } from "../icon";
 import { AnimatedGroup } from "../motion-primitives/animated-group";
-import imageWhiteboard from "@/images/whiteboard.jpg";
+
 import { Section } from "../layout/section";
 
 //done 23a: add  data.bannerimg code TINA CMS/BACKEND

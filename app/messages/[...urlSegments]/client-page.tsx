@@ -10,7 +10,7 @@ import { useLayout } from '@/components/layout/layout-context';
 import MessagesVideoDialog from "@/components/ui/messages-video-dialog";
 import { Section } from '@/components/layout/section';
 import { components } from '@/components/mdx-components';
-import imageWhiteboard from "@/images/whiteboard.jpg";
+
 import ErrorBoundary from '@/components/error-boundary';
 
 const titleColorClasses = {
@@ -80,27 +80,27 @@ export default function MessageClientPage(props: ClientMessageProps) {
         <h2 data-tina-field={tinaField(message, 'title')} className={`w-full relative\tmb-8 text-6xl font-extrabold tracking-normal text-center title-font`}>
           <span className={`bg-clip-text text-transparent bg-linear-to-r ${titleColorClasses[theme!.color!]}`}>{message.title}</span>
         </h2>
-        <div data-tina-field={tinaField(message, 'author')} className='flex items-center justify-center mb-16'>
-          {message.author && (
+        <div data-tina-field={tinaField(message, 'coordinator')} className='flex items-center justify-center mb-16'>
+          {message.coordinator && (
             <>
-              {message.author.avatar && (
+              {message.coordinator.avatar && (
                 <div className='shrink-0 mr-4'>
                   <Image
-                    data-tina-field={tinaField(message.author, 'avatar')}
+                    data-tina-field={tinaField(message.coordinator, 'avatar')}
                     priority={true}
                     className='h-14 w-14 object-cover rounded-full shadow-xs'
-                    src={message.author.avatar}
-                    alt={message.author.name}
+                    src={message.coordinator.avatar}
+                    alt={message.coordinator.name}
                     width={500}
                     height={500}
                   />
                 </div>
               )}
               <p
-                data-tina-field={tinaField(message.author, 'name')}
+                data-tina-field={tinaField(message.coordinator, 'name')}
                 className='text-base font-medium text-gray-600 group-hover:text-gray-800 dark:text-gray-200 dark:group-hover:text-white'
               >
-                {message.author.name}
+                {message.coordinator.name}
               </p>
               <span className='font-bold text-gray-200 dark:text-gray-500 mx-2'>—</span>
             </>

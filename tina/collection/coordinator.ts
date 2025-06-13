@@ -1,9 +1,9 @@
 import type { Collection } from "tinacms";
 
-const Author: Collection = {
-  label: "Authors",
-  name: "author",
-  path: "content/authors",
+const Coordinator: Collection = {
+  label: "Coordinators",
+  name: "coordinator",
+  path: "content/coordinators",
   format: "md",
   fields: [
     {
@@ -18,8 +18,8 @@ const Author: Collection = {
       label: "Avatar",
       name: "avatar",
       // @ts-ignore
-      uploadDir: () => "authors",
+      uploadDir: () => "coordinators",
     },
   ],
 };
-export default Author;
+export default Coordinator;

@@ -37,7 +37,7 @@ export const Step2  = ({ data }: { data: PageBlocksStep2 }) => {
         </p>
       </div>
       <Blockquote
-        author={{ name: "Debra Fiscal", role: "CEO of Unseal" }}
+        coordinator={{ name: "Debra Fiscal", role: "CEO of Unseal" }}
         className="mt-12"
       >
         Studio_clone were so regular with their progress updates we almost began
