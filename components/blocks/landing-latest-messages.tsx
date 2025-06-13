@@ -9,6 +9,7 @@ import { tinaField } from 'tinacms/dist/react';
 import { iconSchema } from "@/tina/fields/icon";
 import { Button } from '@/components/ui/button';
 import { TinaIcon } from '../icon';
+import MessagesVideoDialog from "../ui/messages-video-dialog";
 import { ArrowRight, UserRound } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { format } from "date-fns";
@@ -17,6 +18,23 @@ import Link from "next/link";
 import Image from "next/image";
 
 //to-do 32: add fb video API to messages page or add tina field to accept a link to Vimeo video in messages page TINA CMS/BACKEND
+function extractFacebookVideoId(url: string): string | null {
+  try {
+    // Handle plugin-style Facebook URLs
+    if (url.includes("facebook.com/plugins/video.php")) {
+      const parsed = new URL(url);
+      const href = decodeURIComponent(parsed.searchParams.get("href") || "");
+      const match = href.match(/\/videos\/(\d+)/);
+      return match ? match[1] : null;
+    }
+
+    // Handle standard Facebook watch or direct video URLs
+    const match = url.match(/\/videos\/(\d+)/);
+    return match ? match[1] : null;
+  } catch {
+    return null;
+  }
+}
 
 interface Author {
   name?: string;
@@ -28,7 +46,13 @@ interface Message {
   title: string;
   date?: string;
   excerpt?: any;
-  heroImg?: string;
+  image?: {
+    src?: string;          
+    alt?: string;           
+    videoUrl?: string;      
+    autoPlay?: boolean;     
+    loop?: boolean;         
+  };
   author?: Author;
   tags?: { tag?: { name?: string } }[];
   _sys: { breadcrumbs: string[] };
@@ -89,7 +113,18 @@ export const LatestMessages = ({
             const postedDate = message.date
               ? format(new Date(message.date), "MMM dd, yyyy")
               : "";
-
+            let videoId = "";
+              if (message.image?.videoUrl) {
+                const fbVideoId = extractFacebookVideoId(message.image.videoUrl);
+                if (fbVideoId) {
+                  videoId = fbVideoId;
+                }
+              }
+              const thumbnailSrc = message.image?.src
+                ? message.image.src!
+                : videoId
+                ? `https://graph.facebook.com/${videoId}/picture`
+                : "";
             return (
               <Card
                 key={message.id}
@@ -154,20 +189,17 @@ export const LatestMessages = ({
                       </Link>
                     </div>
                   </div>
-
-                  {message.heroImg && (
+                  {message.image?.videoUrl && (
                     <div className="order-first sm:order-last sm:col-span-5">
                       <Link
                         href={`/messages/${message._sys.breadcrumbs.join("/")}`}
                         className="block"
                       >
                         <div className="aspect-[16/9] overflow-clip rounded-lg border border-border">
-                          <Image
-                            width={533}
-                            height={300}
-                            src={message.heroImg}
-                            alt={message.title}
-                            className="h-full w-full object-cover transition-opacity duration-200 fade-in hover:opacity-70"
+                          <MessagesVideoDialog
+                            videoSrc={message.image.videoUrl}
+                            thumbnailSrc={thumbnailSrc}
+                            thumbnailAlt="Messages Video"
                           />
                         </div>
                       </Link>

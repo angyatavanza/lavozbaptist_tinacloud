@@ -24,7 +24,23 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 //to-do 34: implement design ui of indiv message
 
 //line 144: <ReactPlayer width="100%" height="100%" style={{ margin: "auto" }} playing={!!message.image.autoPlay} loop={!!message.image.loop} controls={true} url={message.image.videoUrl}/>
+function extractFacebookVideoId(url: string): string | null {
+  try {
+    // Handle plugin-style Facebook URLs
+    if (url.includes("facebook.com/plugins/video.php")) {
+      const parsed = new URL(url);
+      const href = decodeURIComponent(parsed.searchParams.get("href") || "");
+      const match = href.match(/\/videos\/(\d+)/);
+      return match ? match[1] : null;
+    }
 
+    // Handle standard Facebook watch or direct video URLs
+    const match = url.match(/\/videos\/(\d+)/);
+    return match ? match[1] : null;
+  } catch {
+    return null;
+  }
+}
 interface ClientMessageProps {
   data: MessageConnectionQuery;
   variables: MessageConnectionQueryVariables;
@@ -73,22 +89,19 @@ export default function MessagesClientPage(props: ClientMessageProps) {
 
           <div className="grid gap-y-10 sm:grid-cols-12 sm:gap-y-12 md:gap-y-16 lg:gap-y-20">
             {messages.map((message) => {
-              const videoUrl = message.image?.videoUrl;
+              //const videoUrl = ;
 
               let videoId = "";
-              if (videoUrl) {
-                const embedPrefix = "/embed/";
-                const idx = videoUrl.indexOf(embedPrefix);
-                if (idx !== -1) {
-                  videoId = videoUrl
-                    .substring(idx + embedPrefix.length)
-                    .split("?")[0];
+              if (message.image?.videoUrl) {
+                const fbVideoId = extractFacebookVideoId(message.image.videoUrl);
+                if (fbVideoId) {
+                  videoId = fbVideoId;
                 }
               }
               const thumbnailSrc = message.image?.src
                 ? message.image.src!
                 : videoId
-                ? `https://i3.ytimg.com/vi/${videoId}/maxresdefault.jpg`
+                ? `https://graph.facebook.com/${videoId}/picture`
                 : "";
 
               return (
@@ -149,25 +162,15 @@ export default function MessagesClientPage(props: ClientMessageProps) {
                         </Link>
                       </div>
                     </div>
-                    {message.image?.src && (
+                    {message.image?.videoUrl && (
                       <div className="order-first sm:order-last sm:col-span-5">
                         <Link href={message.url} className="block">
                           <div className="aspect-[16/9] overflow-clip rounded-lg border border-border">
-                            {videoUrl ? (
                               <MessagesVideoDialog
-                                videoSrc={videoUrl}
+                                videoSrc={message.image.videoUrl}
                                 thumbnailSrc={thumbnailSrc}
                                 thumbnailAlt="Messages Video"
                               />
-                            ) : (
-                              <Image
-                                width={533}
-                                height={300}
-                                src={thumbnailSrc}
-                                alt={message.title}
-                                className="h-full w-full object-cover transition-opacity duration-200 fade-in hover:opacity-70"
-                              />
-                            )}
                           </div>
                         </Link>
                       </div>
@@ -175,7 +178,7 @@ export default function MessagesClientPage(props: ClientMessageProps) {
                   </div>
                 </Card>
               );
-            })}
+              })}
           </div>
         </div>
       </Section>

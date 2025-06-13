@@ -7,6 +7,7 @@ import { tinaField, useTina } from 'tinacms/dist/react';
 import { TinaMarkdown } from 'tinacms/dist/rich-text';
 import { MessageQuery } from '@/tina/__generated__/types';
 import { useLayout } from '@/components/layout/layout-context';
+import MessagesVideoDialog from "@/components/ui/messages-video-dialog";
 import { Section } from '@/components/layout/section';
 import { components } from '@/components/mdx-components';
 import imageWhiteboard from "@/images/whiteboard.jpg";
@@ -22,6 +23,24 @@ const titleColorClasses = {
   orange: 'from-orange-300 to-orange-600 dark:from-orange-200 dark:to-orange-500',
   yellow: 'from-yellow-400 to-yellow-500 dark:from-yellow-300 dark:to-yellow-500',
 };
+
+function extractFacebookVideoId(url: string): string | null {
+  try {
+    // Handle plugin-style Facebook URLs
+    if (url.includes("facebook.com/plugins/video.php")) {
+      const parsed = new URL(url);
+      const href = decodeURIComponent(parsed.searchParams.get("href") || "");
+      const match = href.match(/\/videos\/(\d+)/);
+      return match ? match[1] : null;
+    }
+
+    // Handle standard Facebook watch or direct video URLs
+    const match = url.match(/\/videos\/(\d+)/);
+    return match ? match[1] : null;
+  } catch {
+    return null;
+  }
+}
 
 interface ClientMessageProps {
   data: MessageQuery;
@@ -41,6 +60,19 @@ export default function MessageClientPage(props: ClientMessageProps) {
   if (!isNaN(date.getTime())) {
     formattedDate = format(date, 'MMM dd, yyyy');
   }
+  
+  let videoId = "";
+  if (message.image?.videoUrl) {
+    const fbVideoId = extractFacebookVideoId(message.image.videoUrl);
+    if (fbVideoId) {
+      videoId = fbVideoId;
+    }
+  }
+  const thumbnailSrc = message.image?.src
+    ? message.image.src!
+    : videoId
+    ? `https://graph.facebook.com/${videoId}/picture`
+    : "";
 
   return (
     <ErrorBoundary>
@@ -80,6 +112,17 @@ export default function MessageClientPage(props: ClientMessageProps) {
             {formattedDate}
           </p>
         </div>
+        {message.image?.videoUrl && (
+          <div className="order-first sm:order-last sm:col-span-5">
+            <div className="aspect-[16/9] overflow-clip rounded-lg border border-border">
+              <MessagesVideoDialog
+                videoSrc={message.image.videoUrl}
+                thumbnailSrc={thumbnailSrc}
+                thumbnailAlt="Messages Video"
+              />
+            </div>
+          </div>
+        )}
         {message.image?.src && (
           <div className='px-4 w-full'>
             <div data-tina-field={tinaField(message, 'image')} className='relative max-w-4xl lg:max-w-5xl mx-auto'>
