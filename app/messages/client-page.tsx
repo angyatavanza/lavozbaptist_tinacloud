@@ -18,10 +18,11 @@ import { PageIntro } from "@/components/page-intro";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 //to-do 30: create a messages-home page DESIGN/FRONTEND
-//to-do 31a: create an message-archive page DESIGN/FRONTEND
-//to-do 31b: redesign messages-latest-message page DESIGN/FRONTEND
+//to-do 31: create an message-archive page DESIGN/FRONTEND
+//done 32: add tina field to accept a link to Vimeo video in messages page TINA CMS/BACKEND
 //to-do 33: redesign the all messages page + change layout of all messages card in messages page DESIGN/FRONTEND
 //to-do 34: implement design ui of indiv message
+//to-do 37: redesign messages-latest-message page DESIGN/FRONTEND
 
 //line 144: <ReactPlayer width="100%" height="100%" style={{ margin: "auto" }} playing={!!message.image.autoPlay} loop={!!message.image.loop} controls={true} url={message.image.videoUrl}/>
 function extractFacebookVideoId(url: string): string | null {

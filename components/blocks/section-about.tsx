@@ -23,9 +23,9 @@ import { cn } from "@/lib/utils";
 import { ContactSection } from "./section-contact";
 
 //done 26: add contactsection to sections
-//done 27a: merge aboutsection component --currently there are 2 descriptions
-//to-do 27b: change image to be to the left of the div
-//to-do 29: update the ui of the about page; blocks: Herocontent, banner?, aboutsection, mission, vision, teammembers, faq, cta, contact
+//done 27: merge aboutsection component --currently there are 2 descriptions
+//to-do 22: change image to be to the left of the div
+//to-do 25: update the ui of the about page; blocks: Herocontent, banner?, aboutsection, mission, vision, teammembers, faq, cta, contact
 
 const transitionVariants = {
   container: {

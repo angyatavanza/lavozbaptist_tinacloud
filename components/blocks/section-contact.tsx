@@ -12,7 +12,7 @@ import type { Template } from "tinacms";
 import { PageBlocksContactsection } from "@/tina/__generated__/types";
 
 //done 16: add data.title and data.actions to section-contact
-//to-do 17: change button and text
+///to-do 61: change button and text in section-contact TINA CMS/CONTENT
 
 export const ContactSection = ({
   data,

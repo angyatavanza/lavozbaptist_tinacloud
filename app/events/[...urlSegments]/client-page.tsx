@@ -14,10 +14,17 @@ import { Section } from '@/components/layout/section';
 import { components } from '@/components/mdx-components';
 import ErrorBoundary from '@/components/error-boundary';
 
-const CustomGForm = dynamic(() => import('@customgform-lib/react-customgform'), {
+/* const CustomGForm = dynamic(() => import('@customgform-lib/react-customgform'), {
   ssr: false,
   loading: () => <p>Loading form...</p>,
 });
+<CustomGForm
+  formId="cmbuzv5i800j4wnh93h0r2zns" 
+  mode='popup'
+  label="Show form"
+  inlineStyles='border: none;appearance: none;cursor: pointer;padding: 8px 12px;display: inline-block;background: #3f6bff;font-size: 16px;color: #fff;border-radius: 6px;font-weight: 500;'
+/>
+*/
 
 const titleColorClasses = {
   blue: 'from-blue-400 to-blue-600 dark:from-blue-300 dark:to-blue-500',
@@ -183,12 +190,6 @@ export default function EventClientPage(props: ClientEventProps) {
                     <span className="text-nowrap">{action!.label}</span>
                   </Link>
                 </Button>
-                <CustomGForm
-                  formId="cmbuzv5i800j4wnh93h0r2zns" 
-                  mode='popup' 
-                  label="Show form"
-                  inlineStyles='border: none;appearance: none;cursor: pointer;padding: 8px 12px;display: inline-block;background: #3f6bff;font-size: 16px;color: #fff;border-radius: 6px;font-weight: 500;'
-                />
               </div>
             ))}
         </div>

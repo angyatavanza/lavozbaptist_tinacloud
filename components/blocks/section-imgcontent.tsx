@@ -6,9 +6,9 @@ import { Card, CardContent } from "../ui/card";
 import { tinaField } from "tinacms/dist/react";
 import { sectionBlockSchemaField } from '../layout/section';
 
-//done 36a: add needed blocks to serve page
-//to-do 36b: serve page: add button to missions, change the fields in the template for contentwimage
-//to-do 37: add needed blocks to groups page + change headline to be below tagline
+//done 36: add needed blocks to serve page
+//to-do 50: serve page: add button to missions, change the fields in the template for contentwimage
+//to-do 38: add needed blocks to groups page + change headline to be below tagline
 export const ContentAndImage = ({ data }: { data: PageBlocksContentandimage }) => {
   return (
     <Section  background={data.background!}>

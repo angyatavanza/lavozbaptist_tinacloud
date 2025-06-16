@@ -15,7 +15,8 @@ import { iconSchema } from '@/tina/fields/icon';
 import { tinaField } from "tinacms/dist/react";
 import { PageBlocksPartner } from "@/tina/__generated__/types";
 import { TinaIcon } from '../icon';
-//to-do 57: add data.title + data.description + data.actions
+//to-do 73: add the partners+testimonial block component to a page ? TINA CMS/CONTENT
+//to-do 74: add data.title + data.description + data.actions to partners component TINA CMS/BACKEND
 type PartnerMember = [string, StaticImageData];
 
 const partnerMembers: PartnerMember[] = [

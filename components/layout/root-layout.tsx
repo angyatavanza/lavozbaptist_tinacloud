@@ -18,7 +18,6 @@ import { SocialMedia } from "../social-media";
 import { Footer } from "./footer";
 
 
-//done 0: remove tina icon 
 /*
 <Link href="/" aria-label="home" className="flex items-center space-x-2">
   <TinaIcon
@@ -34,8 +33,8 @@ import { Footer } from "./footer";
   </span>
  </Link>
 */
-//to-do 25a: replace images for all block templates TINA CMS CONTENT
-//to-do 25b: add la voz logo png or svg
+//to-do 68: replace images for all block templates TINA CMS/CONTENT
+//to-do 69: add la voz logo png or svg
 
 interface HeaderProps {
   panelId: string;

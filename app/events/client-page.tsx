@@ -16,10 +16,10 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 //done 35a: create events page tina collection 
 //done 35b: add more sections to events template such as date, time, details,
-//to-do 35c: add data.address + data.actions [add link to a form] to events page.
-//to-do 35d: replace content/mdx files with relevant events
-//to-do 35e: edit ui of the individual event page
-//to-do 35f: edit ui of all events page
+//to-do 46: add data.address + data.actions [add link to a form] to events page.
+//to-do 47: edit ui of the individual event page
+//to-do 48: edit ui of all events page
+//to-do 64: replace content/mdx files with relevant events
 
 interface ClientEventProps {
   data: EventConnectionQuery;

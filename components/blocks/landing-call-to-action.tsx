@@ -8,7 +8,7 @@ import { iconSchema } from "@/tina/fields/icon";
 import { tinaField } from "tinacms/dist/react";
 import { sectionBlockSchemaField } from "../layout/section";
 
-//to-do 15:change the color of the wave in call to action
+//to-do 15: change the color of the wave in call to action
 
 export const CallToAction = ({ data }: { data: PageBlocksCta }) => {
   return (

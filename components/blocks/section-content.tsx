@@ -10,8 +10,8 @@ import { sectionBlockSchemaField } from '../layout/section';
 
 import { scriptCopyBlockSchema, ScriptCopyBtn } from "../magicui/script-copy-btn";
 
-//to-do 40: create content for resources page
-//to-do 41: add paypalAPI to donations
+//to-do 65: create content for resources page
+//to-do 52: add paypalAPI to donations
 
 export const Content = ({ data }: { data: PageBlocksContent }) => {
   return (

@@ -15,7 +15,7 @@ import { mermaid } from "./mermaid";
 import { sectionBlockSchemaField } from "../layout/section";
 
 //done 28: add faq section to block Tina schema TINA CMS/BACKEND 
-//to-do 28a: Implement faq section design DESIGN/FRONTEND 
+//to-do 24: Implement faq section design DESIGN/FRONTEND 
 
 export const FreqAskedQuestions = ({ data }: { data: PageBlocksFreqaskedquestions }) => {
 

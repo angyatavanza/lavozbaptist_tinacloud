@@ -12,7 +12,6 @@ import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { Card, CardContent } from "../ui/card";
 import { tinaField } from "tinacms/dist/react";
 import { sectionBlockSchemaField } from "../layout/section";
-//to-do 20: add text to testimonial in homepage
 
 export const Testimonial = ({ data }: { data: PageBlocksTestimonial }) => {
   return (
@@ -70,7 +69,7 @@ const TestimonialCard = ({ testimonial }: { testimonial: PageBlocksTestimonialTe
         >
           {testimonial.avatar && (
             <AvatarImage
-              alt={testimonial.coordinator!}
+              alt={testimonial.author!}
               src={testimonial.avatar}
               loading="lazy"
               width="120"
@@ -79,7 +78,7 @@ const TestimonialCard = ({ testimonial }: { testimonial: PageBlocksTestimonialTe
           )}
           <AvatarFallback>
             {testimonial
-              .coordinator!.split(" ")
+              .author!.split(" ")
               .map((word) => word[0])
               .join("")}
           </AvatarFallback>
@@ -88,9 +87,9 @@ const TestimonialCard = ({ testimonial }: { testimonial: PageBlocksTestimonialTe
         <div>
           <h3
             className="font-medium"
-            data-tina-field={tinaField(testimonial, "coordinator")}
+            data-tina-field={tinaField(testimonial, "author")}
           >
-            {testimonial.coordinator}
+            {testimonial.author}
           </h3>
 
           <span
@@ -122,7 +121,7 @@ export const testimonialBlockSchema: Template = {
         {
           quote:
             "There are only two hard things in Computer Science: cache invalidation and naming things.",
-          coordinator: "Phil Karlton",
+          author: "Phil Karlton",
         },
       ],
     },
@@ -151,11 +150,11 @@ export const testimonialBlockSchema: Template = {
         defaultItem: {
           quote:
             "There are only two hard things in Computer Science: cache invalidation and naming things.",
-          coordinator: "Phil Karlton",
+          author: "Phil Karlton",
         },
         itemProps: (item) => {
           return {
-            label: `${item.quote} - ${item.coordinator}`,
+            label: `${item.quote} - ${item.author}`,
           };
         },
       },
@@ -171,7 +170,7 @@ export const testimonialBlockSchema: Template = {
         {
           type: "string",
           label: "Coordinator",
-          name: "coordinator",
+          name: "author",
         },
         {
           type: "string",

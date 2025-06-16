@@ -12,7 +12,7 @@ import { Card, CardContent, CardHeader } from "../ui/card";
 import { Section } from "../layout/section";
 
 import { sectionBlockSchemaField } from '../layout/section';
-//to-do 11: add text to connections in homepage
+//to-do 60: add placeholder text to connections in homepage TINA CMS/CONTENT
 export const Connections = ({ data }: { data: PageBlocksConnections }) => {
   return (
     <Section background={data.background!}>

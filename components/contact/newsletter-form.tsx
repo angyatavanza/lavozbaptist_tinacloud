@@ -1,4 +1,4 @@
-//to-do 49: add functionality to newsletter-form
+//to-do 44: add functionality to newsletter-form
 type SVGProps = React.SVGProps<SVGSVGElement>;
 
 const ArrowIcon = (props: SVGProps) => {

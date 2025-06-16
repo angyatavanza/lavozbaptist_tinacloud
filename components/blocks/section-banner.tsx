@@ -11,9 +11,9 @@ import { AnimatedGroup } from "../motion-primitives/animated-group";
 
 import { Section } from "../layout/section";
 
-//done 23a: add  data.bannerimg code TINA CMS/BACKEND
-//to-do 23b: change layout of data.bannerimg to be to the side of the banner DESIGN/FRONTEND 
-//to-do 24: add banner component to messages?, groups -done, our-team, nextsteps, events
+//done 23: add  data.bannerimg code TINA CMS/BACKEND
+//to-do 57: change layout of data.bannerimg to be to the side of the banner DESIGN/FRONTEND 
+//to-do 67: add banner component to messages?, groups -done, our-team, nextsteps, events
 
 const transitionVariants = {
   container: {

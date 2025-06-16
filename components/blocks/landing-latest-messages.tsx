@@ -17,7 +17,9 @@ import { Section } from "../layout/section";
 import Link from "next/link";
 import Image from "next/image";
 
-//to-do 32: add fb video API to messages page or add tina field to accept a link to Vimeo video in messages page TINA CMS/BACKEND
+//done 12: create a latestmessages component that extract the latest 3 messages in homepage
+//to-do 29: add fb video API (Graph APi) to messages thumbnails in the messages page TINA CMS/BACKEND
+
 function extractFacebookVideoId(url: string): string | null {
   try {
     // Handle plugin-style Facebook URLs

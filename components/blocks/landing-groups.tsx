@@ -17,11 +17,10 @@ import { AnimatedGroup } from "../motion-primitives/animated-group";
 import { sectionBlockSchemaField } from "../layout/section";
 
 
-//to-do 12a: create a latestmessages component that extract the latest 3 messages in homepage
-//to-do 12b: change layout of latest message card in homepage
 //done 13: add buttons to each card in groups component
 //to-do 14: change layout of each group card: Image with overlay text of the group name
 //to-do 18: change layout of group items cards in landing-groups page DESIGN/FRONTEND 
+//to-do 19: change layout of latest message card in homepage
 
 const transitionVariants = {
   container: {

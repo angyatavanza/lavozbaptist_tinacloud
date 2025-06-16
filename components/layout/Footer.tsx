@@ -8,8 +8,7 @@ import { useLayout } from "./layout-context";
 import { FooterNavigation } from "./footer-navigation";
 import { Logo } from "../logo";
 
-//to-do 21: remove tina icon from footer
-//to-do 22: 
+//to-do 66: remove tina icon from footer
 
 type SVGProps = React.SVGProps<SVGSVGElement>;
 

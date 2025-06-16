@@ -9,7 +9,8 @@ import { tinaField } from "tinacms/dist/react";
 import { PageBlocksStep1 } from '@/tina/__generated__/types';
 import { TinaIcon } from '../icon';
 
-//to-do 38: complete steps page
+//to-do 40: complete steps page DESIGN/FRONTEND
+//to-do 63: complete steps page TINA CMS/CONTENT
 //to-do 39: add data.code + fix stylized image in steps page
 
 export const Step1  = ({ data }: { data: PageBlocksStep1 }) => {

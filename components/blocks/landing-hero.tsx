@@ -26,8 +26,8 @@ import { cn } from "@/lib/utils";
 //done 4: fix thumbnail errors + move both headline and tagline to be an overlay over video + move tagline so it is above the headline
 //done 5: update herocontent component to match landing-hero
 //to-do 6: extend the width of the div for the hero video to be full-width + remove the white looking border around the video + fix the section width of the section background of the blocks when the url goes to /home or /about
-//to-do 58: take screenshots of all of the blocks and upload to the blocks folder TINA CMS CONTENT
-//to-do 59: change the default text in each block component TINA CMS CONTENT
+//to-do 71: take screenshots of all of the blocks and upload to the blocks folder TINA CMS/CONTENT
+//to-do 72: change the default text in each block component TINA CMS/CONTENT
 
 const transitionVariants = {
   container: {
