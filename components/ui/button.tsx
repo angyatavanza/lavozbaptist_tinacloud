@@ -5,7 +5,7 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 //to-do 17: change the button in the hero section
 //to-do 58: add a border to the ghost/outline button
-//to-do 59: change purple-800 from the hamburger menu to be neutral color and change all tailwind class colors to be Oklch color
+//to-do 56: change purple-800 from the hamburger menu to be neutral color and change all tailwind class colors to be Oklch color
 //to-do 53: add quicksand font
 //to-do 54: remove tina icon from buttons
 //to-do 55: change ui of  the photos

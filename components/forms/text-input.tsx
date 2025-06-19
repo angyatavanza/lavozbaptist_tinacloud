@@ -1,22 +1,22 @@
-import Image from "next/image";
 import React, { useId, InputHTMLAttributes } from "react";
 
-// Extend standard input props and add custom `label` prop
+// Define the props interface
 interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
-  label: string;
+  label: string; // Label is required
 }
 
-export const TextInput = ({ label, ...props }: TextInputProps) => {
-  const id = useId();
+export const TextInput: React.FC<TextInputProps> = ({ label, ...props }) => {
+  const id = useId(); // Generate a unique ID
+
 
   return (
     <div className="group relative z-0 transition-all focus-within:z-10">
       <input
         type="text"
         id={id}
-        {...props}
+        {...props} // Spread other props (e.g., placeholder, value, onChange, etc.)
         placeholder=" "
-        className="peer block w-full border border-purple-300 bg-transparent px-6 pb-4 pt-12 text-base/6 text-neutral-950 ring-4 ring-transparent transition focus:border-purple-800 focus:outline-none focus:ring-purple-800/5 group-first:rounded-t-2xl group-last:rounded-b-2xl"
+        className="peer block w-full border border-neutral-300 bg-transparent px-6 pb-4 pt-12 text-base/6 text-neutral-950 ring-4 ring-transparent transition focus:border-neutral-950 focus:outline-none focus:ring-neutral-950/5 group-first:rounded-t-2xl group-last:rounded-b-2xl"
       />
       <label
         htmlFor={id}

@@ -15,7 +15,6 @@ import { iconSchema } from "@/tina/fields/icon";
 import { TinaIcon } from "../icon";
 import { PageIntro } from "../page-intro";
 import { Section, sectionBlockSchemaField } from "../layout/section";
-
 import { AnimatedGroup } from "../motion-primitives/animated-group";
 import { TextEffect } from "../motion-primitives/text-effect";
 import HeroVideoDialog from "../ui/hero-video-dialog";

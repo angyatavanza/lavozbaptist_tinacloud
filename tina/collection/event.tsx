@@ -244,7 +244,7 @@ const Event: Collection = {
           ],
         },
         {
-          name: 'NewsletterSignup',
+          name: 'ContactSignup',
           label: 'Newsletter Sign Up',
           fields: [
             {
