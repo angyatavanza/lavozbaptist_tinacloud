@@ -9,10 +9,10 @@ export const ContactDetails = () => {
   return (
     <FadeIn>
       <h2 className="font-display text-base font-semibold text-neutral-950">
-        Nuestra ubicacion y horario de servicios
+       Nuestra ubicación y horario de servicios
       </h2>
       <p className="mt-6 text-base text-neutral-600">
-        Le invitamos a unirse a nuestros estudios bíblicos entre semana y al servicio general del Domingo.
+        Le invitamos a unirse a nuestros estudios bíblicos entre semana y al servicio general del Domingo. Contamos con estacionamiento gratuito y fácil acceso al edificio. El servicio tiene una duración aproximada de 1 hora y 30 minutos. Incluye tiempos de alabanza, enseñanza bíblica práctica y momentos de oración
       </p>
       <ServiceTimes className="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-2" />
       <Border className="mt-16 pt-16">

@@ -48,9 +48,8 @@ export const navigation: NavigationSection[] = [
     ],
   },
   {
-    title: "Recursos",
+    title: "Recursos Comunitarios",
     links: [
-      { title: "Recursos", href: "/resources" },
       { title: "Recursos Comunitarios", href: "/community-resources" },
     ],
   },

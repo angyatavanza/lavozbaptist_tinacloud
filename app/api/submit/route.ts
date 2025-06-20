@@ -40,7 +40,7 @@ export async function POST(req: NextRequest) {
       range: "A1:J1",
       valueInputOption: "USER_ENTERED",
       requestBody: {
-        values: [[body.name,body.lastname, body.email, body.phone, body.message, body.address, body.citystatezip, body.visitcount,body.subject, body.age,]],
+        values: [[body.name,body.lastname, body.phone,  body.email, body.address, body.citystatezip, body.message, body.subject, body.visitcount, body.age,]],
       },
     });
 

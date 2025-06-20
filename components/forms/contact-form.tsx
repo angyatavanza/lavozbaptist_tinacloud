@@ -62,7 +62,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({
     <FadeIn>
       <form onSubmit={handleSubmit(onSubmit)}>
         <h2 className="font-display text-base font-semibold text-neutral-950">
-          Envíanos un mensaje:
+          Tiene preguntas? Contáctenos un mensaje:
         </h2>
 
         {hasError && (
@@ -86,19 +86,19 @@ export const ContactForm: React.FC<ContactFormProps> = ({
           />
 
           <TextInput
+            type="tel"
+            {...register("phone")}
+            placeholder="Su número de teléfono"
+            label="Número de teléfono"
+          />
+
+          <TextInput
             type="email"
             {...register("email", { required: true })}
             placeholder={placeholder}
             label="Correo electrónico"
           />
           {errors.email && <span className="text-red-500 text-sm">Correo requerido</span>}
-
-          <TextInput
-            type="tel"
-            {...register("phone")}
-            placeholder="Su número de teléfono"
-            label="Número de teléfono"
-          />
 
           <TextInput
             {...register("message", { required: true })}

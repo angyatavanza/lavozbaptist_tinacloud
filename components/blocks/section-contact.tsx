@@ -12,7 +12,7 @@ import type { Template } from "tinacms";
 import { PageBlocksContactsection } from "@/tina/__generated__/types";
 
 //done 16: add data.title and data.actions to section-contact
-///to-do 61: change button and text in section-contact TINA CMS/CONTENT
+//done 61: change button and text in section-contact TINA CMS/CONTENT
 
 export const ContactSection = ({
   data,
@@ -53,7 +53,7 @@ export const ContactSection = ({
           </div>
           <div className="mt-10 border-t border-white/10 pt-10">
             <h3 className="font-display text-base font-semibold text-white">
-              Nuestra ubicacion y horario de servicios
+              Nuestra ubicación y horario de servicios
             </h3>
             <ServiceTimes
               invert

@@ -35,17 +35,16 @@ export const ServiceTimes = ({
   return (
     <ul role="list" {...props}>
       <li>
-        <ServiceTime name="Ubicación" invert={invert}>
+        <ServiceTime name="¿Dónde estamos?" invert={invert}>
           7122 Robinson Church Rd
           <br />
           Charlotte, NC 28215
         </ServiceTime>
       </li>
       <li>
-        <ServiceTime name="Horario de servicios" invert={invert}>
-          Escuela Dominical 9:45AM
+        <ServiceTime name="¿Cuándo nos reunimos?" invert={invert}>
+          Domingos a las 11:00 AM
           <br />
-          Culto General 11:00AM
         </ServiceTime>
       </li>
     </ul>

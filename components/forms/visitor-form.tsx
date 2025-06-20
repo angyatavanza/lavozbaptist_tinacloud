@@ -64,7 +64,7 @@ export const FTVisitorForm: React.FC<FTVisitorFormProps> = ({
     <FadeIn>
       <form onSubmit={handleSubmit(onSubmit)}>
         <h2 className="font-display text-base font-semibold text-neutral-950">
-          Envíanos un mensaje:
+          Tiene preguntas? Contáctenos un mensaje:
         </h2>
 
         {hasError && (
@@ -101,16 +101,19 @@ export const FTVisitorForm: React.FC<FTVisitorFormProps> = ({
             label="Correo electrónico"
           />
           {errors.email && <span className="text-red-500 text-sm">Correo requerido</span>}
+          
           <TextInput
             {...register("address", { required: false})}
             placeholder="Calle"
             label="Línea de dirección 1"
           />
+
           <TextInput
             {...register("citystatezip", { required: false})}
             placeholder="Ciudad Estado Código Postal"
             label="Línea de dirección 2"
           />
+          
           <div className="border border-neutral-300 px-6 py-8 first:rounded-t-2xl last:rounded-b-2xl">
             <fieldset>
               <legend className="text-base/6 text-neutral-500">Estoy Visitando:</legend>

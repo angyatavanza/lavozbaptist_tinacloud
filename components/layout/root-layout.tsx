@@ -35,6 +35,7 @@ import { Footer } from "./footer";
 */
 //to-do 68: replace images for all block templates TINA CMS/CONTENT
 //to-do 69: add la voz logo png or svg
+//to-do 74: root-layout: Type 'RefObject<HTMLButtonElement | null>' is not assignable to type 'LegacyRef<HTMLButtonElement> | undefined'.
 
 interface HeaderProps {
   panelId: string;
@@ -122,7 +123,7 @@ const Navigation = () => {
         <NavigationItem href="/serve">Servir</NavigationItem>
       </NavigationRow>
       <NavigationRow>
-        <NavigationItem href="/resources">Recursos</NavigationItem>
+        <NavigationItem href="/community-resources">Recursos</NavigationItem>
         <NavigationItem href="/give">Haz tu Donación</NavigationItem>
       </NavigationRow>
     </nav>
@@ -194,7 +195,7 @@ const RootLayoutInner = ({ children }: RootLayoutInnerProps) => {
                 <div className="grid grid-cols-1 gap-y-10 pb-16 pt-10 sm:grid-cols-2 sm:pt-16">
                   <div>
                     <h2 className="font-display text-base font-semibold text-white">
-                      Nuestra ubicacion y horario de servicios
+                     Nuestra ubicación y horario de servicios
                     </h2>
                     <ServiceTimes invert className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2" />
                   </div>
