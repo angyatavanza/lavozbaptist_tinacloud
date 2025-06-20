@@ -4,8 +4,7 @@ import { Border } from "../ui/border";
 import Link from "next/link";
 import { SocialMedia } from "../social-media";
 
-//to-do 43:  add contact page to /content + add form-details component to /form page  
-export const ContactDetails = () => {
+export const ServeDetails = () => {
   return (
     <FadeIn>
       <h2 className="font-display text-base font-semibold text-neutral-950">
@@ -17,7 +16,7 @@ export const ContactDetails = () => {
       <ServiceTimes className="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-2" />
       <Border className="mt-16 pt-16">
         <h2 className="font-display text-base font-semibold text-neutral-950">
-          Ponte en contacto
+          Ponte en Serve
         </h2>
         <dl className="mt-6 grid grid-cols-1 gap-8 text-sm sm:grid-cols-2">
           {([

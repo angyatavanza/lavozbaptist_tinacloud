@@ -11,6 +11,9 @@ import { Prism } from "tinacms/dist/rich-text/prism";
 import { PageIntro } from "./page-intro";
 import { Container } from "./container";
 import { ContactDetails } from "./forms/contact-details";
+import { ServeDetails } from "./forms/serve-details"; 
+import { ResourcesDetails } from "./forms/resources-details"; 
+import { FTVisitorDetails } from "./forms/visitor-details"; 
 import { ContactForm } from "./forms/contact-form";
 import { ResourcesForm } from "./forms/resources-form";
 import { ServeForm } from "./forms/serve-form";
@@ -97,7 +100,7 @@ export const components: Components<{
         </PageIntro>
         <Container className="mt-24 sm:mt-32 lg:mt-40">
           <div className="grid grid-cols-1 gap-x-8 gap-y-24 lg:grid-cols-2">
-            <ContactDetails />
+            <FTVisitorDetails />
             <FTVisitorForm
             placeholder={props.placeholder} 
             buttonText={props.buttonText} 
@@ -119,7 +122,7 @@ export const components: Components<{
         </PageIntro>
         <Container className="mt-24 sm:mt-32 lg:mt-40">
           <div className="grid grid-cols-1 gap-x-8 gap-y-24 lg:grid-cols-2">
-            <ContactDetails />
+            <ResourcesDetails />
             <ResourcesForm 
             placeholder={props.placeholder} 
             buttonText={props.buttonText} 
@@ -163,7 +166,7 @@ export const components: Components<{
         </PageIntro>
         <Container className="mt-24 sm:mt-32 lg:mt-40">
           <div className="grid grid-cols-1 gap-x-8 gap-y-24 lg:grid-cols-2">
-            <ContactDetails />
+            <ServeDetails />
             <ServeForm 
             placeholder={props.placeholder} 
             buttonText={props.buttonText} 

@@ -4,8 +4,7 @@ import { Border } from "../ui/border";
 import Link from "next/link";
 import { SocialMedia } from "../social-media";
 
-//to-do 43:  add contact page to /content + add form-details component to /form page  
-export const ContactDetails = () => {
+export const ResourcesDetails = () => {
   return (
     <FadeIn>
       <h2 className="font-display text-base font-semibold text-neutral-950">

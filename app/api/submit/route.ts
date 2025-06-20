@@ -32,14 +32,15 @@ export async function POST(req: NextRequest) {
       ],
     });
 
-    const sheets = google.sheets({ auth, version: "v4" });
+    const sheets = google.sheets("v4");
 
     const response = await sheets.spreadsheets.values.append({
+      auth,
       spreadsheetId: targetSheetId,
-      range: "A1:D1",
+      range: "A1:J1",
       valueInputOption: "USER_ENTERED",
       requestBody: {
-        values: [[body.name, body.email, body.phone, body.message]],
+        values: [[body.name,body.lastname, body.email, body.phone, body.message, body.address, body.citystatezip, body.visitcount,body.subject, body.age,]],
       },
     });
 

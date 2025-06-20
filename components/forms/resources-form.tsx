@@ -1,14 +1,29 @@
+import { useForm } from 'react-hook-form';
 import { FadeIn } from "../fade-in";
-import { FormEvent, useState } from "react";
 import { TextInput } from "./text-input";
 import { RadioInput } from "./radio-input";
 import { Button } from "../ui/second-button";
+import MailSentState from "@/components/forms/mail-sent-state";
+import { useState } from 'react';
+
 /*En la forma no se que idea tengas.  
 No se si poner un listado de los recursos o bien que ellos pongan directamente .
 Y pues lo datos que necesitamos en nombre, 
 teléfono y dirección (la dirección es porque hasta ahorita la mayor 
 parte de los servicios disponibles (que yo conozco) es en el condado de Mecklenburg
 */
+//done 51b: add dirección to resource form.  fields
+
+interface ResourcesFormInputs {
+  name: string;
+  lastname: string;
+  email: string;
+  phone: string;
+  message: string;
+  subject: string;
+  address: string;
+  citystatezip: string;
+}
 
 interface ResourcesFormProps {
   placeholder: string;
@@ -19,140 +34,118 @@ export const ResourcesForm: React.FC<ResourcesFormProps> = ({
   placeholder,
   buttonText,
 }) => {
-  const [name, setName] = useState("");
-  const [lastname, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [message, setMessage] = useState("");
-  const [subject, setSubject] = useState("");
+  const [hasError, setHasError] = useState(false);
+  const [success, setSuccess] = useState(false);
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors, isSubmitting },
+  } = useForm<ResourcesFormInputs>();
 
-    const form = {
-      spreadsheet: "resources",
-      name,
-      lastname,
-      email,
-      phone,
-      message,
-      subject,
-    };
+  const onSubmit = async (data: ResourcesFormInputs) => {
+    try {
+      const form = {
+        ...data,
+        spreadsheet: "resources",
+      };
 
-    const rawResponse = await fetch("/api/submit", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(form),
-    });
+      const response = await fetch("/api/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
 
-    const content = await rawResponse.json();
+      if (!response.ok) throw new Error("Submission failed");
 
-    // print to screen
-    alert("Form submitted");
-    //alert(content.data.tableRange);
-
-    // Reset the form fields
-    setMessage("");
-    setPhone("");
-    setName("");
-    setLastName("");
-    setEmail("");
-    setSubject("");
+      setSuccess(true);
+      reset();
+    } catch (err) {
+      setHasError(true);
+    }
   };
+
+  if (success) return <MailSentState />;
+  
   return (
     <FadeIn>
-      <form className="" onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <h2 className="font-display text-base font-semibold text-neutral-950">
           Envíanos un mensaje:
         </h2>
+
+        {hasError && (
+          <p className="text-red-500 text-sm mt-2">
+            No se pudo enviar el mensaje. Inténtelo de nuevo.
+          </p>
+        )}
+
         <div className="isolate mt-6 -space-y-px rounded-2xl bg-white/50">
           <TextInput
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            name="name"
-            autoComplete="nombre"
+            {...register("name", { required: true })}
             placeholder="Su nombre"
             label="Nombre"
           />
+          {errors.name && <span className="text-red-500 text-sm">Requerido</span>}
+
           <TextInput
-            value={lastname}
-            onChange={(e) => setLastName(e.target.value)}
-            name="lastname"
-            autoComplete="apellido"
+            {...register("lastname")}
             placeholder="Su apellido"
             label="Apellido"
           />
+
           <TextInput
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            name="email"
             type="email"
-            autoComplete="email"
-            required
-            //className="w-full px-5 py-3 border border-gray-300 shadow-xs placeholder-gray-400 focus:ring-1 focus:ring-teal-500 focus:border-teal-500 sm:max-w-xs rounded-md"
+            {...register("email", { required: true })}
             placeholder={placeholder}
             label="Correo electrónico"
           />
+          {errors.email && <span className="text-red-500 text-sm">Correo requerido</span>}
+
           <TextInput
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
-            name="phone"
             type="tel"
-            autoComplete="tel"
+            {...register("phone")}
             placeholder="Su número de teléfono"
             label="Número de teléfono"
           />
+
           <TextInput
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            name="message"
+            {...register("address", { required: false})}
+            placeholder="Calle"
+            label="Línea de dirección 1"
+          />
+          <TextInput
+            {...register("citystatezip", { required: false})}
+            placeholder="Ciudad Estado Código Postal"
+            label="Línea de dirección 2"
+          />
+
+          <TextInput
+            {...register("message", { required: true })}
             placeholder="Su mensaje"
             label="Mensaje"
           />
+          {errors.message && <span className="text-red-500 text-sm">Requerido</span>}
+
           <div className="border border-neutral-300 px-6 py-8 first:rounded-t-2xl last:rounded-b-2xl">
             <fieldset>
               <legend className="text-base/6 text-neutral-500">Asunto</legend>
             </fieldset>
             <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-8">
-              <RadioInput
-                label="Necesito oración"
-                name="budget"
-                value="oración"
-                onClick={(e: React.MouseEvent<HTMLInputElement>) =>
-                  setSubject(e.currentTarget.value)
-                }
-              />
-              <RadioInput
-                label="Quisiera unirme a un grupo"
-                name="budget"
-                value="grupo"
-                onClick={(e: React.MouseEvent<HTMLInputElement>) =>
-                  setSubject(e.currentTarget.value)
-                }
-              />
-              <RadioInput
-                label="Me gustaría ser bautizado"
-                name="budget"
-                value="bautismo"
-                onClick={(e: React.MouseEvent<HTMLInputElement>) =>
-                  setSubject(e.currentTarget.value)
-                }
-              />
-              <RadioInput
-                label="Otro asunto"
-                name="budget"
-                value="other"
-                onClick={(e: React.MouseEvent<HTMLInputElement>) =>
-                  setSubject(e.currentTarget.value)
-                }
-              />
+              {["oración", "grupo", "bautismo", "other"].map((value) => (
+                <RadioInput
+                  key={value}
+                  label={value === "other" ? "Otro asunto" : `Me gustaría  ${value}`}
+                  value={value}
+                  {...register("subject", { required: true })}
+                />
+              ))}
             </div>
+            {errors.subject && <span className="text-red-500 text-sm mt-2">Selecciona un asunto</span>}
           </div>
         </div>
-        <Button type="submit" className="mt-10">
+        <Button type="submit" className="mt-10" disabled={isSubmitting}>
           {buttonText}
         </Button>
       </form>
