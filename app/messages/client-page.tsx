@@ -1,6 +1,7 @@
 "use client";
 import * as React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { format } from "date-fns";
 import MessagesVideoDialog from "../../components/ui/messages-video-dialog";
 import { TinaMarkdown } from "tinacms/dist/rich-text";
@@ -78,7 +79,7 @@ export default function MessagesClientPage(props: ClientMessageProps) {
 
           <div className="grid gap-y-10 sm:grid-cols-12 sm:gap-y-12 md:gap-y-16 lg:gap-y-20">
             {messages.map((message) => {
-              const thumbnailSrc = message.image?.src ?? "";
+              const thumbnailSrc = "/fallback.jpg";
               return (
                 <Card
                   key={message.id}
@@ -137,19 +138,34 @@ export default function MessagesClientPage(props: ClientMessageProps) {
                         </Link>
                       </div>
                     </div>
-                    {message.image?.videoUrl && (
+                    {message.image?.embeddable && message.image?.videoUrl ? (
                       <div className="order-first sm:order-last sm:col-span-5">
                         <Link href={message.url} className="block">
                           <div className="aspect-[16/9] overflow-clip rounded-lg border border-border">
-                              <div className="fb-video" data-href={message.image.videoUrl} data-allowfullscreen="true" data-width="500"></div>
+                            <div
+                              className="fb-video"
+                              data-href={message.image.videoUrl}
+                              data-allowfullscreen="true"
+                              data-width="500"
+                            ></div>
                           </div>
                         </Link>
+                      </div>
+                    ) : (
+                      <div className="order-first sm:order-last sm:col-span-5">
+                        <div className="aspect-[16/9] overflow-clip rounded-lg border border-border relative">
+                          <MessagesVideoDialog
+                            videoSrc={message.image?.videoUrl || ""}
+                            thumbnailSrc={thumbnailSrc}
+                            thumbnailAlt="Messages Video"
+                          />
+                        </div>
                       </div>
                     )}
                   </div>
                 </Card>
               );
-              })}
+            })}
           </div>
         </div>
       </Section>

@@ -57,6 +57,11 @@ const Message: Collection = {
         },
         {
           type: 'boolean',
+          label: 'Embeddable',
+          name: 'embeddable',
+        },
+        {
+          type: 'boolean',
           label: 'Auto Play',
           name: 'autoPlay',
         },

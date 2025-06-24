@@ -172,11 +172,7 @@ export const LatestMessages = ({
                         className="block"
                       >
                         <div className="aspect-[16/9] overflow-clip rounded-lg border border-border">
-                          <MessagesVideoDialog
-                            videoSrc={message.image.videoUrl}
-                            thumbnailSrc={thumbnailSrc}
-                            thumbnailAlt="Messages Video"
-                          />
+                          <div className="fb-video" data-href={message.image.videoUrl} data-allowfullscreen="true" data-width="500"></div>
                         </div>
                       </Link>
                     </div>

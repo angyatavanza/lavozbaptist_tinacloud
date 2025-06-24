@@ -42,7 +42,7 @@ export default function MessageClientPage(props: ClientMessageProps) {
   if (!isNaN(date.getTime())) {
     formattedDate = format(date, 'MMM dd, yyyy');
   }
-  const thumbnailSrc = message.image?.src ?? "";
+
   return (
     <ErrorBoundary>
       <Section >
@@ -84,36 +84,7 @@ export default function MessageClientPage(props: ClientMessageProps) {
         {message.image?.videoUrl && (
           <div className="order-first sm:order-last sm:col-span-5">
             <div className="aspect-[16/9] overflow-clip rounded-lg border border-border">
-              <MessagesVideoDialog
-                videoSrc={message.image.videoUrl}
-                thumbnailSrc={thumbnailSrc}
-                thumbnailAlt="Messages Video"
-              />
-            </div>
-          </div>
-        )}
-        {message.image?.src && (
-          <div className='px-4 w-full'>
-            <div data-tina-field={tinaField(message, 'image')} className='relative max-w-4xl lg:max-w-5xl mx-auto'>
-              <Image
-                priority={true}
-                src={message.image.src}
-                alt={message.title}
-                className='absolute block mx-auto rounded-lg w-full h-auto blur-2xl brightness-150 contrast-[0.9] dark:brightness-150 saturate-200 opacity-50 dark:opacity-30 mix-blend-multiply dark:mix-blend-hard-light'
-                aria-hidden='true'
-                width={500}
-                height={500}
-                style={{ maxHeight: '25vh' }}
-              />
-              <Image
-                priority={true}
-                src={message.image.src}
-                alt={message.title}
-                width={500}
-                height={500}
-                className='relative z-10 mb-14 mx-auto block rounded-lg w-full h-auto opacity-100'
-                style={{ maxWidth: '25vh' }}
-              />
+              <div className="fb-video" data-href={message.image.videoUrl} data-allowfullscreen="true"></div>
             </div>
           </div>
         )}

@@ -20,9 +20,11 @@ export default function MessagesVideoDialog({
 
   return (
     <div className={cn("relative", className)}>
-      <div
-        className="group relative cursor-pointer"
-        onClick={() => openVideo(videoSrc)}
+      <a
+        href={videoSrc}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="group relative block cursor-pointer"
       >
         <img
           src={thumbnailSrc}
@@ -46,7 +48,7 @@ export default function MessagesVideoDialog({
             </div>
           </div>
         </div>
-      </div>
+      </a>
     </div>
   );
 }

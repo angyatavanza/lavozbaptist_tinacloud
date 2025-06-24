@@ -15,7 +15,7 @@ export async function fetchFacebookVideos() {
   }
 
   const res = await fetch(
-    `https://graph.facebook.com/v23.0/${pageId}/videos?fields=length,created_time,description,title,id,picture&access_token=${accessToken}`
+    `https://graph.facebook.com/v23.0/${pageId}/videos?fields=embeddable,length,created_time,description,title,id,picture&access_token=${accessToken}`
   );
   console.log("FB response status", res.status);
 
@@ -36,6 +36,7 @@ export async function fetchFacebookVideos() {
     excerpt: video.description || "No descripcion",
     videoUrl: `https://www.facebook.com/video.php?v=${video.id}`,
     thumbnailUrl: video.picture,
+    embeddableURL: video.embeddable,
     type: "facebook",
   }));
 }
@@ -75,6 +76,7 @@ export default async function MessagesPage() {
       .replace(/[^a-z0-9]+/g, "-")
       .replace(/(^-|-$)/g, "")
       .slice(0, 50);
+    const customSlug = `${dateSlug}-${safeSlug}`;
 
     return {
       node: {
@@ -84,11 +86,12 @@ export default async function MessagesPage() {
         image: {
           videoUrl: video.videoUrl,
           src: video.thumbnailUrl,
+          embeddable: video.embeddableURL,
         },
         excerpt: video.excerpt,
         tags: [],
         _sys: {
-          breadcrumbs: [dateSlug + "-" + safeSlug],
+          breadcrumbs: [customSlug],
         },
         coordinator: {
           name: "Facebook",
