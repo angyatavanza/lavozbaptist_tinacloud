@@ -169,7 +169,7 @@ export const missionBlockSchema: Template = {
           link: "/",
         },
         {
-          label: "Book Demo",
+          label: "Placeholder Button",
           type: "link",
           link: "/",
         },

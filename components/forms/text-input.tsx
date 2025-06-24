@@ -15,6 +15,7 @@ export const TextInput: React.FC<TextInputProps> = ({ label, ...props }) => {
         type="text"
         id={id}
         {...props} // Spread other props (e.g., placeholder, value, onChange, etc.)
+        //block w-full rounded-2xl border border-purple-300 bg-transparent py-4 pl-6 pr-20 text-base/6 text-neutral-950 ring-4 ring-transparent transition placeholder:text-neutral-500 focus:border-purple-800 focus:outline-none focus:ring-purple-800/5
         className="peer block w-full border border-neutral-300 bg-transparent placeholder-transparent focus:placeholder-gray-400 px-6 pb-4 pt-12 text-base/6 text-neutral-950 ring-4 ring-transparent transition focus:border-neutral-950 focus:outline-none focus:ring-neutral-950/5 group-first:rounded-t-2xl group-last:rounded-b-2xl"
       />
       <label

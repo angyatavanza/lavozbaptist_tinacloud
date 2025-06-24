@@ -38,5 +38,5 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts"
-  ]
+, "content/pages/serve-form.mdx"  ]
 }

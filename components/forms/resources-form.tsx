@@ -12,8 +12,8 @@ Y pues lo datos que necesitamos en nombre,
 teléfono y dirección (la dirección es porque hasta ahorita la mayor 
 parte de los servicios disponibles (que yo conozco) es en el condado de Mecklenburg
 */
-//to-do 51b: add dirección to resource form fields + change radioinput options
-//to-do 51c: Add to details:Nos gustaría entender mejor tu situación, ¿puedes describirnos tu necesidad?
+//done 51b: add dirección to resource form fields + change radioinput options
+//to-do 51c: Add to details: Nos gustaría entender mejor tu situación, ¿puedes describirnos tu necesidad?
 //to-do 51d: Ask carmen which fields are required
 
 interface ResourcesFormInputs {

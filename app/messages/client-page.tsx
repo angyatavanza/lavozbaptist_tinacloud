@@ -1,8 +1,6 @@
 "use client";
 import * as React from "react";
-import dynamic from "next/dynamic";
 import Link from "next/link";
-import Image from "next/image";
 import { format } from "date-fns";
 import MessagesVideoDialog from "../../components/ui/messages-video-dialog";
 import { TinaMarkdown } from "tinacms/dist/rich-text";
@@ -25,23 +23,13 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 //to-do 37: redesign messages-latest-message page DESIGN/FRONTEND
 
 //line 144: <ReactPlayer width="100%" height="100%" style={{ margin: "auto" }} playing={!!message.image.autoPlay} loop={!!message.image.loop} controls={true} url={message.image.videoUrl}/>
-function extractFacebookVideoId(url: string): string | null {
-  try {
-    // Handle plugin-style Facebook URLs
-    if (url.includes("facebook.com/plugins/video.php")) {
-      const parsed = new URL(url);
-      const href = decodeURIComponent(parsed.searchParams.get("href") || "");
-      const match = href.match(/\/videos\/(\d+)/);
-      return match ? match[1] : null;
-    }
+/*<MessagesVideoDialog
+  videoSrc={message.image.videoUrl}
+  thumbnailSrc={thumbnailSrc}
+  thumbnailAlt="Messages Video"
+  />
+*/
 
-    // Handle standard Facebook watch or direct video URLs
-    const match = url.match(/\/videos\/(\d+)/);
-    return match ? match[1] : null;
-  } catch {
-    return null;
-  }
-}
 interface ClientMessageProps {
   data: MessageConnectionQuery;
   variables: MessageConnectionQueryVariables;
@@ -90,21 +78,7 @@ export default function MessagesClientPage(props: ClientMessageProps) {
 
           <div className="grid gap-y-10 sm:grid-cols-12 sm:gap-y-12 md:gap-y-16 lg:gap-y-20">
             {messages.map((message) => {
-              //const videoUrl = ;
-
-              let videoId = "";
-              if (message.image?.videoUrl) {
-                const fbVideoId = extractFacebookVideoId(message.image.videoUrl);
-                if (fbVideoId) {
-                  videoId = fbVideoId;
-                }
-              }
-              const thumbnailSrc = message.image?.src
-                ? message.image.src!
-                : videoId
-                ? `https://graph.facebook.com/${videoId}/picture`
-                : "";
-
+              const thumbnailSrc = message.image?.src ?? "";
               return (
                 <Card
                   key={message.id}
@@ -167,11 +141,7 @@ export default function MessagesClientPage(props: ClientMessageProps) {
                       <div className="order-first sm:order-last sm:col-span-5">
                         <Link href={message.url} className="block">
                           <div className="aspect-[16/9] overflow-clip rounded-lg border border-border">
-                              <MessagesVideoDialog
-                                videoSrc={message.image.videoUrl}
-                                thumbnailSrc={thumbnailSrc}
-                                thumbnailAlt="Messages Video"
-                              />
+                              <div className="fb-video" data-href={message.image.videoUrl} data-allowfullscreen="true" data-width="500"></div>
                           </div>
                         </Link>
                       </div>

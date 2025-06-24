@@ -4,6 +4,7 @@ import client from "../../tina/__generated__/client";
 import { Header } from "./nav/Header";
 import { Footer } from "./nav/Footer";
 import { RootLayout } from "./root-layout";
+import FacebookSdkLoader from "../facebook-sdk-loader";
 type LayoutProps = PropsWithChildren & {
   rawPageData?: any;
 };
@@ -23,6 +24,7 @@ export default async function Layout({ children, rawPageData }: LayoutProps) {
 
   return (
     <LayoutProvider globalSettings={globalData.global} pageData={rawPageData}>
+      <FacebookSdkLoader />
       <RootLayout>{children}</RootLayout>
     </LayoutProvider>
   );

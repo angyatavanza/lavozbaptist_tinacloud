@@ -24,24 +24,6 @@ const titleColorClasses = {
   yellow: 'from-yellow-400 to-yellow-500 dark:from-yellow-300 dark:to-yellow-500',
 };
 
-function extractFacebookVideoId(url: string): string | null {
-  try {
-    // Handle plugin-style Facebook URLs
-    if (url.includes("facebook.com/plugins/video.php")) {
-      const parsed = new URL(url);
-      const href = decodeURIComponent(parsed.searchParams.get("href") || "");
-      const match = href.match(/\/videos\/(\d+)/);
-      return match ? match[1] : null;
-    }
-
-    // Handle standard Facebook watch or direct video URLs
-    const match = url.match(/\/videos\/(\d+)/);
-    return match ? match[1] : null;
-  } catch {
-    return null;
-  }
-}
-
 interface ClientMessageProps {
   data: MessageQuery;
   variables: {
@@ -60,20 +42,7 @@ export default function MessageClientPage(props: ClientMessageProps) {
   if (!isNaN(date.getTime())) {
     formattedDate = format(date, 'MMM dd, yyyy');
   }
-  
-  let videoId = "";
-  if (message.image?.videoUrl) {
-    const fbVideoId = extractFacebookVideoId(message.image.videoUrl);
-    if (fbVideoId) {
-      videoId = fbVideoId;
-    }
-  }
-  const thumbnailSrc = message.image?.src
-    ? message.image.src!
-    : videoId
-    ? `https://graph.facebook.com/${videoId}/picture`
-    : "";
-
+  const thumbnailSrc = message.image?.src ?? "";
   return (
     <ErrorBoundary>
       <Section >

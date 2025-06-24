@@ -102,7 +102,7 @@ export const visionBlockSchema: Template = {
           link: "/",
         },
         {
-          label: "Book Demo",
+          label: "Placeholder Button",
           type: "link",
           link: "/",
         },

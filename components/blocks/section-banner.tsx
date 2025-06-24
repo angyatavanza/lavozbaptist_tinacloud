@@ -142,7 +142,7 @@ export const bannerBlockSchema: Template = {
           link: "/",
         },
         {
-          label: "Book Demo",
+          label: "Placeholder Button",
           type: "link",
           link: "/",
         },

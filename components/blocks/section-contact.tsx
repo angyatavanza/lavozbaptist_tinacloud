@@ -82,7 +82,7 @@ export const contactsectionBlockSchema: Template = {
           link: "/",
         },
         {
-          label: "Book Demo",
+          label: "Placeholder Button",
           type: "link",
           link: "/",
         },

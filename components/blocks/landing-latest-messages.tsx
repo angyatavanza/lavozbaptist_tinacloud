@@ -15,28 +15,12 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { format } from "date-fns";
 import { Section } from "../layout/section";
 import Link from "next/link";
-import Image from "next/image";
 
 //done 12: create a latestmessages component that extract the latest 3 messages in homepage
 //to-do 29: add fb video API (Graph APi) to messages thumbnails in the messages page TINA CMS/BACKEND
-
-function extractFacebookVideoId(url: string): string | null {
-  try {
-    // Handle plugin-style Facebook URLs
-    if (url.includes("facebook.com/plugins/video.php")) {
-      const parsed = new URL(url);
-      const href = decodeURIComponent(parsed.searchParams.get("href") || "");
-      const match = href.match(/\/videos\/(\d+)/);
-      return match ? match[1] : null;
-    }
-
-    // Handle standard Facebook watch or direct video URLs
-    const match = url.match(/\/videos\/(\d+)/);
-    return match ? match[1] : null;
-  } catch {
-    return null;
-  }
-}
+//to-do 29b: remove copyright from 5 videos: https://www.facebook.com/video/copyright/claim/?match_id=24630578953196706&is_from_action_center_v2=0
+//to-do 29c: dynamically add info extracted from fb videos to mdx file
+//to-do 29d: extend duration of FACEBOOK_ACCESS_TOKEN 
 
 interface Coordinator {
   name?: string;
@@ -115,18 +99,8 @@ export const LatestMessages = ({
             const postedDate = message.date
               ? format(new Date(message.date), "MMM dd, yyyy")
               : "";
-            let videoId = "";
-              if (message.image?.videoUrl) {
-                const fbVideoId = extractFacebookVideoId(message.image.videoUrl);
-                if (fbVideoId) {
-                  videoId = fbVideoId;
-                }
-              }
-              const thumbnailSrc = message.image?.src
-                ? message.image.src!
-                : videoId
-                ? `https://graph.facebook.com/${videoId}/picture`
-                : "";
+        
+              const thumbnailSrc = message.image?.src ?? "";
             return (
               <Card
                 key={message.id}

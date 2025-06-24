@@ -2,6 +2,7 @@ import React from "react";
 import client from "@/tina/__generated__/client";
 import Layout from "@/components/layout/layout";
 import ClientPage from "./[...urlSegments]/client-page";
+import { fetchFacebookVideos } from "./messages/page";
 //import RootLayout from "@/components/layout/RootLayout";
 export const revalidate = 300;
 

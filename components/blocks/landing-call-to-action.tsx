@@ -78,7 +78,7 @@ export const ctaBlockSchema: Template = {
           link: "/",
         },
         {
-          label: "Book Demo",
+          label: "Placeholder Button",
           type: "link",
           link: "/",
         },

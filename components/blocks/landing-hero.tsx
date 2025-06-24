@@ -76,7 +76,8 @@ export const Hero = ({ data }: { data: PageBlocksHero }) => {
   return (
     <SectionHero background={data.background!}>
       {data.image && (
-        <AnimatedGroup variants={transitionVariants}>
+        <AnimatedGroup 
+          variants={transitionVariants}>
           <div
             className="relative overflow-hidden px-2 sm:mr-0 sm:mt-12 max-w-full"
             data-tina-field={tinaField(data, "image")}

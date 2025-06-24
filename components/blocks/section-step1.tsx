@@ -68,7 +68,7 @@ export const step1BlockSchema: Template = {
                     link: '/',
                 },
                 {
-                    label: 'Book Demo',
+                    label: 'Placeholder Button',
                     type: 'link',
                     link: '/',
                 },
