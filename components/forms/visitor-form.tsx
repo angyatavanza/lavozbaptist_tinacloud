@@ -6,6 +6,8 @@ import { Button } from "../ui/second-button";
 import MailSentState from "@/components/forms/mail-sent-state";
 import { useState } from 'react';
 
+//done 41: add functionality to ftvisitor-form  TINA CMS/BACKEND
+
 interface FTVisitorFormInputs {
   name: string;
   lastname: string;
