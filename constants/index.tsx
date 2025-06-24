@@ -19,7 +19,7 @@ export const navigation: NavigationSection[] = [
       { title: "Propósito, Estrategia y Valores", href: "/purpose" },
       { title: "Nuestro Pastor", href: "/our-pastor" },
       { title: "Nuestro Equipo", href: "/staff" },
-      { title: "Política de Privacidad", href: "/privacy" },
+      { title: "Política de Privacidad", href: "/privacy-policy" },
     ],
   },
   {

@@ -3,8 +3,11 @@ import { ServiceTimes } from "../service-times";
 import { Border } from "../ui/border";
 import Link from "next/link";
 import { SocialMedia } from "../social-media";
-
-//to-do 43:  add contact page to /content + add form-details component to /form page  
+//done 42: add functionality to contact-form TINA CMS/BACKEND
+    //done 42b: (add errors, mail-sent confirmation, to contact-form ?) TINA CMS/BACKEND
+//done 43:  add contact page to /content + add form-details component to /form page TINA CMS/BACKEND
+//done 44: remove newsletter-form TINA CMS/BACKEND
+//done 45: create privacy page and add content blocks to privacy page TINA CMS/CONTENT 
 export const ContactDetails = () => {
   return (
     <FadeIn>
