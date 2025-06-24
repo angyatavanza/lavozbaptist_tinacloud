@@ -8,7 +8,7 @@ import { sectionBlockSchemaField } from '../layout/section';
 
 //done 36: add needed blocks to serve page
 //to-do 50: serve page: add button to missions, change the fields in the template for contentwimage
-//to-do 38: add needed blocks to groups page + change headline to be below tagline
+//to-do 38: add needed blocks + content to groups page TINA CMS/CONTENT
 export const ContentAndImage = ({ data }: { data: PageBlocksContentandimage }) => {
   return (
     <Section  background={data.background!}>
