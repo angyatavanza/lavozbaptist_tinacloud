@@ -43,6 +43,8 @@ export default function MessageClientPage(props: ClientMessageProps) {
     formattedDate = format(date, 'MMM dd, yyyy');
   }
 
+  const thumbnailSrc = "/fallback.jpg";
+  
   return (
     <ErrorBoundary>
       <Section >
@@ -81,10 +83,25 @@ export default function MessageClientPage(props: ClientMessageProps) {
             {formattedDate}
           </p>
         </div>
-        {message.image?.videoUrl && (
+        {message.image?.embeddable && message.image?.videoUrl ? (
           <div className="order-first sm:order-last sm:col-span-5">
-            <div className="aspect-[16/9] overflow-clip rounded-lg border border-border">
-              <div className="fb-video" data-href={message.image.videoUrl} data-allowfullscreen="true"></div>
+              <div className="aspect-[16/9] overflow-clip rounded-lg border border-border">
+                <div
+                  className="fb-video"
+                  data-href={message.image.videoUrl}
+                  data-allowfullscreen="true"
+                  data-width="500"
+                ></div>
+              </div>
+          </div>
+        ) : (
+          <div className="order-first sm:order-last sm:col-span-5">
+            <div className="aspect-[16/9] overflow-clip rounded-lg border border-border relative">
+              <MessagesVideoDialog
+                videoSrc={message.image?.videoUrl || ""}
+                thumbnailSrc={thumbnailSrc}
+                thumbnailAlt="Messages Video"
+              />
             </div>
           </div>
         )}

@@ -17,10 +17,9 @@ import { Section } from "../layout/section";
 import Link from "next/link";
 
 //done 12: create a latestmessages component that extract the latest 3 messages in homepage
-//to-do 29: add fb video API (Graph APi) to messages thumbnails in the messages page TINA CMS/BACKEND
-//to-do 29b: remove copyright from 5 videos: https://www.facebook.com/video/copyright/claim/?match_id=24630578953196706&is_from_action_center_v2=0
-//to-do 29c: dynamically add info extracted from fb videos to mdx file
-//to-do 29d: extend duration of FACEBOOK_ACCESS_TOKEN 
+//done 29: add fb video API (Graph APi) to messages videoUrls and thumbnails in the messages page TINA CMS/BACKEND
+//done 29b: find workaround to 5 copyrighted videos: https://www.facebook.com/video/copyright/claim/?match_id=24630578953196706&is_from_action_center_v2=0
+//to-do 29c: extend duration of FACEBOOK_ACCESS_TOKEN 
 
 interface Coordinator {
   name?: string;
@@ -35,7 +34,8 @@ interface Message {
   image?: {
     src?: string;          
     alt?: string;           
-    videoUrl?: string;      
+    videoUrl?: string;
+    embeddable?: boolean;        
     autoPlay?: boolean;     
     loop?: boolean;         
   };
@@ -100,7 +100,7 @@ export const LatestMessages = ({
               ? format(new Date(message.date), "MMM dd, yyyy")
               : "";
         
-              const thumbnailSrc = message.image?.src ?? "";
+              const thumbnailSrc = "/fallback2.jpg";
             return (
               <Card
                 key={message.id}
@@ -165,18 +165,33 @@ export const LatestMessages = ({
                       </Link>
                     </div>
                   </div>
-                  {message.image?.videoUrl && (
-                    <div className="order-first sm:order-last sm:col-span-5">
-                      <Link
+                  {message.image?.embeddable && message.image?.videoUrl ? (
+                      <div className="order-first sm:order-last sm:col-span-5">
+                        <Link
                         href={`/messages/${message._sys.breadcrumbs.join("/")}`}
                         className="block"
                       >
-                        <div className="aspect-[16/9] overflow-clip rounded-lg border border-border">
-                          <div className="fb-video" data-href={message.image.videoUrl} data-allowfullscreen="true" data-width="500"></div>
+                          <div className="aspect-[16/9] overflow-clip rounded-lg border border-border">
+                            <div
+                              className="fb-video"
+                              data-href={message.image.videoUrl}
+                              data-allowfullscreen="true"
+                              data-width="500"
+                            ></div>
+                          </div>
+                        </Link>
+                      </div>
+                    ) : (
+                      <div className="order-first sm:order-last sm:col-span-5">
+                        <div className="aspect-[16/9] overflow-clip rounded-lg border border-border relative">
+                          <MessagesVideoDialog
+                            videoSrc={message.image?.videoUrl || ""}
+                            thumbnailSrc={thumbnailSrc}
+                            thumbnailAlt="Messages Video"
+                          />
                         </div>
-                      </Link>
-                    </div>
-                  )}
+                      </div>
+                    )}
                 </div>
               </Card>
             );
