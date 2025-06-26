@@ -2,8 +2,6 @@ import type { NextConfig } from 'next'
  
 const nextConfig: NextConfig = {
   images: {
-    domains: 
-    ['scontent-atl3-2.xx.fbcdn.net', 'scontent-atl3-1.xx.fbcdn.net', 'scontent-atl3-3.xx.fbcdn.net', 'scontent.xx.fbcdn.net'],
     remotePatterns: [
       {
         protocol: 'https',

@@ -75,18 +75,90 @@ const Event: Collection = {
       ],
     },
     {
-      type: 'boolean',
-      label: 'Recurring Event',
-      name: 'recurring',
-    },
-    {
       type: 'datetime',
-      label: 'Event Date',
+      label: 'Event Date and Time',
       name: 'date',
       ui: {
         dateFormat: 'MMMM DD YYYY',
         timeFormat: 'hh:mm A',
       },
+    },
+    {
+      type: 'datetime',
+      label: 'Event End Time',
+      name: 'endtime',
+      ui: {
+        timeFormat: 'hh:mm A',
+      },
+    },
+    iconSchema as any,
+    {
+      label: 'Reccuring Event Details',
+      name: 'reccuringeventdetails',
+      type: 'object',
+      list: true,
+      ui: {
+        defaultItem: {
+        recurring: false,
+        date: new Date().toISOString(),
+        enddate: new Date().toISOString(),
+        label: 'Date Label',
+        type: 'button',
+        icon: true,
+        link: '/',
+      },
+      itemProps: (item) => ({ label: item.label }),
+    },
+    fields: [
+      {
+        type: 'boolean',
+        label: 'Recurring Event',
+        name: 'recurring',
+      },
+      {
+        type: 'string',
+        label: 'Recurrence',
+        name: 'frequency',
+      },
+      {
+        type: 'datetime',
+        label: 'Recurring Event Start Date',
+        name: 'recstartdate',
+        ui: {
+          dateFormat: 'MMMM DD YYYY',
+          timeFormat: 'hh:mm A',
+        },
+      },
+      {
+        type: 'datetime',
+        label: 'Recurring Event End Date',
+        name: 'recenddate',
+        ui: {
+          dateFormat: 'MMMM DD YYYY',
+          timeFormat: 'hh:mm A',
+        },
+      },
+      {
+        label: 'Label',
+        name: 'label',
+        type: 'string',
+      },
+      {
+        label: 'Type',
+        name: 'type',
+        type: 'string',
+        options: [
+          { label: 'Button', value: 'button' },
+          { label: 'Link', value: 'link' },
+        ],
+      },
+       iconSchema as any,
+       {
+          label: 'Link',
+          name: 'link',
+          type: 'string',
+        },
+      ],
     },
     {
       type: 'reference',
@@ -125,15 +197,6 @@ const Event: Collection = {
           );
         },
       }
-    },
-    {
-      type: 'datetime',
-      label: 'End Date',
-      name: 'enddate',
-      ui: {
-        dateFormat: 'MMMM DD YYYY',
-        timeFormat: 'hh:mm A',
-      },
     },
     {
       label: 'Location Details',
