@@ -22,10 +22,7 @@ import { Stats } from "./landing-stats";
 import { LatestEvents } from "./landing-latest-events";
 import { LatestMessages } from "./landing-latest-messages";
 import { Vision } from "./section-vision";
-import { Step1 } from "./section-step1";
-import { Step2 } from "./section-step2";
-import { Step3 } from "./section-step3";
-import { Step4 } from "./section-step4";
+import { NextSteps } from "./section-next-steps";
 import { Mission } from "./section-mission";
 import { Partner } from "./section-partners";
 import { Listcontent } from "./section-listcontent";
@@ -98,14 +95,8 @@ const Block = ({block, events, messages,}: {block: PageBlocks; events?: Event[];
       return <Partner data={block} />;
     case "PageBlocksListcontent":
       return <Listcontent data={block} />;
-    case "PageBlocksStep1":
-      return <Step1 data={block} />;
-    case "PageBlocksStep2":
-      return <Step2 data={block} />;
-    case "PageBlocksStep3":
-      return <Step3 data={block} />;
-    case "PageBlocksStep4":
-      return <Step4 data={block} />;
+    case "PageBlocksNextsteps":
+      return <NextSteps data={block} />;
     case "PageBlocksMission":
       return <Mission data={block} />;
     case "PageBlocksContactsection":

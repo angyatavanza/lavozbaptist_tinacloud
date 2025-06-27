@@ -24,10 +24,7 @@ import { latestmessagesBlockSchema } from "@/components/blocks/landing-latest-me
 import { testimonialBlockSchema } from "@/components/blocks/section-testimonial";
 import { missionBlockSchema } from "@/components/blocks/section-mission";
 import { listcontentBlockSchema } from "@/components/blocks/section-listcontent";
-import { step1BlockSchema } from "@/components/blocks/section-step1";
-import { step2BlockSchema } from "@/components/blocks/section-step2";
-import { step3BlockSchema } from "@/components/blocks/section-step3";
-import { step4BlockSchema } from "@/components/blocks/section-step4";
+import { nextstepsBlockSchema } from "@/components/blocks/section-next-steps";
 import { contactsectionBlockSchema } from "@/components/blocks/section-contact";
 
 const Page: Collection = {
@@ -79,10 +76,7 @@ const Page: Collection = {
         missionBlockSchema,
         listcontentBlockSchema,
         partnerBlockSchema,
-        step1BlockSchema,
-        step2BlockSchema,
-        step3BlockSchema,
-        step4BlockSchema,
+        nextstepsBlockSchema,
         contactsectionBlockSchema,
       ],
     },

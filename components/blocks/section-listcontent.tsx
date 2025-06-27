@@ -3,7 +3,6 @@ import { SectionIntro } from "../layout/section-intro";
 import { Container } from "../container";
 import { FadeIn } from "../fade-in";
 import { StylizedImage } from "../ui/stylized-image";
-import imageLaptop from "../../images/church/congregation-IMG-1038.jpg";
 import {List, ListItem } from "../list";
 import type { Template } from 'tinacms';
 import { iconSchema } from '@/tina/fields/icon';
@@ -30,7 +29,7 @@ export const Listcontent  = ({ data }: { data: PageBlocksListcontent }) => {
           <div className="flex justify-center lg:w-1/2 lg:justify-end lg:pr-12">
             <FadeIn className="w-[33.75rem] flex-none lg:w-[45rem]">
               <StylizedImage
-                src={imageLaptop}
+                src={"/whiteboard.jpg"}
                 alt=""
                 sizes="(min-width: 1024px) 41rem, 31rem"
                 className="justify-center lg:justify-end"

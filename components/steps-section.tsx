@@ -16,18 +16,18 @@ type StepsSectionProps = {
 export const StepsSection = ({ title, image, children }: StepsSectionProps) => {
   return (
     <Container className="group/section [counter-increment:section]">
-      <div className="lg:flex lg:items-center lg:justify-end lg:gap-x-8 lg:group-even/section:justify-start xl:gap-x-20">
+       <div className="lg:flex lg:items-center lg:gap-x-8 lg:group-even/section:flex-row-reverse xl:gap-x-20">
         <div className="flex justify-center">
           <FadeIn className="w-[33.75rem] flex-none lg:w-[45rem]">
             <StylizedImage
               {...image}
-              alt=""
+              alt="An illustration"
               sizes="(min-width: 1024px) 41rem, 31rem"
               className="justify-center lg:justify-end lg:group-even/section:justify-start"
             />
           </FadeIn>
         </div>
-        <div className="mt-12 lg:mt-0 lg:w-[37rem] lg:flex-none lg:group-even/section:order-first">
+        <div className="mt-12 lg:mt-0 lg:w-[37rem] lg:flex-none">
           <FadeIn>
             <div
               className="font-display text-base font-semibold before:text-neutral-300 before:content-['/_'] after:text-neutral-950 after:content-[counter(section,decimal-leading-zero)]"

@@ -1,33 +1,23 @@
-import Image, { StaticImageData } from "next/image";
-import logoBrightPath from "../../images/partner/bright-path/logo-light.svg";
-import logoFamilyFund from "../../images/partner/family-fund/logo-light.svg";
-import logoGreenLife from "../../images/partner/green-life/logo-light.svg";
-import logoHomeWork from "../../images/partner/home-work/logo-light.svg";
-import logoMailSmirk from "../../images/partner/mail-smirk/logo-light.svg";
-import logoNorthAdventures from "../../images/partner/north-adventures/logo-light.svg";
-import logoPhobiaLight from "../../images/partner/phobia/logo-light.svg";
-import logoUnseal from "../../images/partner/unseal/logo-light.svg";
+import Image from "next/image";
 import { Container } from "../container";
 import { FadeIn, FadeInStagger } from "../fade-in";
-import React, { ReactElement } from "react";
+import React from "react";
 import type { Template } from 'tinacms';
 import { iconSchema } from '@/tina/fields/icon';
-import { tinaField } from "tinacms/dist/react";
 import { PageBlocksPartner } from "@/tina/__generated__/types";
-import { TinaIcon } from '../icon';
 //to-do 73: add the partners+testimonial block component to a page ? TINA CMS/CONTENT
 //to-do 74: add data.title + data.description + data.actions to partners component TINA CMS/BACKEND
-type PartnerMember = [string, StaticImageData];
+type PartnerMember = [string, string];
 
 const partnerMembers: PartnerMember[] = [
-  ["Pastor Hugo", logoPhobiaLight],
-  ["Family Fund", logoFamilyFund],
-  ["Unseal", logoUnseal],
-  ["Mail Smirk", logoMailSmirk],
-  ["Home Work", logoHomeWork],
-  ["Green Life", logoGreenLife],
-  ["Bright Path", logoBrightPath],
-  ["North Adventures", logoNorthAdventures],
+  ["Pastor Hugo","/partner/green-life/logo-light.svg"],
+  ["Family Fund", "/partner/home-work/logo-light.svg"],
+  ["Unseal", "/partner/home-work/logo-light.svg"],
+  ["Mail Smirk", "/partner/home-work/logo-light.svg"],
+  ["Home Work", "/partner/home-work/logo-light.svg"],
+  ["Green Life","/partner/home-work/logo-light.svg"],
+  ["Bright Path", "/partner/home-work/logo-light.svg"],
+  ["North Adventures", "/partner/home-work/logo-light.svg"],
 ];
 
 export const Partner = ({ data }: { data: PageBlocksPartner }) => {
