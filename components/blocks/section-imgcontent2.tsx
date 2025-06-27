@@ -122,11 +122,30 @@ export const contentandimagevariantBlockSchema: Template = {
   ui: {
     previewSrc: "/blocks/contentandimagevariant.png",
     defaultItem: {
+      title: 'Built to cover your needs',
+      description: 'We have a lot of features to cover your needs',
+      icon: {
+        color: "",
+        style: "float",
+        name: "",
+      },
       contentandimagevariants: [
         {
           quote:
             "There are only two hard things in Computer Science: cache invalidation and naming things.",
           quotetitle: "Phil Karlton",
+          actions: [
+            {
+              label: "Get Started",
+              type: "button",
+              link: "/",
+            },
+            {
+              label: "Placeholder Button",
+              type: "link",
+              link: "/",
+            },
+          ],
         },
       ],
     },
@@ -157,10 +176,22 @@ export const contentandimagevariantBlockSchema: Template = {
           quote:
             "There are only two hard things in Computer Science: cache invalidation and naming things.",
           quotetitle: "Phil Karlton",
+          actions: [
+            {
+              label: "Get Started",
+              type: "button",
+              link: "/",
+            },
+            {
+              label: "Placeholder Button",
+              type: "link",
+              link: "/",
+            },
+          ],
         },
         itemProps: (item) => {
           return {
-            label: `${item.quote} - ${item.coordinator}`,
+            label: `${item.quote} - ${item.quotetitle}`,
           };
         },
       },
@@ -197,7 +228,6 @@ export const contentandimagevariantBlockSchema: Template = {
             defaultItem: {
               label: "Action Label",
               type: "button",
-              icon: true,
               link: "/",
             },
             itemProps: (item) => ({ label: item.label }),

@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils"
 //to-do 58: add a border to the ghost/outline button
 //to-do 56: change purple-800 from the hamburger menu to be neutral color and change all tailwind class colors to be Oklch color
 //to-do 53: add quicksand font
-//to-do 54: remove tina icon from buttons
+//done 54: remove tina icon from buttons
 //to-do 55: change ui of  the photos
 //to-do 70:change background colors to all sections TINA CMS/CONTENT
 

@@ -60,16 +60,10 @@ export const FreqAskedQuestion: React.FC<PageBlocksFreqaskedquestionsItems> = (d
       open={open}
       onClick={handleClick}
     >
-      <div
+      <TinaMarkdown
         data-tina-field={tinaField(data, "text")}
-        className="text-palePurple pt-6 text-sm font-normal leading-[21px]"
-      >
-        {typeof data.text === 'string' ? (
-          <div dangerouslySetInnerHTML={{ __html: data.text }} />
-        ) : (
-          <TinaMarkdown content={data.text} />
-        )}
-      </div>
+        content={data.text}
+      />
     </AccordionItem>
     <Line />
     </>

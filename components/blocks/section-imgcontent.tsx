@@ -59,7 +59,7 @@ export const contentandimageBlockSchema: Template = {
         {
           quote:
             "There are only two hard things in Computer Science: cache invalidation and naming things.",
-          coordinator: "Phil Karlton",
+          quotetitle: "Phil Karlton",
         },
       ],
     },
@@ -91,7 +91,7 @@ export const contentandimageBlockSchema: Template = {
         },
         itemProps: (item) => {
           return {
-            label: `${item.quote} - ${item.coordinator}`,
+            label: `${item.quote} - ${item.quotetitle}`,
           };
         },
       },

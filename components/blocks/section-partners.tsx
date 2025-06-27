@@ -97,7 +97,6 @@ export const partnerBlockSchema: Template = {
                 defaultItem: {
                     label: 'Action Label',
                     type: 'button',
-                    icon: true,
                     link: '/',
                 },
                 itemProps: (item) => ({ label: item.label }),
@@ -117,7 +116,6 @@ export const partnerBlockSchema: Template = {
                         { label: 'Link', value: 'link' },
                     ],
                 },
-                iconSchema as any,
                 {
                     label: 'Link',
                     name: 'link',

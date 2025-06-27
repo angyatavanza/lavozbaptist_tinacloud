@@ -144,7 +144,6 @@ export const AboutUs = ({ data }: { data: PageBlocksAboutus }) => {
                           className="rounded-xl px-5 text-base"
                         >
                           <Link href={action!.link!}>
-                            {action?.icon && <TinaIcon data={action?.icon} />}
                             <span className="text-nowrap">{action!.label}</span>
                           </Link>
                         </Button>
@@ -238,7 +237,6 @@ export const aboutusBlockSchema: Template = {
         defaultItem: {
           label: "Action Label",
           type: "button",
-          icon: true,
           link: "/",
         },
         itemProps: (item) => ({ label: item.label }),
@@ -258,7 +256,6 @@ export const aboutusBlockSchema: Template = {
             { label: "Link", value: "link" },
           ],
         },
-        iconSchema as any,
         {
           label: "Link",
           name: "link",

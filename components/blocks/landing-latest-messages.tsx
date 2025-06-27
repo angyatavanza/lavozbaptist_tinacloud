@@ -85,7 +85,6 @@ export const LatestMessages = ({
                     className="rounded-xl px-5 text-base"
                   >
                     <Link href={action!.link!}>
-                      {action?.icon && <TinaIcon data={action?.icon} />}
                       <span className="text-nowrap">{action!.label}</span>
                     </Link>
                   </Button>
@@ -232,7 +231,6 @@ export const latestmessagesBlockSchema: Template = {
         defaultItem: {
           label: "Action Label",
           type: "button",
-          icon: true,
           link: "/",
         },
         itemProps: (item) => ({ label: item.label }),
@@ -252,7 +250,6 @@ export const latestmessagesBlockSchema: Template = {
             { label: "Link", value: "link" },
           ],
         },
-        iconSchema as any,
         {
           label: "Link",
           name: "link",

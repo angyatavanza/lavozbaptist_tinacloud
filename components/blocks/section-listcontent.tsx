@@ -104,7 +104,6 @@ export const listcontentBlockSchema: Template = {
                 defaultItem: {
                     label: 'Action Label',
                     type: 'button',
-                    icon: true,
                     link: '/',
                 },
                 itemProps: (item) => ({ label: item.label }),
@@ -124,7 +123,6 @@ export const listcontentBlockSchema: Template = {
                         { label: 'Link', value: 'link' },
                     ],
                 },
-                iconSchema as any,
                 {
                     label: 'Link',
                     name: 'link',

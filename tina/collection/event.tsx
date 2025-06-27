@@ -1,170 +1,176 @@
-import React from 'react';
-import { videoBlockSchema } from '@/components/blocks/section-video';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import type { Collection } from 'tinacms';
-import { iconSchema } from '../fields/icon';
+import React from "react";
+import { videoBlockSchema } from "@/components/blocks/section-video";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import type { Collection } from "tinacms";
+import { iconSchema } from "../fields/icon";
 
 const Event: Collection = {
-  label: 'Eventos',
-  name: 'event',
-  path: 'content/events',
-  format: 'mdx',
+  label: "Eventos",
+  name: "event",
+  path: "content/events",
+  format: "mdx",
   ui: {
     router: ({ document }) => {
-      return `/events/${document._sys.breadcrumbs.join('/')}`;
+      return `/events/${document._sys.breadcrumbs.join("/")}`;
     },
   },
   fields: [
     {
-      type: 'string',
-      label: 'Title',
-      name: 'title',
+      type: "string",
+      label: "Title",
+      name: "title",
       isTitle: true,
       required: true,
     },
     {
-      type: 'image',
-      name: 'heroImg',
-      label: 'Hero Image',
+      type: "image",
+      name: "heroImg",
+      label: "Hero Image",
       // @ts-ignore
       uploadDir: () => "events",
     },
     {
-      type: 'rich-text',
-      label: 'Description',
-      name: 'description',
+      type: "rich-text",
+      label: "Description",
+      name: "description",
       overrides: {
-        toolbar: ['bold', 'italic', 'link'],
+        toolbar: ["bold", "italic", "link"],
       },
     },
     {
-      label: 'Actions',
-      name: 'actions',
-      type: 'object',
+      label: "Actions",
+      name: "actions",
+      type: "object",
       list: true,
       ui: {
         defaultItem: {
-        label: 'Action Label',
-        type: 'button',
-        icon: true,
-        link: '/',
+          label: "Action Label",
+          type: "button",
+          icon: {
+            name: "",
+            color: "",
+          },
+          link: "/",
+        },
+        itemProps: (item) => ({ label: item.label }),
       },
-      itemProps: (item) => ({ label: item.label }),
-    },
-    fields: [
-      {
-        label: 'Label',
-        name: 'label',
-        type: 'string',
-      },
-      {
-        label: 'Type',
-        name: 'type',
-        type: 'string',
-        options: [
-          { label: 'Button', value: 'button' },
-          { label: 'Link', value: 'link' },
-        ],
-      },
-       iconSchema as any,
-       {
-          label: 'Link',
-          name: 'link',
-          type: 'string',
+      fields: [
+        {
+          label: "Label",
+          name: "label",
+          type: "string",
+        },
+        {
+          label: "Type",
+          name: "type",
+          type: "string",
+          options: [
+            { label: "Button", value: "button" },
+            { label: "Link", value: "link" },
+          ],
+        },
+        iconSchema as any,
+        {
+          label: "Link",
+          name: "link",
+          type: "string",
         },
       ],
     },
     {
-      type: 'datetime',
-      label: 'Event Date and Time',
-      name: 'date',
+      type: "datetime",
+      label: "Event Date and Time",
+      name: "date",
       ui: {
-        dateFormat: 'MMMM DD YYYY',
-        timeFormat: 'hh:mm A',
+        dateFormat: "MMMM DD YYYY",
+        timeFormat: "hh:mm A",
       },
     },
     {
-      type: 'datetime',
-      label: 'Event End Time',
-      name: 'endtime',
+      type: "datetime",
+      label: "Event End Time",
+      name: "endtime",
       ui: {
-        timeFormat: 'hh:mm A',
+        timeFormat: "hh:mm A",
       },
     },
     iconSchema as any,
     {
-      label: 'Reccuring Event Details',
-      name: 'reccuringeventdetails',
-      type: 'object',
+      label: "Reccuring Event Details",
+      name: "reccuringeventdetails",
+      type: "object",
       list: true,
       ui: {
         defaultItem: {
-        recurring: false,
-        date: new Date().toISOString(),
-        enddate: new Date().toISOString(),
-        label: 'Date Label',
-        type: 'button',
-        icon: true,
-        link: '/',
-      },
-      itemProps: (item) => ({ label: item.label }),
-    },
-    fields: [
-      {
-        type: 'boolean',
-        label: 'Recurring Event',
-        name: 'recurring',
-      },
-      {
-        type: 'string',
-        label: 'Recurrence',
-        name: 'frequency',
-      },
-      {
-        type: 'datetime',
-        label: 'Recurring Event Start Date',
-        name: 'recstartdate',
-        ui: {
-          dateFormat: 'MMMM DD YYYY',
-          timeFormat: 'hh:mm A',
+          recurring: false,
+          date: new Date().toISOString(),
+          enddate: new Date().toISOString(),
+          label: "Date Label",
+          type: "button",
+          icon: {
+            name: "",
+            color: "",
+          },
+          link: "/",
         },
+        itemProps: (item) => ({ label: item.label }),
       },
-      {
-        type: 'datetime',
-        label: 'Recurring Event End Date',
-        name: 'recenddate',
-        ui: {
-          dateFormat: 'MMMM DD YYYY',
-          timeFormat: 'hh:mm A',
+      fields: [
+        {
+          type: "boolean",
+          label: "Recurring Event",
+          name: "recurring",
         },
-      },
-      {
-        label: 'Label',
-        name: 'label',
-        type: 'string',
-      },
-      {
-        label: 'Type',
-        name: 'type',
-        type: 'string',
-        options: [
-          { label: 'Button', value: 'button' },
-          { label: 'Link', value: 'link' },
-        ],
-      },
-       iconSchema as any,
-       {
-          label: 'Link',
-          name: 'link',
-          type: 'string',
+        {
+          type: "string",
+          label: "Recurrence",
+          name: "frequency",
+        },
+        {
+          type: "datetime",
+          label: "Recurring Event Start Date",
+          name: "recstartdate",
+          ui: {
+            dateFormat: "MMMM DD YYYY",
+            timeFormat: "hh:mm A",
+          },
+        },
+        {
+          type: "datetime",
+          label: "Recurring Event End Date",
+          name: "recenddate",
+          ui: {
+            dateFormat: "MMMM DD YYYY",
+            timeFormat: "hh:mm A",
+          },
+        },
+        {
+          label: "Label",
+          name: "label",
+          type: "string",
+        },
+        {
+          label: "Type",
+          name: "type",
+          type: "string",
+          options: [
+            { label: "Button", value: "button" },
+            { label: "Link", value: "link" },
+          ],
+        },
+        iconSchema as any,
+        {
+          label: "Link",
+          name: "link",
+          type: "string",
         },
       ],
     },
     {
-      type: 'reference',
-      label: 'Coordinator',
-      name: 'coordinator',
-      collections: ['coordinator'],
+      type: "reference",
+      label: "Coordinator",
+      name: "coordinator",
+      collections: ["coordinator"],
       ui: {
         optionComponent: (
           props: {
@@ -179,87 +185,85 @@ const Event: Collection = {
           return (
             <p className="flex min-h-8 items-center gap-4">
               <Avatar>
-                {avatar && (
-                  <AvatarImage
-                    src={avatar}
-                    alt={`${name} Profile`}
-                  />
-                )}
+                {avatar && <AvatarImage src={avatar} alt={`${name} Profile`} />}
                 <AvatarFallback>
                   {name
-                    .split(' ')
-                    .map((part) => part[0]?.toUpperCase() || '')
-                    .join('')}
+                    .split(" ")
+                    .map((part) => part[0]?.toUpperCase() || "")
+                    .join("")}
                 </AvatarFallback>
               </Avatar>
               {name}
             </p>
           );
         },
-      }
+      },
     },
     {
-      label: 'Location Details',
-      name: 'locationdetails',
-      type: 'object',
+      label: "Location Details",
+      name: "locationdetails",
+      type: "object",
       list: true,
       ui: {
         defaultItem: {
-        location: 'La Voz de la Esperanza',
-        label: 'Address Label',
-        type: 'button',
-        icon: true,
-        link: '/',
+          location: "La Voz de la Esperanza",
+          label: "Address Label",
+          type: "button",
+          icon: {
+            name: "",
+            color: "",
+          },
+          link: "/",
+        },
+        itemProps: (item) => ({ label: item.label }),
       },
-      itemProps: (item) => ({ label: item.label }),
-    },
-    fields: [
-      {
-      type: 'string',
-      label: 'Location',
-      name: 'location',
-      required: true,
-      },
-      {
-        label: 'Label',
-        name: 'label',
-        type: 'string',
-      },
-      {
-        label: 'Type',
-        name: 'type',
-        type: 'string',
-        options: [
-          { label: 'Button', value: 'button' },
-          { label: 'Link', value: 'link' },
-        ],
-      },
-       iconSchema as any,
-       {
-          label: 'Link',
-          name: 'link',
-          type: 'string',
+      fields: [
+        {
+          type: "string",
+          label: "Location",
+          name: "location",
+          required: true,
+        },
+        {
+          label: "Label",
+          name: "label",
+          type: "string",
+        },
+        {
+          label: "Type",
+          name: "type",
+          type: "string",
+          options: [
+            { label: "Button", value: "button" },
+            { label: "Link", value: "link" },
+          ],
+        },
+        iconSchema as any,
+        {
+          label: "Link",
+          name: "link",
+          type: "string",
         },
       ],
     },
     {
-      type: 'object',
-      label: 'Tags',
-      name: 'tags',
+      type: "object",
+      label: "Tags",
+      name: "tags",
       list: true,
       fields: [
         {
-          type: 'reference',
-          label: 'Tag',
-          name: 'tag',
-          collections: ['tag'],
+          type: "reference",
+          label: "Tag",
+          name: "tag",
+          collections: ["tag"],
           ui: {
             optionComponent: (
               props: {
                 name?: string;
               },
               _internalSys: { path: string }
-            ) => props.name || _internalSys.path
+            ) => props.name || _internalSys.path,
           },
         },
       ],
@@ -267,77 +271,77 @@ const Event: Collection = {
         itemProps: (item) => {
           return { label: item?.tag };
         },
-      }
+      },
     },
     {
-      type: 'rich-text',
-      label: 'Body',
-      name: '_body',
+      type: "rich-text",
+      label: "Body",
+      name: "_body",
       templates: [
         {
-          name: 'BlockQuote',
-          label: 'Block Quote',
+          name: "BlockQuote",
+          label: "Block Quote",
           fields: [
             {
-              name: 'children',
-              label: 'Quote',
-              type: 'rich-text',
+              name: "children",
+              label: "Quote",
+              type: "rich-text",
               overrides: {
-                toolbar: ['bold', 'italic', 'link'],
+                toolbar: ["bold", "italic", "link"],
               },
             },
             {
-              name: 'coordinatorName',
-              label: 'Coordinator',
-              type: 'string',
+              name: "coordinatorName",
+              label: "Coordinator",
+              type: "string",
             },
           ],
         },
         {
-          name: 'DateTime',
-          label: 'Date & Time',
+          name: "DateTime",
+          label: "Date & Time",
           inline: true,
           fields: [
             {
-              name: 'format',
-              label: 'Format',
-              type: 'string',
-              options: ['utc', 'iso', 'local'],
+              name: "format",
+              label: "Format",
+              type: "string",
+              options: ["utc", "iso", "local"],
             },
           ],
         },
         {
-          name: 'ContactSignup',
-          label: 'Newsletter Sign Up',
+          name: "ContactSignup",
+          label: "Newsletter Sign Up",
           fields: [
             {
-              name: 'children',
-              label: 'CTA',
-              type: 'rich-text',
+              name: "children",
+              label: "CTA",
+              type: "rich-text",
             },
             {
-              name: 'placeholder',
-              label: 'Placeholder',
-              type: 'string',
+              name: "placeholder",
+              label: "Placeholder",
+              type: "string",
             },
             {
-              name: 'buttonText',
-              label: 'Button Text',
-              type: 'string',
+              name: "buttonText",
+              label: "Button Text",
+              type: "string",
             },
             {
-              name: 'disclaimer',
-              label: 'Disclaimer',
-              type: 'rich-text',
+              name: "disclaimer",
+              label: "Disclaimer",
+              type: "rich-text",
               overrides: {
-                toolbar: ['bold', 'italic', 'link'],
+                toolbar: ["bold", "italic", "link"],
               },
             },
           ],
           ui: {
             defaultItem: {
-              placeholder: 'Enter your email',
-              buttonText: 'Notify Me',
+              placeholder: "Enter your email",
+              buttonText: "Notify Me",
             },
           },
         },
