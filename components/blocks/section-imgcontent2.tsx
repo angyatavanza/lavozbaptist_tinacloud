@@ -1,47 +1,115 @@
 import type { Template } from "tinacms";
-import { PageBlocksContentandimagevariant, PageBlocksContentandimagevariantContentandimagevariants } from "../../tina/__generated__/types";
+import {
+  PageBlocksContentandimagevariant,
+  PageBlocksContentandimagevariantContentandimagevariants,
+} from "../../tina/__generated__/types";
 import { Section } from "../layout/section";
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import Image from "next/image";
+import Link from "next/link";
+import { Button } from "../ui/button";
+import { iconSchema } from "@/tina/fields/icon";
 import { Card, CardContent } from "../ui/card";
 import { tinaField } from "tinacms/dist/react";
-import { sectionBlockSchemaField } from '../layout/section';
+import { TinaIcon } from "@/components/icon";
+import { sectionBlockSchemaField } from "../layout/section";
 
-
-export const ContentAndImageVariant = ({ data }: { data: PageBlocksContentandimagevariant }) => {
+export const ContentAndImageVariant = ({
+  data,
+}: {
+  data: PageBlocksContentandimagevariant;
+}) => {
   return (
-    <Section  background={data.background!}>
+    <Section background={data.background!}>
       <div className="text-center">
-        <h2 className="text-title text-3xl font-semibold" data-tina-field={tinaField(data, 'title')}>{data.title}</h2>
-        <p className="text-body mt-6" data-tina-field={tinaField(data, 'description')}>{data.description}</p>
+        {data.icon && <TinaIcon data={data?.icon} />}
+        <h2
+          className="text-title text-3xl font-semibold"
+          data-tina-field={tinaField(data, "title")}
+        >
+          {data.title}
+        </h2>
+        <p
+          className="text-body mt-6"
+          data-tina-field={tinaField(data, "description")}
+        >
+          {data.description}
+        </p>
       </div>
       <div className="mt-8 [column-width:300px] [column-gap:1.5rem] md:mt-12">
         {data.contentandimagevariants?.map((contentandimagevariant, index) => (
-          <ContentandimagevariantCard key={index} contentandimagevariant={contentandimagevariant!} />
+          <ContentandimagevariantCard
+            key={index}
+            contentandimagevariant={contentandimagevariant!}
+          />
         ))}
       </div>
     </Section>
   );
 };
 
-const ContentandimagevariantCard = ({ contentandimagevariant }: { contentandimagevariant: PageBlocksContentandimagevariantContentandimagevariants }) => {
+const ContentandimagevariantCard = ({
+  contentandimagevariant,
+}: {
+  contentandimagevariant: PageBlocksContentandimagevariantContentandimagevariants;
+}) => {
   return (
     <Card className="mb-6 break-inside-avoid">
       <CardContent className="grid grid-cols-[auto_1fr] gap-3 pt-6">
-        <Avatar className="size-9" data-tina-field={tinaField(contentandimagevariant, 'avatar')}>
-          {contentandimagevariant.avatar && (
-            <AvatarImage alt={contentandimagevariant.coordinator!} src={contentandimagevariant.avatar} loading="lazy" width="120" height="120" />
+        <div data-tina-field={tinaField(contentandimagevariant, "img")}>
+          {contentandimagevariant.img && (
+            <Image
+              alt={contentandimagevariant.quotetitle!}
+              src={contentandimagevariant.img}
+              loading="lazy"
+              width="120"
+              height="120"
+            />
           )}
-          <AvatarFallback>{contentandimagevariant.coordinator!.split(" ").map((word) => word[0]).join("")}</AvatarFallback>
-        </Avatar>
-
+        </div>
         <div>
-          <h3 className="font-medium" data-tina-field={tinaField(contentandimagevariant, 'coordinator')}>{contentandimagevariant.coordinator}</h3>
+          <h3
+            className="font-medium"
+            data-tina-field={tinaField(contentandimagevariant, "quotetitle")}
+          >
+            {contentandimagevariant.quotetitle}
+          </h3>
 
-          <span className="text-muted-foreground block text-sm tracking-wide" data-tina-field={tinaField(contentandimagevariant, 'role')}>{contentandimagevariant.role}</span>
+          <span
+            className="text-muted-foreground block text-sm tracking-wide"
+            data-tina-field={tinaField(contentandimagevariant, "requirements")}
+          >
+            {contentandimagevariant.requirements}
+          </span>
 
-          <blockquote className="mt-3" data-tina-field={tinaField(contentandimagevariant, 'quote')}>
-            <p className="text-gray-700 dark:text-gray-300">{contentandimagevariant.quote}</p>
+          <blockquote
+            className="mt-3"
+            data-tina-field={tinaField(contentandimagevariant, "quote")}
+          >
+            <p className="text-gray-700 dark:text-gray-300">
+              {contentandimagevariant.quote}
+            </p>
           </blockquote>
+        </div>
+        <div className="mt-12 flex flex-wrap justify-center gap-4">
+          {contentandimagevariant.actions &&
+            contentandimagevariant.actions.map((action) => (
+              <div
+                key={action!.label}
+                data-tina-field={tinaField(action)}
+                className="bg-foreground/10 rounded-[calc(var(--radius-xl)+0.125rem)] border p-0.5"
+              >
+                <Button
+                  asChild
+                  size="lg"
+                  variant={action!.type === "link" ? "outline" : "default"}
+                  className="rounded-xl px-5 text-base"
+                >
+                  <Link href={action!.link!}>
+                    <span className="text-nowrap">{action!.label}</span>
+                  </Link>
+                </Button>
+              </div>
+            ))}
         </div>
       </CardContent>
     </Card>
@@ -58,7 +126,7 @@ export const contentandimagevariantBlockSchema: Template = {
         {
           quote:
             "There are only two hard things in Computer Science: cache invalidation and naming things.",
-          coordinator: "Phil Karlton",
+          quotetitle: "Phil Karlton",
         },
       ],
     },
@@ -78,6 +146,7 @@ export const contentandimagevariantBlockSchema: Template = {
         component: "textarea",
       },
     },
+    iconSchema as any,
     {
       type: "object",
       list: true,
@@ -85,8 +154,9 @@ export const contentandimagevariantBlockSchema: Template = {
       name: "contentandimagevariants",
       ui: {
         defaultItem: {
-          quote: "There are only two hard things in Computer Science: cache invalidation and naming things.",
-          coordinator: "Phil Karlton",
+          quote:
+            "There are only two hard things in Computer Science: cache invalidation and naming things.",
+          quotetitle: "Phil Karlton",
         },
         itemProps: (item) => {
           return {
@@ -97,6 +167,11 @@ export const contentandimagevariantBlockSchema: Template = {
       fields: [
         {
           type: "string",
+          label: "Quote Title",
+          name: "quotetitle",
+        },
+        {
+          type: "string",
           ui: {
             component: "textarea",
           },
@@ -105,19 +180,50 @@ export const contentandimagevariantBlockSchema: Template = {
         },
         {
           type: "string",
-          label: "Coordinator",
-          name: "coordinator",
-        },
-        {
-          type: "string",
-          label: "Role",
-          name: "role",
+          label: "Requirements",
+          name: "requirements",
         },
         {
           type: "image",
-          label: "Avatar",
-          name: "avatar",
-        }
+          label: "Image",
+          name: "img",
+        },
+        {
+          label: "Actions",
+          name: "actions",
+          type: "object",
+          list: true,
+          ui: {
+            defaultItem: {
+              label: "Action Label",
+              type: "button",
+              icon: true,
+              link: "/",
+            },
+            itemProps: (item) => ({ label: item.label }),
+          },
+          fields: [
+            {
+              label: "Label",
+              name: "label",
+              type: "string",
+            },
+            {
+              label: "Type",
+              name: "type",
+              type: "string",
+              options: [
+                { label: "Button", value: "button" },
+                { label: "Link", value: "link" },
+              ],
+            },
+            {
+              label: "Link",
+              name: "link",
+              type: "string",
+            },
+          ],
+        },
       ],
     },
   ],

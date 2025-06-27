@@ -2,12 +2,13 @@ import type { Template } from "tinacms";
 import { PageBlocksContentandimage, PageBlocksContentandimageContentandimages } from "../../tina/__generated__/types";
 import { Section } from "../layout/section";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import Image from "next/image";
 import { Card, CardContent } from "../ui/card";
 import { tinaField } from "tinacms/dist/react";
 import { sectionBlockSchemaField } from '../layout/section';
 
 //done 36: add needed blocks to serve page
-//to-do 50: serve page: add button to missions, change the fields in the template for contentwimage
+//done 50: serve page: add button to mission trips, change the field name in the template for contentandimage contentandimagevariant
 //to-do 38: add needed blocks + content to groups page TINA CMS/CONTENT
 export const ContentAndImage = ({ data }: { data: PageBlocksContentandimage }) => {
   return (
@@ -29,17 +30,15 @@ const ContentandimageCard = ({ contentandimage }: { contentandimage: PageBlocksC
   return (
     <Card className="mb-6 break-inside-avoid">
       <CardContent className="grid grid-cols-[auto_1fr] gap-3 pt-6">
-        <Avatar className="size-9" data-tina-field={tinaField(contentandimage, 'avatar')}>
-          {contentandimage.avatar && (
-            <AvatarImage alt={contentandimage.coordinator!} src={contentandimage.avatar} loading="lazy" width="120" height="120" />
+        <div  data-tina-field={tinaField(contentandimage, 'img')}>
+          {contentandimage.img && (
+            <Image alt={contentandimage.quotetitle!} src={contentandimage.img} loading="lazy" width="120" height="120" />
           )}
-          <AvatarFallback>{contentandimage.coordinator!.split(" ").map((word) => word[0]).join("")}</AvatarFallback>
-        </Avatar>
-
+        </div>
         <div>
-          <h3 className="font-medium" data-tina-field={tinaField(contentandimage, 'coordinator')}>{contentandimage.coordinator}</h3>
+          <h3 className="font-medium" data-tina-field={tinaField(contentandimage, 'quotetitle')}>{contentandimage.quotetitle}</h3>
 
-          <span className="text-muted-foreground block text-sm tracking-wide" data-tina-field={tinaField(contentandimage, 'role')}>{contentandimage.role}</span>
+          <span className="text-muted-foreground block text-sm tracking-wide" data-tina-field={tinaField(contentandimage, 'requirements')}>{contentandimage.requirements}</span>
 
           <blockquote className="mt-3" data-tina-field={tinaField(contentandimage, 'quote')}>
             <p className="text-gray-700 dark:text-gray-300">{contentandimage.quote}</p>
@@ -88,7 +87,7 @@ export const contentandimageBlockSchema: Template = {
       ui: {
         defaultItem: {
           quote: "There are only two hard things in Computer Science: cache invalidation and naming things.",
-          coordinator: "Phil Karlton",
+          quotetitle: "Phil Karlton",
         },
         itemProps: (item) => {
           return {
@@ -107,18 +106,18 @@ export const contentandimageBlockSchema: Template = {
         },
         {
           type: "string",
-          label: "Coordinator",
-          name: "coordinator",
+          label: "Quote Title",
+          name: "quotetitle",
         },
         {
           type: "string",
-          label: "Role",
-          name: "role",
+          label: "Requirements",
+          name: "requirements",
         },
         {
           type: "image",
-          label: "Avatar",
-          name: "avatar",
+          label: "Image",
+          name: "img",
         }
       ],
     },
