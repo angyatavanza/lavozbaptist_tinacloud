@@ -9,7 +9,7 @@ declare global {
 }
 
 export default function FacebookSdkLoader() {
-  const appId = process.env.NEXT_PUBLIC_FACEBOOK_APP_ID;
+  const appId = process.env.FACEBOOK_APP_ID;
 
   useEffect(() => {
     if (!appId) {

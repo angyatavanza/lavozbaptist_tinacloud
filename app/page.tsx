@@ -3,10 +3,21 @@ import client from "@/tina/__generated__/client";
 import Layout from "@/components/layout/layout";
 import ClientPage from "./[...urlSegments]/client-page";
 import { fetchFacebookVideos } from "./messages/page";
+import {
+  loadTokenFromEnv,
+  isTokenValid,
+  daysUntilExpiration,
+} from "@/lib/token-helper";
 
+const token = loadTokenFromEnv();
 export const revalidate = 300;
 
 export default async function Home() {
+  if (token && isTokenValid(token)) {
+    console.log(`Token is valid with ${daysUntilExpiration(token)} days left`);
+  } else {
+    console.warn("Facebook token is expired or missing!");
+  }
   const data = await client.queries.page({
     relativePath: `home.mdx`,
   });
@@ -35,7 +46,7 @@ export default async function Home() {
       .replace(/(^-|-$)/g, "")
       .slice(0, 50);
     const customSlug = `${dateSlug}-${safeSlug}`;
-    
+
     return {
       id: video.id,
       title: video.title,
