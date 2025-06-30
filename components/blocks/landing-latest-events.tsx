@@ -1,60 +1,113 @@
 "use client";
 import React from "react";
-import { client } from "@/tina/__generated__/client";
-import { PageBlocksLatestevents } from "@/tina/__generated__/types";
-import type { Template } from "tinacms";
+import type { Event, PageBlocksLatestevents } from "@/tina/__generated__/types";
+import { es } from "date-fns/locale";
 import { Card } from "@/components/ui/card";
-import { TinaMarkdown } from "tinacms/dist/rich-text";
+import { Template } from "tinacms";
 import { ArrowRight, UserRound } from "lucide-react";
-import { Button } from '@/components/ui/button';
-import { tinaField } from 'tinacms/dist/react';
-import { TinaIcon } from '../icon';
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
+import { TinaIcon } from "../icon";
+import { tinaField } from "tinacms/dist/react";
 import { format } from "date-fns";
-import { iconSchema } from "@/tina/fields/icon";
 import { Section } from "../layout/section";
 import Link from "next/link";
 import Image from "next/image";
 
-//done 9a: figure out how to link the 3 latest events in the landing page
-//done 9b: fix the url of root page b/c sometimes the latest 3 events load only when the url is without "/home" after it
-//done 9c: add eventdate tina field to display in the frontend
-//done 9d: add actions as a field of latest events component
-//done 10: extract the time from "date" tina field and display in the event card
-//to-do 11: change layout of event card: date as a bookmark top left, photo centered, event title +event date/time + location underneath photo
-
-interface Coordinator {
-  name?: string;
-  avatar?: string;
-}
-
-interface Event {
-  id: string;
-  title: string;
-  date?: string;
-  enddate?: string;
-  description?: any;
-  location?: any;
-  heroImg?: string;
-  coordinator?: Coordinator;
-  tags?: { tag?: { name?: string } }[];
-  _sys: { breadcrumbs: string[] };
-}
-
-export const LatestEvents = ({
-  data,
-  events,
-}: {
+interface LatestEventsProps {
   data: PageBlocksLatestevents;
   events: Event[];
-}) => {
+}
+
+export const LatestEvents = ({ data, events }: LatestEventsProps) => {
   const limit = Math.min(Math.max(data.limit ?? 3, 1), 10);
   const title = data.title || "Eventos";
 
-  // Filter future or recent events by date and sort descending by date
-  const filteredEvents = events
-    .filter((e) => e.date)
-    .sort((a, b) => new Date(b.date!).getTime() - new Date(a.date!).getTime())
+  const formattedEvents = (events ?? []).map((event) => {
+    const start = new Date(event.date!);
+    const end = new Date(event.endtime!);
+    let formattedStartDate = '';
+    let formattedStartTime = '';
+    let formattedEndTime = '';
+    if (!isNaN(start.getTime())) {
+      formattedStartDate = format(start, 'MMM dd', { locale: es });
+      formattedStartTime = format(start, 'h:mm a').toLowerCase();
+    }
+    if (!isNaN(end.getTime())) {
+      formattedEndTime = format(end, 'h:mm a').toLowerCase();
+    }
+
+    return {
+      id: event.id,
+      published: formattedStartDate,
+      publishedtime: formattedStartTime,
+      publishedendtime: formattedEndTime,
+      icon: event.icon || null,
+      title: event.title,
+      tags: event.tags?.map((tag) => tag?.tag?.name) || [],
+      url: `/events/${event._sys.breadcrumbs.join("/")}`,
+      description: event.description,
+      reccuringeventdetails:
+        event.reccuringeventdetails?.map((reccuringeventdetail) => {
+          const start = new Date(reccuringeventdetail?.recstartdate!);
+          const end = new Date(reccuringeventdetail?.recenddate!);
+          return {
+            recurring: reccuringeventdetail?.recurring || false,
+            recstartdate: reccuringeventdetail?.recstartdate || "",
+            formattedrecstartDate: !isNaN(end.getTime())
+              ? format(start, "MMM dd", { locale: es })
+              : "",
+            formattedrecstartTime: !isNaN(end.getTime())
+              ? format(start, "EEEE h:mm a").toLowerCase()
+              : "",
+            recenddate: reccuringeventdetail?.recenddate || "",
+            formattedrecendDate: !isNaN(end.getTime())
+              ? format(end, "MMM dd", { locale: es })
+              : "",
+            formattedrecendTime: !isNaN(end.getTime())
+              ? format(end, "h:mm a").toLowerCase()
+              : "",
+            label: reccuringeventdetail?.label || "",
+            frequency: reccuringeventdetail?.frequency || "Weekly",
+            type: reccuringeventdetail?.type || "",
+            icon: reccuringeventdetail?.icon || null,
+            link: reccuringeventdetail?.link || "",
+          };
+        }) || [],
+      locationdetails:
+        event.locationdetails?.map((locationdetail) => ({
+          location: locationdetail?.location || "",
+          label: locationdetail?.label || "",
+          type: locationdetail?.type || "",
+          icon: locationdetail?.icon || null,
+          link: locationdetail?.link || "",
+        })) || [],
+      heroImg: event.heroImg,
+      coordinator: {
+        name: event.coordinator?.name || "Anonymous",
+        avatar: event.coordinator?.avatar,
+      },
+    };
+  });
+
+  // 2. Apply recurring/non-recurring, sort, and limit logic
+  const recurringEvents = formattedEvents
+    .filter(
+      (event) =>
+        event.reccuringeventdetails &&
+        event.reccuringeventdetails.some((d) => d?.recurring === true)
+    )
+    .filter((e) => !!e.published)
+    .sort((a, b) => new Date(b.published).getTime() - new Date(a.published).getTime())
+    .slice(0, limit);
+
+  const nonRecurringEvents = formattedEvents
+    .filter(
+      (event) =>
+        !event.reccuringeventdetails ||
+        !event.reccuringeventdetails.some((d) => d?.recurring === true)
+    )
+    .filter((e) => !!e.published)
+    .sort((a, b) => new Date(b.published).getTime() - new Date(a.published).getTime())
     .slice(0, limit);
 
   return (
@@ -91,120 +144,203 @@ export const LatestEvents = ({
         </div>
 
         <div className="grid gap-y-10 sm:grid-cols-12 sm:gap-y-12 md:gap-y-16 lg:gap-y-20">
-          {filteredEvents.map((event) => {
-             const eventdate = new Date(event.date!);
-              let formattedDate = '';
-              let formattedTime = '';
-              if (!isNaN(eventdate.getTime())) {
-                formattedDate = format(eventdate, 'MMM dd, yyyy');
-                formattedTime = format(eventdate, 'h:mm a');
-              }
-              
-              const eventenddate = new Date(event.enddate!);
-              let formattedendDate = '';
-              let formattedendTime = '';
-              if (!isNaN(eventenddate.getTime())) {
-                formattedendDate = format(eventenddate, 'MMM dd, yyyy');
-                formattedendTime = format(eventenddate, 'h:mm a');
-              }
-
-              return (
-                <Card
-                  key={event.id}
-                  className="order-last border-0 bg-transparent shadow-none sm:order-first sm:col-span-12 lg:col-span-10 lg:col-start-2"
-                >
-                  <div className="grid gap-y-6 sm:grid-cols-10 sm:gap-x-5 sm:gap-y-0 md:items-center md:gap-x-8 lg:gap-x-12">
-                    <div className="sm:col-span-5">
-                      <div className="mb-4 md:mb-6">
-                        <div className="flex flex-wrap gap-3 text-xs uppercase tracking-wider text-muted-foreground md:gap-5 lg:gap-6">
-                          {event.tags?.map((tag, i) => (
-                            <span key={i}>{tag?.tag?.name}</span>
-                          ))}
-                        </div>
-                      </div>
-                      <h3 className="text-xl font-semibold md:text-2xl lg:text-3xl">
-                        <Link
-                          href={`/events/${event._sys.breadcrumbs.join("/")}`}
-                          className="hover:underline"
-                        >
-                          {event.title}
-                        </Link>
-                      </h3>
-                      <div className="mt-4 text-muted-foreground md:mt-5">
-                        {event.location && (
-                          <TinaMarkdown content={event.location} />
-                        )}
-                      </div>
-                      <div className="mt-4 text-muted-foreground md:mt-5">
-                        {event.description && (
-                          <TinaMarkdown content={event.description} />
-                        )}
-                      </div>
-                      <div className="mt-6 flex items-center space-x-4 text-sm md:mt-8">
-                        <Avatar>
-                          {event.coordinator?.avatar ? (
-                            <AvatarImage
-                              src={event.coordinator.avatar}
-                              alt={event.coordinator.name || "Coordinator avatar"}
-                              className="h-8 w-8"
-                            />
-                          ) : (
-                            <AvatarFallback>
-                              <UserRound
-                                size={16}
-                                strokeWidth={2}
-                                className="opacity-60"
-                                aria-hidden="true"
-                              />
-                            </AvatarFallback>
-                          )}
-                        </Avatar>
-                        <span className="text-muted-foreground">
-                          {event.coordinator?.name || "Anonymous"}
-                        </span>
-                        <span className="text-muted-foreground">•</span>
-                        <span className="text-muted-foreground">{formattedDate}</span>
-                        <span className="text-muted-foreground">-</span>
-                        <span className="text-muted-foreground">{formattedendDate}</span>
-                        <span className="text-muted-foreground">•</span>
-                        <span className="text-muted-foreground">{formattedTime}</span>
-                        <span className="text-muted-foreground">-</span>
-                        <span className="text-muted-foreground">{formattedendTime}</span>
-                      </div>
-                      <div className="mt-6 flex items-center space-x-2 md:mt-8">
-                        <Link
-                          href={`/events/${event._sys.breadcrumbs.join("/")}`}
-                          className="inline-flex items-center font-semibold hover:underline md:text-base"
-                        >
-                          <span>Ver Evento</span>
-                          <ArrowRight className="ml-2 size-4 transition-transform" />
-                        </Link>
+            {recurringEvents.map((event) => (
+              <Card
+                key={event.id}
+                className="order-last border-0 bg-transparent shadow-none sm:order-first sm:col-span-12 lg:col-span-10 lg:col-start-2"
+              >
+                <div className="grid gap-y-6 sm:grid-cols-10 sm:gap-x-5 sm:gap-y-0 md:items-center md:gap-x-8 lg:gap-x-12">
+                  <div className="sm:col-span-5">
+                    <div className="mb-4 md:mb-6">
+                      {event.published}
+                      <div className="flex flex-wrap gap-3 text-xs uppercase tracking-wider text-muted-foreground md:gap-5 lg:gap-6">
+                        {event.tags?.map((tag) => (
+                          <span key={tag}>{tag}</span>
+                        ))}
                       </div>
                     </div>
-
-                    {event.heroImg && (
-                      <div className="order-first sm:order-last sm:col-span-5">
-                        <Link
-                          href={`/events/${event._sys.breadcrumbs.join("/")}`}
-                          className="block"
-                        >
-                          <div className="aspect-[16/9] overflow-clip rounded-lg border border-border">
-                            <Image
-                              width={533}
-                              height={300}
-                              src={event.heroImg}
-                              alt={event.title}
-                              className="h-full w-full object-cover transition-opacity duration-200 fade-in hover:opacity-70"
-                            />
+                    <h3 className="text-xl font-semibold md:text-2xl lg:text-3xl">
+                      <Link href={event.url} className="hover:underline">
+                        {event.title}
+                      </Link>
+                    </h3>
+                    <div className="mt-12 flex flex-wrap justify-center gap-4">
+                      {event.reccuringeventdetails &&
+                        event.reccuringeventdetails.map((reccuringeventdetail) => (
+                          <div
+                            key={reccuringeventdetail!.label}
+                            data-tina-field={tinaField(reccuringeventdetail)}
+                            className="bg-foreground/10 rounded-[calc(var(--radius-xl)+0.125rem)] border p-0.5"
+                          >
+                            {reccuringeventdetail?.icon && (
+                              <TinaIcon data={reccuringeventdetail?.icon} />
+                            )}
+                            <span>
+                              {` Recurring At: ${reccuringeventdetail.formattedrecstartDate} - ${reccuringeventdetail.formattedrecendDate}`}
+                            </span>
+                            <span>
+                              {` Recurring At: ${reccuringeventdetail.formattedrecstartTime} - ${reccuringeventdetail.formattedrecendTime}`}
+                            </span>
+                            <Button
+                              asChild
+                              size="lg"
+                              variant={
+                                reccuringeventdetail!.type === "link"
+                                  ? "outline"
+                                  : "default"
+                              }
+                              className="rounded-xl px-5 text-base"
+                            >
+                              <Link href={reccuringeventdetail!.link!}>
+                                <span className="text-wrap">
+                                  {reccuringeventdetail!.label}
+                                </span>
+                              </Link>
+                            </Button>
                           </div>
-                        </Link>
-                      </div>
-                    )}
+                        ))}
+                    </div>
+                    <div className="mt-12 flex flex-wrap justify-center gap-4">
+                      {event.locationdetails &&
+                        event.locationdetails.map((locationdetail) => (
+                          <div
+                            key={locationdetail!.label}
+                            data-tina-field={tinaField(locationdetail)}
+                            className="bg-foreground/10 rounded-[calc(var(--radius-xl)+0.125rem)] border p-0.5"
+                          >
+                            <Button
+                              asChild
+                              size="lg"
+                              variant={
+                                locationdetail!.type === "link"
+                                  ? "outline"
+                                  : "default"
+                              }
+                              className="rounded-xl px-5 text-base"
+                            >
+                              <Link href={locationdetail!.link!}>
+                                {locationdetail?.icon && (
+                                  <TinaIcon data={locationdetail?.icon} />
+                                )}
+                                <span className="text-wrap">
+                                  {locationdetail!.location}
+                                </span>
+                              </Link>
+                            </Button>
+                          </div>
+                        ))}
+                    </div>
+                    <div className="mt-6 flex items-center space-x-2 md:mt-8">
+                      <Link
+                        href={event.url}
+                        className="inline-flex items-center font-semibold hover:underline md:text-base"
+                      >
+                        <span>Ver Evento</span>
+                        <ArrowRight className="ml-2 size-4 transition-transform" />
+                      </Link>
+                    </div>
                   </div>
-                </Card>
-              );
-          })}
-        </div>
+                  {event.heroImg && (
+                    <div className="order-first sm:order-last sm:col-span-5">
+                      <Link href={event.url} className="block">
+                        <div className="aspect-[16/9] overflow-clip rounded-lg border border-border">
+                          <Image
+                            width={533}
+                            height={300}
+                            src={event.heroImg}
+                            alt={event.title}
+                            className="h-full w-full object-cover transition-opacity duration-200 fade-in hover:opacity-70"
+                          />
+                        </div>
+                      </Link>
+                    </div>
+                  )}
+                </div>
+              </Card>
+            ))}
+            {nonRecurringEvents.map((event) => (
+              <Card
+                key={event.id}
+                className="order-last border-0 bg-transparent shadow-none sm:order-first sm:col-span-12 lg:col-span-10 lg:col-start-2"
+              >
+                <div className="grid gap-y-6 sm:grid-cols-10 sm:gap-x-5 sm:gap-y-0 md:items-center md:gap-x-8 lg:gap-x-12">
+                  <div className="sm:col-span-5">
+                    <div className="mb-4 md:mb-6">
+                      {event.published}
+                      <div className="flex flex-wrap gap-3 text-xs uppercase tracking-wider text-muted-foreground md:gap-5 lg:gap-6">
+                        {event.tags?.map((tag) => (
+                          <span key={tag}>{tag}</span>
+                        ))}
+                      </div>
+                    </div>
+                    <h3 className="text-xl font-semibold md:text-2xl lg:text-3xl">
+                      <Link href={event.url} className="hover:underline">
+                        {event.title}
+                      </Link>
+                    </h3>
+                    <div className="mt-12 flex flex-wrap justify-center gap-4">
+                      {event.icon && (
+                        <TinaIcon data={event?.icon} />
+                      )}
+                     <span>{event.publishedtime}</span>
+                      {event.locationdetails &&
+                        event.locationdetails.map((locationdetail) => (
+                          <div
+                            key={locationdetail!.label}
+                            data-tina-field={tinaField(locationdetail)}
+                            className="bg-foreground/10 rounded-[calc(var(--radius-xl)+0.125rem)] border p-0.5"
+                          >
+                            <Button
+                              asChild
+                              size="lg"
+                              variant={
+                                locationdetail!.type === "link"
+                                  ? "outline"
+                                  : "default"
+                              }
+                              className="rounded-xl px-5 text-base"
+                            >
+                              <Link href={locationdetail!.link!}>
+                                {locationdetail?.icon && (
+                                  <TinaIcon data={locationdetail?.icon} />
+                                )}
+                                <span className="text-wrap">
+                                  {locationdetail!.location}
+                                </span>
+                              </Link>
+                            </Button>
+                          </div>
+                        ))}
+                    </div>
+                    <div className="mt-6 flex items-center space-x-2 md:mt-8">
+                      <Link
+                        href={event.url}
+                        className="inline-flex items-center font-semibold hover:underline md:text-base"
+                      >
+                        <span>Ver Evento</span>
+                        <ArrowRight className="ml-2 size-4 transition-transform" />
+                      </Link>
+                    </div>
+                  </div>
+                  {event.heroImg && (
+                    <div className="order-first sm:order-last sm:col-span-5">
+                      <Link href={event.url} className="block">
+                        <div className="aspect-[16/9] overflow-clip rounded-lg border border-border">
+                          <Image
+                            width={533}
+                            height={300}
+                            src={event.heroImg}
+                            alt={event.title}
+                            className="h-full w-full object-cover transition-opacity duration-200 fade-in hover:opacity-70"
+                          />
+                        </div>
+                      </Link>
+                    </div>
+                  )}
+                </div>
+              </Card>
+            ))}
+          </div>
       </div>
     </Section>
   );

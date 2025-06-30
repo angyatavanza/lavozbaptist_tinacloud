@@ -81,6 +81,7 @@ const Event: Collection = {
       type: "datetime",
       label: "Event Date and Time",
       name: "date",
+      required: true, //this is required to display the event date in the frontend
       ui: {
         dateFormat: "MMMM DD YYYY",
         timeFormat: "hh:mm A",

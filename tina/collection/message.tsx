@@ -117,6 +117,7 @@ const Message: Collection = {
       type: "datetime",
       label: "Posted Date",
       name: "date",
+      required: true, //this is required to display the event date in the frontend
       ui: {
         dateFormat: "MMMM DD YYYY",
         timeFormat: "hh:mm A",

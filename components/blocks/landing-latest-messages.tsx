@@ -1,14 +1,12 @@
 "use client";
 import React from "react";
 import { client } from "@/tina/__generated__/client";
-import { PageBlocksLatestmessages } from "@/tina/__generated__/types";
+import { Message, PageBlocksLatestmessages } from "@/tina/__generated__/types";
 import type { Template } from "tinacms";
 import { Card } from "@/components/ui/card";
 import { TinaMarkdown } from "tinacms/dist/rich-text";
 import { tinaField } from 'tinacms/dist/react';
-import { iconSchema } from "@/tina/fields/icon";
 import { Button } from '@/components/ui/button';
-import { TinaIcon } from '../icon';
 import MessagesVideoDialog from "../ui/messages-video-dialog";
 import { ArrowRight, UserRound } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -21,36 +19,11 @@ import Link from "next/link";
 //done 29b: find workaround to 5 copyrighted videos: https://www.facebook.com/video/copyright/claim/?match_id=24630578953196706&is_from_action_center_v2=0
 //to-do 29c: extend duration of FACEBOOK_ACCESS_TOKEN 
 
-interface Coordinator {
-  name?: string;
-  avatar?: string;
-}
-
-interface Message {
-  id: string;
-  title: string;
-  date?: string;
-  excerpt?: any;
-  image?: {
-    src?: string;          
-    alt?: string;           
-    videoUrl?: string;
-    embeddable?: boolean;        
-    autoPlay?: boolean;     
-    loop?: boolean;         
-  };
-  coordinator?: Coordinator;
-  tags?: { tag?: { name?: string } }[];
-  _sys: { breadcrumbs: string[] };
-}
-
-export const LatestMessages = ({
-  data,
-  messages,
-}: {
+interface LatestMessagesProps {
   data: PageBlocksLatestmessages;
   messages: Message[];
-}) => {
+}
+export const LatestMessages = ({ data, messages }: LatestMessagesProps) => {
   const limit = Math.min(Math.max(data.limit ?? 3, 1), 10);
   const title = data.title || "Mensajes";
 

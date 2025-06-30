@@ -1,5 +1,5 @@
 import { tinaField } from "tinacms/dist/react";
-import { Page, PageBlocks } from "../../tina/__generated__/types";
+import { Page, PageBlocks, Message, Event } from "../../tina/__generated__/types";
 import { Hero } from "./landing-hero";
 import { Aboutsection } from "./section-about";
 import { AboutUs } from "./landing-about-us";
@@ -28,11 +28,20 @@ import { Partner } from "./section-partners";
 import { Listcontent } from "./section-listcontent";
 import { ContactSection } from "./section-contact";
 
-export const Blocks = (props: Omit<Page, "id" | "_sys" | "_values">& { messages?: Message[] }& { events?: Event[] }) => {
+export const Blocks = (
+  props: Omit<Page, "id" | "_sys" | "_values"> & {
+    events?: Event[];
+    messages?: Message[];
+  }
+) => {
+  //This only checks if props.blocks is undefined or null (i.e., the whole array is missing), not if the array contains null elements.
   if (!props.blocks) return null;
   return (
     <>
       {props.blocks
+      //Filters out any null values from the props.blocks array before mapping over it.
+      //You should keep the .filter((block): block is PageBlocks => block !== null) line
+      //unless you are 100% certain that props.blocks will never contain null or undefined values.
       .filter((block): block is PageBlocks => block !== null)
       .map(function (block, i) {
         return (
@@ -45,7 +54,15 @@ export const Blocks = (props: Omit<Page, "id" | "_sys" | "_values">& { messages?
   );
 };
 
-const Block = ({block, events, messages,}: {block: PageBlocks; events?: Event[]; messages?: Message[];}) => {
+const Block = ({
+  block,
+  events,
+  messages,
+}: {
+  block: PageBlocks;
+  events?: Event[];
+  messages?: Message[];
+}) => {
   switch (block.__typename) {
     case "PageBlocksVideo":
       return <Video data={block} />;

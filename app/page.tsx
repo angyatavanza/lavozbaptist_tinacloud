@@ -79,7 +79,7 @@ export default async function Home() {
 
   return (
     <Layout rawPageData={data}>
-      <ClientPage {...data} events={events} messages={messages} />
+      <ClientPage {...data} events={events ?? []} messages={messages ?? []}/>
     </Layout>
   );
 }
