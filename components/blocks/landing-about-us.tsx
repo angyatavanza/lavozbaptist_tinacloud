@@ -17,7 +17,7 @@ import { AnimatedGroup } from "../motion-primitives/animated-group";
 import { TextEffect } from "../motion-primitives/text-effect";
 import HeroVideoDialog from "../ui/hero-video-dialog";
 import { cn } from "@/lib/utils";
-
+import { Transition } from 'motion/react';
 //done 7: add text to aboutus in homepage
 //done 8: decide if short aboutus or short mission should be on the homepage
 //to-do 21: extend the width of the div for the about-us image to be full-width
@@ -35,18 +35,18 @@ const transitionVariants = {
   item: {
     hidden: {
       opacity: 0,
-      filter: "blur(12px)",
+      filter: 'blur(12px)',
       y: 12,
     },
     visible: {
       opacity: 1,
-      filter: "blur(0px)",
+      filter: 'blur(0px)',
       y: 0,
       transition: {
-        type: "spring",
+        type: 'spring',
         bounce: 0.3,
         duration: 1.5,
-      },
+      } as Transition,
     },
   },
 };
@@ -70,7 +70,6 @@ export const AboutUs = ({ data }: { data: PageBlocksAboutus }) => {
   return (
     <Section background={data.background!}>
       {data.image && (
-        <AnimatedGroup variants={transitionVariants}>
           <div
             className="relative -mr-56 mt-8 overflow-hidden px-2 sm:mr-0 sm:mt-12 md:mt-20 max-w-full"
             data-tina-field={tinaField(data, "image")}
@@ -153,7 +152,6 @@ export const AboutUs = ({ data }: { data: PageBlocksAboutus }) => {
               </div>
             </div>
           </div>
-        </AnimatedGroup>
       )}
     </Section>
   );

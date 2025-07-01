@@ -17,6 +17,7 @@ import { AnimatedGroup } from "../motion-primitives/animated-group";
 import { TextEffect } from "../motion-primitives/text-effect";
 import HeroVideoDialog from "../ui/hero-video-dialog";
 import { cn } from "@/lib/utils";
+import { Transition } from 'motion/react';
 
 const transitionVariants = {
   container: {
@@ -30,18 +31,18 @@ const transitionVariants = {
   item: {
     hidden: {
       opacity: 0,
-      filter: "blur(12px)",
+      filter: 'blur(12px)',
       y: 12,
     },
     visible: {
       opacity: 1,
-      filter: "blur(0px)",
+      filter: 'blur(0px)',
       y: 0,
       transition: {
-        type: "spring",
+        type: 'spring',
         bounce: 0.3,
         duration: 1.5,
-      },
+      } as Transition,
     },
   },
 };
@@ -65,7 +66,6 @@ export const Herocontent = ({ data }: { data: PageBlocksHerocontent }) => {
   return (
     <Section background={data.background!}>
       {data.image && (
-        <AnimatedGroup variants={transitionVariants}>
           <div
             className="relative -mr-56 mt-8 overflow-hidden px-2 sm:mr-0 sm:mt-12 md:mt-20 max-w-full"
             data-tina-field={tinaField(data, "image")}
@@ -126,7 +126,6 @@ export const Herocontent = ({ data }: { data: PageBlocksHerocontent }) => {
                           className="rounded-xl px-5 text-base"
                         >
                           <Link href={action!.link!}>
-                            {action?.icon && (<TinaIcon data={action?.icon} />)}
                             <span className="text-nowrap">{action!.label}</span>
                           </Link>
                         </Button>
@@ -136,7 +135,6 @@ export const Herocontent = ({ data }: { data: PageBlocksHerocontent }) => {
               </div>
             </div>
           </div>
-        </AnimatedGroup>
       )}
     </Section>
   );

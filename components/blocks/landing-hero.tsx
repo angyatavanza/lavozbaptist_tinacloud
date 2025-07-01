@@ -20,6 +20,7 @@ import { AnimatedGroup } from "../motion-primitives/animated-group";
 import { TextEffect } from "../motion-primitives/text-effect";
 import HeroVideoDialog from "../ui/hero-video-dialog";
 import { cn } from "@/lib/utils";
+import { Transition } from 'motion/react';
 
 //done 2: embed video from vimeo
 //done 3: change video type to be vimeo + make video autoplay
@@ -41,18 +42,18 @@ const transitionVariants = {
   item: {
     hidden: {
       opacity: 0,
-      filter: "blur(12px)",
+      filter: 'blur(12px)',
       y: 12,
     },
     visible: {
       opacity: 1,
-      filter: "blur(0px)",
+      filter: 'blur(0px)',
       y: 0,
       transition: {
-        type: "spring",
+        type: 'spring',
         bounce: 0.3,
         duration: 1.5,
-      },
+      } as Transition,
     },
   },
 };
@@ -76,8 +77,6 @@ export const Hero = ({ data }: { data: PageBlocksHero }) => {
   return (
     <SectionHero background={data.background!}>
       {data.image && (
-        <AnimatedGroup 
-          variants={transitionVariants}>
           <div
             className="relative overflow-hidden px-2 sm:mr-0 sm:mt-12 max-w-full"
             data-tina-field={tinaField(data, "image")}
@@ -118,10 +117,7 @@ export const Hero = ({ data }: { data: PageBlocksHero }) => {
                   </div>
                 )}
 
-                <AnimatedGroup
-                  variants={transitionVariants}
-                  className="mt-12 flex flex-col items-center justify-center gap-2 md:flex-row"
-                >
+                <AnimatedGroup variants={transitionVariants} className='mt-12 flex flex-col items-center justify-center gap-2 md:flex-row'>
                   {data.actions &&
                     data.actions.map((action) => (
                       <div
@@ -147,7 +143,6 @@ export const Hero = ({ data }: { data: PageBlocksHero }) => {
               </div>
             </div>
           </div>
-        </AnimatedGroup>
       )}
     </SectionHero>
   );

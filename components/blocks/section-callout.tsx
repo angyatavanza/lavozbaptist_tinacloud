@@ -6,27 +6,35 @@ import { PageBlocksCallout } from "@/tina/__generated__/types";
 import { ArrowRight } from "lucide-react";
 import { AnimatedGroup } from "../motion-primitives/animated-group";
 import { Section, sectionBlockSchemaField } from '../layout/section';
-
+import { Transition } from 'motion/react';
 //done 1: fix url link to /service-times
 const transitionVariants = {
-    item: {
-        hidden: {
-            opacity: 0,
-            filter: 'blur(12px)',
-            y: 12,
-        },
-        visible: {
-            opacity: 1,
-            filter: 'blur(0px)',
-            y: 0,
-            transition: {
-                type: 'spring',
-                bounce: 0.3,
-                duration: 1.5,
-            },
-        },
+  container: {
+    visible: {
+      transition: {
+        staggerChildren: 0.05,
+        delayChildren: 0.75,
+      },
     },
-}
+  },
+  item: {
+    hidden: {
+      opacity: 0,
+      filter: 'blur(12px)',
+      y: 12,
+    },
+    visible: {
+      opacity: 1,
+      filter: 'blur(0px)',
+      y: 0,
+      transition: {
+        type: 'spring',
+        bounce: 0.3,
+        duration: 1.5,
+      } as Transition,
+    },
+  },
+};
 
 export const Callout = ({ data }: { data: PageBlocksCallout }) => {
     return (

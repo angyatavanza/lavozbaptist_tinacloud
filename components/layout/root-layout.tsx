@@ -43,7 +43,7 @@ interface HeaderProps {
   icon: React.ElementType;
   expanded: boolean;
   onToggle: () => void;
-  toggleRef: RefObject<HTMLButtonElement | null>;
+  toggleRef: RefObject<HTMLButtonElement>;
 };
 
 const Header = ({ panelId, invert = false, icon: Icon, expanded, onToggle, toggleRef }: HeaderProps) => {

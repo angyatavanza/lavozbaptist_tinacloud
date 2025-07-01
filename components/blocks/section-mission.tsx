@@ -10,7 +10,7 @@ import Link from "next/link";
 import { Button } from "../ui/button";
 import { AnimatedGroup } from "../motion-primitives/animated-group";
 import { GridList, GridListItem } from "../grid-list";
-
+import { Transition } from 'motion/react';
 //Done 20: add data.code
 
 const transitionVariants = {
@@ -25,18 +25,18 @@ const transitionVariants = {
   item: {
     hidden: {
       opacity: 0,
-      filter: "blur(12px)",
+      filter: 'blur(12px)',
       y: 12,
     },
     visible: {
       opacity: 1,
-      filter: "blur(0px)",
+      filter: 'blur(0px)',
       y: 0,
       transition: {
-        type: "spring",
+        type: 'spring',
         bounce: 0.3,
         duration: 1.5,
-      },
+      } as Transition,
     },
   },
 };

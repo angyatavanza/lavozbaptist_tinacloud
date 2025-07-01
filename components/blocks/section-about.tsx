@@ -20,7 +20,7 @@ import { TextEffect } from "../motion-primitives/text-effect";
 import HeroVideoDialog from "../ui/hero-video-dialog";
 import { cn } from "@/lib/utils";
 import { ContactSection } from "./section-contact";
-
+import { Transition } from 'motion/react';
 //done 26: add contactsection to sections
 //done 27: merge aboutsection component --currently there are 2 descriptions
 //to-do 22: change image to be to the left of the div
@@ -38,18 +38,18 @@ const transitionVariants = {
   item: {
     hidden: {
       opacity: 0,
-      filter: "blur(12px)",
+      filter: 'blur(12px)',
       y: 12,
     },
     visible: {
       opacity: 1,
-      filter: "blur(0px)",
+      filter: 'blur(0px)',
       y: 0,
       transition: {
-        type: "spring",
+        type: 'spring',
         bounce: 0.3,
         duration: 1.5,
-      },
+      } as Transition,
     },
   },
 };
