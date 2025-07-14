@@ -1,49 +1,17 @@
 "use client";
 import * as React from "react";
 import Image from "next/image";
-import Link from "next/link";
 import type { Template } from "tinacms";
 import { tinaField } from "tinacms/dist/react";
 import {
   PageBlocksHerocontent,
   PageBlocksHerocontentImage,
 } from "@/tina/__generated__/types";
-import { Button } from "@/components/ui/button";
 import { Section, sectionBlockSchemaField } from "@/components/layout/section";
-import { AnimatedGroup } from "../motion-primitives/animated-group";
 import { TextEffect } from "../motion-primitives/text-effect";
 import HeroVideoDialog from "@/components/ui/hero-video-dialog";
-import { Transition } from 'motion/react';
 
 //to-do 92: extend the width of the div for the Hero content component to be full-width + remove the white looking border around the video + fix the section width of the section background of the blocks when the url goes to /home or /about
-
-const transitionVariants = {
-  container: {
-    visible: {
-      transition: {
-        staggerChildren: 0.05,
-        delayChildren: 0.75,
-      },
-    },
-  },
-  item: {
-    hidden: {
-      opacity: 0,
-      filter: 'blur(12px)',
-      y: 12,
-    },
-    visible: {
-      opacity: 1,
-      filter: 'blur(0px)',
-      y: 0,
-      transition: {
-        type: 'spring',
-        bounce: 0.3,
-        duration: 1.5,
-      } as Transition,
-    },
-  },
-};
 
 export const Herocontent = ({ data }: { data: PageBlocksHerocontent }) => {
   // Extract the background style logic into a more readable format
@@ -103,33 +71,6 @@ export const Herocontent = ({ data }: { data: PageBlocksHerocontent }) => {
                     </TextEffect>
                   </div>
                 )}
-
-                <AnimatedGroup
-                  variants={transitionVariants}
-                  className="mt-12 flex flex-col items-center justify-center gap-2 md:flex-row"
-                >
-                  {data.actions &&
-                    data.actions.map((action) => (
-                      <div
-                        key={action!.label}
-                        data-tina-field={tinaField(action)}
-                        className="bg-foreground/10 rounded-[calc(var(--radius-xl)+0.125rem)] border p-0.5"
-                      >
-                        <Button
-                          asChild
-                          size="lg"
-                          variant={
-                            action!.type === "link" ? "ghost" : "default"
-                          }
-                          className="rounded-xl px-5 text-base"
-                        >
-                          <Link href={action!.link!}>
-                            <span className="text-nowrap">{action!.label}</span>
-                          </Link>
-                        </Button>
-                      </div>
-                    ))}
-                </AnimatedGroup>
               </div>
             </div>
           </div>
@@ -200,41 +141,6 @@ export const herocontentBlockSchema: Template = {
       type: "string",
       label: "Tagline",
       name: "tagline",
-    },
-    {
-      label: "Actions",
-      name: "actions",
-      type: "object",
-      list: true,
-      ui: {
-        defaultItem: {
-          label: "Action Label",
-          type: "button",
-          link: "/",
-        },
-        itemProps: (item) => ({ label: item.label }),
-      },
-      fields: [
-        {
-          label: "Label",
-          name: "label",
-          type: "string",
-        },
-        {
-          label: "Type",
-          name: "type",
-          type: "string",
-          options: [
-            { label: "Button", value: "button" },
-            { label: "Link", value: "link" },
-          ],
-        },
-        {
-          label: "Link",
-          name: "link",
-          type: "string",
-        },
-      ],
     },
     {
       type: "object",

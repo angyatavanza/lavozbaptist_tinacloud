@@ -1,32 +1,32 @@
 import { tinaField } from "tinacms/dist/react";
 import { Page, PageBlocks, Message, Event } from "@/tina/__generated__/types";
-import { Hero } from "./landing-hero";
-import { Aboutsection } from "./section-about";
-import { AboutUs } from "./landing-about-us";
-import { Content } from "./section-content";
-import { Connections } from "./landing-connect";
-import { Features } from "./section-features";
-import { Groups } from "./landing-groups";
-import { CallToAction } from "./section-call-to-action";
-import { Testimonial } from "./del-testimonial";
-import { Video } from "./section-video";
 import { Callout } from "./landing-callout";
-import { Herocontent } from "./section-herocontent";
-import { CallToActionLinks } from "./section-cta-links";
-import { FreqAskedQuestions } from "./section-faqcontent";
-import { ContentAndImage } from "./section-imgcontent";
-import { ContentAndImageVariant } from "./section-imgcontent2";
-import { Profile } from "./del-profile";
-import { TeamMember } from "./section-our-team";
+import { Hero } from "./landing-hero";
+import { AboutUs } from "./landing-about-us";
+import { Groupsinfo } from "./landing-groups";
+import { Connections } from "./landing-connect";
 import { LatestEvents } from "./landing-latest-events";
 import { LatestMessages } from "./landing-latest-messages";
+import { CallToAction } from "./section-call-to-action";
+import { CallToActionLinks } from "./section-cta-links";
+import { FreqAskedQuestions } from "./section-faqcontent";
+import { Herocontent } from "./section-herocontent";
+import { Herodonation } from "./section-herodonation";
+import { Profile } from "./del-profile";
+import { TeamMember } from "./section-our-team";
 import { Vision } from "./section-vision";
 import { NextSteps } from "./section-first-steps";
 import { Mission } from "./section-mission";
+import { Aboutsection } from "./section-about";
+import { Group } from "./section-groups";
 import { Partner } from "./del-partners";
+import { ContentAndImage } from "./section-imgcontent";
+import { ContentAndImageVariant } from "./section-imgcontent2";
+import { Features } from "./section-features";
 import { Listcontent } from "./section-listcontent";
 import { ContactSection } from "./section-contact";
-import { Herodonation } from "./section-herodonation";
+import { Content } from "./section-content";
+import { Video } from "./section-video";
 
 export const Blocks = (
   props: Omit<Page, "id" | "_sys" | "_values"> & {
@@ -80,8 +80,8 @@ const Block = ({
       return <Aboutsection data={block} />;
     case "PageBlocksTeammember":
       return <TeamMember data={block} />; 
-     case "PageBlocksTestimonial":
-      return <Testimonial data={block} />;   
+    case "PageBlocksGroup":
+      return <Group data={block} />;   
     case "PageBlocksAboutus":
       return <AboutUs data={block} />;    
     case "PageBlocksCallout":
@@ -102,8 +102,8 @@ const Block = ({
       return <Connections data={block} />;
     case "PageBlocksFeatures":
       return <Features data={block} />;
-    case "PageBlocksGroups":
-      return <Groups data={block} />;  
+    case "PageBlocksGroupsinfo":
+      return <Groupsinfo data={block} />;  
     case "PageBlocksCta":
       return <CallToAction data={block} />;
     case "PageBlocksVision":

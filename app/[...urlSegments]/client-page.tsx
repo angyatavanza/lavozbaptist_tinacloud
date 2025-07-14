@@ -10,7 +10,7 @@ import { components } from '@/components/mdx-components';
 //done 7: add text to aboutus in homepage
 //done 8: decide if short aboutus or short mission should be on the homepage
 //done 36: add needed blocks to serve page
-//to-do 38: add needed blocks + content to groups page TINA CMS/CONTENT
+//done 38: add needed blocks + content to groups page TINA CMS/CONTENT
 //done 45: create privacy page and add content blocks to privacy page TINA CMS/CONTENT 
 //done 60: add text to connections in homepage TINA CMS/CONTENT
 //done 61: change button and text in section-contact TINA CMS/CONTENT

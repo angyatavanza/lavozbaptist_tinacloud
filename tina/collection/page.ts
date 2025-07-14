@@ -13,7 +13,7 @@ import { connectionBlockSchema } from "@/components/blocks/landing-connect";
 import { featureBlockSchema } from "@/components/blocks/section-features";
 import { partnerBlockSchema } from "@/components/blocks/del-partners";
 import { visionBlockSchema } from "@/components/blocks/section-vision";
-import { groupBlockSchema } from "@/components/blocks/landing-groups";
+import { groupinfoBlockSchema } from "@/components/blocks/landing-groups";
 import { videoBlockSchema } from "@/components/blocks/section-video";
 import { calloutBlockSchema } from "@/components/blocks/landing-callout";
 import { freqaskedquestionsBlockSchema } from "@/components/blocks/section-faqcontent";
@@ -21,12 +21,12 @@ import { contentandimageBlockSchema } from "@/components/blocks/section-imgconte
 import { contentandimagevariantBlockSchema } from "@/components/blocks/section-imgcontent2";
 import { latesteventsBlockSchema } from "@/components/blocks/landing-latest-events";
 import { latestmessagesBlockSchema } from "@/components/blocks/landing-latest-messages";
-import { testimonialBlockSchema } from "@/components/blocks/del-testimonial";
+import { groupBlockSchema } from "@/components/blocks/section-groups";
 import { missionBlockSchema } from "@/components/blocks/section-mission";
 import { listcontentBlockSchema } from "@/components/blocks/section-listcontent";
 import { nextstepsBlockSchema } from "@/components/blocks/section-first-steps";
 import { contactsectionBlockSchema } from "@/components/blocks/section-contact";
-import { Herodonation } from "@/components/blocks/section-herodonation";
+
 
 const Page: Collection = {
   label: "Pages",
@@ -59,12 +59,12 @@ const Page: Collection = {
         calloutBlockSchema,
         connectionBlockSchema,
         featureBlockSchema,
-        groupBlockSchema,
+        groupinfoBlockSchema,
         latesteventsBlockSchema,
         latestmessagesBlockSchema,
         contentBlockSchema,
         ctaBlockSchema,
-        testimonialBlockSchema,
+        groupBlockSchema,
         videoBlockSchema,
         herocontentBlockSchema,
         herodonationBlockSchema,

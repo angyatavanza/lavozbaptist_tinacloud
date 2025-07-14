@@ -155,7 +155,7 @@ export const FTVisitorForm: React.FC<FTVisitorFormProps> = ({
               <legend className="text-base/6 text-neutral-500">Me Gustaría:</legend>
             </fieldset>
             <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-8">
-              {["Conocer Más Acerca De Jesús", "Buscar Un Lugar Para Reunirme", "Visita Del Pastor", "Ser Bautizado","Ser Parte De La Familia Espiritual"].map((value) => (
+              {["Conocer más acerca de Jesús", "Buscar un lugar para reunirme", "Visita del pastor", "Ser bautizado","Unirme a un grupo","Ser parte de la familia espiritual"].map((value) => (
                 <RadioInput
                   key={value}
                   label={`${value}`}
