@@ -2,17 +2,18 @@ import type { Template } from "tinacms";
 import {
   PageBlocksContentandimagevariant,
   PageBlocksContentandimagevariantContentandimagevariants,
-} from "../../tina/__generated__/types";
-import { Section } from "../layout/section";
+} from "@/tina/__generated__/types";
+import { Section } from "@/components/layout/section";
 import Image from "next/image";
 import Link from "next/link";
-import { Button } from "../ui/button";
+import { Button } from "@/components/ui/button";
 import { iconSchema } from "@/tina/fields/icon";
-import { Card, CardContent } from "../ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { tinaField } from "tinacms/dist/react";
-import { TinaIcon } from "@/components/icon";
-import { sectionBlockSchemaField } from "../layout/section";
+import { TinaIcon } from "@/components/ui/icon";
+import { sectionBlockSchemaField } from "@/components/layout/section";
 
+//to-do 95: update the ui of the ContentAndImageVariant block component in the /content/community+serve pages FRONTEND
 export const ContentAndImageVariant = ({
   data,
 }: {
@@ -23,7 +24,7 @@ export const ContentAndImageVariant = ({
       <div className="text-center">
         {data.icon && <TinaIcon data={data?.icon} />}
         <h2
-          className="text-title text-3xl font-semibold"
+          className="text-title text-3xl font-nunito font-medium"
           data-tina-field={tinaField(data, "title")}
         >
           {data.title}
@@ -68,7 +69,7 @@ const ContentandimagevariantCard = ({
         </div>
         <div>
           <h3
-            className="font-medium"
+            className="font-nunito font-medium"
             data-tina-field={tinaField(contentandimagevariant, "quotetitle")}
           >
             {contentandimagevariant.quotetitle}
@@ -101,7 +102,7 @@ const ContentandimagevariantCard = ({
                 <Button
                   asChild
                   size="lg"
-                  variant={action!.type === "link" ? "outline" : "default"}
+                  variant={action!.type === "link" ? "ghost" : "default"}
                   className="rounded-xl px-5 text-base"
                 >
                   <Link href={action!.link!}>

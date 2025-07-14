@@ -3,7 +3,7 @@ import React from "react";
 import { es } from "date-fns/locale";
 import Image from "next/image";
 import Link from "next/link";
-import { TinaIcon } from "@/components/icon";
+import { TinaIcon } from "@/components/ui/icon";
 import { Button } from "@/components/ui/button";
 import { format } from "date-fns";
 import { tinaField, useTina } from "tinacms/dist/react";
@@ -83,7 +83,7 @@ export default function EventClientPage(props: ClientEventProps) {
       <Section>
         <h2
           data-tina-field={tinaField(event, "title")}
-          className={`w-full relative\tmb-8 text-6xl font-extrabold tracking-normal text-center title-font`}
+          className={`w-full relative\tmb-8 text-6xl font-nunito font-medium tracking-normal text-center title-font`}
         >
           <span
             className={`bg-clip-text text-transparent bg-linear-to-r ${
@@ -135,7 +135,7 @@ export default function EventClientPage(props: ClientEventProps) {
                     asChild
                     size="lg"
                     variant={
-                      locationdetail!.type === "link" ? "outline" : "default"
+                      locationdetail!.type === "link" ? "ghost" : "default"
                     }
                     className="rounded-xl px-5 text-base"
                   >
@@ -182,7 +182,7 @@ export default function EventClientPage(props: ClientEventProps) {
                   size="lg"
                   variant={
                     reccuringeventdetail!.type === "link"
-                      ? "outline"
+                      ? "ghost"
                       : "default"
                   }
                   className="rounded-xl px-5 text-base"
@@ -250,7 +250,7 @@ export default function EventClientPage(props: ClientEventProps) {
                 <Button
                   asChild
                   size="lg"
-                  variant={action!.type === "link" ? "outline" : "default"}
+                  variant={action!.type === "link" ? "ghost" : "default"}
                   className="rounded-xl px-5 text-base"
                 >
                   <Link href={action!.link!}>

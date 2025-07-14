@@ -1,7 +1,7 @@
 import React, { ReactNode } from "react";
 import { Container } from "./container";
 import clsx from "clsx";
-import { FadeIn } from "./fade-in";
+import { FadeIn } from "../motion-primitives/fade-in";
 
 interface PageIntroProps {
   eyebrow: ReactNode;
@@ -22,13 +22,13 @@ export const PageIntro = ({
     >
        <FadeIn>
         <h1>
-          <span className="block font-display text-base font-semibold text-neutral-950">
+          <span className="block font-nunito font-display text-base font-medium text-primary">
             {eyebrow}
           </span>
           <span className="sr-only"> - </span>
           <span
             className={clsx(
-              "mt-6 block max-w-5xl font-display text-5xl font-medium tracking-tight text-neutral-950 [text-wrap:balance] sm:text-6xl",
+              "mt-6 block max-w-5xl font-display text-5xl font-medium tracking-tight text-primary [text-wrap:balance] sm:text-6xl",
               centered && "mx-auto"
             )}
           >

@@ -1,8 +1,6 @@
 import React, { PropsWithChildren } from "react";
 import { LayoutProvider } from "./layout-context";
-import client from "../../tina/__generated__/client";
-import { Header } from "./nav/Header";
-import { Footer } from "./nav/Footer";
+import client from "@/tina/__generated__/client";
 import { RootLayout } from "./root-layout";
 import FacebookSdkLoader from "../facebook-sdk-loader";
 type LayoutProps = PropsWithChildren & {

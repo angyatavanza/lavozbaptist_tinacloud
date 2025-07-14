@@ -1,21 +1,17 @@
 "use client";
 import React, { useState } from "react";
 import { TinaMarkdown } from "tinacms/dist/rich-text";
-import { Line } from "../line"
+import { Line } from "@/components/ui/line"
 import type { Template } from "tinacms";
-import { PageBlocksFreqaskedquestions, PageBlocksFreqaskedquestionsItems } from "../../tina/__generated__/types";
+import { PageBlocksFreqaskedquestions, PageBlocksFreqaskedquestionsItems } from "@/tina/__generated__/types";
 import { tinaField } from "tinacms/dist/react";
-import Image from "next/image";
-import { AccordionItem } from "../accordion-item";
-import { TinaIcon } from "../icon";
-import { iconSchema } from "../../tina/fields/icon";
-import { Card, CardContent, CardHeader } from "../ui/card";
-import { Section } from "../layout/section";
-import { mermaid } from "./mermaid";
-import { sectionBlockSchemaField } from "../layout/section";
+import { AccordionItem } from "@/components/ui/accordion-item";
+import { iconSchema }from "@/tina/fields/icon";
+import { Section } from "@/components/layout/section";
+import { sectionBlockSchemaField } from "@/components/layout/section";
 
 //done 28: add faq section to block Tina schema TINA CMS/BACKEND 
-//to-do 24: Implement faq section design DESIGN/FRONTEND 
+//to-do 24:  update the ui of the faq block component in the /home page FRONTEND
 
 export const FreqAskedQuestions = ({ data }: { data: PageBlocksFreqaskedquestions }) => {
 
@@ -25,7 +21,7 @@ export const FreqAskedQuestions = ({ data }: { data: PageBlocksFreqaskedquestion
         <div className="text-center">
           <h2
             data-tina-field={tinaField(data, "title")}
-            className="text-balance text-4xl font-semibold lg:text-5xl"
+            className="text-balance text-4xl font-nunito font-medium lg:text-5xl"
           >
             {data.title}
           </h2>

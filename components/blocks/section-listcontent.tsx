@@ -1,15 +1,13 @@
 import React from "react";
-import { SectionIntro } from "../layout/section-intro";
-import { Container } from "../container";
-import { FadeIn } from "../fade-in";
-import { StylizedImage } from "../ui/stylized-image";
-import {List, ListItem } from "../list";
+import { SectionIntro } from "@/components/layout/section-intro";
+import { Container } from "@/components/layout/container";
+import { FadeIn } from "../motion-primitives/fade-in";
+import { StylizedImage } from "@/components/ui/stylized-image";
+import {List, ListItem } from "@/components/ui/list";
 import type { Template } from 'tinacms';
-import { iconSchema } from '@/tina/fields/icon';
-import { tinaField } from "tinacms/dist/react";
-import { TinaIcon } from '../icon';
 import { PageBlocksListcontent } from "@/tina/__generated__/types";
 
+//to-do 65: replace "content" template with "listcontent" in /resources page 
 export const Listcontent  = ({ data }: { data: PageBlocksListcontent }) => {
   return (
     <>

@@ -3,28 +3,24 @@ import * as React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import type { Template } from "tinacms";
-import { Container } from "../container";
-import { StatList, StatListItem } from "../stat-list";
+import { Container } from "@/components/layout/container";
+import { StatList, StatListItem } from "@/components/ui/stat-list";
 import { tinaField } from "tinacms/dist/react";
 import {
   PageBlocksAboutsection,
   PageBlocksAboutsectionImage,
-} from "../../tina/__generated__/types";
-import { Button } from "../ui/button";
-import { iconSchema } from "@/tina/fields/icon";
-import { TinaIcon } from "../icon";
-import { PageIntro } from "../page-intro";
-import { Section, sectionBlockSchemaField } from "../layout/section";
+} from "@/tina/__generated__/types";
+import { Button } from "@/components/ui/button";
+import { PageIntro } from "@/components/layout/page-intro";
+import { Section, sectionBlockSchemaField } from "@/components/layout/section";
 import { AnimatedGroup } from "../motion-primitives/animated-group";
 import { TextEffect } from "../motion-primitives/text-effect";
-import HeroVideoDialog from "../ui/hero-video-dialog";
-import { cn } from "@/lib/utils";
-import { ContactSection } from "./section-contact";
+import HeroVideoDialog from "@/components/ui/hero-video-dialog";
 import { Transition } from 'motion/react';
-//done 26: add contactsection to sections
+
 //done 27: merge aboutsection component --currently there are 2 descriptions
-//to-do 22: change image to be to the left of the div
-//to-do 25: update the ui of the about page; blocks: Herocontent, banner?, aboutsection, mission, vision, teammembers, faq, cta, contact
+//to-do 22: change image to be to the left of the div FRONTEND
+//to-do 25: update the ui of the aboutsection block component in the /about page FRONTEND
 
 const transitionVariants = {
   container: {
@@ -82,7 +78,7 @@ export const Aboutsection = ({ data }: { data: PageBlocksAboutsection }) => {
                 speedSegment={0.3}
                 delay={0.5}
                 as="p"
-                className="mx-auto mt-8 max-w-2xl text-balance text-lg"
+                className="font-nunito font-bold mx-auto mt-8 max-w-2xl text-balance text-lg"
               >
                 {data.tagline!}
               </TextEffect>
@@ -96,7 +92,7 @@ export const Aboutsection = ({ data }: { data: PageBlocksAboutsection }) => {
                 preset="fade-in-blur"
                 speedSegment={0.3}
                 as="h1"
-                className="mt-8 text-balance text-6xl md:text-7xl xl:text-[5.25rem]"
+                className="font-nunito font-medium mt-8 text-balance text-6xl md:text-7xl xl:text-[5.25rem]"
               >
                 {data.headline!}
               </TextEffect>
@@ -224,7 +220,7 @@ export const aboutsectionBlockSchema: Template = {
   ui: {
     previewSrc: "/blocks/aboutsection.png",
     defaultItem: {
-      tagline: "Here's some text above the other text",
+      tagline: "HERE'S SOME TEXT ABOVE THE OTHER TEXT",
       headline: "This Big Text is Totally Awesome",
       description: "This Desc is Totally Awesome",
       text: "Phasellus scelerisque, libero eu finibus rutrum, risus risus accumsan libero, nec molestie urna dui a leo.",

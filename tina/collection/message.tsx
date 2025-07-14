@@ -217,7 +217,7 @@ const Message: Collection = {
           ],
           ui: {
             defaultItem: {
-              placeholder: "Enter your email",
+              placeholder: "",
               buttonText: "Notify Me",
             },
           },

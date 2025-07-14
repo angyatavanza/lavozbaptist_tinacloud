@@ -1,23 +1,22 @@
-import Image from "next/image";
 import React, { ReactNode } from "react";
-import { GridPattern } from "../grid-pattern";
-import { SectionIntro } from "../layout/section-intro";
+import { GridPattern } from "@/components/ui/grid-pattern";
+import { SectionIntro } from "@/components/layout/section-intro";
 import type { Template } from "tinacms";
-import { iconSchema } from "@/tina/fields/icon";
 import { tinaField } from "tinacms/dist/react";
 import { PageBlocksVision } from "@/tina/__generated__/types";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { TinaIcon } from "../icon";
-import { Container } from "../container";
-import { GridList, GridListItem } from "../grid-list";
+import { Container } from "@/components/layout/container";
+import { GridList, GridListItem } from "@/components/ui/grid-list";
+
+//to-do 93: update the ui of the vision block component in the /about page FRONTEND
 
 export const Vision = ({ data }: { data: PageBlocksVision }) => {
   return (
     <div className="relative mt-24 pt-24 sm:mt-32 sm:pt-32 lg:mt-40 lg:pt-40">
       <div className="absolute inset-x-0 top-0 -z-10 h-[884px] overflow-hidden rounded-t-4xl bg-gradient-to-b from-neutral-50">
         <GridPattern
-          className="absolute inset-0 h-full w-full fill-neutral-100 stroke-purple-800/5 [mask-image:linear-gradient(to_bottom_left,white_40%,transparent_50%)]"
+          className="absolute inset-0 h-full w-full fill-neutral-100 stroke-primary/5 [mask-image:linear-gradient(to_bottom_left,white_40%,transparent_50%)]"
           yOffset={-270}
         />
       </div>

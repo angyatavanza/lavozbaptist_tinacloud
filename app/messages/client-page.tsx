@@ -1,9 +1,8 @@
 "use client";
 import * as React from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { format } from "date-fns";
-import MessagesVideoDialog from "../../components/ui/messages-video-dialog";
+import MessagesVideoDialog from "@/components/ui/messages-video-dialog";
 import { TinaMarkdown } from "tinacms/dist/rich-text";
 import {
   MessageConnectionQuery,
@@ -13,15 +12,15 @@ import ErrorBoundary from "@/components/error-boundary";
 import { ArrowRight, UserRound } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Section } from "@/components/layout/section";
-import { PageIntro } from "@/components/page-intro";
+import { PageIntro } from "@/components/layout/page-intro";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
-//to-do 30: create a messages-home page DESIGN/FRONTEND
-//to-do 31: create an message-archive page DESIGN/FRONTEND
+//to-do 30: change all tailwind class colors to be Oklch color FRONTEND
+//done 31: pass on creating a message-archive page FRONTEND
 //done 32: add tina field to accept a link to Vimeo video in messages page TINA CMS/BACKEND
-//to-do 33: redesign the all messages page + change layout of all messages card in messages page DESIGN/FRONTEND
-//to-do 34: implement design ui of indiv message
-//to-do 37: redesign messages-latest-message page DESIGN/FRONTEND
+//to-do 33: redesign the all messages page to be a "home" page + change layout of all messages cards FRONTEND
+//to-do 34: ensure UX Design is responsive accross screen sizes FRONTEND
+//to-do 37: redesign messages-latest-message/indiv message page FRONTEND
 
 //line 144: <ReactPlayer width="100%" height="100%" style={{ margin: "auto" }} playing={!!message.image.autoPlay} loop={!!message.image.loop} controls={true} url={message.image.videoUrl}/>
 /*<MessagesVideoDialog
@@ -68,7 +67,7 @@ export default function MessagesClientPage(props: ClientMessageProps) {
       <Section>
         <div className="container flex flex-col items-center gap-16">
           <div className="text-center">
-            <h2 className="mx-auto mb-6 text-pretty text-3xl font-semibold md:text-4xl lg:max-w-3xl">
+            <h2 className="mx-auto mb-6 text-pretty text-3xl font-nunito font-medium md:text-4xl lg:max-w-3xl">
               Mensajes Recientes
             </h2>
             <p className="mx-auto max-w-2xl text-muted-foreground md:text-lg">
@@ -79,7 +78,7 @@ export default function MessagesClientPage(props: ClientMessageProps) {
 
           <div className="grid gap-y-10 sm:grid-cols-12 sm:gap-y-12 md:gap-y-16 lg:gap-y-20">
             {messages.map((message) => {
-              const thumbnailSrc = "/fallback.jpg";
+              const thumbnailSrc = "/fallback2.jpg";
               return (
                 <Card
                   key={message.id}
@@ -94,7 +93,7 @@ export default function MessagesClientPage(props: ClientMessageProps) {
                           ))}
                         </div>
                       </div>
-                      <h3 className="text-xl font-semibold md:text-2xl lg:text-3xl">
+                      <h3 className="text-xl font-nunito font-medium md:text-2xl lg:text-3xl">
                         <Link href={message.url} className="hover:underline">
                           {message.title}
                         </Link>
@@ -131,7 +130,7 @@ export default function MessagesClientPage(props: ClientMessageProps) {
                       <div className="mt-6 flex items-center space-x-2 md:mt-8">
                         <Link
                           href={message.url}
-                          className="inline-flex items-center font-semibold hover:underline md:text-base"
+                          className="inline-flex items-center font-medium hover:underline md:text-base"
                         >
                           <span>Read more</span>
                           <ArrowRight className="ml-2 size-4 transition-transform" />
@@ -139,9 +138,9 @@ export default function MessagesClientPage(props: ClientMessageProps) {
                       </div>
                     </div>
                     {message.image?.embeddable && message.image?.videoUrl ? (
-                      <div className="order-first sm:order-last sm:col-span-5">
+                      <div className="order-first sm:order-last">
                         <Link href={message.url} className="block">
-                          <div className="aspect-[16/9] overflow-clip rounded-lg border border-border">
+                          <div className="aspect-[16/9] overflow-clip rounded-lg border border-border w-full">
                             <div
                               className="fb-video"
                               data-href={message.image.videoUrl}
@@ -152,12 +151,17 @@ export default function MessagesClientPage(props: ClientMessageProps) {
                         </Link>
                       </div>
                     ) : (
-                      <div className="order-first sm:order-last sm:col-span-5">
-                        <div className="aspect-[16/9] overflow-clip rounded-lg border border-border relative">
+                      <div className="order-first sm:order-last">
+                        <div className="aspect-[16/9] overflow-clip rounded-lg border border-border relative  w-full">
                           <MessagesVideoDialog
                             videoSrc={message.image?.videoUrl || ""}
                             thumbnailSrc={thumbnailSrc}
                             thumbnailAlt="Messages Video"
+                            title={message.title}
+                            coordinator={{
+                              avatar: message.coordinator?.avatar || "",
+                              name: message.coordinator?.name || "",
+                            }}
                           />
                         </div>
                       </div>

@@ -1,16 +1,18 @@
 import type { Template } from "tinacms";
-import { PageBlocksTeammember, PageBlocksTeammemberTeammembers } from "../../tina/__generated__/types";
-import { Section } from "../layout/section";
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
-import { Card, CardContent } from "../ui/card";
+import { PageBlocksTeammember, PageBlocksTeammemberTeammembers } from "@/tina/__generated__/types";
+import { Section } from "@/components/layout/section";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Card, CardContent } from "@/components/ui/card";
 import { tinaField } from "tinacms/dist/react";
-import { sectionBlockSchemaField } from '../layout/section';
+import { sectionBlockSchemaField } from '@/components/layout/section';
+
+//to-do 96: update the ui of the teammembers block component in the /about page FRONTEND
 
 export const TeamMember = ({ data }: { data: PageBlocksTeammember }) => {
   return (
     <Section  background={data.background!}>
       <div className="text-center">
-        <h2 className="text-title text-3xl font-semibold" data-tina-field={tinaField(data, 'title')}>{data.title}</h2>
+        <h2 className="text-title text-3xl font-nunito font-medium" data-tina-field={tinaField(data, 'title')}>{data.title}</h2>
         <p className="text-body mt-6" data-tina-field={tinaField(data, 'description')}>{data.description}</p>
       </div>
       <div className="mt-8 [column-width:300px] [column-gap:1.5rem] md:mt-12">
@@ -34,7 +36,7 @@ const TeammemberCard = ({ teammember }: { teammember: PageBlocksTeammemberTeamme
         </Avatar>
 
         <div>
-          <h3 className="font-medium" data-tina-field={tinaField(teammember, 'coordinator')}>{teammember.coordinator}</h3>
+          <h3 className="font-nunito font-medium" data-tina-field={tinaField(teammember, 'coordinator')}>{teammember.coordinator}</h3>
 
           <span className="text-muted-foreground block text-sm tracking-wide" data-tina-field={tinaField(teammember, 'role')}>{teammember.role}</span>
 

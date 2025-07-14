@@ -8,8 +8,8 @@ import {
 } from "tinacms/dist/rich-text";
 import Image from "next/image";
 import { Prism } from "tinacms/dist/rich-text/prism";
-import { PageIntro } from "./page-intro";
-import { Container } from "./container";
+import { PageIntro } from "./layout/page-intro";
+import { Container } from "./layout/container";
 import { ContactDetails } from "./forms/contact-details";
 import { ServeDetails } from "./forms/serve-details"; 
 import { ResourcesDetails } from "./forms/resources-details"; 
@@ -20,7 +20,7 @@ import { ServeForm } from "./forms/serve-form";
 import { FTVisitorForm } from "./forms/visitor-form";
 import { Video } from "./blocks/section-video";
 import { PageBlocksVideo } from "@/tina/__generated__/types";
-import { mermaid } from "./blocks/mermaid";
+import { Mermaid } from "./blocks/mermaid";
 
 export const components: Components<{
   BlockQuote: {
@@ -60,6 +60,11 @@ export const components: Components<{
     if (!props) {
       return <></>;
     }
+
+    if (props.lang === 'mermaid') {
+      return <Mermaid value={props.value} />
+    }
+
     return <Prism lang={props.lang} value={props.value} />;
   },
   BlockQuote: (props: {
@@ -189,7 +194,7 @@ export const components: Components<{
       </span>
     );
   },
-  mermaid,
+  mermaid: (props: any) => <Mermaid {...props} />,
   video: (props) => {
     return <Video data={props} />;
   },

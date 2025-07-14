@@ -2,12 +2,19 @@
 import { Play } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useVideoDialog } from "./video-dialog-context";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { ArrowRight, UserRound } from "lucide-react";
 
 interface MessagesVideoProps {
   videoSrc: string;
   thumbnailSrc: string;
   thumbnailAlt?: string;
   className?: string;
+  title?: string;
+  coordinator?: {
+    avatar?: string;
+    name?: string;
+  };
 }
 
 export default function MessagesVideoDialog({
@@ -15,6 +22,8 @@ export default function MessagesVideoDialog({
   thumbnailSrc,
   thumbnailAlt = "Video thumbnail",
   className,
+  title,
+  coordinator,
 }: MessagesVideoProps) {
   const { openVideo } = useVideoDialog();
 
@@ -33,10 +42,40 @@ export default function MessagesVideoDialog({
           height={1080}
           className="w-full rounded-md border shadow-lg transition-all duration-200 ease-out group-hover:brightness-[0.8]"
         />
-        <div className="absolute inset-0 flex scale-[0.9] items-center justify-center rounded-2xl transition-all duration-200">
-          <div className="group size-16 flex items-center justify-center rounded-full bg-black/20 group-hover:bg-black/40 border-2 border-white shadow-md backdrop-blur-md transition-colors duration-200 ease-out">
+        {/* Top-left overlay: Avatar + Title */}
+        <div className="absolute top-3 left-3 flex items-center gap-2 z-10 px-3 py-2 rounded-lg">
+          <Avatar>
+            {coordinator?.avatar ? (
+              <AvatarImage
+                src={coordinator.avatar}
+                alt={coordinator.name || "La Voz De La Esperanza"}
+                className="h-8 w-10"
+              />
+            ) : (
+              <AvatarFallback>
+                <UserRound
+                  size={16}
+                  strokeWidth={2}
+                  className="opacity-60"
+                  aria-hidden="true"
+                />
+              </AvatarFallback>
+            )}
+          </Avatar>
+          <div className="flex flex-col">
+            <span className="text-white text-sm font-nunito font-bold group-hover:underline">
+              {title}
+            </span>
+            <span className="text-white font-nunito text-xs">
+              {coordinator?.name || "La Voz De La Esperanza was live"}
+            </span>
+          </div>
+        </div>
+        {/* Centered Play Button */}
+        <div className="absolute inset-0 flex items-center justify-center z-20">
+          <div className="group size-10 flex items-center justify-center rounded-full bg-black/20 group-hover:bg-black/10 border-2 border-white shadow-md backdrop-blur-md transition-colors duration-200 ease-out">
             <Play
-              className="size-8 scale-100 fill-white text-white transition-transform duration-200"
+              className="size-5 scale-100 fill-white text-white transition-transform duration-200"
               style={{
                 filter:
                   "drop-shadow(0 4px 3px rgba(0, 0, 0, 0.15)) drop-shadow(0 2px 2px rgba(0, 0, 0, 0.1))",
@@ -48,3 +87,4 @@ export default function MessagesVideoDialog({
     </div>
   );
 }
+

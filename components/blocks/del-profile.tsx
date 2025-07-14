@@ -1,16 +1,15 @@
 import type { Template } from "tinacms";
-import { PageBlocksProfile, PageBlocksProfileProfiles } from "../../tina/__generated__/types";
-import { Section } from "../layout/section";
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
-import { Card, CardContent } from "../ui/card";
+import { PageBlocksProfile, PageBlocksProfileProfiles } from "@/tina/__generated__/types";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Card, CardContent } from "@/components/ui/card";
 import { tinaField } from "tinacms/dist/react";
-import { sectionBlockSchemaField } from '../layout/section';
+import { Section, sectionBlockSchemaField } from '@/components/layout/section';
 
 export const Profile = ({ data }: { data: PageBlocksProfile }) => {
   return (
     <Section  background={data.background!}>
       <div className="text-center">
-        <h2 className="text-title text-3xl font-semibold" data-tina-field={tinaField(data, 'title')}>{data.title}</h2>
+        <h2 className="text-title text-3xl font-nunito font-medium" data-tina-field={tinaField(data, 'title')}>{data.title}</h2>
         <p className="text-body mt-6" data-tina-field={tinaField(data, 'description')}>{data.description}</p>
       </div>
       <div className="mt-8 [column-width:300px] [column-gap:1.5rem] md:mt-12">
@@ -34,7 +33,7 @@ const ProfileCard = ({ profile }: { profile: PageBlocksProfileProfiles }) => {
         </Avatar>
 
         <div>
-          <h3 className="font-medium" data-tina-field={tinaField(profile, 'coordinator')}>{profile.coordinator}</h3>
+          <h3 className="font-nunito font-medium" data-tina-field={tinaField(profile, 'coordinator')}>{profile.coordinator}</h3>
 
           <span className="text-muted-foreground block text-sm tracking-wide" data-tina-field={tinaField(profile, 'role')}>{profile.role}</span>
 

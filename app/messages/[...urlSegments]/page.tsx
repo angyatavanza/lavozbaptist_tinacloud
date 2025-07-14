@@ -65,8 +65,8 @@ export default async function MessagePage({
       color: "blue",
       coordinator: {
         __typename: "Coordinator",
-        name: "Facebook",
-        avatar: null,
+        name: "La Voz De La Esperanza was live",
+        avatar: "/ve_logo.png",
         id: `fb-${fbVideo.id}`,
         _sys: {
           __typename: "SystemInfo",

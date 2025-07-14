@@ -1,11 +1,13 @@
 import { useForm } from "react-hook-form";
-import { FadeIn } from "../fade-in";
+import { FadeIn } from "../motion-primitives/fade-in";
 import { TextInput } from "./text-input";
 import { RadioInput } from "./radio-input";
-import { Button } from "../ui/second-button";
+import { Button } from "@/components/ui/second-button";
 import MailSentState from "@/components/forms/mail-sent-state";
 import { useState } from "react";
 //done 49: add functionality to serve-form  TINA CMS/BACKEND
+
+
 interface ServeFormInputs {
   name: string;
   lastname: string;
@@ -62,7 +64,7 @@ export const ServeForm: React.FC<ServeFormProps> = ({
   return (
     <FadeIn>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <h2 className="font-display text-base font-semibold text-neutral-950">
+        <h2 className="font-display text-base font-nunito font-medium text-primary">
           Tiene preguntas? Contáctenos un mensaje:
         </h2>
 
@@ -75,25 +77,24 @@ export const ServeForm: React.FC<ServeFormProps> = ({
         <div className="isolate mt-6 -space-y-px rounded-2xl bg-white/50">
           <TextInput
             {...register("name", { required: true })}
-            placeholder="Su nombre"
+            placeholder=""
             label="Nombre"
           />
-          {errors.name && (
-            <span className="text-red-500 text-sm">Requerido</span>
-          )}
+          {errors.name && <span className="text-red-500 text-sm">Nombre requerido</span>}
 
           <TextInput
             {...register("lastname")}
-            placeholder="Su apellido"
+            placeholder=""
             label="Apellido"
           />
 
           <TextInput
             type="tel"
-            {...register("phone")}
-            placeholder="Su número de teléfono"
+            {...register("phone", { required: true })}
+            placeholder=""
             label="Número de teléfono"
           />
+          {errors.phone && <span className="text-red-500 text-sm">Número de teléfono requerido</span>}
 
           <TextInput
             type="email"
@@ -101,9 +102,7 @@ export const ServeForm: React.FC<ServeFormProps> = ({
             placeholder={placeholder}
             label="Correo electrónico"
           />
-          {errors.email && (
-            <span className="text-red-500 text-sm">Correo requerido</span>
-          )}
+          {errors.email && <span className="text-red-500 text-sm">Correo electrónico requerido</span>}
 
           <TextInput
             {...register("message", { required: true })}
@@ -113,6 +112,7 @@ export const ServeForm: React.FC<ServeFormProps> = ({
           {errors.message && (
             <span className="text-red-500 text-sm">Requerido</span>
           )}
+
           <div className="border border-neutral-300 px-6 py-8 first:rounded-t-2xl last:rounded-b-2xl">
             <fieldset>
               <legend className="text-base/6 text-neutral-500">
@@ -143,10 +143,13 @@ export const ServeForm: React.FC<ServeFormProps> = ({
             </fieldset>
             <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-8">
               {[
-                "Hacer una petición de oración",
-                "Unirme a un grupo",
-                "Ser bautizado",
-                "Discutir otro Tema",
+                "Compañerismo",
+                "Comunitario",
+                "Tecnología",
+                "Jóvenes",
+                "Niños",
+                "Bienvenida",
+                "Transportación",
               ].map((value) => (
                 <RadioInput
                   key={value}
@@ -158,7 +161,7 @@ export const ServeForm: React.FC<ServeFormProps> = ({
             </div>
             {errors.subject && (
               <span className="text-red-500 text-sm mt-2">
-                Selecciona un asunto
+                Seleccione su área de interés
               </span>
             )}
           </div>

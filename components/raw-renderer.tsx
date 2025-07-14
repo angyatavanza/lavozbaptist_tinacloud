@@ -35,7 +35,7 @@ export const RawRenderer = ({ rawData, parentColor }) => {
       <button
         type="button"
         onClick={openModal}
-        className={`z-10 relative flex items-center px-5 py-2 mx-3 my-2 font-semibold text-sm transition duration-150 ease-out rounded transform focus:shadow-outline focus:outline-hidden whitespace-nowrap opacity-80 hover:opacity-100 shadow-md ${
+        className={`z-10 relative flex items-center px-5 py-2 mx-3 my-2 font-medium text-sm transition duration-150 ease-out rounded transform focus:shadow-outline focus:outline-hidden whitespace-nowrap opacity-80 hover:opacity-100 shadow-md ${
           buttonColorClasses[theme!.color!]
         }`}
       >
@@ -84,7 +84,7 @@ export const RawRenderer = ({ rawData, parentColor }) => {
                 </pre>
                 <button
                   type="button"
-                  className="flex-0 font-semibold text-lg transition duration-150 ease-out opacity-80 hover:opacity-100"
+                  className="flex-0 font-medium text-lg transition duration-150 ease-out opacity-80 hover:opacity-100"
                   onClick={closeModal}
                 >
                   Great, thanks!

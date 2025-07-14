@@ -1,15 +1,14 @@
 import Image from "next/image";
 import React from "react";
-import { StepsSection } from "../steps-section";
-import { TagList, TagListItem } from "../tag-list";
+import { StepsSection } from "@/components/layout/steps-section";
+import { TagList, TagListItem } from "@/components/ui/tag-list";
 import type { Template } from "tinacms";
 import { tinaField } from "tinacms/dist/react";
 import { PageBlocksNextsteps } from "@/tina/__generated__/types";
-import { Blockquote } from "../blockquote";
-import { List, ListItem } from "../list";
+import { Blockquote } from "@/components/ui/blockquote";
+import { List, ListItem } from "@/components/ui/list";
 
-//to-do 40: complete steps page DESIGN/FRONTEND
-//to-do 63: complete steps page TINA CMS/CONTENT
+//to-do 40: complete the design of first steps page FRONTEND
 //done 39: combine steps 1-4 into nextsteps and add data.title + data.description code + fix stylized image in steps page
 
 export const NextSteps = ({ data }: { data: PageBlocksNextsteps }) => {
@@ -28,7 +27,7 @@ export const NextSteps = ({ data }: { data: PageBlocksNextsteps }) => {
             estrategia; ambas cosas ayudan a comprometerse en la expansión del
             reino en esta comunidad de fe. We work closely with our staff to
             understand their{" "}
-            <strong className="font-semibold text-neutral-950">
+            <strong className="font-medium text-primary">
               needs
             </strong>{" "}
             and goals, embedding ourselves in their every day operations to
@@ -39,17 +38,17 @@ export const NextSteps = ({ data }: { data: PageBlocksNextsteps }) => {
             several weeks while our account managers focus on going through
             their trash. Our senior security experts then perform social
             engineering hacks to gain access to their{" "}
-            <strong className="font-semibold text-neutral-950">business</strong>
+            <strong className="font-medium text-primary">business</strong>
             accounts — handing that information over to our forensic accounting
             team.
           </p>
           <p>
             Once the full audit is complete, we report back with a comprehensive{" "}
-            <strong className="font-semibold text-neutral-950">plan</strong>{" "}
+            <strong className="font-medium text-primary">plan</strong>{" "}
             and, more importantly, a budget.
           </p>
         </div>
-        <h3 className="mt-12 font-display text-base font-semibold text-neutral-950">
+        <h3 className="mt-12 font-display text-base font-nunito font-medium text-primary">
           Included in this phase
         </h3>
         <TagList className="mt-4">
@@ -106,32 +105,32 @@ export const NextSteps = ({ data }: { data: PageBlocksNextsteps }) => {
             {data.description3}
             About halfway through the Build phase, we push each project out by 6
             weeks due to a change in{" "}
-            <strong className="font-semibold text-neutral-950">
+            <strong className="font-medium text-primary">
               requirements
             </strong>
             . This allows us to increase the budget a final time before launch.
           </p>
           <p>
             Despite largely using pre-built components, most of the{" "}
-            <strong className="font-semibold text-neutral-950">progress</strong>{" "}
+            <strong className="font-medium text-primary">progress</strong>{" "}
             on each project takes place in the final 24 hours. The development
             time allocated to each client is actually spent making augmented
             reality demos that go viral on Twitter.
           </p>
           <p>
             We ensure that the main pages of the site are{" "}
-            <strong className="font-semibold text-neutral-950">
+            <strong className="font-medium text-primary">
               fully functional
             </strong>{" "}
             at launch — the auxiliary pages will, of course, be lorem ipusm
             shells which get updated as part of our exorbitant{" "}
-            <strong className="font-semibold text-neutral-950">
+            <strong className="font-medium text-primary">
               maintenance
             </strong>{" "}
             retainer.
           </p>
         </div>
-        <h3 className="mt-12 font-display text-base font-semibold text-neutral-950">
+        <h3 className="mt-12 font-display text-base font-nunito font-medium text-primary">
           Included in this phase
         </h3>
         <List>
@@ -160,33 +159,33 @@ export const NextSteps = ({ data }: { data: PageBlocksNextsteps }) => {
             {data.description4}
             Ayudará a desarrollar un estilo de vida que glorifique a Dios
             compartiendo su{" "}
-            <strong className="font-semibold text-neutral-950">amor</strong>.
+            <strong className="font-medium text-primary">amor</strong>.
             También podrás descubrir el propósito de tu vida e integrarte al
             equipo de trabajo para llevar acabo tu misión de vida.
           </p>
           {/* Longer description
                 <p>
                   Despite largely using pre-built components, most of the{" "}
-                  <strong className="font-semibold text-neutral-950">progress</strong>{" "}
+                  <strong className="font-medium text-primary">progress</strong>{" "}
                   on each project takes place in the final 24 hours. The development
                   time allocated to each client is actually spent making augmented
                   reality demos that go viral on Twitter.
                 </p>
                 <p>
                   We ensure that the main pages of the site are{" "}
-                  <strong className="font-semibold text-neutral-950">
+                  <strong className="font-medium text-primary">
                     fully functional
                   </strong>{" "}
                   at launch — the auxiliary pages will, of course, be lorem ipusm shells
                   which get updated as part of our exorbitant{" "}
-                  <strong className="font-semibold text-neutral-950">
+                  <strong className="font-medium text-primary">
                     maintenance
                   </strong>{" "}
                   retainer.
                 </p>
                 */}
         </div>
-        <h3 className="mt-12 font-display text-base font-semibold text-neutral-950">
+        <h3 className="mt-12 font-display text-base font-nunito font-medium text-primary">
           Included in this phase
         </h3>
         <List>

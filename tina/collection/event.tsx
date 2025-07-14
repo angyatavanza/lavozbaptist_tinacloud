@@ -146,6 +146,10 @@ const Event: Collection = {
           },
         },
         {
+          ...iconSchema,
+          name: "icon2",
+        } as any,
+        {
           label: "Label",
           name: "label",
           type: "string",
@@ -341,7 +345,7 @@ const Event: Collection = {
           ],
           ui: {
             defaultItem: {
-              placeholder: "Enter your email",
+              placeholder: "",
               buttonText: "Notify Me",
             },
           },

@@ -1,18 +1,15 @@
-import { Container } from "../container";
+import { Container } from "@/components/layout/container";
 import Link from "next/link";
-import { FadeIn } from "../fade-in";
-//import { Button } from "../ui/second-button";
+import { FadeIn } from "../motion-primitives/fade-in";
+//import { Button } from "@/components/ui/second-button";
 import { Button } from "@/components/ui/button";
-import { ServiceTimes } from "../service-times";
-import { TextEffect } from "../motion-primitives/text-effect";
-import { iconSchema } from "@/tina/fields/icon";
+import { ServiceTimes } from "@/components/layout/nav/service-times";
 import { tinaField } from "tinacms/dist/react";
-import { TinaIcon } from "../icon";
 import type { Template } from "tinacms";
 import { PageBlocksContactsection } from "@/tina/__generated__/types";
 
 //done 16: add data.title and data.actions to section-contact
-//done 61: change button and text in section-contact TINA CMS/CONTENT
+//done 26: add contactsection to sections
 
 export const ContactSection = ({
   data,
@@ -21,10 +18,10 @@ export const ContactSection = ({
 }) => {
   return (
     <Container className="mt-24 sm:mt-32 lg:mt-40">
-      <FadeIn className="-mx-6 rounded-4xl bg-purple-800 px-6 py-20 sm:mx-0 sm:py-32 md:px-12">
+      <FadeIn className="-mx-6 rounded-4xl bg-primary px-6 py-20 sm:mx-0 sm:py-32 md:px-12">
         <div className="max-w-4xl mx-auto">
           <h2
-            className="font-display text-3xl font-medium text-white [text-wrap:balance] sm:text-4xl"
+            className="font-display text-3xl font-nunito font-medium text-white [text-wrap:balance] sm:text-4xl"
             data-tina-field={tinaField(data, "title")}
           >
             {data.title}
@@ -40,7 +37,7 @@ export const ContactSection = ({
                   <Button
                     asChild
                     size="lg"
-                    variant={action!.type === "link" ? "outline" : "default"}
+                    variant={action!.type === "link" ? "ghost" : "default"}
                     className="rounded-xl px-5 text-base"
                   >
                     <Link href={action!.link!}>
@@ -51,7 +48,7 @@ export const ContactSection = ({
               ))}
           </div>
           <div className="mt-10 border-t border-white/10 pt-10">
-            <h3 className="font-display text-base font-semibold text-white">
+            <h3 className="font-display text-base font-nunito font-medium text-white">
               Nuestra ubicación y horario de servicios
             </h3>
             <ServiceTimes

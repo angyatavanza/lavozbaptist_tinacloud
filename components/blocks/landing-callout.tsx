@@ -5,9 +5,9 @@ import { tinaField } from "tinacms/dist/react";
 import { PageBlocksCallout } from "@/tina/__generated__/types";
 import { ArrowRight } from "lucide-react";
 import { AnimatedGroup } from "../motion-primitives/animated-group";
-import { Section, sectionBlockSchemaField } from '../layout/section';
+import { Section, sectionBlockSchemaField } from '@/components/layout/section';
 import { Transition } from 'motion/react';
-//done 1: fix url link to /service-times
+
 const transitionVariants = {
   container: {
     visible: {
@@ -43,7 +43,7 @@ export const Callout = ({ data }: { data: PageBlocksCallout }) => {
                 <Link
                     data-tina-field={tinaField(data, "url")}
                     href={data.url!}
-                    className="hover:bg-background dark:hover:border-t-border bg-muted group mx-auto flex w-fit items-center gap-4 rounded-full border p-1 pl-4 shadow-md shadow-zinc-950/5 transition-colors duration-300 dark:border-t-white/5 dark:shadow-zinc-950">
+                    className="hover:bg-background dark:hover:border-t-border bg-muted group mx-auto flex w-fit items-center gap-3.75  rounded-full border p-1 pl-4 shadow-md shadow-zinc-950/5 transition-colors duration-300 dark:border-t-white/5 dark:shadow-zinc-950">
                     <span data-tina-field={tinaField(data, "text")} className="text-foreground text-sm">{data.text}</span>
                     <span className="dark:border-background block h-4 w-0.5 border-l bg-white dark:bg-zinc-700"></span>
 

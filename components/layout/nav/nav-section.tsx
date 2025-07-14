@@ -1,5 +1,4 @@
-import { ReactNode } from "react";
-import { SocialMediaProfiles } from "../components/social-media";
+import React, { ReactNode } from "react";
 
 interface NavigationLink {
   title: string | ReactNode;
@@ -11,7 +10,7 @@ interface NavigationSection {
   links: NavigationLink[];
 }
 
-export const navigation: NavigationSection[] = [
+export const createNavigation = (latestMessageUrl?: string): NavigationSection[] => [
   {
     title: "Quiénes Somos",
     links: [
@@ -19,29 +18,24 @@ export const navigation: NavigationSection[] = [
       { title: "Propósito, Estrategia y Valores", href: "/purpose" },
       { title: "Nuestro Pastor", href: "/our-pastor" },
       { title: "Nuestro Equipo", href: "/staff" },
-      { title: "Política de Privacidad", href: "/privacy-policy" },
     ],
   },
   {
-    title: "Mensajes",
+    title: "Experiencias",
     links: [
       { title: "Mensajes", href: "/messages" },
-      { title: "Último Mensaje", href: "/messages/amazonclone" },
-      { title: "Tiempos de Servicios", href: "/service-times" },
-      {
-        title: (
+      { title: (
           <>
-            Ver Archivo de Mensajes <span aria-hidden="true">&rarr;</span>
+            Último Mensaje <span aria-hidden="true">&rarr;</span>
           </>
-        ),
-        href: "/all-messages",
-      },
+        ), href: latestMessageUrl || "/messages" },
+      { title: "Horario de Servicios", href: "/service-times" },
     ],
   },
   {
     title: "Conectate",
     links: [
-      { title: "Jornada de Crecimiento", href: "/growth" },
+      { title: "Jornada de Crecimiento", href: "/first-steps" },
       { title: "Grupos", href: "/groups" },
       { title: "Servir", href: "/serve" },
       { title: "Eventos", href: "/events" },
@@ -51,17 +45,10 @@ export const navigation: NavigationSection[] = [
     title: "Recursos Comunitarios",
     links: [
       { title: "Recursos Comunitarios", href: "/community-resources" },
+      { title: "Haz tu Donación en Linea", href: "/donations" },
     ],
-  },
-  {
-    title: "Haz tu Donación",
-    links: [
-      { title: "Haz tu Donación en Linea", href: "/give" },
-      { title: "Preguntas Frecuentes", href: "/give/faqs" },
-    ],
-  },
-  {
-    title: "Síguenos",
-    links: SocialMediaProfiles,
   },
 ];
+
+// Keep the old static navigation for backward compatibility
+export const navigation: NavigationSection[] = createNavigation();

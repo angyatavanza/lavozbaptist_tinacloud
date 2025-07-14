@@ -94,8 +94,8 @@ export default async function MessagesPage() {
           breadcrumbs: [customSlug],
         },
         coordinator: {
-          name: "Facebook",
-          avatar: null,
+        name: "La Voz De La Esperanza was live",
+        avatar: "/ve_logo.png",
         },
         type: "facebook",
       },

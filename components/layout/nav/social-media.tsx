@@ -18,11 +18,6 @@ export interface SocialMediaProfile {
 
 export const SocialMediaProfiles: SocialMediaProfile[] = [
   {
-    title: "Youtube",
-    href: "https://www.youtube.com/watch?v=eAswnbWptBM",
-    icon: BsYoutube,
-  },
-  {
     title: "Facebook",
     href: "https://www.facebook.com/lavozdelaesperanzacharlotte",
     icon: BsFacebook,
@@ -31,6 +26,11 @@ export const SocialMediaProfiles: SocialMediaProfile[] = [
     title: "Instagram",
     href: "https://www.instagram.com/lavozdelaesperanzacharlotte/?hl=en/",
     icon: BsInstagram,
+  },
+  {
+    title: "Youtube",
+    href: "https://www.youtube.com/@lavozdelaesperanza5391",
+    icon: BsYoutube,
   },
 ];
 
@@ -45,7 +45,7 @@ export const SocialMedia = ({ className, invert = false }: SocialMediaProps) => 
       role="list"
       className={clsx(
         "flex gap-x-10",
-        invert ? "text-white" : "text-neutral-950",
+        invert ? "text-white" : "text-primary",
         className
       )}
     >
@@ -67,4 +67,3 @@ export const SocialMedia = ({ className, invert = false }: SocialMediaProps) => 
   );
 };
 
-//export default SocialMedia;

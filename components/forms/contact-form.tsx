@@ -1,8 +1,8 @@
 import { useForm } from 'react-hook-form';
-import { FadeIn } from "../fade-in";
+import { FadeIn } from "../motion-primitives/fade-in";
 import { TextInput } from "./text-input";
 import { RadioInput } from "./radio-input";
-import { Button } from "../ui/second-button";
+import { Button } from "@/components/ui/second-button";
 import MailSentState from "@/components/forms/mail-sent-state";
 import { useState } from 'react';
 
@@ -61,7 +61,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({
   return (
     <FadeIn>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <h2 className="font-display text-base font-semibold text-neutral-950">
+        <h2 className="font-display text-base font-nunito font-medium text-primary">
           Tiene preguntas? Contáctenos un mensaje:
         </h2>
 
@@ -74,23 +74,24 @@ export const ContactForm: React.FC<ContactFormProps> = ({
         <div className="isolate mt-6 -space-y-px rounded-2xl bg-white/50">
           <TextInput
             {...register("name", { required: true })}
-            placeholder="Su nombre"
+            placeholder=""
             label="Nombre"
           />
-          {errors.name && <span className="text-red-500 text-sm">Requerido</span>}
+          {errors.name && <span className="text-red-500 text-sm">Nombre requerido</span>}
 
           <TextInput
             {...register("lastname")}
-            placeholder="Su apellido"
+            placeholder=""
             label="Apellido"
           />
 
           <TextInput
             type="tel"
-            {...register("phone")}
-            placeholder="Su número de teléfono"
+            {...register("phone", { required: true })}
+            placeholder=""
             label="Número de teléfono"
           />
+          {errors.phone && <span className="text-red-500 text-sm">Número de teléfono requerido</span>}
 
           <TextInput
             type="email"
@@ -98,7 +99,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({
             placeholder={placeholder}
             label="Correo electrónico"
           />
-          {errors.email && <span className="text-red-500 text-sm">Correo requerido</span>}
+          {errors.email && <span className="text-red-500 text-sm">Correo electrónico requerido</span>}
 
           <TextInput
             {...register("message", { required: true })}

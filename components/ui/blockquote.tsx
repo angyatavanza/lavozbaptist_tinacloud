@@ -1,6 +1,6 @@
 import Image, { ImageProps } from "next/image";
 import clsx from "clsx";
-import { Border } from "./ui/border";
+import { Border } from "./border";
 import React, { ReactNode, ReactElement } from "react";
 
 // Shared coordinator type
@@ -46,11 +46,11 @@ function BlockquoteWithImage({
           className="h-12 w-12 object-cover grayscale sm:aspect-[7/9] sm:h-auto sm:w-full"
         />
       </div>
-      <figcaption className="text-sm text-neutral-950 sm:col-span-7 sm:row-start-3 sm:text-base">
-        <span className="font-semibold">{coordinator.name}</span>
-        <span className="hidden font-semibold sm:inline">, </span>
+      <figcaption className="text-sm text-primary sm:col-span-7 sm:row-start-3 sm:text-base">
+        <span className="font-medium">{coordinator.name}</span>
+        <span className="hidden font-medium sm:inline">, </span>
         <br className="sm:hidden" />
-        <span className="sm:font-semibold">{coordinator.role}</span>
+        <span className="sm:font-medium">{coordinator.role}</span>
       </figcaption>
     </figure>
   );
@@ -68,7 +68,7 @@ function BlockquoteWithoutImage({
         <blockquote className="text-neutral-600 [&>*]:relative [&>:first-child]:before:absolute [&>:first-child]:before:right-full [&>:first-child]:before:content-['“'] [&>:last-child]:after:content-['”']">
           {typeof children === "string" ? <p>{children}</p> : children}
         </blockquote>
-        <figcaption className="mt-6 font-semibold text-neutral-950">
+        <figcaption className="mt-6 font-medium text-primary">
           {coordinator.name}, {coordinator.role}
         </figcaption>
       </figure>

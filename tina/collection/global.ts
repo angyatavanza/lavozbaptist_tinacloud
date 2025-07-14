@@ -118,6 +118,10 @@ const Global: Collection = {
               label: "Lato",
               value: "lato",
             },
+            {
+              label: "Roboto",
+              value: "roboto",
+            },
           ],
         },
         {

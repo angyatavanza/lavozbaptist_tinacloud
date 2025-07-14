@@ -1,82 +1,65 @@
 "use client";
-
-import React from "react";
+import { usePathname } from "next/navigation";
+import { useEffect, useId, useRef, useState, ReactNode, RefObject } from "react";
+import { Container } from "../container";
 import Link from "next/link";
-import { TinaIcon } from "../../icon";
 import { useLayout } from "../layout-context";
-import { Menu, X } from "lucide-react";
+import { Logo } from "@/components/ui/logo";
+import { Button } from "@/components/ui/second-button";
+import clsx from "clsx";
 
-export const Header = () => {
+interface HeaderProps {
+  panelId: string;
+  invert?: boolean;
+  icon: React.ElementType;
+  expanded: boolean;
+  onToggle: () => void;
+  toggleRef: RefObject<HTMLButtonElement>;
+}
+
+export const Header = ({ panelId, invert = false, icon: Icon, expanded, onToggle, toggleRef }: HeaderProps) => {
   const { globalSettings, theme } = useLayout();
   const header = globalSettings!.header!;
-
-  const [menuState, setMenuState] = React.useState(false)
   return (
-    <header>
-      <nav
-        data-state={menuState && 'active'}
-        className="bg-background/50 fixed z-20 w-full border-b backdrop-blur-3xl">
-        <div className="mx-auto max-w-6xl px-6 transition-all duration-300">
-          <div className="relative flex flex-wrap items-center justify-between gap-6 py-3 lg:gap-0 lg:py-4">
-            <div className="flex w-full items-center justify-between gap-12">
-              <Link
-                href="/"
-                aria-label="home"
-                className="flex items-center space-x-2">
-                <TinaIcon
-                  parentColor={header.color!}
-                  data={{
-                    name: header.icon!.name,
-                    color: header.icon!.color,
-                    style: header.icon!.style,
-                  }}
-                />{" "}
-                <span>
-                  {header.name}
-                </span>
-              </Link>
-
-              <button
-                onClick={() => setMenuState(!menuState)}
-                aria-label={menuState == true ? 'Close Menu' : 'Open Menu'}
-                className="relative z-20 -m-2.5 -mr-4 block cursor-pointer p-2.5 lg:hidden">
-                <Menu className="in-data-[state=active]:rotate-180 in-data-[state=active]:scale-0 in-data-[state=active]:opacity-0 m-auto size-6 duration-200" />
-                <X className="in-data-[state=active]:rotate-0 in-data-[state=active]:scale-100 in-data-[state=active]:opacity-100 absolute inset-0 m-auto size-6 -rotate-180 scale-0 opacity-0 duration-200" />
-              </button>
-
-              <div className="hidden lg:block">
-                <ul className="flex gap-8 text-sm">
-                  {header.nav!.map((item, index) => (
-                    <li key={index}>
-                      <Link
-                        href={item!.href!}
-                        className="text-muted-foreground hover:text-accent-foreground block duration-150">
-                        <span>{item!.label}</span>
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-
-            <div className="bg-background in-data-[state=active]:block lg:in-data-[state=active]:flex mb-6 hidden w-full flex-wrap items-center justify-end space-y-8 rounded-3xl border p-6 shadow-2xl shadow-zinc-300/20 md:flex-nowrap lg:m-0 lg:flex lg:w-fit lg:gap-6 lg:space-y-0 lg:border-transparent lg:bg-transparent lg:p-0 lg:shadow-none dark:shadow-none dark:lg:bg-transparent">
-              <div className="lg:hidden">
-                <ul className="space-y-6 text-base">
-                  {header.nav!.map((item, index) => (
-                    <li key={index}>
-                      <Link
-                        href={item!.href!}
-                        className="text-muted-foreground hover:text-accent-foreground block duration-150">
-                        <span>{item!.label}</span>
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </div>
+    <Container>
+      <div className="flex items-center justify-between">
+        <Link href="/" aria-label="home" className="flex items-center space-x-2">
+          <Logo invert={invert} />
+        </Link>
+        <div className="hidden lg:block">
+          <ul className="flex gap-8 text-sm">
+            {header.nav!.map((item, index) => (
+              <li key={index}>
+                <Link
+                  href={item!.href!}
+                  className="text-muted-foreground hover:text-accent-foreground block duration-150">
+                  <span>{item!.label}</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
-      </nav>
-    </header>
-  )
-}
+        <div className="flex items-center gap-x-8">
+          <Button href="/contact" invert={invert}>Contacto</Button>
+          <button
+            ref={toggleRef}
+            type="button"
+            onClick={onToggle}
+            aria-expanded={expanded}
+            aria-controls={panelId}
+            className={clsx(
+              "group -m-2.5 rounded-full p-2.5 transition",
+              invert ? "hover:bg-white/10" : "hover:bg-primary/10"
+            )}
+            aria-label="Toggle navigation"
+          >
+            <Icon className={clsx(
+              "h-6 w-6",
+              invert ? "fill-white group-hover:fill-neutral-200" : "fill-primary group-hover:fill-neutral-500"
+            )} />
+          </button>
+        </div>
+      </div>
+    </Container>
+  );
+};

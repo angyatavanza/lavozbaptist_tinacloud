@@ -1,24 +1,22 @@
 import Link from "next/link";
-import { TinaIcon } from "../icon";
 import type { Template } from "tinacms";
 import {
   PageBlocksTestimonial,
   PageBlocksTestimonialTestimonials,
-} from "../../tina/__generated__/types";
-import { Section } from "../layout/section";
+} from "@/tina/__generated__/types";
+import { Section } from "@/components/layout/section";
 import { Button } from "@/components/ui/button";
-import { iconSchema } from '@/tina/fields/icon';
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
-import { Card, CardContent } from "../ui/card";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Card, CardContent } from "@/components/ui/card";
 import { tinaField } from "tinacms/dist/react";
-import { sectionBlockSchemaField } from "../layout/section";
+import { sectionBlockSchemaField } from "@/components/layout/section";
 
 export const Testimonial = ({ data }: { data: PageBlocksTestimonial }) => {
   return (
     <Section background={data.background!}>
       <div className="text-center">
         <h2
-          className="text-balance text-4xl font-semibold lg:text-5xl"
+          className="text-balance text-4xl font-nunito font-medium lg:text-5xl"
           data-tina-field={tinaField(data, "title")}
         >
           {data.title}
@@ -38,7 +36,7 @@ export const Testimonial = ({ data }: { data: PageBlocksTestimonial }) => {
                 <Button
                   asChild
                   size="lg"
-                  variant={action!.type === "link" ? "outline" : "default"}
+                  variant={action!.type === "link" ? "ghost" : "default"}
                   className="rounded-xl px-5 text-base"
                 >
                   <Link href={action!.link!}>
@@ -85,7 +83,7 @@ const TestimonialCard = ({ testimonial }: { testimonial: PageBlocksTestimonialTe
 
         <div>
           <h3
-            className="font-medium"
+            className="font-nunito font-medium"
             data-tina-field={tinaField(testimonial, "author")}
           >
             {testimonial.author}

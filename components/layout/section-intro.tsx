@@ -1,6 +1,6 @@
 import React, { ReactNode } from "react";
-import { Container }from "../container";
-import { FadeIn } from "../fade-in";
+import { Container }from "./container";
+import { FadeIn } from "../motion-primitives/fade-in";
 import clsx from "clsx";
 
 interface SectionIntroProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -27,8 +27,8 @@ export const SectionIntro = ({
             <>
               <span
                 className={clsx(
-                  "mb-6 block font-display text-base font-semibold",
-                  invert ? "text-white" : "text-neutral-950"
+                  "mb-6 block font-display text-base font-nunito font-medium",
+                  invert ? "text-white" : "text-primary"
                 )}
               >
                 {eyebrow}
@@ -40,9 +40,9 @@ export const SectionIntro = ({
             className={clsx(
               "block font-display tracking-tight [text-wrap:balance]",
               smaller
-                ? "text-2xl font-semibold"
-                : "text-4xl font-medium sm:text-5xl",
-              invert ? "text-white" : "text-neutral-950"
+                ? "text-2xl font-nunito font-medium"
+                : "text-4xl font-nunito font-regular sm:text-5xl",
+              invert ? "text-white" : "text-primary"
             )}
           >
             {title}

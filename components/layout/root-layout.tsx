@@ -2,22 +2,20 @@
 import { usePathname } from "next/navigation";
 import { useEffect, useId, useRef, useState, ReactNode, RefObject } from "react";
 import { motion, MotionConfig, useReducedMotion } from "framer-motion";
-import { Container } from "../container";
-import client from "../../tina/__generated__/client";
+import { Container } from "./container";
 import Link from "next/link";
-import { LayoutProvider } from "./layout-context";
-import { useLayout } from "./layout-context";
-import { TinaIcon } from "../icon";
-import { Logo } from "../logo";
 import { HiMenuAlt4 } from "react-icons/hi";
 import { IoMdClose } from "react-icons/io";
-import { Button } from "../ui/second-button";
-import clsx from "clsx";
-import { ServiceTimes } from "../service-times";
-import { SocialMedia } from "../social-media";
-import { Footer } from "./footer";
+import { ServiceTimes } from "./nav/service-times";
+import { SocialMedia } from "./nav/social-media";
+import { Footer } from "./nav/footer";
+import { Header } from "./nav/header";
 
-
+//done 82:root-layout: Type 'RefObject<HTMLButtonElement | null>' is not assignable to type 'LegacyRef<HTMLButtonElement> | undefined'.
+//to-do 56: change purple-800 from the hamburger menu to be neutral color FRONTEND
+//to-do 59:  make sure all of the buttons have /links attached to them and check that the links work across the pages TINA CMS CONTENT
+//done 86: merge social media & move “/constants/index.tsx” to components/nav-section.tsx & fetch latest message url BACKEND
+//to-do 91: apply typography-Nunito-medium for Headings, Roboto-bold for Buttons/Link/Taglines/Subheadings, Roboto-regular Paragraph FRONTEND
 /*
 <Link href="/" aria-label="home" className="flex items-center space-x-2">
   <TinaIcon
@@ -33,69 +31,10 @@ import { Footer } from "./footer";
   </span>
  </Link>
 */
-//to-do 68: replace images for all block templates TINA CMS/CONTENT
-//to-do 69: add la voz logo png or svg
-//to-do 74: root-layout: Type 'RefObject<HTMLButtonElement | null>' is not assignable to type 'LegacyRef<HTMLButtonElement> | undefined'.
-
-interface HeaderProps {
-  panelId: string;
-  invert?: boolean;
-  icon: React.ElementType;
-  expanded: boolean;
-  onToggle: () => void;
-  toggleRef: RefObject<HTMLButtonElement>;
-};
-
-const Header = ({ panelId, invert = false, icon: Icon, expanded, onToggle, toggleRef }: HeaderProps) => {
-  const { globalSettings, theme } = useLayout();
-  const header = globalSettings!.header!;
-  return (
-    <Container>
-      <div className="flex items-center justify-between">
-        <Link href="/" aria-label="home" className="flex items-center space-x-2">
-          <Logo invert={invert}>{header.name}</Logo>
-        </Link>
-        <div className="hidden lg:block">
-          <ul className="flex gap-8 text-sm">
-            {header.nav!.map((item, index) => (
-              <li key={index}>
-                <Link
-                  href={item!.href!}
-                  className="text-muted-foreground hover:text-accent-foreground block duration-150">
-                  <span>{item!.label}</span>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div className="flex items-center gap-x-8">
-          <Button href="/contact" invert={invert}>Contacto</Button>
-          <button
-            ref={toggleRef}
-            type="button"
-            onClick={onToggle}
-            aria-expanded={expanded}
-            aria-controls={panelId}
-            className={clsx(
-              "group -m-2.5 rounded-full p-2.5 transition",
-              invert ? "hover:bg-white/10" : "hover:bg-purple-800/10"
-            )}
-            aria-label="Toggle navigation"
-          >
-            <Icon className={clsx(
-              "h-6 w-6",
-              invert ? "fill-white group-hover:fill-neutral-200" : "fill-purple-800 group-hover:fill-neutral-500"
-            )} />
-          </button>
-        </div>
-      </div>
-    </Container>
-  );
-};
 
 const NavigationRow = ({ children }: { children: ReactNode }) => {
   return (
-    <div className="even:mt-px sm:bg-purple-800">
+    <div className="even:mt-px sm:bg-sidebar">
       <Container>
         <div className="grid grid-cols-1 sm:grid-cols-2">{children}</div>
       </Container>
@@ -107,24 +46,24 @@ const NavigationItem = ({ href, children }: { href: string; children: ReactNode 
   return (
     <Link
       href={href}
-      className="group relative isolate -mx-6 bg-purple-800 px-6 py-10 even:mt-px sm:mx-0 sm:px-0 sm:py-16 sm:odd:pr-16 sm:even:mt-0 sm:even:border-l sm:even:border-purple-600 sm:even:pl-16"
+      className="group relative isolate -mx-6 bg-sidebar px-6 py-10 even:mt-px sm:mx-0 sm:px-0 sm:py-16 sm:odd:pr-16 sm:even:mt-0 sm:even:border-l sm:even:border-sidebar-accent sm:even:pl-16"
     >
       {children}
-      <span className="absolute inset-y-0 -z-10 w-screen bg-purple-700 opacity-0 transition group-odd:right-0 group-even:left-0 group-hover:opacity-100" />
+      <span className="absolute inset-y-0 -z-10 w-screen sidebar-accent opacity-0 transition group-odd:right-0 group-even:left-0 group-hover:opacity-100" />
     </Link>
   );
 };
 
 const Navigation = () => {
   return (
-    <nav className="mt-px font-display text-5xl font-medium tracking-tight text-white">
+    <nav className="mt-px font-display text-5xl font-medium tracking-tight text-sidebar-foreground">
       <NavigationRow>
         <NavigationItem href="/events">Eventos</NavigationItem>
         <NavigationItem href="/serve">Servir</NavigationItem>
       </NavigationRow>
       <NavigationRow>
-        <NavigationItem href="/community-resources">Recursos</NavigationItem>
-        <NavigationItem href="/give">Haz tu Donación</NavigationItem>
+        <NavigationItem href="/community-resources">Recursos comunitarios</NavigationItem>
+        <NavigationItem href="/donations">Haz tu donación</NavigationItem>
       </NavigationRow>
     </nav>
   );
@@ -171,12 +110,12 @@ const RootLayoutInner = ({ children }: RootLayoutInnerProps) => {
           layout
           id={panelId}
           style={{ height: expanded ? "auto" : "0.5rem" }}
-          className="relative z-50 overflow-hidden bg-purple-800 pt-2"
+          className="relative z-50 overflow-hidden bg-sidebar pt-2"
           aria-hidden={expanded ? undefined : true}
           inert={expanded ? undefined : true}
         >
-          <motion.div layout className="bg-purple-600">
-            <div ref={navRef} className="bg-purple-800 pb-16 pt-14">
+          <motion.div layout className="bg-sidebar-accent">
+            <div ref={navRef} className="bg-sidebar pb-16 pt-14">
               <Header
                 invert
                 panelId={panelId}
@@ -190,17 +129,17 @@ const RootLayoutInner = ({ children }: RootLayoutInnerProps) => {
               />
             </div>
             <Navigation />
-            <div className="relative bg-purple-800 before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-purple-600">
+            <div className="relative bg-sidebar before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-sidebar-accent">
               <Container>
                 <div className="grid grid-cols-1 gap-y-10 pb-16 pt-10 sm:grid-cols-2 sm:pt-16">
                   <div>
-                    <h2 className="font-display text-base font-semibold text-white">
+                    <h2 className="font-display text-base font-nunito font-medium text-sidebar-foreground">
                      Nuestra ubicación y horario de servicios
                     </h2>
                     <ServiceTimes invert className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2" />
                   </div>
                   <div className="sm:border-l sm:border-transparent sm:pl-16">
-                    <h2 className="font-display text-base font-semibold text-white">
+                    <h2 className="font-display text-base font-nunito font-medium text-sidebar-foreground">
                       Síguenos
                     </h2>
                     <SocialMedia className="mt-6" invert />

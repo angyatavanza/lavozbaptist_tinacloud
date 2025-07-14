@@ -7,17 +7,15 @@ import { tinaField } from "tinacms/dist/react";
 import {
   PageBlocksHerocontent,
   PageBlocksHerocontentImage,
-} from "../../tina/__generated__/types";
-import { Button } from "../ui/button";
-import { iconSchema } from "@/tina/fields/icon";
-import { TinaIcon } from "../icon";
-import { Section, sectionBlockSchemaField } from "../layout/section";
-
+} from "@/tina/__generated__/types";
+import { Button } from "@/components/ui/button";
+import { Section, sectionBlockSchemaField } from "@/components/layout/section";
 import { AnimatedGroup } from "../motion-primitives/animated-group";
 import { TextEffect } from "../motion-primitives/text-effect";
-import HeroVideoDialog from "../ui/hero-video-dialog";
-import { cn } from "@/lib/utils";
+import HeroVideoDialog from "@/components/ui/hero-video-dialog";
 import { Transition } from 'motion/react';
+
+//to-do 92: extend the width of the div for the Hero content component to be full-width + remove the white looking border around the video + fix the section width of the section background of the blocks when the url goes to /home or /about
 
 const transitionVariants = {
   container: {
@@ -87,7 +85,7 @@ export const Herocontent = ({ data }: { data: PageBlocksHerocontent }) => {
                       speedSegment={0.3}
                       delay={0.5}
                       as="p"
-                      className="mx-auto mt-8 max-w-2xl text-balance text-lg"
+                      className="font-nunito font-bold mx-auto mt-8 max-w-2xl text-balance text-lg"
                     >
                       {data.tagline!}
                     </TextEffect>
@@ -99,7 +97,7 @@ export const Herocontent = ({ data }: { data: PageBlocksHerocontent }) => {
                       preset="fade-in-blur"
                       speedSegment={0.3}
                       as="h1"
-                      className="mt-8 text-balance text-6xl md:text-7xl xl:text-[5.25rem]"
+                      className="font-nunito font-medium mt-8 text-balance text-6xl md:text-7xl xl:text-[5.25rem]"
                     >
                       {data.headline!}
                     </TextEffect>
@@ -186,7 +184,7 @@ export const herocontentBlockSchema: Template = {
   ui: {
     previewSrc: "/blocks/herocontent.png",
     defaultItem: {
-      tagline: "Here's some text above the other text",
+      tagline: "HERE'S SOME TEXT ABOVE THE OTHER TEXT",
       headline: "This Big Text is Totally Awesome",
       text: "Phasellus scelerisque, libero eu finibus rutrum, risus risus accumsan libero, nec molestie urna dui a leo.",
     },

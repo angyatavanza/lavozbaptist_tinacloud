@@ -1,17 +1,17 @@
 import React from "react";
-import { SectionIntro } from "../layout/section-intro";
-import { Container } from "../container";
+import { SectionIntro } from "@/components/layout/section-intro";
+import { Container } from "@/components/layout/container";
 import type { Template } from "tinacms";
-import { iconSchema } from "@/tina/fields/icon";
 import { tinaField } from "tinacms/dist/react";
 import { PageBlocksMission } from "@/tina/__generated__/types";
-import { TinaIcon } from "../icon";
 import Link from "next/link";
-import { Button } from "../ui/button";
+import { Button } from "@/components/ui/button";
 import { AnimatedGroup } from "../motion-primitives/animated-group";
-import { GridList, GridListItem } from "../grid-list";
+import { GridList, GridListItem } from "@/components/ui/grid-list";
 import { Transition } from 'motion/react';
+
 //Done 20: add data.code
+//to-do 94: update the ui of the mission block component in the /about page FRONTEND
 
 const transitionVariants = {
   container: {
@@ -43,7 +43,7 @@ const transitionVariants = {
 
 export const Mission = ({ data }: { data: PageBlocksMission }) => {
   return (
-    <div className="mt-24 rounded-4xl bg-purple-800 py-24 sm:mt-32 lg:mt-40 lg:py-32">
+    <div className="mt-24 rounded-4xl bg-primary py-24 sm:mt-32 lg:mt-40 lg:py-32">
       <SectionIntro
         eyebrow="Nuestra Misión"
         title="Alcanzamos Personas para Cristo"
@@ -51,7 +51,7 @@ export const Mission = ({ data }: { data: PageBlocksMission }) => {
       >
         <h2
           data-tina-field={tinaField(data, "title")}
-          className="text-balance text-4xl font-semibold lg:text-5xl"
+          className="text-balance text-4xl font-nunito font-medium lg:text-5xl"
         >
           {data.title}
         </h2>

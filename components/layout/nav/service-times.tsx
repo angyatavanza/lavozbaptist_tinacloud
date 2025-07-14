@@ -15,7 +15,7 @@ function ServiceTime({ name, children, invert = false }: ServiceTimeProps): Reac
         invert ? "text-neutral-300" : "text-neutral-600"
       )}
     >
-      <strong className={invert ? "text-white" : "text-neutral-950"}>
+      <strong className={invert ? "text-primary" : "text-white"}>
         {name}
       </strong>
       <br />

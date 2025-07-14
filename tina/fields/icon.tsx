@@ -3,7 +3,7 @@ import React from "react";
 import { Button, wrapFieldsWithMeta } from "tinacms";
 import { BiChevronRight } from "react-icons/bi";
 import { GoCircleSlash } from "react-icons/go";
-import { TinaIcon, IconOptions } from "../../components/icon";
+import { TinaIcon, IconOptions } from "@/components/ui/icon";
 import {
   Popover,
   PopoverButton,

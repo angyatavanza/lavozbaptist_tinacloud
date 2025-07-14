@@ -1,31 +1,32 @@
 import type { Collection } from "tinacms";
 import { herocontentBlockSchema } from "@/components/blocks/section-herocontent";
-import { bannerBlockSchema } from "@/components/blocks/section-banner";
+import { ctalinkBlockSchema } from "@/components/blocks/section-cta-links";
 import { teammemberBlockSchema } from "@/components/blocks/section-our-team";
-import { profileBlockSchema } from "@/components/blocks/section-profile";
+import { profileBlockSchema } from "@/components/blocks/del-profile";
 import { heroBlockSchema } from "@/components/blocks/landing-hero";
+import { herodonationBlockSchema } from "@/components/blocks/section-herodonation";
 import { aboutsectionBlockSchema } from "@/components/blocks/section-about";
 import { aboutusBlockSchema } from "@/components/blocks/landing-about-us";
 import { contentBlockSchema } from "@/components/blocks/section-content";
-import { ctaBlockSchema } from "@/components/blocks/landing-call-to-action";
+import { ctaBlockSchema } from "@/components/blocks/section-call-to-action";
 import { connectionBlockSchema } from "@/components/blocks/landing-connect";
 import { featureBlockSchema } from "@/components/blocks/section-features";
-import { partnerBlockSchema } from "@/components/blocks/section-partners";
+import { partnerBlockSchema } from "@/components/blocks/del-partners";
 import { visionBlockSchema } from "@/components/blocks/section-vision";
 import { groupBlockSchema } from "@/components/blocks/landing-groups";
 import { videoBlockSchema } from "@/components/blocks/section-video";
-import { calloutBlockSchema } from "@/components/blocks/section-callout";
+import { calloutBlockSchema } from "@/components/blocks/landing-callout";
 import { freqaskedquestionsBlockSchema } from "@/components/blocks/section-faqcontent";
 import { contentandimageBlockSchema } from "@/components/blocks/section-imgcontent";
 import { contentandimagevariantBlockSchema } from "@/components/blocks/section-imgcontent2";
-import { statsBlockSchema } from "@/components/blocks/landing-stats";
 import { latesteventsBlockSchema } from "@/components/blocks/landing-latest-events";
 import { latestmessagesBlockSchema } from "@/components/blocks/landing-latest-messages";
-import { testimonialBlockSchema } from "@/components/blocks/section-testimonial";
+import { testimonialBlockSchema } from "@/components/blocks/del-testimonial";
 import { missionBlockSchema } from "@/components/blocks/section-mission";
 import { listcontentBlockSchema } from "@/components/blocks/section-listcontent";
-import { nextstepsBlockSchema } from "@/components/blocks/section-next-steps";
+import { nextstepsBlockSchema } from "@/components/blocks/section-first-steps";
 import { contactsectionBlockSchema } from "@/components/blocks/section-contact";
+import { Herodonation } from "@/components/blocks/section-herodonation";
 
 const Page: Collection = {
   label: "Pages",
@@ -52,14 +53,13 @@ const Page: Collection = {
       },
       templates: [
         heroBlockSchema,
-        bannerBlockSchema,
+        ctalinkBlockSchema,
         aboutsectionBlockSchema,
         aboutusBlockSchema,
         calloutBlockSchema,
         connectionBlockSchema,
         featureBlockSchema,
         groupBlockSchema,
-        statsBlockSchema,
         latesteventsBlockSchema,
         latestmessagesBlockSchema,
         contentBlockSchema,
@@ -67,6 +67,7 @@ const Page: Collection = {
         testimonialBlockSchema,
         videoBlockSchema,
         herocontentBlockSchema,
+        herodonationBlockSchema,
         profileBlockSchema,
         teammemberBlockSchema,
         contentandimagevariantBlockSchema,
@@ -147,7 +148,7 @@ const Page: Collection = {
           ],
           ui: {
             defaultItem: {
-              placeholder: "Enter your email",
+              placeholder: "",
               buttonText: "Notify Me",
             },
           },
@@ -182,7 +183,7 @@ const Page: Collection = {
           ],
           ui: {
             defaultItem: {
-              placeholder: "Enter your email",
+              placeholder: "",
               buttonText: "Notify Me",
             },
           },
@@ -217,7 +218,7 @@ const Page: Collection = {
           ],
           ui: {
             defaultItem: {
-              placeholder: "Enter your email",
+              placeholder: "",
               buttonText: "Notify Me",
             },
           },
@@ -252,7 +253,7 @@ const Page: Collection = {
           ],
           ui: {
             defaultItem: {
-              placeholder: "Enter your email",
+              placeholder: "",
               buttonText: "Notify Me",
             },
           },

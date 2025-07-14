@@ -22,7 +22,7 @@ export const AccordionItem = ({
         onClick={onClick}
         className="flex cursor-pointer items-center justify-between gap-[24px] "
       >
-        <h4 className="text-darkPurple font-semibold lg:text-lg">{title}</h4>
+        <h4 className="text-primary font-nunito font-medium lg:text-lg">{title}</h4>
         {open ? (
           <Image
             alt=""

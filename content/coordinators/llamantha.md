@@ -1,5 +1,5 @@
 ---
-name: Llamantha
-avatar: /uploads/coordinators/llamantha.png
+name: La Voz de la Esperanza
+avatar: /uploads/coordinators/ve_logo.png
 ---
 

@@ -1,12 +1,11 @@
 import Image from "next/image";
-import { Container } from "../container";
-import { FadeIn, FadeInStagger } from "../fade-in";
+import { Container } from "@/components/layout/container";
+import { FadeIn, FadeInStagger } from "../motion-primitives/fade-in";
 import React from "react";
 import type { Template } from 'tinacms';
-import { iconSchema } from '@/tina/fields/icon';
 import { PageBlocksPartner } from "@/tina/__generated__/types";
-//to-do 73: add the partners+testimonial block component to a page ? TINA CMS/CONTENT
-//to-do 74: add data.title + data.description + data.actions to partners component TINA CMS/BACKEND
+////to-do 74: update the ui of the features block component in the /serve+service-times page FRONTEND
+//to-do 100: add data.title + data.description + data.actions to partners component TINA CMS/BACKEND
 type PartnerMember = [string, string];
 
 const partnerMembers: PartnerMember[] = [
@@ -22,16 +21,16 @@ const partnerMembers: PartnerMember[] = [
 
 export const Partner = ({ data }: { data: PageBlocksPartner }) => {
   return (
-    <div className="mt-24 rounded-4xl bg-purple-800 py-20 sm:mt-32 sm:py-32 lg:mt-56">
+    <div className="mt-24 rounded-4xl bg-primary py-20 sm:mt-32 sm:py-32 lg:mt-56">
       <Container>
         <FadeIn className="flex items-center gap-x-8">
-          <h2 className="text-center font-display text-sm font-semibold tracking-wider text-white sm:text-left">
+          <h2 className="text-center font-display text-sm font-nunito font-medium tracking-wider text-white sm:text-left">
             ¡Bienvenidos a la Iglesia La Voz! Nuestros servicios dominicales
             ofrecen adoración y enseñanza bíblica para todas las edades. Desde
             niños hasta adultos, somos una comunidad apasionada por conectar la
             gente con su fe.
           </h2>
-          <div className="h-px flex-auto bg-purple-600" />
+          <div className="h-px flex-auto bg-primary-muted-2" />
         </FadeIn>
         <FadeInStagger faster>
           <ul

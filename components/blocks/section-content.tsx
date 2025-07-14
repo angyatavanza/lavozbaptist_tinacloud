@@ -2,16 +2,13 @@
 import React from "react";
 import { TinaMarkdown } from "tinacms/dist/rich-text";
 import type { Template } from "tinacms";
-import { PageBlocksContent } from "../../tina/__generated__/types";
+import { PageBlocksContent } from "@/tina/__generated__/types";
 import { tinaField } from "tinacms/dist/react";
-import { Section } from "../layout/section";
-import { mermaid } from "./mermaid";
-import { sectionBlockSchemaField } from '../layout/section';
+import { Section } from "@/components/layout/section";
+import { Mermaid } from "./mermaid";
+import { sectionBlockSchemaField } from '@/components/layout/section';
 
 import { scriptCopyBlockSchema, ScriptCopyBtn } from "../magicui/script-copy-btn";
-
-//to-do 65: create content for resources page
-//to-do 52: add paypalAPI to donations
 
 export const Content = ({ data }: { data: PageBlocksContent }) => {
   return (
@@ -22,7 +19,7 @@ export const Content = ({ data }: { data: PageBlocksContent }) => {
       <TinaMarkdown
         content={data.body}
         components={{
-          mermaid,
+          mermaid: (props: any) => <Mermaid {...props} />,
           scriptCopyBlock: (props: any) => <ScriptCopyBtn {...props} />,
         }}
       />

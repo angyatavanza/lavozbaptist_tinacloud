@@ -1,20 +1,20 @@
 import type { Template } from "tinacms";
-import { PageBlocksContentandimage, PageBlocksContentandimageContentandimages } from "../../tina/__generated__/types";
-import { Section } from "../layout/section";
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import { PageBlocksContentandimage, PageBlocksContentandimageContentandimages } from "@/tina/__generated__/types";
+import { Section } from "@/components/layout/section";
 import Image from "next/image";
-import { Card, CardContent } from "../ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { tinaField } from "tinacms/dist/react";
-import { sectionBlockSchemaField } from '../layout/section';
+import { sectionBlockSchemaField } from '@/components/layout/section';
 
-//done 36: add needed blocks to serve page
 //done 50: serve page: add button to mission trips, change the field name in the template for contentandimage contentandimagevariant
-//to-do 38: add needed blocks + content to groups page TINA CMS/CONTENT
+//to-do 97: update the ui of the ContentAndImage block component in the /content/community+serve pages FRONTEND
+//to-do 57: replace text + images in content/serve and details components TINA CMS CONTENT
+
 export const ContentAndImage = ({ data }: { data: PageBlocksContentandimage }) => {
   return (
     <Section  background={data.background!}>
       <div className="text-center">
-        <h2 className="text-title text-3xl font-semibold" data-tina-field={tinaField(data, 'title')}>{data.title}</h2>
+        <h2 className="text-title text-3xl font-nunito font-medium" data-tina-field={tinaField(data, 'title')}>{data.title}</h2>
         <p className="text-body mt-6" data-tina-field={tinaField(data, 'description')}>{data.description}</p>
       </div>
       <div className="mt-8 [column-width:300px] [column-gap:1.5rem] md:mt-12">
@@ -36,7 +36,7 @@ const ContentandimageCard = ({ contentandimage }: { contentandimage: PageBlocksC
           )}
         </div>
         <div>
-          <h3 className="font-medium" data-tina-field={tinaField(contentandimage, 'quotetitle')}>{contentandimage.quotetitle}</h3>
+          <h3 className="font-nunito font-medium" data-tina-field={tinaField(contentandimage, 'quotetitle')}>{contentandimage.quotetitle}</h3>
 
           <span className="text-muted-foreground block text-sm tracking-wide" data-tina-field={tinaField(contentandimage, 'requirements')}>{contentandimage.requirements}</span>
 

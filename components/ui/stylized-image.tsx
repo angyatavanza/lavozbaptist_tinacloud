@@ -59,7 +59,7 @@ export const StylizedImage = ({ shape = 0, className, ...props }: StylizedImageP
           <use
             href={`#${id}-shape`}
             strokeWidth="2"
-            className="stroke-neutral-950/10"
+            className="stroke-primary/10"
           />
         </g>
         <defs>

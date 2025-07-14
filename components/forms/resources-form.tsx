@@ -1,8 +1,8 @@
 import { useForm } from 'react-hook-form';
-import { FadeIn } from "../fade-in";
+import { FadeIn } from "../motion-primitives/fade-in";
 import { TextInput } from "./text-input";
 import { RadioInput } from "./radio-input";
-import { Button } from "../ui/second-button";
+import { Button } from "@/components/ui/second-button";
 import MailSentState from "@/components/forms/mail-sent-state";
 import { useState } from 'react';
 
@@ -12,9 +12,9 @@ Y pues lo datos que necesitamos en nombre,
 teléfono y dirección (la dirección es porque hasta ahorita la mayor 
 parte de los servicios disponibles (que yo conozco) es en el condado de Mecklenburg
 */
-//done 51b: add dirección to resource form fields + change radioinput options
-//to-do 51c: Add to details: Nos gustaría entender mejor tu situación, ¿puedes describirnos tu necesidad?
-//to-do 51d: Ask carmen which fields are required
+//done 51b: add address to resource form fields + change radioinput options
+//to-do 85: replace text + images in content/resources+serve and details components TINA CMS CONTENT
+//done 55: implement address, email, phone, name fields required in resources/visitor/contact/serve forms + add the options to serve form BACKEND
 
 interface ResourcesFormInputs {
   name: string;
@@ -24,7 +24,9 @@ interface ResourcesFormInputs {
   message: string;
   subject: string;
   address: string;
-  citystatezip: string;
+  address2: string;
+  citystate: string;
+  zip: string;
 }
 
 interface ResourcesFormProps {
@@ -73,8 +75,8 @@ export const ResourcesForm: React.FC<ResourcesFormProps> = ({
   return (
     <FadeIn>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <h2 className="font-display text-base font-semibold text-neutral-950">
-          Tiene preguntas? Contáctenos un mensaje:
+        <h2 className="font-display text-base font-nunito font-medium text-primary">
+          Para poder apoyarte mejor, nos gustaría saber más sobre tu situación:
         </h2>
 
         {hasError && (
@@ -86,23 +88,24 @@ export const ResourcesForm: React.FC<ResourcesFormProps> = ({
         <div className="isolate mt-6 -space-y-px rounded-2xl bg-white/50">
           <TextInput
             {...register("name", { required: true })}
-            placeholder="Su nombre"
+            placeholder=""
             label="Nombre"
           />
-          {errors.name && <span className="text-red-500 text-sm">Requerido</span>}
+          {errors.name && <span className="text-red-500 text-sm">Nombre requerido</span>}
 
           <TextInput
             {...register("lastname")}
-            placeholder="Su apellido"
+            placeholder=""
             label="Apellido"
           />
 
           <TextInput
             type="tel"
-            {...register("phone")}
-            placeholder="Su número de teléfono"
+            {...register("phone", { required: true })}
+            placeholder=""
             label="Número de teléfono"
           />
+          {errors.phone && <span className="text-red-500 text-sm">Número de teléfono requerido</span>}
 
           <TextInput
             type="email"
@@ -110,30 +113,44 @@ export const ResourcesForm: React.FC<ResourcesFormProps> = ({
             placeholder={placeholder}
             label="Correo electrónico"
           />
-          {errors.email && <span className="text-red-500 text-sm">Correo requerido</span>}
+          {errors.email && <span className="text-red-500 text-sm">Correo electrónico requerido</span>}
 
           <TextInput
-            {...register("address", { required: false})}
-            placeholder="Calle"
+            {...register("address", { required: true})}
+            placeholder=""
             label="Línea de dirección 1"
+          />
+          {errors.address && <span className="text-red-500 text-sm">Dirección requerida</span>}
+
+          <TextInput
+            {...register("address2", { required: false})}
+            placeholder=""
+            label="Línea de dirección 2 (opcional)"
+          />
+
+          <TextInput
+            {...register("citystate", { required: false})}
+            placeholder=""
+            label="Ciudad Estado"
           />
           
           <TextInput
-            {...register("citystatezip", { required: false})}
-            placeholder="Ciudad Estado Código Postal"
-            label="Línea de dirección 2"
+            {...register("zip", { required: true})}
+            placeholder=""
+            label="Código postal"
           />
+          {errors.zip && <span className="text-red-500 text-sm">Código postal requerido</span>}
 
           <TextInput
             {...register("message", { required: true })}
-            placeholder="Su mensaje"
-            label="Mensaje"
+            placeholder=""
+            label="¿Qué situación estás enfrentando y cómo podemos ayudarte?"
           />
-          {errors.message && <span className="text-red-500 text-sm">Requerido</span>}
+          {errors.message && <span className="text-red-500 text-sm">Mensaje requerido</span>}
 
           <div className="border border-neutral-300 px-6 py-8 first:rounded-t-2xl last:rounded-b-2xl">
             <fieldset>
-              <legend className="text-base/6 text-neutral-500">¿Cómo podemos ayudarte a ti y a tu familia? </legend>
+              <legend className="text-base/6 text-neutral-500">¿De qué manera podemos asistirte?</legend>
             </fieldset>
             <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-8">
               

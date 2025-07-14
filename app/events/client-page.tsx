@@ -14,8 +14,8 @@ import { ArrowRight, UserRound } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Section } from "@/components/layout/section";
 import { tinaField } from "tinacms/dist/react";
-import { TinaIcon } from "@/components/icon";
-import { PageIntro } from "@/components/page-intro";
+import { TinaIcon } from "@/components/ui/icon";
+import { PageIntro } from "@/components/layout/page-intro";
 
 //done 35a: create events page tina collection
 //done 35b: add more sections to events template such as date, time, details,
@@ -122,7 +122,7 @@ export default function EventsClientPage(props: ClientEventProps) {
       <Section>
         <div className="container flex flex-col items-center gap-16">
           <div className="text-center">
-            <h2 className="mx-auto mb-6 text-pretty text-3xl font-semibold md:text-4xl lg:max-w-3xl">
+            <h2 className="mx-auto mb-6 text-pretty text-3xl font-nunito font-medium md:text-4xl lg:max-w-3xl">
               Eventos
             </h2>
             <p className="mx-auto max-w-2xl text-muted-foreground md:text-lg">
@@ -146,7 +146,7 @@ export default function EventsClientPage(props: ClientEventProps) {
                         ))}
                       </div>
                     </div>
-                    <h3 className="text-xl font-semibold md:text-2xl lg:text-3xl">
+                    <h3 className="text-xl font-nunito font-medium md:text-2xl lg:text-3xl">
                       <Link href={event.url} className="hover:underline">
                         {event.title}
                       </Link>
@@ -173,7 +173,7 @@ export default function EventsClientPage(props: ClientEventProps) {
                               size="lg"
                               variant={
                                 reccuringeventdetail!.type === "link"
-                                  ? "outline"
+                                  ? "ghost"
                                   : "default"
                               }
                               className="rounded-xl px-5 text-base"
@@ -200,7 +200,7 @@ export default function EventsClientPage(props: ClientEventProps) {
                               size="lg"
                               variant={
                                 locationdetail!.type === "link"
-                                  ? "outline"
+                                  ? "ghost"
                                   : "default"
                               }
                               className="rounded-xl px-5 text-base"
@@ -220,7 +220,7 @@ export default function EventsClientPage(props: ClientEventProps) {
                     <div className="mt-6 flex items-center space-x-2 md:mt-8">
                       <Link
                         href={event.url}
-                        className="inline-flex items-center font-semibold hover:underline md:text-base"
+                        className="inline-flex items-center font-medium hover:underline md:text-base"
                       >
                         <span>Ver Evento</span>
                         <ArrowRight className="ml-2 size-4 transition-transform" />
@@ -260,7 +260,7 @@ export default function EventsClientPage(props: ClientEventProps) {
                         ))}
                       </div>
                     </div>
-                    <h3 className="text-xl font-semibold md:text-2xl lg:text-3xl">
+                    <h3 className="text-xl font-nunito font-medium md:text-2xl lg:text-3xl">
                       <Link href={event.url} className="hover:underline">
                         {event.title}
                       </Link>
@@ -282,7 +282,7 @@ export default function EventsClientPage(props: ClientEventProps) {
                               size="lg"
                               variant={
                                 locationdetail!.type === "link"
-                                  ? "outline"
+                                  ? "ghost"
                                   : "default"
                               }
                               className="rounded-xl px-5 text-base"
@@ -302,7 +302,7 @@ export default function EventsClientPage(props: ClientEventProps) {
                     <div className="mt-6 flex items-center space-x-2 md:mt-8">
                       <Link
                         href={event.url}
-                        className="inline-flex items-center font-semibold hover:underline md:text-base"
+                        className="inline-flex items-center font-medium hover:underline md:text-base"
                       >
                         <span>Ver Evento</span>
                         <ArrowRight className="ml-2 size-4 transition-transform" />

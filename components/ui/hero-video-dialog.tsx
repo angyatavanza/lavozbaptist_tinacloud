@@ -27,7 +27,7 @@ export default function HeroVideoDialog({
   const videoId = extractVideoId(videoSrc);
 
   return (
-    <div className={cn("relative w-full min-h-screen overflow-hidden", className)}>
+    <div className={cn("relative w-full h-full overflow-hidden", className)}>
       <iframe
         src={`${videoSrc}&autoplay=1&hideinfo=1&controls=0&mute=1&loop=1&modestbranding=1&rel=0&badge=0&autopause=0&player_id=0&app_id=58479&playlist=${videoId}`}
         allowFullScreen

@@ -1,5 +1,5 @@
 import { tinaField } from "tinacms/dist/react";
-import { Page, PageBlocks, Message, Event } from "../../tina/__generated__/types";
+import { Page, PageBlocks, Message, Event } from "@/tina/__generated__/types";
 import { Hero } from "./landing-hero";
 import { Aboutsection } from "./section-about";
 import { AboutUs } from "./landing-about-us";
@@ -7,26 +7,26 @@ import { Content } from "./section-content";
 import { Connections } from "./landing-connect";
 import { Features } from "./section-features";
 import { Groups } from "./landing-groups";
-import { CallToAction } from "./landing-call-to-action";
-import { Testimonial } from "./section-testimonial";
+import { CallToAction } from "./section-call-to-action";
+import { Testimonial } from "./del-testimonial";
 import { Video } from "./section-video";
-import { Callout } from "./section-callout";
+import { Callout } from "./landing-callout";
 import { Herocontent } from "./section-herocontent";
-import { Banner } from "./section-banner";
+import { CallToActionLinks } from "./section-cta-links";
 import { FreqAskedQuestions } from "./section-faqcontent";
 import { ContentAndImage } from "./section-imgcontent";
 import { ContentAndImageVariant } from "./section-imgcontent2";
-import { Profile } from "./section-profile";
+import { Profile } from "./del-profile";
 import { TeamMember } from "./section-our-team";
-import { Stats } from "./landing-stats";
 import { LatestEvents } from "./landing-latest-events";
 import { LatestMessages } from "./landing-latest-messages";
 import { Vision } from "./section-vision";
-import { NextSteps } from "./section-next-steps";
+import { NextSteps } from "./section-first-steps";
 import { Mission } from "./section-mission";
-import { Partner } from "./section-partners";
+import { Partner } from "./del-partners";
 import { Listcontent } from "./section-listcontent";
 import { ContactSection } from "./section-contact";
+import { Herodonation } from "./section-herodonation";
 
 export const Blocks = (
   props: Omit<Page, "id" | "_sys" | "_values"> & {
@@ -66,14 +66,16 @@ const Block = ({
   switch (block.__typename) {
     case "PageBlocksVideo":
       return <Video data={block} />;
-    case "PageBlocksBanner":
-      return <Banner data={block} />;
+    case "PageBlocksCtalinks":
+      return <CallToActionLinks data={block} />;
     case "PageBlocksProfile":
       return <Profile data={block} />;
     case "PageBlocksHero":
       return <Hero data={block} />;
     case "PageBlocksHerocontent":
-      return <Herocontent data={block} />;    
+      return <Herocontent data={block} />;
+    case "PageBlocksHerodonation":
+      return <Herodonation data={block} />;      
     case "PageBlocksAboutsection":
       return <Aboutsection data={block} />;
     case "PageBlocksTeammember":
@@ -84,8 +86,6 @@ const Block = ({
       return <AboutUs data={block} />;    
     case "PageBlocksCallout":
       return <Callout data={block} />;
-    case "PageBlocksStats":
-      return <Stats data={block} />;
     case "PageBlocksLatestevents":
         return <LatestEvents data={block} events={events ?? []} />;
     case "PageBlocksLatestmessages":

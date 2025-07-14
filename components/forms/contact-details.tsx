@@ -1,17 +1,17 @@
-import { FadeIn } from "../fade-in";
-import { ServiceTimes } from "../service-times";
-import { Border } from "../ui/border";
+import { FadeIn } from "../motion-primitives/fade-in";
+import { ServiceTimes } from "@/components/layout/nav/service-times";
+import { Border } from "@/components/ui/border";
 import Link from "next/link";
-import { SocialMedia } from "../social-media";
+import { SocialMedia } from "@/components/layout/nav/social-media";
 //done 42: add functionality to contact-form TINA CMS/BACKEND
     //done 42b: (add errors, mail-sent confirmation, to contact-form ?) TINA CMS/BACKEND
 //done 43:  add contact page to /content + add form-details component to /form page TINA CMS/BACKEND
 //done 44: remove newsletter-form TINA CMS/BACKEND
-//done 45: create privacy page and add content blocks to privacy page TINA CMS/CONTENT 
+
 export const ContactDetails = () => {
   return (
     <FadeIn>
-      <h2 className="font-display text-base font-semibold text-neutral-950">
+      <h2 className="font-display text-base font-nunito font-medium text-primary">
        Nuestra ubicación y horario de servicios
       </h2>
       <p className="mt-6 text-base text-neutral-600">
@@ -19,7 +19,7 @@ export const ContactDetails = () => {
       </p>
       <ServiceTimes className="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-2" />
       <Border className="mt-16 pt-16">
-        <h2 className="font-display text-base font-semibold text-neutral-950">
+        <h2 className="font-display text-base font-nunito font-medium text-primary">
           Ponte en contacto
         </h2>
         <dl className="mt-6 grid grid-cols-1 gap-8 text-sm sm:grid-cols-2">
@@ -28,11 +28,11 @@ export const ContactDetails = () => {
             ["Teléfono", "(704) 537-7133"],
           ] as [string, string][]).map(([label, email]) => (
             <div key={email}>
-              <dt className="font-semibold text-neutral-950">{label}</dt>
+              <dt className="font-medium text-primary">{label}</dt>
               <dd>
                 <Link
                   href={`mailto:${email}`}
-                  className="text-neutral-600 hover:text-neutral-950"
+                  className="text-neutral-600 hover:text-primary"
                 >
                   {email}
                 </Link>
@@ -42,7 +42,7 @@ export const ContactDetails = () => {
         </dl>
       </Border>
       <Border className="mt-16 pt-16">
-        <h2 className="font-display text-base font-semibold text-neutral-950">
+        <h2 className="font-display text-base font-nunito font-medium text-primary">
           Síguenos
         </h2>
         <SocialMedia className="mt-6" />

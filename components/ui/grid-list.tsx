@@ -1,6 +1,6 @@
-import { FadeIn, FadeInStagger } from "./fade-in";
+import { FadeIn, FadeInStagger } from "../motion-primitives/fade-in";
 import clsx from "clsx";
-import { Border } from "./ui/border";
+import { Border } from "./border";
 import { ReactNode } from "react";
 
 interface GridListProps {
@@ -43,7 +43,7 @@ export function GridListItem({
         "text-base",
         invert
           ? "text-neutral-300 before:bg-white after:bg-white/10"
-          : "text-neutral-600 before:bg-purple-800 after:bg-neutral-100",
+          : "text-neutral-600 before:bg-primary after:bg-neutral-100",
         className
       )}
     >
@@ -51,8 +51,8 @@ export function GridListItem({
         <Border position="left" className="pl-8" invert={invert}>
           <strong
             className={clsx(
-              "font-semibold",
-              invert ? "text-white" : "text-neutral-950"
+              "font-medium",
+              invert ? "text-white" : "text-primary"
             )}
           >
             {title}.

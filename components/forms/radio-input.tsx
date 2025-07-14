@@ -10,9 +10,9 @@ export const RadioInput = ({ label, ...props }: RadioInputProps) => {
       <input
         type="radio"
         {...props}
-        className="h-6 w-6 flex-none appearance-none rounded-full border border-purple-800/20 outline-none checked:border-[0.5rem] checked:border-purple-800 focus-visible:ring-1 focus-visible:ring-purple-800 focus-visible:ring-offset-2"
+        className="h-6 w-6 flex-none appearance-none rounded-full border border-primary/20 outline-none checked:border-[0.5rem] checked:border-primary focus-visible:ring-1 focus-visible:ring-primarycus-visible:ring-offset-2"
       />
-      <span className="text-base/6 text-neutral-950">{label}</span>
+      <span className="text-base/6 text-primary">{label}</span>
     </label>
   );
 };

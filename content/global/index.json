@@ -5,7 +5,7 @@
       "color": "purple",
       "style": "float"
     },
-    "name": "Iglesia La Voz de la Esperanza",
+    "name": "",
     "color": "default",
     "nav": [
       {
@@ -34,33 +34,28 @@
     "social": [
       {
         "icon": {
-          "name": "FaLinkedin"
+          "name": "BiLogoFacebookCircle"
         },
-        "url": "https://www.linkedin.com/company/tinacms"
+        "url": "https://www.facebook.com/lavozdelaesperanzacharlotte"
       },
       {
         "icon": {
-          "name": "FaGithub"
+          "name": "BiLogoInstagram"
         },
-        "url": "https://github.com/tinacms/tinacms"
+        "url": "https://www.instagram.com/lavozdelaesperanzacharlotte/?hl=en/"
       },
       {
         "icon": {
-          "name": "FaYoutube"
+          "name": "BiLogoYoutube",
+          "style": "float"
         },
-        "url": "https://www.youtube.com/@TinaCMS"
-      },
-      {
-        "icon": {
-          "name": "FaXTwitter"
-        },
-        "url": "https://x.com/TinaCMS"
+        "url": "https://www.youtube.com/@lavozdelaesperanza5391"
       }
     ]
   },
   "theme": {
     "color": "purple",
-    "font": "lato",
+    "font": "roboto",
     "darkMode": "light"
   }
 }

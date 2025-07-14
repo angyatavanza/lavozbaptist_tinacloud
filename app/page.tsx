@@ -9,6 +9,7 @@ import {
   daysUntilExpiration,
 } from "@/lib/token-helper";
 
+
 const token = loadTokenFromEnv();
 export const revalidate = 300;
 
@@ -23,10 +24,12 @@ export default async function Home() {
   });
 
   const eventRes = await client.queries.eventConnection();
+  const now = new Date();
   const events = eventRes.data.eventConnection
     .edges!.map((edge) => edge!.node!)
     .filter((event) => !!event.date)
-    .sort((a, b) => new Date(b.date!).getTime() - new Date(a.date!).getTime());
+    .filter((event) => new Date(event.date!) >= now) // Only future events
+    .sort((a, b) => new Date(a.date!).getTime() - new Date(b.date!).getTime()); // Soonest to furthest
 
   const messageRes = await client.queries.messageConnection();
   const tinaMessages = messageRes.data.messageConnection
@@ -62,8 +65,8 @@ export default async function Home() {
         breadcrumbs: [customSlug],
       },
       coordinator: {
-        name: "Facebook",
-        avatar: null,
+        name: "La Voz De La Esperanza was live",
+        avatar: "/ve_logo.png",
       },
       type: "facebook",
     };

@@ -48,7 +48,7 @@ export default function MessageClientPage(props: ClientMessageProps) {
   return (
     <ErrorBoundary>
       <Section >
-        <h2 data-tina-field={tinaField(message, 'title')} className={`w-full relative\tmb-8 text-6xl font-extrabold tracking-normal text-center title-font`}>
+        <h2 data-tina-field={tinaField(message, 'title')} className={`w-full relative\tmb-8 text-6xl font-nunito font-medium tracking-normal text-center title-font`}>
           <span className={`bg-clip-text text-transparent bg-linear-to-r ${titleColorClasses[theme!.color!]}`}>{message.title}</span>
         </h2>
         <div data-tina-field={tinaField(message, 'coordinator')} className='flex items-center justify-center mb-16'>
