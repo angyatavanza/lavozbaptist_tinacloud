@@ -6,12 +6,12 @@ interface CTACardProps {
 
 function CTACard({ title, bgColor, onClick }: CTACardProps) {
   return (
-    <div className="col-span-2 sm:col-span-3 lg:col-span-3 3xl:col-span-3">
+    <div className="col-span-2 md:col-span-3 lg:col-span-3 3xl:col-span-3">
       <div
         className={`flex flex-col justify-center items-center py-10 px-4 h-[253px] cursor-pointer hover:opacity-90 transition-opacity ${bgColor}`}
         onClick={onClick}
       >
-        <h2 className="font-playfair font-bold text-[40px] leading-[50px] text-redcross-text text-center capitalize max-w-full">
+        <h2 className="font-nunito font-bold text-[40px] leading-[50px] text-redcross-text text-center capitalize max-w-full">
           {title}
         </h2>
       </div>
@@ -42,7 +42,7 @@ export default function CTASection() {
 
   return (
                     <section className="mx-auto px-6">
-      <div className="grid grid-cols-2 sm:grid-cols-12 lg:grid-cols-12 3xl:grid-cols-12 gap-3.75">
+      <div className="grid grid-cols-2 md:grid-cols-12 gap-3.75 mx-6">
         <CTACard
           title="Become a Volunteer"
           bgColor="bg-redcross-volunteer"

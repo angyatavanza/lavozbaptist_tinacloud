@@ -12,14 +12,14 @@ import { CallToActionLinks } from "./section-cta-links";
 import { FreqAskedQuestions } from "./section-faqcontent";
 import { Herocontent } from "./section-herocontent";
 import { Herodonation } from "./section-herodonation";
-import { Profile } from "./del-profile";
+import { Profile } from "./section-profile";
 import { TeamMember } from "./section-our-team";
 import { Vision } from "./section-vision";
 import { NextSteps } from "./section-first-steps";
 import { Mission } from "./section-mission";
-import { Aboutsection } from "./section-about";
+import { Aboutsectionsinfo } from "./section-about";
 import { Group } from "./section-groups";
-import { Partner } from "./del-partners";
+import { Leadership } from "./section-leadership";
 import { ContentAndImage } from "./section-imgcontent";
 import { ContentAndImageVariant } from "./section-imgcontent2";
 import { Features } from "./section-features";
@@ -76,8 +76,8 @@ const Block = ({
       return <Herocontent data={block} />;
     case "PageBlocksHerodonation":
       return <Herodonation data={block} />;      
-    case "PageBlocksAboutsection":
-      return <Aboutsection data={block} />;
+    case "PageBlocksAboutsectionsinfo":
+      return <Aboutsectionsinfo data={block} />;
     case "PageBlocksTeammember":
       return <TeamMember data={block} />; 
     case "PageBlocksGroup":
@@ -108,8 +108,8 @@ const Block = ({
       return <CallToAction data={block} />;
     case "PageBlocksVision":
       return <Vision data={block} />;
-    case "PageBlocksPartner":
-      return <Partner data={block} />;
+    case "PageBlocksLeadership":
+      return <Leadership data={block} />;
     case "PageBlocksListcontent":
       return <Listcontent data={block} />;
     case "PageBlocksNextsteps":

@@ -17,11 +17,11 @@ export const ContactSection = ({
   data: PageBlocksContactsection;
 }) => {
   return (
-    <Container className="mt-24 sm:mt-32 lg:mt-40">
-      <FadeIn className="-mx-6 rounded-4xl bg-primary px-6 py-20 sm:mx-0 sm:py-32 md:px-12">
+    <Container className="mt-20 md:mt-28">
+      <FadeIn className="-mx-6 rounded-4xl bg-primary px-6 py-20 md:mx-0 md:py-32 md:px-12">
         <div className="max-w-4xl mx-auto">
           <h2
-            className="font-display text-3xl font-nunito font-medium text-white [text-wrap:balance] sm:text-4xl"
+            className=" text-3xl font-nunito font-medium text-white [text-wrap:balance] md:text-4xl"
             data-tina-field={tinaField(data, "title")}
           >
             {data.title}
@@ -48,12 +48,12 @@ export const ContactSection = ({
               ))}
           </div>
           <div className="mt-10 border-t border-white/10 pt-10">
-            <h3 className="font-display text-base font-nunito font-medium text-white">
+            <h3 className=" text-base font-nunito font-medium text-white">
               Nuestra ubicación y horario de servicios
             </h3>
             <ServiceTimes
               invert
-              className="mt-6 grid grid-cols-1 gap-8 sm:grid-cols-2"
+              className="mt-6 grid grid-cols-2 gap-3.75 md:grid-cols-12"
             />
           </div>
         </div>

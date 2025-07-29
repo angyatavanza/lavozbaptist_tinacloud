@@ -2,16 +2,16 @@ import type { Collection } from "tinacms";
 import { herocontentBlockSchema } from "@/components/blocks/section-herocontent";
 import { ctalinkBlockSchema } from "@/components/blocks/section-cta-links";
 import { teammemberBlockSchema } from "@/components/blocks/section-our-team";
-import { profileBlockSchema } from "@/components/blocks/del-profile";
+import { profileBlockSchema } from "@/components/blocks/section-profile";
 import { heroBlockSchema } from "@/components/blocks/landing-hero";
 import { herodonationBlockSchema } from "@/components/blocks/section-herodonation";
-import { aboutsectionBlockSchema } from "@/components/blocks/section-about";
+import { aboutsectioninfoBlockSchema } from "@/components/blocks/section-about";
 import { aboutusBlockSchema } from "@/components/blocks/landing-about-us";
 import { contentBlockSchema } from "@/components/blocks/section-content";
 import { ctaBlockSchema } from "@/components/blocks/section-call-to-action";
 import { connectionBlockSchema } from "@/components/blocks/landing-connect";
 import { featureBlockSchema } from "@/components/blocks/section-features";
-import { partnerBlockSchema } from "@/components/blocks/del-partners";
+import { leadershipBlockSchema } from "@/components/blocks/section-leadership";
 import { visionBlockSchema } from "@/components/blocks/section-vision";
 import { groupinfoBlockSchema } from "@/components/blocks/landing-groups";
 import { videoBlockSchema } from "@/components/blocks/section-video";
@@ -54,7 +54,7 @@ const Page: Collection = {
       templates: [
         heroBlockSchema,
         ctalinkBlockSchema,
-        aboutsectionBlockSchema,
+        aboutsectioninfoBlockSchema,
         aboutusBlockSchema,
         calloutBlockSchema,
         connectionBlockSchema,
@@ -76,7 +76,7 @@ const Page: Collection = {
         visionBlockSchema,
         missionBlockSchema,
         listcontentBlockSchema,
-        partnerBlockSchema,
+        leadershipBlockSchema,
         nextstepsBlockSchema,
         contactsectionBlockSchema,
       ],

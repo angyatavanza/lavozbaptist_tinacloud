@@ -1,39 +1,27 @@
 "use client";
-
-import { Play } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { useVideoDialog } from "./video-dialog-context";
 
 interface HeroVideoProps {
   videoSrc: string;
-  thumbnailSrc: string;
-  thumbnailAlt?: string;
   className?: string;
-}
-
-function extractVideoId(embedUrl: string): string | null {
-  const match = embedUrl.match(/\/embed\/([^?&"'>]+)/);
-  return match ? match[1] : null;
 }
 
 export default function HeroVideoDialog({
   videoSrc,
-  thumbnailSrc,
-  thumbnailAlt = "Video thumbnail",
   className,
 }: HeroVideoProps) {
-  const { openVideo } = useVideoDialog();
-
-  const videoId = extractVideoId(videoSrc);
+  const vimeoUrl = `${videoSrc}&background=1&muted=1&dnt=1&title=0&byline=0&portrait=0&badge=0&autopause=0&vimeo_logo=0`;
 
   return (
-    <div className={cn("relative w-full h-full overflow-hidden", className)}>
+    <div
+      className={cn("relative w-full h-auto aspect-[16/9] md:aspect-[16/9] md:h-auto overflow-hidden", className)}
+    >
       <iframe
-        src={`${videoSrc}&autoplay=1&hideinfo=1&controls=0&mute=1&loop=1&modestbranding=1&rel=0&badge=0&autopause=0&player_id=0&app_id=58479&playlist=${videoId}`}
+        src={vimeoUrl}
         allowFullScreen
-        title="YouTube video player"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        className="absolute inset-0 h-full w-full object-cover"
+        title="Vimeo video player"
+        allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+        className="absolute inset-0 w-full h-full"
       />
     </div>
   );

@@ -15,7 +15,7 @@ export const TeamMember = ({ data }: { data: PageBlocksTeammember }) => {
         <h2 className="text-title text-3xl font-nunito font-medium" data-tina-field={tinaField(data, 'title')}>{data.title}</h2>
         <p className="text-body mt-6" data-tina-field={tinaField(data, 'description')}>{data.description}</p>
       </div>
-      <div className="mt-8 [column-width:300px] [column-gap:1.5rem] md:mt-12">
+      <div className="mt-8 grid grid-cols-2 md:grid-cols-12 gap-3.75 mx-6 md:mt-12">
         {data.teammembers?.map((teammember, index) => (
           <TeammemberCard key={index} teammember={teammember!} />
         ))}
@@ -26,8 +26,8 @@ export const TeamMember = ({ data }: { data: PageBlocksTeammember }) => {
 
 const TeammemberCard = ({ teammember }: { teammember: PageBlocksTeammemberTeammembers }) => {
   return (
-    <Card className="mb-6 break-inside-avoid">
-      <CardContent className="grid grid-cols-[auto_1fr] gap-3 pt-6">
+    <Card className="col-span-1 md:col-span-3 mb-6">
+      <CardContent className="grid grid-cols-2 gap-3 pt-6">
         <Avatar className="size-9" data-tina-field={tinaField(teammember, 'avatar')}>
           {teammember.avatar && (
             <AvatarImage alt={teammember.coordinator!} src={teammember.avatar} loading="lazy" width="120" height="120" />
@@ -118,7 +118,42 @@ export const teammemberBlockSchema: Template = {
           type: "image",
           label: "Avatar",
           name: "avatar",
-        }
+        },
+        {
+          label: "Actions",
+          name: "actions",
+          type: "object",
+          list: true,
+          ui: {
+            defaultItem: {
+              label: "Action Label",
+              type: "button",
+              link: "/",
+            },
+            itemProps: (item) => ({ label: item.label }),
+          },
+          fields: [
+            {
+              label: "Label",
+              name: "label",
+              type: "string",
+            },
+            {
+              label: "Type",
+              name: "type",
+              type: "string",
+              options: [
+                { label: "Button", value: "button" },
+                { label: "Link", value: "link" },
+              ],
+            },
+            {
+              label: "Link",
+              name: "link",
+              type: "string",
+            },
+          ],
+        },
       ],
     },
   ],

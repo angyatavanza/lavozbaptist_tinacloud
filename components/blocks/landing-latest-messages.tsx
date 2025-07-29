@@ -1,24 +1,27 @@
 "use client";
 import React from "react";
-import { client } from "@/tina/__generated__/client";
 import { Message, PageBlocksLatestmessages } from "@/tina/__generated__/types";
 import type { Template } from "tinacms";
 import { Card } from "@/components/ui/card";
-import { TinaMarkdown } from "tinacms/dist/rich-text";
-import { tinaField } from 'tinacms/dist/react';
-import { Button } from '@/components/ui/button';
-import MessagesVideoDialog from "../ui/messages-video-dialog";
+import { tinaField } from "tinacms/dist/react";
+import { Button } from "@/components/ui/button";
+import MessagesVideoDialog from "@/components/ui/messages-video-dialog";
 import { ArrowRight, UserRound } from "lucide-react";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import {
+  DecorativeIcon,
+  LargeDecorativeIcon,
+} from "@/components/ui/decorative-icon";
 import { format } from "date-fns";
-import { Section } from "../layout/section";
+import { Section, sectionBlockSchemaField } from "@/components/layout/section";
 import Link from "next/link";
 
 //done 12: create a latestmessages component that extract the latest 3 messages in homepage
 //done 29: add fb video API (Graph APi) to messages videoUrls and thumbnails in the messages page TINA CMS/BACKEND
 //done 29b: find workaround to 5 copyrighted videos: https://www.facebook.com/video/copyright/claim/?match_id=24630578953196706&is_from_action_center_v2=0
-//to-do 29c: extend duration of FACEBOOK_ACCESS_TOKEN 
+//done 77: extend duration of FACEBOOK_ACCESS_TOKEN
+//done 19: change layout of /landing-latest-messages component- div< title top left, description, view all button to the far right>, div< 3 column video "cards" with grid-column-gap: 50px, FB Play button center, circle logo/title/account top left.
 
+//line 55 p< mx-auto max-w-2xl text-muted-foreground md:text-lg ?
 interface LatestMessagesProps {
   data: PageBlocksLatestmessages;
   messages: Message[];
@@ -34,140 +37,95 @@ export const LatestMessages = ({ data, messages }: LatestMessagesProps) => {
     .slice(0, limit);
 
   return (
-    <Section>
-      <div className="container flex flex-col items-center gap-16">
-        <div className="text-center">
-          <h2 className="mx-auto mb-6 text-pretty text-3xl font-semibold md:text-4xl lg:max-w-3xl">
-            {title}
-          </h2>
+    <Section background={data.background!} className="relative py-16 px-24 md:px-24 lg:px-24 3xl:px-119 overflow-hidden">
+      {/* Header */}
+      <div className="flex flex-col lg:flex-row lg:justify-between lg:items-start gap-8 lg:gap-0 mb-12 lg:mb-16">
+        <div className="flex flex-col gap-2">
+          <span className="font-nunito font-bold text-lg text-secondary">
+            Mensajes
+          </span>
+          <div className="relative">
+            <h2 className="font-nunito font-bold text-3xl md:text-4xl lg:text-[42px] text-white leading-[1.4] max-w-md lg:max-w-lg">
+              {title}
+            </h2>
+            <div className="absolute -top-2 right-4 md:right-0 lg:right-0 lg:top-0">
+              <DecorativeIcon />
+            </div>
+          </div>
           <p className="mx-auto max-w-2xl text-muted-foreground md:text-lg">
             Manténgase al tanto de lo que está sucediendo en la Iglesia La Voz
           </p>
-          <div className="mt-12 flex flex-wrap justify-center gap-4">
-            {data.actions &&
-              data.actions.map((action) => (
-                <div
-                  key={action!.label}
-                  data-tina-field={tinaField(action)}
-                  className="bg-foreground/10 rounded-[calc(var(--radius-xl)+0.125rem)] border p-0.5"
-                >
-                  <Button
-                    asChild
-                    size="lg"
-                    variant={action!.type === "link" ? "outline" : "default"}
-                    className="rounded-xl px-5 text-base"
-                  >
-                    <Link href={action!.link!}>
-                      <span className="text-nowrap">{action!.label}</span>
-                    </Link>
-                  </Button>
-                </div>
-              ))}
-          </div>
         </div>
-
-        <div className="grid gap-y-10 sm:grid-cols-12 sm:gap-y-12 md:gap-y-16 lg:gap-y-20">
-          {filteredMessages.map((message) => {
-            const postedDate = message.date
-              ? format(new Date(message.date), "MMM dd, yyyy")
-              : "";
-        
-              const thumbnailSrc = "/fallback2.jpg";
-            return (
-              <Card
-                key={message.id}
-                className="order-last border-0 bg-transparent shadow-none sm:order-first sm:col-span-12 lg:col-span-10 lg:col-start-2"
+        {/* Header Button */}
+        <div className="mt-12 flex flex-wrap justify-center gap-4">
+          {data.actions &&
+            data.actions.map((action) => (
+              <div
+                key={action!.label}
+                data-tina-field={tinaField(action)}
+                className="bg-foreground/10 rounded-[calc(var(--radius-xl)+0.125rem)] border p-0.5"
               >
-                <div className="grid gap-y-6 sm:grid-cols-10 sm:gap-x-5 sm:gap-y-0 md:items-center md:gap-x-8 lg:gap-x-12">
-                  <div className="sm:col-span-5">
-                    <div className="mb-4 md:mb-6">
-                      <div className="flex flex-wrap gap-3 text-xs uppercase tracking-wider text-muted-foreground md:gap-5 lg:gap-6">
-                        {message.tags?.map((tag, i) => (
-                          <span key={i}>{tag?.tag?.name}</span>
-                        ))}
-                      </div>
-                    </div>
-                    <h3 className="text-xl font-semibold md:text-2xl lg:text-3xl">
-                      <Link
-                        href={`/messages/${message._sys.breadcrumbs.join("/")}`}
-                        className="hover:underline"
-                      >
-                        {message.title}
-                      </Link>
-                    </h3>
-                    <div className="mt-4 text-muted-foreground md:mt-5">
-                      {message.excerpt && (
-                        <TinaMarkdown content={message.excerpt} />
-                      )}
-                    </div>
-                    <div className="mt-6 flex items-center space-x-4 text-sm md:mt-8">
-                      <Avatar>
-                        {message.coordinator?.avatar ? (
-                          <AvatarImage
-                            src={message.coordinator.avatar}
-                            alt={message.coordinator.name || "Coordinator avatar"}
-                            className="h-8 w-8"
-                          />
-                        ) : (
-                          <AvatarFallback>
-                            <UserRound
-                              size={16}
-                              strokeWidth={2}
-                              className="opacity-60"
-                              aria-hidden="true"
-                            />
-                          </AvatarFallback>
-                        )}
-                      </Avatar>
-                      <span className="text-muted-foreground">
-                        {message.coordinator?.name || "Anonymous"}
-                      </span>
-                      <span className="text-muted-foreground">•</span>
-                      <span className="text-muted-foreground">
-                        {postedDate}
-                      </span>
-                    </div>
-                    <div className="mt-6 flex items-center space-x-2 md:mt-8">
-                      <Link
-                        href={`/messages/${message._sys.breadcrumbs.join("/")}`}
-                        className="inline-flex items-center font-semibold hover:underline md:text-base"
-                      >
-                        <span>Ver Mensaje</span>
-                        <ArrowRight className="ml-2 size-4 transition-transform" />
-                      </Link>
-                    </div>
+                <Button
+                  asChild
+                  size="lg"
+                  variant={action!.type === "link" ? "ghost" : "default"}
+                  className="flex items-center gap-3 px-6 md:px-8 py-3 md:py-4 border border-white text-white font-nunito font-bold  text-sm md:text-base hover:bg-white hover:text-primary transition-colors self-start lg:self-auto"
+                >
+                  <Link href={action!.link!}>
+                    <span className="text-nowrap">{action!.label}</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
+                </Button>
+              </div>
+            ))}
+        </div>
+      </div>
+      {/* Cards Grid */}
+      <div className="grid grid-cols-2 md:grid-cols-12 gap-3.75 mx-6 relative">
+        {filteredMessages.map((message) => {
+          const thumbnailSrc = "/fallback2.jpg";
+          const postedDate = message.date
+            ? format(new Date(message.date), "MMM dd, yyyy")
+            : "";
+          return (
+            <Card
+              key={message.id}
+              className="bg-white border border-grey-0 p-3 md:p-4 flex flex-col gap-3 md:gap-4 group hover:shadow-lg transition-shadow col-span-1 md:col-span-4"
+            >
+              {message.image?.embeddable && message.image?.videoUrl ? (
+                <Link
+                  href={`/messages/${message._sys.breadcrumbs.join("/")}`}
+                  className="block"
+                >
+                  <div className="aspect-[16/9] overflow-clip rounded-lg border border-border">
+                    <div
+                      className="fb-video"
+                      data-href={message.image.videoUrl}
+                      data-allowfullscreen="true"
+                      data-width="500"
+                    ></div>
                   </div>
-                  {message.image?.embeddable && message.image?.videoUrl ? (
-                      <div className="order-first sm:order-last sm:col-span-5">
-                        <Link
-                        href={`/messages/${message._sys.breadcrumbs.join("/")}`}
-                        className="block"
-                      >
-                          <div className="aspect-[16/9] overflow-clip rounded-lg border border-border">
-                            <div
-                              className="fb-video"
-                              data-href={message.image.videoUrl}
-                              data-allowfullscreen="true"
-                              data-width="500"
-                            ></div>
-                          </div>
-                        </Link>
-                      </div>
-                    ) : (
-                      <div className="order-first sm:order-last sm:col-span-5">
-                        <div className="aspect-[16/9] overflow-clip rounded-lg border border-border relative">
-                          <MessagesVideoDialog
-                            videoSrc={message.image?.videoUrl || ""}
-                            thumbnailSrc={thumbnailSrc}
-                            thumbnailAlt="Messages Video"
-                          />
-                        </div>
-                      </div>
-                    )}
-                </div>
-              </Card>
-            );
-          })}
+                </Link>
+              ) : (
+              <div className="aspect-[16/9] overflow-clip rounded-lg border border-border relative">
+                <MessagesVideoDialog
+                  videoSrc={message.image?.videoUrl || ""}
+                  thumbnailSrc={thumbnailSrc}
+                  thumbnailAlt="Messages Video"
+                  title={message.title}
+                  coordinator={{
+                    avatar: message.coordinator?.avatar || "",
+                    name: message.coordinator?.name || "",
+                  }}
+                />
+              </div>
+              )}
+            </Card>
+          );
+        })}
+        {/* Large Decorative Icon */}
+        <div className="absolute -bottom-6 -right-2 md:-bottom-8 md:-right-4 lg:-bottom-12 lg:-right-8 opacity-80 hidden md:block">
+          <LargeDecorativeIcon />
         </div>
       </div>
     </Section>
@@ -185,6 +143,7 @@ export const latestmessagesBlockSchema: Template = {
     },
   },
   fields: [
+    sectionBlockSchemaField as any,
     {
       type: "string",
       label: "Section Title",

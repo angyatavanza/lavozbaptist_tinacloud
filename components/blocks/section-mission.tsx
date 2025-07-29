@@ -43,7 +43,7 @@ const transitionVariants = {
 
 export const Mission = ({ data }: { data: PageBlocksMission }) => {
   return (
-    <div className="mt-24 rounded-4xl bg-primary py-24 sm:mt-32 lg:mt-40 lg:py-32">
+    <div className="mt-24 rounded-4xl bg-primary py-24 md:mt-32 lg:mt-40 lg:py-32">
       <SectionIntro
         eyebrow="Nuestra Misión"
         title="Alcanzamos Personas para Cristo"
@@ -83,7 +83,7 @@ export const Mission = ({ data }: { data: PageBlocksMission }) => {
         </GridList>
         <AnimatedGroup
             variants={transitionVariants}
-            className="mt-12 flex flex-col items-center justify-center gap-2 md:flex-row"
+            className="mt-6 flex flex-col items-center justify-center gap-2 md:flex-row"
           >
             {data.actions &&
               data.actions.map((action) => (

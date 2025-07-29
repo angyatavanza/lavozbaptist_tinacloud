@@ -97,6 +97,10 @@ const Event: Collection = {
     },
     iconSchema as any,
     {
+          ...iconSchema,
+          name: "icon2",
+        } as any,
+    {
       label: "Reccuring Event Details",
       name: "reccuringeventdetails",
       type: "object",

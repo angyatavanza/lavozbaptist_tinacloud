@@ -12,10 +12,10 @@ import { Section, sectionBlockSchemaField } from "@/components/layout/section";
 import { AnimatedGroup } from "../motion-primitives/animated-group";
 import { TextEffect } from "../motion-primitives/text-effect";
 import HeroVideoDialog from "@/components/ui/hero-video-dialog";
-import { Transition } from 'motion/react';
+import { Transition } from "motion/react";
 
 //done 52: add paypal button to donations page TINA CMS/BACKEND
-//to-do 98: extend the width of the div for the Hero donation component to be full-width + remove the white looking border around the video + fix the section width of the section background of the blocks when the url goes to /home or /about
+//done 98: extend the width of the div for the Hero donation component to be full-width + remove the white looking border around the video + fix the section width of the section background of the blocks when the url goes to /home or /about
 
 const transitionVariants = {
   container: {
@@ -29,15 +29,15 @@ const transitionVariants = {
   item: {
     hidden: {
       opacity: 0,
-      filter: 'blur(12px)',
+      filter: "blur(12px)",
       y: 12,
     },
     visible: {
       opacity: 1,
-      filter: 'blur(0px)',
+      filter: "blur(0px)",
       y: 0,
       transition: {
-        type: 'spring',
+        type: "spring",
         bounce: 0.3,
         duration: 1.5,
       } as Transition,
@@ -62,21 +62,22 @@ export const Herodonation = ({ data }: { data: PageBlocksHerodonation }) => {
   }
 
   return (
-    <Section background={data.background!}>
+    <Section background={data.background!} className="py-6 pt-9">
       {data.image && (
+        <div
+          className="relative overflow-hidden"
+          data-tina-field={tinaField(data, "image")}
+        >
           <div
-            className="relative -mr-56 mt-8 overflow-hidden px-2 sm:mr-0 sm:mt-12 md:mt-20 max-w-full"
-            data-tina-field={tinaField(data, "image")}
-          >
-            <div
-              aria-hidden
-              className="bg-linear-to-b absolute inset-0 z-10 from-transparent from-35% pointer-events-none"
-              style={gradientStyle}
-            />
-            <div className="inset-shadow-2xs ring-background dark:inset-shadow-white/20 bg-background relative mx-auto max-w-6xl overflow-hidden rounded-2xl border p-4 shadow-lg shadow-zinc-950/15 ring-1">
-              <ImageBlock image={data.image} />
-              {/* Overlay content */}
-              <div className="absolute inset-0 z-20 flex flex-col items-center justify-center text-center px-6 py-12 text-white sm:mx-auto lg:mr-auto lg:mt-0">
+            aria-hidden
+            className="bg-linear-to-b absolute inset-0 z-10 from-transparent from-35% pointer-events-none"
+            style={gradientStyle}
+          />
+          <ImageBlock image={data.image} />
+          {/* Overlay content with grid system */}
+          <div className="absolute inset-0 z-20 flex items-center justify-center px-4 md:px-18">
+            <div className="w-full max-w-7xl grid grid-cols-2 md:grid-cols-12 gap-3.75">
+              <div className="col-span-2 md:col-span-10 lg:col-span-8 md:col-start-2 lg:col-start-3 flex flex-col items-start text-left gap-1 md:gap-2">
                 {data.tagline && (
                   <div data-tina-field={tinaField(data, "tagline")}>
                     <TextEffect
@@ -85,31 +86,44 @@ export const Herodonation = ({ data }: { data: PageBlocksHerodonation }) => {
                       speedSegment={0.3}
                       delay={0.5}
                       as="p"
-                      className="font-nunito font-bold mx-auto mt-8 max-w-2xl text-balance text-lg"
+                      className="font-nunito font-bold text-white text-sm md:text-base leading-6 max-w-md uppercase"
                     >
                       {data.tagline!}
                     </TextEffect>
                   </div>
                 )}
                 {data.headline && (
-                  <div data-tina-field={tinaField(data, "headline")}>
+                  <div
+                    data-tina-field={tinaField(data, "headline")}
+                    className="mb-0 md:mb-6"
+                  >
                     <TextEffect
                       preset="fade-in-blur"
                       speedSegment={0.3}
                       as="h1"
-                      className="font-nunito font-medium mt-8 text-balance text-6xl md:text-7xl xl:text-[5.25rem]"
+                      className="lg:block font-nunito font-medium text-white text-[40px] leading-[52px] md:text-6xl md:leading-[76px]"
                     >
                       {data.headline!}
                     </TextEffect>
                   </div>
                 )}
-
+              </div>
+              {/* Centered form container */}
+              <div className="col-span-2 md:col-span-12 flex justify-center">
                 <AnimatedGroup
                   variants={transitionVariants}
-                  className="mt-12 flex flex-col items-center justify-center gap-2 md:flex-row"
+                  className="flex flex-col items-center justify-center gap-2 md:gap-2 md:flex-row"
                 >
-                  <form action="https://www.paypal.com/donate" method="post" target="_top">
-                    <input type="hidden" name="hosted_button_id" value="ZQW4WNHL4KL66" />
+                  <form
+                    action="https://www.paypal.com/donate"
+                    method="post"
+                    target="_top"
+                  >
+                    <input
+                      type="hidden"
+                      name="hosted_button_id"
+                      value="ZQW4WNHL4KL66"
+                    />
                     <input
                       type="image"
                       src="https://www.paypalobjects.com/es_XC/i/btn/btn_donateCC_LG.gif"
@@ -128,6 +142,7 @@ export const Herodonation = ({ data }: { data: PageBlocksHerodonation }) => {
               </div>
             </div>
           </div>
+        </div>
       )}
     </Section>
   );
@@ -135,40 +150,20 @@ export const Herodonation = ({ data }: { data: PageBlocksHerodonation }) => {
 
 const ImageBlock = ({ image }: { image: PageBlocksHerodonationImage }) => {
   if (image.videoUrl) {
-    let videoId = "";
-    if (image.videoUrl) {
-      const embedPrefix = "/embed/";
-      const idx = image.videoUrl.indexOf(embedPrefix);
-      if (idx !== -1) {
-        videoId = image.videoUrl
-          .substring(idx + embedPrefix.length)
-          .split("?")[0];
-      }
-    }
-    const thumbnailSrc = image.src
-      ? image.src!
-      : videoId
-      ? `https://i3.ytimg.com/vi/${videoId}/maxresdefault.jpg`
-      : "";
-
-    return (
-      <HeroVideoDialog
-        videoSrc={image.videoUrl}
-        thumbnailSrc={thumbnailSrc}
-        thumbnailAlt="Hero Video"
-      />
-    );
+    return <HeroVideoDialog videoSrc={image.videoUrl} />;
   }
 
   if (image.src) {
     return (
-      <Image
-        className="z-2 border-border/25 aspect-15/8 relative rounded-2xl border max-w-full h-auto"
-        alt={image!.alt || ""}
-        src={image!.src!}
-        height={4000}
-        width={3000}
-      />
+      <div className="relative w-full h-auto aspect-[4/5] md:aspect-square lg:aspect-[18/6] md:h-auto overflow-hidden">
+        <Image
+          className="w-full h-full object-cover"
+          alt={image!.alt || ""}
+          src={image!.src!}
+          height={4000}
+          width={3000}
+        />
+      </div>
     );
   }
 };

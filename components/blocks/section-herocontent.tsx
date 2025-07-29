@@ -11,10 +11,10 @@ import { Section, sectionBlockSchemaField } from "@/components/layout/section";
 import { TextEffect } from "../motion-primitives/text-effect";
 import HeroVideoDialog from "@/components/ui/hero-video-dialog";
 
-//to-do 92: extend the width of the div for the Hero content component to be full-width + remove the white looking border around the video + fix the section width of the section background of the blocks when the url goes to /home or /about
+//done 92: extend the width of the div for the Hero content component to be full-width + remove the white looking border around the video + fix the section width of the section background of the blocks when the url goes to /home or /about
 
 export const Herocontent = ({ data }: { data: PageBlocksHerocontent }) => {
-  // Extract the background style logic into a more readable format
+    // Extract the background style logic into a more readable format
   let gradientStyle: React.CSSProperties | undefined = undefined;
   if (data.background) {
     const colorName = data.background
@@ -30,21 +30,22 @@ export const Herocontent = ({ data }: { data: PageBlocksHerocontent }) => {
   }
 
   return (
-    <Section background={data.background!}>
+    <Section background={data.background!} className="py-6 pt-9">
       {data.image && (
+        <div
+          className="relative overflow-hidden"
+          data-tina-field={tinaField(data, "image")}
+        >
           <div
-            className="relative -mr-56 mt-8 overflow-hidden px-2 sm:mr-0 sm:mt-12 md:mt-20 max-w-full"
-            data-tina-field={tinaField(data, "image")}
-          >
-            <div
-              aria-hidden
-              className="bg-linear-to-b absolute inset-0 z-10 from-transparent from-35% pointer-events-none"
-              style={gradientStyle}
-            />
-            <div className="inset-shadow-2xs ring-background dark:inset-shadow-white/20 bg-background relative mx-auto max-w-6xl overflow-hidden rounded-2xl border p-4 shadow-lg shadow-zinc-950/15 ring-1">
-              <ImageBlock image={data.image} />
-              {/* Overlay content */}
-              <div className="absolute inset-0 z-20 flex flex-col items-center justify-center text-center px-6 py-12 text-white sm:mx-auto lg:mr-auto lg:mt-0">
+            aria-hidden
+            className="bg-linear-to-b absolute inset-0 z-10 from-transparent from-35% pointer-events-none"
+            style={gradientStyle}
+          />
+          <ImageBlock image={data.image} />
+          {/* Overlay content with grid system */}
+          <div className="absolute inset-0 z-20 flex items-center justify-center px-4 md:px-18">
+            <div className="w-full max-w-7xl grid grid-cols-2 md:grid-cols-12 gap-3.75">
+              <div className="col-span-2 md:col-span-10 lg:col-span-8 md:col-start-2 lg:col-start-3 flex flex-col items-start text-left gap-1 md:gap-2">
                 {data.tagline && (
                   <div data-tina-field={tinaField(data, "tagline")}>
                     <TextEffect
@@ -53,19 +54,22 @@ export const Herocontent = ({ data }: { data: PageBlocksHerocontent }) => {
                       speedSegment={0.3}
                       delay={0.5}
                       as="p"
-                      className="font-nunito font-bold mx-auto mt-8 max-w-2xl text-balance text-lg"
+                      className="font-nunito font-bold text-left text-white text-sm md:text-base leading-6 max-w-md uppercase"
                     >
                       {data.tagline!}
                     </TextEffect>
                   </div>
                 )}
                 {data.headline && (
-                  <div data-tina-field={tinaField(data, "headline")}>
+                  <div
+                    data-tina-field={tinaField(data, "headline")}
+                    className="mb-0 md:mb-6"
+                  >
                     <TextEffect
                       preset="fade-in-blur"
                       speedSegment={0.3}
                       as="h1"
-                      className="font-nunito font-medium mt-8 text-balance text-6xl md:text-7xl xl:text-[5.25rem]"
+                      className="lg:block text-left font-nunito font-medium text-white text-[40px] leading-[52px] md:text-6xl md:leading-[76px]"
                     >
                       {data.headline!}
                     </TextEffect>
@@ -74,47 +78,28 @@ export const Herocontent = ({ data }: { data: PageBlocksHerocontent }) => {
               </div>
             </div>
           </div>
+        </div>
       )}
     </Section>
   );
 };
 
 const ImageBlock = ({ image }: { image: PageBlocksHerocontentImage }) => {
-  if (image.videoUrl) {
-    let videoId = "";
-    if (image.videoUrl) {
-      const embedPrefix = "/embed/";
-      const idx = image.videoUrl.indexOf(embedPrefix);
-      if (idx !== -1) {
-        videoId = image.videoUrl
-          .substring(idx + embedPrefix.length)
-          .split("?")[0];
-      }
-    }
-    const thumbnailSrc = image.src
-      ? image.src!
-      : videoId
-      ? `https://i3.ytimg.com/vi/${videoId}/maxresdefault.jpg`
-      : "";
-
-    return (
-      <HeroVideoDialog
-        videoSrc={image.videoUrl}
-        thumbnailSrc={thumbnailSrc}
-        thumbnailAlt="Hero Video"
-      />
-    );
+if (image.videoUrl) {
+    return <HeroVideoDialog videoSrc={image.videoUrl} />;
   }
 
   if (image.src) {
     return (
-      <Image
-        className="z-2 border-border/25 aspect-15/8 relative rounded-2xl border max-w-full h-auto"
-        alt={image!.alt || ""}
-        src={image!.src!}
-        height={4000}
-        width={3000}
-      />
+      <div className="relative w-full h-auto aspect-[4/5] md:aspect-square lg:aspect-[18/6] md:h-auto overflow-hidden">
+        <Image
+          className="w-full h-full object-cover"
+          alt={image!.alt || ""}
+          src={image!.src!}
+          height={4000}
+          width={3000}
+        />
+      </div>
     );
   }
 };

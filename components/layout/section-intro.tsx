@@ -27,7 +27,7 @@ export const SectionIntro = ({
             <>
               <span
                 className={clsx(
-                  "mb-6 block font-display text-base font-nunito font-medium",
+                  "mb-6 block  text-base font-nunito font-medium",
                   invert ? "text-white" : "text-primary"
                 )}
               >
@@ -38,10 +38,10 @@ export const SectionIntro = ({
           )}
           <span
             className={clsx(
-              "block font-display tracking-tight [text-wrap:balance]",
+              "block font-nunito tracking-tight [text-wrap:balance]",
               smaller
                 ? "text-2xl font-nunito font-medium"
-                : "text-4xl font-nunito font-regular sm:text-5xl",
+                : "text-4xl font-nunito font-regular md:text-5xl",
               invert ? "text-white" : "text-primary"
             )}
           >

@@ -4,11 +4,11 @@ import {
   PageBlocksGroup,
   PageBlocksGroupGroups,
 } from "@/tina/__generated__/types";
-import { Section } from "@/components/layout/section";
+import Image from "next/image";
+import { Section, sectionBlockSchemaField } from "@/components/layout/section";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { tinaField } from "tinacms/dist/react";
-import { sectionBlockSchemaField } from "@/components/layout/section";
 import { ArrowRight } from "lucide-react";
 import { iconSchema } from "@/tina/fields/icon";
 import { TinaIcon } from "@/components/ui/icon";
@@ -55,7 +55,7 @@ export const Group = ({ data }: { data: PageBlocksGroup }) => {
             {data.title}
           </h2>
           <p
-            className="max-w-[632px] w-full text-center text-base text-[#3F444D] leading-[1.5] px-4 font-quicksand"
+            className="max-w-[632px] w-full text-center text-base text-[#3F444D] leading-[1.5] px-4 font-roboto"
             data-tina-field={tinaField(data, "description")}
           >
             {data.description}
@@ -63,7 +63,7 @@ export const Group = ({ data }: { data: PageBlocksGroup }) => {
         </div>
 
         <div className="w-full px-4 md:px-8 lg:px-[120px]">
-          <div className="grid grid-cols-2 sm:grid-cols-12 lg:grid-cols-12 3xl:grid-cols-12 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-12 gap-3.75 mx-6">
             {data.groups?.map((group, index) => (
               <GroupCard key={index} group={group!} />
             ))}
@@ -82,7 +82,7 @@ export const Group = ({ data }: { data: PageBlocksGroup }) => {
 
 const GroupCard = ({ group }: { group: PageBlocksGroupGroups }) => {
   return (
-    <Card className="col-span-2 sm:col-span-6 lg:col-span-6 3xl:col-span-6 flex items-center gap-5 p-5 border-[#D9DADB] bg-white">
+    <Card className="col-span-2 md:col-span-6 lg:col-span-6 3xl:col-span-6 flex items-center gap-5 p-5 border-[#D9DADB] bg-white">
       <CardContent className="flex flex-col items-start gap-6 flex-1 p-0">
         <div className="flex flex-col items-start gap-4 self-stretch">
           {/* Icon & Text */}
@@ -114,31 +114,33 @@ const GroupCard = ({ group }: { group: PageBlocksGroupGroups }) => {
             {group.description}
           </p>
           {/* Image */}
-          {group.image && (
-            <img
-              src={group.image}
-              alt=""
+          {group.image?.src && (
+            <Image
+              src={group.image.src}
+              alt={group.image.alt || ""}
+              width={300}
+              height={200}
               className="flex-1 self-stretch object-cover min-h-[200px]"
               data-tina-field={tinaField(group, "image")}
             />
           )}
           {/* Actions */}
-          {group.actions && (
-            <AnimatedGroup
-              variants={transitionVariants}
-              className="flex flex-col gap-2 w-full"
-            >
-              {group.actions.map((action) => (
+          <AnimatedGroup
+            variants={transitionVariants}
+            className="flex flex-col items-center justify-center gap-2 md:gap-2 md:flex-row"
+          >
+            {group.actions &&
+              group.actions.map((action) => (
                 <div
                   key={action!.label}
                   data-tina-field={tinaField(action)}
-                  className="bg-foreground/10 rounded-lg border p-0.5"
+                  className="bg-foreground/10 rounded-[calc(var(--radius-xl)+0.125rem)] border p-[0.4px] w-full md:w-auto"
                 >
                   <Button
                     asChild
-                    size="sm"
-                    variant={action!.type === "link" ? "ghost" : "default"}
-                    className="w-full rounded-md text-sm"
+                    size="lg"
+                    variant={action!.type === "link" ? "outline" : "default"}
+                    className="rounded-xl py-[1.1px] md:py-[3.6px] w-full md:w-auto"
                   >
                     <Link href={action!.link!}>
                       <span className="text-nowrap">{action!.label}</span>
@@ -146,8 +148,7 @@ const GroupCard = ({ group }: { group: PageBlocksGroupGroups }) => {
                   </Button>
                 </div>
               ))}
-            </AnimatedGroup>
-          )}
+          </AnimatedGroup>
         </div>
       </CardContent>
     </Card>
@@ -173,8 +174,10 @@ export const groupBlockSchema: Template = {
             color: "primary",
             size: "medium",
           },
-          image:
-            "/uploads/groups/kids/kidz-IMG-1173.jpg",
+          image: {
+            src: "/uploads/groups/kids/kidz-IMG-1173.jpg",
+            alt: "Kids group image",
+          },
         },
         {
           title: "Jóvenes",
@@ -185,8 +188,10 @@ export const groupBlockSchema: Template = {
             color: "primary",
             size: "medium",
           },
-          image:
-            "/uploads/groups/teens/jovenes-IMG-1159.jpg",
+          image: {
+            src: "/uploads/groups/teens/jovenes-IMG-1159.jpg",
+            alt: "Teens group image",
+          },
         },
         {
           title: "Mujeres",
@@ -197,8 +202,10 @@ export const groupBlockSchema: Template = {
             color: "primary",
             size: "medium",
           },
-          image:
-            "/uploads/groups/women/mujeres-IMG-1169.jpg",
+          image: {
+            src: "/uploads/groups/women/mujeres-IMG-1169.jpg",
+            alt: "Women group image",
+          },
         },
         {
           title: "Hombres",
@@ -209,8 +216,10 @@ export const groupBlockSchema: Template = {
             color: "primary",
             size: "medium",
           },
-          image:
-            "/uploads/groups/men/varones-IMG-1188.jpg",
+          image: {
+            src: "/uploads/groups/men/varones-IMG-1188.jpg",
+            alt: "Men group image",
+          },
         },
       ],
     },
@@ -244,7 +253,10 @@ export const groupBlockSchema: Template = {
             color: "primary",
             size: "medium",
           },
-          image: "",
+          image: {
+            src: "",
+            alt: "",
+          },
         },
         itemProps: (item) => {
           return {
@@ -268,9 +280,28 @@ export const groupBlockSchema: Template = {
         },
         iconSchema as any,
         {
-          type: "image",
-          label: "Groups Image",
+          type: "object",
+          label: "Image",
           name: "image",
+          fields: [
+            {
+              name: "src",
+              label: "Image Source",
+              type: "image",
+            },
+            {
+              name: "alt",
+              label: "Alt Text",
+              type: "string",
+            },
+            {
+              name: "videoUrl",
+              label: "Video URL",
+              type: "string",
+              description:
+                "If using a YouTube video, make sure to use the embed version of the video URL",
+            },
+          ],
         },
         {
           label: "Actions",

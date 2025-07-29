@@ -4,6 +4,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card, CardContent } from "@/components/ui/card";
 import { tinaField } from "tinacms/dist/react";
 import { Section, sectionBlockSchemaField } from '@/components/layout/section';
+import { Blockquote } from "@/components/ui/blockquote";
 
 export const Profile = ({ data }: { data: PageBlocksProfile }) => {
   return (
@@ -12,7 +13,7 @@ export const Profile = ({ data }: { data: PageBlocksProfile }) => {
         <h2 className="text-title text-3xl font-nunito font-medium" data-tina-field={tinaField(data, 'title')}>{data.title}</h2>
         <p className="text-body mt-6" data-tina-field={tinaField(data, 'description')}>{data.description}</p>
       </div>
-      <div className="mt-8 [column-width:300px] [column-gap:1.5rem] md:mt-12">
+      <div className="mt-8 grid grid-cols-2 md:grid-cols-12 gap-3.75 mx-6 md:mt-12">
         {data.profiles?.map((profile, index) => (
           <ProfileCard key={index} profile={profile!} />
         ))}
@@ -23,8 +24,8 @@ export const Profile = ({ data }: { data: PageBlocksProfile }) => {
 
 const ProfileCard = ({ profile }: { profile: PageBlocksProfileProfiles }) => {
   return (
-    <Card className="mb-6 break-inside-avoid">
-      <CardContent className="grid grid-cols-[auto_1fr] gap-3 pt-6">
+    <Card className="col-span-1 md:col-span-6 mb-6">
+      <CardContent className="grid grid-cols-2 gap-3 pt-6">
         <Avatar className="size-9" data-tina-field={tinaField(profile, 'avatar')}>
           {profile.avatar && (
             <AvatarImage alt={profile.coordinator!} src={profile.avatar} loading="lazy" width="120" height="120" />
@@ -40,6 +41,13 @@ const ProfileCard = ({ profile }: { profile: PageBlocksProfileProfiles }) => {
           <blockquote className="mt-3" data-tina-field={tinaField(profile, 'quote')}>
             <p className="text-gray-700 dark:text-gray-300">{profile.quote}</p>
           </blockquote>
+          <Blockquote
+                    coordinator={{ name: "Debra Fiscal", role: "CEO of Unseal" }}
+                    className="mt-12"
+                  >
+                    Studio_clone were so regular with their progress updates we almost
+                    began to think they were automated!
+                  </Blockquote>
         </div>
       </CardContent>
     </Card>

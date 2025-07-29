@@ -12,7 +12,7 @@ interface StatListProps {
 export function StatList({ children, ...props }: StatListProps): ReactElement {
   return (
     <FadeInStagger {...props}>
-      <dl className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:auto-cols-fr lg:grid-flow-col lg:grid-cols-none">
+      <dl className="grid grid-cols-2 gap-3.75 md:grid-cols-12 lg:auto-cols-fr lg:grid-flow-col lg:grid-cols-none">
         {children}
       </dl>
     </FadeInStagger>
@@ -27,9 +27,9 @@ interface StatListItemProps {
 
 export function StatListItem({ label, value }: StatListItemProps): ReactElement {
   return (
-    <Border as={FadeIn} position="left" className="flex flex-col-reverse pl-8">
+    <Border as={FadeIn} position="left" className="flex flex-col-reverse pl-8 col-span-1 md:col-span-6">
       <dt className="mt-2 text-base text-neutral-600">{label}</dt>
-      <dd className="font-display text-3xl font-medium text-primary sm:text-4xl">
+      <dd className="font-nunito text-3xl font-medium text-primary md:text-4xl">
         {value}
       </dd>
     </Border>

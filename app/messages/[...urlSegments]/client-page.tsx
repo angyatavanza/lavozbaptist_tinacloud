@@ -84,7 +84,7 @@ export default function MessageClientPage(props: ClientMessageProps) {
           </p>
         </div>
         {message.image?.embeddable && message.image?.videoUrl ? (
-          <div className="order-first sm:order-last sm:col-span-5">
+          <div className="order-first md:order-last md:col-span-5">
               <div className="aspect-[16/9] overflow-clip rounded-lg border border-border">
                 <div
                   className="fb-video"
@@ -95,7 +95,7 @@ export default function MessageClientPage(props: ClientMessageProps) {
               </div>
           </div>
         ) : (
-          <div className="order-first sm:order-last sm:col-span-5">
+          <div className="order-first md:order-last md:col-span-5">
             <div className="aspect-[16/9] overflow-clip rounded-lg border border-border relative">
               <MessagesVideoDialog
                 videoSrc={message.image?.videoUrl || ""}

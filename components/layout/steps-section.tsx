@@ -30,10 +30,10 @@ export const StepsSection = ({ title, image, children }: StepsSectionProps) => {
         <div className="mt-12 lg:mt-0 lg:w-[37rem] lg:flex-none">
           <FadeIn>
             <div
-              className="font-display text-base font-medium before:text-neutral-300 before:content-['/_'] after:text-primary after:content-[counter(section,decimal-leading-zero)]"
+              className="font-nunito text-base font-medium before:text-neutral-300 before:content-['/_'] after:text-primary after:content-[counter(section,decimal-leading-zero)]"
               aria-hidden="true"
             />
-            <h2 className="mt-2 font-display text-3xl font-nunito font-medium tracking-tight text-primary sm:text-4xl">
+            <h2 className="mt-2 text-3xl font-nunito font-medium tracking-tight text-primary md:text-4xl">
               {title}
             </h2>
             <div className="mt-6">{children}</div>

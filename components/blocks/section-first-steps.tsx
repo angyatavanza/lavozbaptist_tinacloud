@@ -5,15 +5,15 @@ import { TagList, TagListItem } from "@/components/ui/tag-list";
 import type { Template } from "tinacms";
 import { tinaField } from "tinacms/dist/react";
 import { PageBlocksNextsteps } from "@/tina/__generated__/types";
-import { Blockquote } from "@/components/ui/blockquote";
 import { List, ListItem } from "@/components/ui/list";
+import { components } from '@/components/mdx-components';
 
-//to-do 40: complete the design of first steps page FRONTEND
+//to-do 40: edit the ui of first steps page FRONTEND
 //done 39: combine steps 1-4 into nextsteps and add data.title + data.description code + fix stylized image in steps page
 
 export const NextSteps = ({ data }: { data: PageBlocksNextsteps }) => {
   return (
-    <div className="mt-24 space-y-24 [counter-reset:section] sm:mt-32 sm:space-y-32 lg:mt-40 lg:space-y-40">
+    <div className="mt-24 space-y-24 [counter-reset:section] md:mt-32 md:space-y-32 lg:mt-40 lg:space-y-40">
       <StepsSection
         title={data.title ?? "Descubre"}
         image={{ src: "/whiteboard.jpg", shape: 1 }}
@@ -21,34 +21,10 @@ export const NextSteps = ({ data }: { data: PageBlocksNextsteps }) => {
       >
         <div className="space-y-6 text-base text-neutral-600">
           <p data-tina-field={tinaField(data, "description")}>
-            {data.description}
-            Ayudará a entender el funcionamiento básico de LA VOZ. Está diseñada
-            para descubrir la misión de la iglesia, los valores fundamentales, y
-            estrategia; ambas cosas ayudan a comprometerse en la expansión del
-            reino en esta comunidad de fe. We work closely with our staff to
-            understand their{" "}
-            <strong className="font-medium text-primary">
-              needs
-            </strong>{" "}
-            and goals, embedding ourselves in their every day operations to
-            understand what makes their business tick.
-          </p>
-          <p>
-            Our team of private investigators shadow the company director’s for
-            several weeks while our account managers focus on going through
-            their trash. Our senior security experts then perform social
-            engineering hacks to gain access to their{" "}
-            <strong className="font-medium text-primary">business</strong>
-            accounts — handing that information over to our forensic accounting
-            team.
-          </p>
-          <p>
-            Once the full audit is complete, we report back with a comprehensive{" "}
-            <strong className="font-medium text-primary">plan</strong>{" "}
-            and, more importantly, a budget.
+          Ayudará a entender el funcionamiento básico de <components.LaVoz />. {data.description}
           </p>
         </div>
-        <h3 className="mt-12 font-display text-base font-nunito font-medium text-primary">
+        <h3 className="mt-12  text-base font-nunito font-medium text-primary">
           Included in this phase
         </h3>
         <TagList className="mt-4">
@@ -87,13 +63,6 @@ export const NextSteps = ({ data }: { data: PageBlocksNextsteps }) => {
             for changes.
           </p>
         </div>
-        <Blockquote
-          coordinator={{ name: "Debra Fiscal", role: "CEO of Unseal" }}
-          className="mt-12"
-        >
-          Studio_clone were so regular with their progress updates we almost
-          began to think they were automated!
-        </Blockquote>
       </StepsSection>
       <StepsSection
         title={data.title3 ?? "Define tu proposito"}
@@ -130,7 +99,7 @@ export const NextSteps = ({ data }: { data: PageBlocksNextsteps }) => {
             retainer.
           </p>
         </div>
-        <h3 className="mt-12 font-display text-base font-nunito font-medium text-primary">
+        <h3 className="mt-12  text-base font-nunito font-medium text-primary">
           Included in this phase
         </h3>
         <List>
@@ -150,7 +119,7 @@ export const NextSteps = ({ data }: { data: PageBlocksNextsteps }) => {
         </List>
       </StepsSection>
       <StepsSection
-        title={data.title4 ?? "Transforme su Vida"}
+        title={data.title4 ?? "Transforma tu Vida"}
         image={{ src: "/whiteboard.jpg", shape: 2 }}
         data-tina-field={tinaField(data, "title4")}
       >
@@ -185,7 +154,7 @@ export const NextSteps = ({ data }: { data: PageBlocksNextsteps }) => {
                 </p>
                 */}
         </div>
-        <h3 className="mt-12 font-display text-base font-nunito font-medium text-primary">
+        <h3 className="mt-12  text-base font-nunito font-medium text-primary">
           Included in this phase
         </h3>
         <List>

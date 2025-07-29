@@ -19,7 +19,7 @@ function EventCard({
   imageUrl,
 }: EventCardProps) {
   return (
-    <div className="col-span-2 sm:col-span-4 lg:col-span-4 3xl:col-span-4">
+    <div className="col-span-2 md:col-span-4 lg:col-span-4 3xl:col-span-4">
       <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
         {imageUrl && (
           <div className="h-48 bg-gray-200 overflow-hidden">
@@ -31,7 +31,7 @@ function EventCard({
           </div>
         )}
         <div className="p-6">
-          <h3 className="font-playfair font-bold text-xl text-gray-900 mb-3">
+          <h3 className="font-nunito font-bold text-xl text-gray-900 mb-3">
             {title}
           </h3>
           <div className="space-y-2 mb-4">
@@ -60,7 +60,7 @@ function EventCard({
   );
 }
 
-export default function LatestEvents() {
+export default function LatestPlaceholderEvents() {
   const events = [
     {
       title: "Blood Drive - Community Center",
@@ -93,7 +93,7 @@ export default function LatestEvents() {
 
   return (
   <section className="mx-auto px-6">
-      <div className="grid grid-cols-2 sm:grid-cols-12 lg:grid-cols-12 3xl:grid-cols-12 gap-3.75">
+      <div className="grid grid-cols-2 md:grid-cols-12 gap-3.75 mx-6">
         {events.map((event, index) => (
           <EventCard
             key={index}

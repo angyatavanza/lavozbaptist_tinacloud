@@ -14,7 +14,7 @@ export const Listcontent  = ({ data }: { data: PageBlocksListcontent }) => {
       <SectionIntro
         eyebrow="Grupos"
         title="Fuimos creados para estar en comunidad unos con otros."
-        className="mt-24 sm:mt-32 lg:mt-40"
+        className="mt-20 md:mt-28"
       >
         <p>
           Nunca es el plan de Dios que nos sintamos aislados y solos.

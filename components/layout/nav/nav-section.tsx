@@ -15,7 +15,7 @@ export const createNavigation = (latestMessageUrl?: string): NavigationSection[]
     title: "Quiénes Somos",
     links: [
       { title: "Sobre Nosotros", href: "/about" },
-      { title: "Propósito, Estrategia y Valores", href: "/purpose" },
+      { title: "Propósito, Misión y valores", href: "/purpose" },
       { title: "Nuestro Pastor", href: "/our-pastor" },
       { title: "Nuestro Equipo", href: "/staff" },
     ],

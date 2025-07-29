@@ -5,10 +5,11 @@ import Link from "next/link";
 import type { Template } from "tinacms";
 import { Container } from "@/components/layout/container";
 import { StatList, StatListItem } from "@/components/ui/stat-list";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { tinaField } from "tinacms/dist/react";
+import { TinaMarkdown } from "tinacms/dist/rich-text";
 import {
-  PageBlocksAboutsection,
-  PageBlocksAboutsectionImage,
+  PageBlocksAboutsectionsinfo, PageBlocksAboutsectionsinfoItems
 } from "@/tina/__generated__/types";
 import { Button } from "@/components/ui/button";
 import { PageIntro } from "@/components/layout/page-intro";
@@ -22,221 +23,136 @@ import { Transition } from 'motion/react';
 //to-do 22: change image to be to the left of the div FRONTEND
 //to-do 25: update the ui of the aboutsection block component in the /about page FRONTEND
 
-const transitionVariants = {
-  container: {
-    visible: {
-      transition: {
-        staggerChildren: 0.05,
-        delayChildren: 0.75,
-      },
-    },
-  },
-  item: {
-    hidden: {
-      opacity: 0,
-      filter: 'blur(12px)',
-      y: 12,
-    },
-    visible: {
-      opacity: 1,
-      filter: 'blur(0px)',
-      y: 0,
-      transition: {
-        type: 'spring',
-        bounce: 0.3,
-        duration: 1.5,
-      } as Transition,
-    },
-  },
-};
-
-export const Aboutsection = ({ data }: { data: PageBlocksAboutsection }) => {
-  // Extract the background style logic into a more readable format
-  let gradientStyle: React.CSSProperties | undefined = undefined;
-  if (data.background) {
-    const colorName = data.background
-      .replace(/\/\d{1,2}$/, "")
-      .split("-")
-      .slice(1)
-      .join("-");
-    const opacity = data.background.match(/\/(\d{1,3})$/)?.[1] || "100";
-
-    gradientStyle = {
-      "--tw-gradient-to": `color-mix(in oklab, var(--color-${colorName}) ${opacity}%, transparent)`,
-    } as React.CSSProperties;
-  }
-
+export const Aboutsectionsinfo = ({ data }: { data: PageBlocksAboutsectionsinfo }) => {
   return (
     <Section background={data.background!}>
-      <PageIntro
-        eyebrow={
-          data.tagline && (
-            <div data-tina-field={tinaField(data, "tagline")}>
-              <TextEffect
-                per="line"
-                preset="fade-in-blur"
-                speedSegment={0.3}
-                delay={0.5}
-                as="p"
-                className="font-nunito font-bold mx-auto mt-8 max-w-2xl text-balance text-lg"
-              >
-                {data.tagline!}
-              </TextEffect>
-            </div>
-          )
-        }
-        title={
-          data.headline && (
-            <div data-tina-field={tinaField(data, "headline")}>
-              <TextEffect
-                preset="fade-in-blur"
-                speedSegment={0.3}
-                as="h1"
-                className="font-nunito font-medium mt-8 text-balance text-6xl md:text-7xl xl:text-[5.25rem]"
-              >
-                {data.headline!}
-              </TextEffect>
-            </div>
-          )
-        }
-      >
-        <p></p>
-        <div className="mt-10 max-w-2xl space-y-6 text-base">
-          {data.description && (
-            <div data-tina-field={tinaField(data, "description")}>
-              <TextEffect
-                per="line"
-                preset="fade-in-blur"
-                speedSegment={0.3}
-                delay={0.5}
-                as="p"
-                className="mx-auto mt-8 max-w-2xl text-balance text-lg"
-              >
-                {data.description!}
-              </TextEffect>
-            </div>
-          )}
-          <p></p>
-        </div>
-      </PageIntro>
-      <Container className="mt-16">
-        <StatList>
-          <StatListItem value="→" label="Nuestro Propósito, Visión y Valores" />
-          <StatListItem value="→" label="Nuestro Equipo" />
-          <StatListItem value="→" label="Nuestro Pastor" />
-        </StatList>
-      </Container>
-      <div className="text-center sm:mx-auto lg:mr-auto lg:mt-0">
-        <AnimatedGroup
-          variants={transitionVariants}
-          className="mt-12 flex flex-col items-center justify-center gap-2 md:flex-row"
-        >
-          {data.actions &&
-            data.actions.map((action) => (
-              <div
-                key={action!.label}
-                data-tina-field={tinaField(action)}
-                className="bg-foreground/10 rounded-[calc(var(--radius-xl)+0.125rem)] border p-0.5"
-              >
-                <Button
-                  asChild
-                  size="lg"
-                  variant={action!.type === "link" ? "ghost" : "default"}
-                  className="rounded-xl px-5 text-base"
-                >
-                  <Link href={action!.link!}>
-                    <span className="text-nowrap">{action!.label}</span>
-                  </Link>
-                </Button>
-              </div>
-            ))}
-        </AnimatedGroup>
-      </div>
-
-      {data.image && (
-        <AnimatedGroup variants={transitionVariants}>
-          <div
-            className="relative -mr-56 mt-8 overflow-hidden px-2 sm:mr-0 sm:mt-12 md:mt-20 max-w-full"
-            data-tina-field={tinaField(data, "image")}
+      <div className="flex w-full max-w-7xl mx-auto px-6 md:px-12 lg:px-32 py-12 lg:py-20 flex-col items-start gap-12 lg:gap-16">
+        {/* Header Section */}
+        <div className="flex w-full max-w-md flex-col items-start gap-1">
+          <h2
+            data-tina-field={tinaField(data, "title")}
+            className="text-slate-900 font-nunito text-3xl lg:text-5xl font-bold leading-normal"
           >
-            <div
-              aria-hidden
-              className="bg-linear-to-b absolute inset-0 z-10 from-transparent from-35% pointer-events-none"
-              style={gradientStyle}
-            />
-            <div className="inset-shadow-2xs ring-background dark:inset-shadow-white/20 bg-background relative mx-auto max-w-6xl overflow-hidden rounded-2xl border p-4 shadow-lg shadow-zinc-950/15 ring-1">
-              <ImageBlock image={data.image} />
-            </div>
+            {data.title}
+          </h2>
+          <div
+            data-tina-field={tinaField(data, "description")}
+            className="text-primary font-roboto text-xl lg:text-2xl font-semibold leading-normal"
+          >
+            {data.description}
           </div>
-        </AnimatedGroup>
-      )}
+        </div>
+
+        {/* 12 Column Grid 3 Cards 4 Columns */}
+        <div className="w-full px-4 md:px-8 lg:px-[120px]">
+            <div className="grid grid-cols-2 md:grid-cols-12 gap-3.75 mx-6 w-full">
+              {data.items &&
+                data.items.map(function (block, i) {
+                  return <Aboutsection key={i} {...block!} />;
+                })}
+            </div>
+        </div>
+      </div>
     </Section>
   );
 };
 
-const ImageBlock = ({ image }: { image: PageBlocksAboutsectionImage }) => {
-  if (image.videoUrl) {
-    let videoId = "";
-    if (image.videoUrl) {
-      const embedPrefix = "/embed/";
-      const idx = image.videoUrl.indexOf(embedPrefix);
-      if (idx !== -1) {
-        videoId = image.videoUrl
-          .substring(idx + embedPrefix.length)
-          .split("?")[0];
-      }
-    }
-    const thumbnailSrc = image.src
-      ? image.src!
-      : videoId
-      ? `https://i3.ytimg.com/vi/${videoId}/maxresdefault.jpg`
-      : "";
+export const Aboutsection: React.FC<PageBlocksAboutsectionsinfoItems> = (data) => {
+  return (
+    <Card className="col-span-2 md:col-span-4 flex items-center gap-4 p-5 border-[#D9DADB] bg-white">
+      {/* Image Container with hover buttons */}
+      <CardHeader className="relative w-full h-64 lg:h-80 bg-pink-200 p-0 overflow-hidden group">
+        {data.cover && (
+          <>
+            <Image
+              data-tina-field={tinaField(data, "cover")}
+              src={data.cover}
+              alt={data.title || ""}
+              fill
+              className="object-cover object-center"
+            />
+            {/* Separate overlay that appears on hover */}
+            <div className="absolute inset-0 opacity-0 group-hover:opacity-50 group-hover:bg-accent transition-opacity duration-300 pointer-events-none" />
+          </>
+        )}
 
-    return (
-      <HeroVideoDialog
-        videoSrc={image.videoUrl}
-        thumbnailSrc={thumbnailSrc}
-        thumbnailAlt="Aboutsection Video"
-      />
-    );
-  }
+        {/* Hover overlay with buttons */}
+        {data.actions && data.actions.length > 0 && (
+          <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <div className="flex flex-col gap-2 px-4">
+              {data.actions &&
+                data.actions.map((action) => (
+                  <div
+                    key={action!.label}
+                    data-tina-field={tinaField(action)}
+                    className="bg-foreground/10 rounded-[calc(var(--radius-xl)+0.125rem)] border p-0.5"
+                  >
+                    <Button
+                      asChild
+                      size="lg"
+                      variant={action!.type === "link" ? "ghost" : "default"}
+                      className="rounded-xl px-5 text-base"
+                    >
+                      <Link href={action!.link!}>
+                        <span className="text-nowrap">{action!.label}</span>
+                      </Link>
+                    </Button>
+                  </div>
+                ))}
+            </div>
+          </div>
+        )}
+      </CardHeader>
 
-  if (image.src) {
-    return (
-      <Image
-        className="z-2 border-border/25 aspect-15/8 relative rounded-2xl border max-w-full h-auto"
-        alt={image!.alt || ""}
-        src={image!.src!}
-        height={4000}
-        width={3000}
-      />
-    );
-  }
+      {/* Text Overlay - Show for all cards */}
+      <CardContent className="flex px-4 py-3 items-center bg-card relative w-full z-20 -mt-10">
+        <div className="flex w-full flex-col items-start gap-1">
+          <h2
+            data-tina-field={tinaField(data, "title")}
+            className="text-slate-50 font-nunito text-lg lg:text-2xl font-semibold leading-normal"
+          >
+            {data.title}
+          </h2>
+          <div className="text-gray-300 font-roboto text-base lg:text-xl font-medium leading-normal">
+            <TinaMarkdown
+              data-tina-field={tinaField(data, "text")}
+              content={data.text}
+            />
+          </div>
+        </div>
+      </CardContent>
+    </Card>
+  );
 };
 
-export const aboutsectionBlockSchema: Template = {
-  name: "aboutsection",
-  label: "Aboutsection",
+const defaultAboutsectioninfo = {
+  title: "Aquí hay otro grupo",
+  text: "Aquí puedes proveer más información sobre un grupo.",
+  icon: {
+    color: "",
+    style: "float",
+    name: "",
+  },
+};
+
+export const aboutsectioninfoBlockSchema: Template = {
+  name: "aboutsectionsinfo",
+  label: "Aboutsectionsinfo",
   ui: {
-    previewSrc: "/blocks/aboutsection.png",
+    previewSrc: "/blocks/aboutsectionsinfo.png",
     defaultItem: {
-      tagline: "HERE'S SOME TEXT ABOVE THE OTHER TEXT",
-      headline: "This Big Text is Totally Awesome",
-      description: "This Desc is Totally Awesome",
-      text: "Phasellus scelerisque, libero eu finibus rutrum, risus risus accumsan libero, nec molestie urna dui a leo.",
+      title: "Grupos",
+      description:
+        "En La Iglesia La Voz, hay algo para todos. Ofrecemos los siguientes Ministerios: Varones, Mujeres, Jovenes, y Niños",
+      items: [defaultAboutsectioninfo, defaultAboutsectioninfo, defaultAboutsectioninfo],
     },
   },
   fields: [
     sectionBlockSchemaField as any,
     {
       type: "string",
-      label: "Headline",
-      name: "headline",
-    },
-    {
-      type: "string",
-      label: "Tagline",
-      name: "tagline",
+      label: "Title",
+      name: "title",
     },
     {
       type: "string",
@@ -244,61 +160,71 @@ export const aboutsectionBlockSchema: Template = {
       name: "description",
     },
     {
-      label: "Actions",
-      name: "actions",
       type: "object",
+      label: "Aboutsection Items",
+      name: "items",
       list: true,
       ui: {
-        defaultItem: {
-          label: "Action Label",
-          type: "button",
-          link: "/",
+        itemProps: (item) => {
+          return {
+            label: item?.title,
+          };
         },
-        itemProps: (item) => ({ label: item.label }),
+        defaultItem: {
+          ...defaultAboutsectioninfo,
+        },
       },
       fields: [
+        //iconSchema as any,
         {
-          label: "Label",
-          name: "label",
-          type: "string",
-        },
-        {
-          label: "Type",
-          name: "type",
-          type: "string",
-          options: [
-            { label: "Button", value: "button" },
-            { label: "Link", value: "link" },
-          ],
-        },
-        {
-          label: "Link",
-          name: "link",
-          type: "string",
-        },
-      ],
-    },
-    {
-      type: "object",
-      label: "Image",
-      name: "image",
-      fields: [
-        {
-          name: "src",
-          label: "Image Source",
           type: "image",
+          label: "CoverImg",
+          name: "cover",
         },
         {
-          name: "alt",
-          label: "Alt Text",
           type: "string",
+          label: "Title",
+          name: "title",
         },
         {
-          name: "videoUrl",
-          label: "Video URL",
-          type: "string",
-          description:
-            "If using a YouTube video, make sure to use the embed version of the video URL",
+          type: "rich-text",
+          label: "Text",
+          name: "text",
+        },
+        {
+          label: "Actions",
+          name: "actions",
+          type: "object",
+          list: true,
+          ui: {
+            defaultItem: {
+              label: "Action Label",
+              type: "button",
+              link: "/",
+            },
+            itemProps: (item) => ({ label: item.label }),
+          },
+          fields: [
+            {
+              label: "Label",
+              name: "label",
+              type: "string",
+            },
+            {
+              label: "Type",
+              name: "type",
+              type: "string",
+              options: [
+                { label: "Button", value: "button" },
+                { label: "Link", value: "link" },
+              ],
+            },
+            {
+              label: "Link",
+              name: "link",
+              type: "string",
+            },
+          ],
         },
       ],
     },

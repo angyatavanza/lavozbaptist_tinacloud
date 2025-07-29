@@ -19,26 +19,25 @@ export const Footer = () => {
   return (
     <Container
       as="footer"
-      className="mt-24 w-full sm:mt-32 lg:mt-40 py-12"
+      className="mt-24 w-full md:mt-32 lg:mt-40 py-12"
     >
       <FadeIn>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 sm:grid-cols-12 lg:grid-cols-12 3xl:grid-cols-12 px-6 gap-x-4 gap-y-16">
-            <div className="col-span-2 sm:col-span-4 lg:col-span-4 3xl:col-span-4">
+        <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
+          <div className="grid grid-cols-2 md:grid-cols-12 px-6 gap-x-3.75 gap-y-16">
+            <div className="col-span-2 md:col-span-4 lg:col-span-4 3xl:col-span-4">
               <div className="flex items-center space-x-2 mb-4">
-                <div className="w-8 h-8 bg-red-600 rounded-full flex items-center justify-center">
+                <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
                   <Logo className="w-5 h-5 text-white fill-current" />
                 </div>
-                <span className="font-playfair font-bold text-lg">
-                  Red Cross
+                <span className="font-roboto font-bold text-lg">
+                  La Voz
                 </span>
               </div>
               <p className="text-gray-400">
-                Preventing and alleviating human suffering wherever it may be
-                found.
+                Mision
               </p>
             </div>
-             <div className="col-span-2 sm:col-span-8 lg:col-span-8 3xl:col-span-8">
+             <div className="col-span-2 md:col-span-8 lg:col-span-8 3xl:col-span-8">
               <FooterNavigation />
              </div>
           </div>

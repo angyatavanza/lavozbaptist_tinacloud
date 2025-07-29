@@ -64,7 +64,7 @@ export const ServeForm: React.FC<ServeFormProps> = ({
   return (
     <FadeIn>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <h2 className="font-display text-base font-nunito font-medium text-primary">
+        <h2 className=" text-base font-nunito font-medium text-primary">
           Tiene preguntas? Contáctenos un mensaje:
         </h2>
 
@@ -119,14 +119,15 @@ export const ServeForm: React.FC<ServeFormProps> = ({
                 Mi edad:
               </legend>
             </fieldset>
-            <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-8">
+            <div className="mt-6 grid grid-cols-2 md:grid-cols-12 gap-3.75">
               {["13 - 28", "29 - 44", "45 - 60", "61 - 70"].map((value) => (
-                <RadioInput
-                  key={value}
-                  label={`${value}`}
-                  value={value}
-                  {...register("age", { required: true })}
-                />
+                <div key={value} className="col-span-1 md:col-span-6">
+                  <RadioInput
+                    label={`${value}`}
+                    value={value}
+                    {...register("age", { required: true })}
+                  />
+                </div>
               ))}
             </div>
             {errors.age && (
@@ -141,7 +142,7 @@ export const ServeForm: React.FC<ServeFormProps> = ({
                 ¿Qué área le interesa servir?
               </legend>
             </fieldset>
-            <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-8">
+            <div className="mt-6 grid grid-cols-2 md:grid-cols-12 gap-3.75">
               {[
                 "Compañerismo",
                 "Comunitario",
@@ -151,12 +152,13 @@ export const ServeForm: React.FC<ServeFormProps> = ({
                 "Bienvenida",
                 "Transportación",
               ].map((value) => (
-                <RadioInput
-                  key={value}
-                  label={`${value}`}
-                  value={value}
-                  {...register("subject", { required: true })}
-                />
+                <div key={value} className="col-span-1 md:col-span-6">
+                  <RadioInput
+                    label={`${value}`}
+                    value={value}
+                    {...register("subject", { required: true })}
+                  />
+                </div>
               ))}
             </div>
             {errors.subject && (

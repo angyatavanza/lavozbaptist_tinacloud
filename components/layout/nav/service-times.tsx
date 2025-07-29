@@ -34,14 +34,14 @@ export const ServiceTimes = ({
 }: ServiceTimesProps): ReactElement => {
   return (
     <ul role="list" {...props}>
-      <li>
+      <li className="col-span-1 md:col-span-6">
         <ServiceTime name="¿Dónde estamos?" invert={invert}>
           7122 Robinson Church Rd
           <br />
           Charlotte, NC 28215
         </ServiceTime>
       </li>
-      <li>
+      <li className="col-span-1 md:col-span-6">
         <ServiceTime name="¿Cuándo nos reunimos?" invert={invert}>
           Domingos a las 11:00 AM
           <br />

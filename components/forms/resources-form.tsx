@@ -75,7 +75,7 @@ export const ResourcesForm: React.FC<ResourcesFormProps> = ({
   return (
     <FadeIn>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <h2 className="font-display text-base font-nunito font-medium text-primary">
+        <h2 className=" text-base font-nunito font-medium text-primary">
           Para poder apoyarte mejor, nos gustaría saber más sobre tu situación:
         </h2>
 
@@ -152,15 +152,16 @@ export const ResourcesForm: React.FC<ResourcesFormProps> = ({
             <fieldset>
               <legend className="text-base/6 text-neutral-500">¿De qué manera podemos asistirte?</legend>
             </fieldset>
-            <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-8">
+            <div className="mt-6 grid grid-cols-2 md:grid-cols-12 gap-3.75">
               
               {["Productos para el Cuidado Infantil", "Servicios y Apoyos Locales", "Otros Artículos de Primera Necesidad"].map((value) => (
-                <RadioInput
-                  key={value}
-                  label={`${value}`}
-                  value={value}
-                  {...register("subject", { required: true })}
-                />
+                <div key={value} className="col-span-1 md:col-span-6">
+                  <RadioInput
+                    label={`${value}`}
+                    value={value}
+                    {...register("subject", { required: true })}
+                  />
+                </div>
               ))}
             </div>
             {errors.subject && <span className="text-red-500 text-sm mt-2">Selecciona un asunto</span>}

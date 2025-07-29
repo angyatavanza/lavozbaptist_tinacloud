@@ -61,7 +61,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({
   return (
     <FadeIn>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <h2 className="font-display text-base font-nunito font-medium text-primary">
+        <h2 className=" text-base font-nunito font-medium text-primary">
           Tiene preguntas? Contáctenos un mensaje:
         </h2>
 
@@ -112,14 +112,15 @@ export const ContactForm: React.FC<ContactFormProps> = ({
             <fieldset>
               <legend className="text-base/6 text-neutral-500">Me Gustaría:</legend>
             </fieldset>
-            <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-8">
+            <div className="mt-6 grid grid-cols-2 md:grid-cols-12 gap-3.75">
               {["Hacer una petición de oración", "Unirme a un grupo", "Ser bautizado", "Discutir otro Tema"].map((value) => (
-                <RadioInput
-                  key={value}
-                  label={`${value}`}
-                  value={value}
-                  {...register("subject", { required: true })}
-                />
+                <div key={value} className="col-span-1 md:col-span-6">
+                  <RadioInput
+                    label={`${value}`}
+                    value={value}
+                    {...register("subject", { required: true })}
+                  />
+                </div>
               ))}
             </div>
             {errors.subject && <span className="text-red-500 text-sm mt-2">Selecciona un asunto</span>}

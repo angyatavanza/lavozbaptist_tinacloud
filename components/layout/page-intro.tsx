@@ -18,17 +18,17 @@ export const PageIntro = ({
 }:PageIntroProps) => {
   return (
     <Container
-      className={clsx("mt-24 sm:mt-32 lg:mt-40", centered && "text-center")}
+      className={clsx("mt-20 md:mt-28", centered && "text-center")}
     >
        <FadeIn>
         <h1>
-          <span className="block font-nunito font-display text-base font-medium text-primary">
+          <span className="block font-nunito text-base font-semibold text-primary">
             {eyebrow}
           </span>
           <span className="sr-only"> - </span>
           <span
             className={clsx(
-              "mt-6 block max-w-5xl font-display text-5xl font-medium tracking-tight text-primary [text-wrap:balance] sm:text-6xl",
+              "font-nunito mt-6 block max-w-5xl tracking-tight text-4xl font-medium text-primary [text-wrap:balance] md:text-5xl",
               centered && "mx-auto"
             )}
           >

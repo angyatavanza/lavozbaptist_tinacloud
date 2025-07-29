@@ -13,7 +13,7 @@ import { GridList, GridListItem } from "@/components/ui/grid-list";
 
 export const Vision = ({ data }: { data: PageBlocksVision }) => {
   return (
-    <div className="relative mt-24 pt-24 sm:mt-32 sm:pt-32 lg:mt-40 lg:pt-40">
+    <div className="relative mt-24 pt-24 md:mt-32 md:pt-32 lg:mt-40 lg:pt-40">
       <div className="absolute inset-x-0 top-0 -z-10 h-[884px] overflow-hidden rounded-t-4xl bg-gradient-to-b from-neutral-50">
         <GridPattern
           className="absolute inset-0 h-full w-full fill-neutral-100 stroke-primary/5 [mask-image:linear-gradient(to_bottom_left,white_40%,transparent_50%)]"
@@ -58,7 +58,7 @@ export const Vision = ({ data }: { data: PageBlocksVision }) => {
             centro de cuidado para niños.
           </GridListItem>
         </GridList>
-        <div className="mt-12 flex flex-wrap justify-center gap-4">
+        <div className="mt-6 flex flex-wrap justify-center gap-4">
           {data.actions &&
             data.actions.map((action) => (
               <div

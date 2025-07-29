@@ -21,7 +21,7 @@ export const Features = ({ data }: { data: PageBlocksFeatures }) => {
           <h2 data-tina-field={tinaField(data, 'title')} className="text-balance text-4xl font-nunito font-medium lg:text-5xl">{data.title}</h2>
           <p data-tina-field={tinaField(data, 'description')} className="mt-4">{data.description}</p>
         </div>
-        <Card className="mx-auto mt-8 grid grid-cols-2 sm:grid-cols-12 lg:grid-cols-12 3xl:grid-cols-12 gap-3.75 overflow-hidden shadow-zinc-950/5 md:mt-16">
+        <Card className="mx-auto mt-8 grid grid-cols-2 md:grid-cols-12 gap-3.75 mx-6 overflow-hidden shadow-zinc-950/5 md:mt-16">
           {data.items &&
             data.items.map(function (block, i) {
               return <Feature key={i} {...block!} />;
@@ -42,7 +42,7 @@ const CardDecorator = ({ children }: { children: React.ReactNode }) => (
 
 export const Feature: React.FC<PageBlocksFeaturesItems> = (data) => {
   return (
-    <div className="group col-span-2 sm:col-span-4 lg:col-span-4 3xl:col-span-4 shadow-zinc-950/5 text-center5">
+    <div className="group col-span-2 md:col-span-4 lg:col-span-4 3xl:col-span-4 shadow-zinc-950/5 text-center5">
       <CardHeader className="pb-3">
         <CardDecorator>
           {data.icon && (

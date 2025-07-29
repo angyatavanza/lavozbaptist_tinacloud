@@ -1,169 +1,121 @@
 "use client";
 import {
-  PageBlocksGroups,
-  PageBlocksGroupsItems,
-} from "../../tina/__generated__/types";
+  PageBlocksGroupsinfo,
+  PageBlocksGroupsinfoItems,
+} from "@/tina/__generated__/types";
 import type { Template } from "tinacms";
 import { tinaField } from "tinacms/dist/react";
 import { TinaMarkdown } from "tinacms/dist/rich-text";
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
-import { Card, CardContent, CardHeader } from "../ui/card";
-import { Section } from "../layout/section";
-import { TinaIcon } from "../icon";
-import { Button } from "../ui/button";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Section } from "@/components/layout/section";
+import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { iconSchema } from "@/tina/fields/icon";
-import { AnimatedGroup } from "../motion-primitives/animated-group";
-import { sectionBlockSchemaField } from "../layout/section";
-import { Transition } from 'motion/react';
+import Image from "next/image";
+import { sectionBlockSchemaField } from "@/components/layout/section";
+//done 13: add buttons to each card in groupsinfo component
+//to-do 18: change layout of group items cards in landing-groupsinfo component FRONTEND
 
-//done 13: add buttons to each card in groups component
-//to-do 14: change layout of each group card: Image with overlay text of the group name
-//to-do 18: change layout of group items cards in landing-groups page DESIGN/FRONTEND 
-//to-do 19: change layout of latest message card in homepage
-
-const transitionVariants = {
-  container: {
-    visible: {
-      transition: {
-        staggerChildren: 0.05,
-        delayChildren: 0.75,
-      },
-    },
-  },
-  item: {
-    hidden: {
-      opacity: 0,
-      filter: 'blur(12px)',
-      y: 12,
-    },
-    visible: {
-      opacity: 1,
-      filter: 'blur(0px)',
-      y: 0,
-      transition: {
-        type: 'spring',
-        bounce: 0.3,
-        duration: 1.5,
-      } as Transition,
-    },
-  },
-};
-
-export const Groups = ({ data }: { data: PageBlocksGroups }) => {
+export const Groupsinfo = ({ data }: { data: PageBlocksGroupsinfo }) => {
   return (
     <Section background={data.background!}>
-      <div className="@container mx-auto max-w-5xl px-6">
-        <div className="text-center">
+      <div className="flex w-full max-w-7xl mx-auto px-6 md:px-12 lg:px-32 py-12 lg:py-20 flex-col items-start gap-12 lg:gap-16">
+        {/* Header Section */}
+        <div className="flex w-full max-w-md flex-col items-start gap-1">
           <h2
             data-tina-field={tinaField(data, "title")}
-            className="text-balance text-4xl font-semibold lg:text-5xl"
+            className="text-slate-900 font-nunito text-3xl lg:text-5xl font-bold leading-normal"
           >
             {data.title}
           </h2>
-          <p data-tina-field={tinaField(data, "description")} className="mt-4">
+          <div
+            data-tina-field={tinaField(data, "description")}
+            className="text-primary font-roboto text-xl lg:text-2xl font-semibold leading-normal"
+          >
             {data.description}
-          </p>
+          </div>
         </div>
-        <Card className="@min-4xl:max-w-full @min-4xl:grid-cols-3 @min-4xl:divide-x @min-4xl:divide-y-0 mx-auto mt-8 grid max-w-sm divide-y overflow-hidden shadow-zinc-950/5 *:text-center md:mt-16">
+
+        {/* Team Cards Grid */}
+        <div className="grid grid-cols-2 md:grid-cols-12 gap-3.75 mx-6 w-full">
           {data.items &&
             data.items.map(function (block, i) {
               return <Group key={i} {...block!} />;
             })}
-        </Card>
+        </div>
       </div>
     </Section>
   );
 };
 
-const CardDecorator = ({ children }: { children: React.ReactNode }) => (
-  <div className="relative mx-auto size-36 duration-200 [--color-border:color-mix(in_oklab,var(--color-zinc-950)10%,transparent)] group-hover:[--color-border:color-mix(in_oklab,var(--color-zinc-950)20%,transparent)] dark:[--color-border:color-mix(in_oklab,var(--color-white)15%,transparent)] dark:group-hover:bg-white/5 dark:group-hover:[--color-border:color-mix(in_oklab,var(--color-white)20%,transparent)]">
-    <div
-      aria-hidden
-      className="absolute inset-0 bg-[linear-gradient(to_right,var(--color-border)_1px,transparent_1px),linear-gradient(to_bottom,var(--color-border)_1px,transparent_1px)] bg-[size:24px_24px]"
-    />
-    <div
-      aria-hidden
-      className="bg-radial to-background absolute inset-0 from-transparent to-75%"
-    />
-    <div className="bg-background absolute inset-0 m-auto flex size-12 items-center justify-center border-l border-t">
-      {children}
-    </div>
-  </div>
-);
-
-export const Group: React.FC<PageBlocksGroupsItems> = (data) => {
+export const Group: React.FC<PageBlocksGroupsinfoItems> = (data) => {
   return (
-    <div className="group shadow-zinc-950/5">
-      <CardHeader className="pb-3">
-        <CardDecorator>
-          {data.cover && (
-            <Avatar
-              className="size-9"
+    <Card className="col-span-1 md:col-span-3 flex w-full max-w-sm flex-col items-center relative overflow-hidden shadow-none border-0 bg-transparent group">
+      {/* Image Container with hover buttons */}
+      <CardHeader className="relative w-full h-64 lg:h-80 bg-pink-200 p-0 overflow-hidden group">
+        {data.cover && (
+          <>
+            <Image
               data-tina-field={tinaField(data, "cover")}
-            >
-              {data.cover && (
-                <AvatarImage
-                  alt={data.title!}
-                  src={data.cover}
-                  loading="lazy"
-                  width="120"
-                  height="120"
-                />
-              )}
-              <AvatarFallback>
-                {data
-                  .title!.split(" ")
-                  .map((word) => word[0])
-                  .join("")}
-              </AvatarFallback>
-            </Avatar>
-          )}
-          <AnimatedGroup
-            variants={transitionVariants}
-            className="mt-12 flex flex-col items-center justify-center gap-2 md:flex-row"
-          >
-            {data.actions &&
-              data.actions.map((action) => (
-                <div
-                  key={action!.label}
-                  data-tina-field={tinaField(action)}
-                  className="bg-foreground/10 rounded-[calc(var(--radius-xl)+0.125rem)] border p-0.5"
-                >
-                  <Button
-                    asChild
-                    size="lg"
-                    variant={action!.type === "link" ? "ghost" : "default"}
-                    className="rounded-xl px-5 text-base"
-                  >
-                    <Link href={action!.link!}>
-                      <span className="text-nowrap">{action!.label}</span>
-                    </Link>
-                  </Button>
-                </div>
-              ))}
-          </AnimatedGroup>
-        </CardDecorator>
+              src={data.cover}
+              alt={data.title || ""}
+              fill
+              className="object-cover object-center"
+            />
+            {/* Separate overlay that appears on hover */}
+            <div className="absolute inset-0 opacity-0 group-hover:opacity-50 group-hover:bg-accent transition-opacity duration-300 pointer-events-none" />
+          </>
+        )}
 
-        <h3
-          data-tina-field={tinaField(data, "title")}
-          className="mt-6 font-medium"
-        >
-          {data.title}
-        </h3>
+        {/* Hover overlay with buttons */}
+        {data.actions && data.actions.length > 0 && (
+          <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <div className="flex flex-col gap-2 px-4">
+              {data.actions &&
+                data.actions.map((action) => (
+                  <div
+                    key={action!.label}
+                    data-tina-field={tinaField(action)}
+                    className="bg-foreground/10 rounded-[calc(var(--radius-xl)+0.125rem)] border p-0.5"
+                  >
+                    <Button
+                      asChild
+                      size="lg"
+                      variant={action!.type === "link" ? "ghost" : "default"}
+                      className="rounded-xl px-5 text-base"
+                    >
+                      <Link href={action!.link!}>
+                        <span className="text-nowrap">{action!.label}</span>
+                      </Link>
+                    </Button>
+                  </div>
+                ))}
+            </div>
+          </div>
+        )}
       </CardHeader>
 
-      <CardContent className="text-sm pb-8">
-        <TinaMarkdown
-          data-tina-field={tinaField(data, "text")}
-          content={data.text}
-        />
+      {/* Text Overlay - Show for all cards */}
+      <CardContent className="flex px-4 py-3 items-center bg-card relative w-full z-20 -mt-10">
+        <div className="flex w-full flex-col items-start gap-1">
+          <h2
+            data-tina-field={tinaField(data, "title")}
+            className="text-slate-50 font-nunito text-lg lg:text-2xl font-semibold leading-normal"
+          >
+            {data.title}
+          </h2>
+          <div className="text-gray-300 font-roboto text-base lg:text-xl font-medium leading-normal">
+            <TinaMarkdown
+              data-tina-field={tinaField(data, "text")}
+              content={data.text}
+            />
+          </div>
+        </div>
       </CardContent>
-    </div>
+    </Card>
   );
 };
 
-const defaultGroup = {
+const defaultGroupinfo = {
   title: "Aquí hay otro grupo",
   text: "Aquí puedes proveer más información sobre un grupo.",
   icon: {
@@ -173,16 +125,16 @@ const defaultGroup = {
   },
 };
 
-export const groupBlockSchema: Template = {
-  name: "groups",
-  label: "Groups",
+export const groupinfoBlockSchema: Template = {
+  name: "groupsinfo",
+  label: "Groupsinfo",
   ui: {
-    previewSrc: "/blocks/groups.png",
+    previewSrc: "/blocks/groupsinfo.png",
     defaultItem: {
       title: "Grupos",
       description:
         "En La Iglesia La Voz, hay algo para todos. Ofrecemos los siguientes Ministerios: Varones, Mujeres, Jovenes, y Niños",
-      items: [defaultGroup, defaultGroup, defaultGroup],
+      items: [defaultGroupinfo, defaultGroupinfo, defaultGroupinfo],
     },
   },
   fields: [
@@ -209,7 +161,7 @@ export const groupBlockSchema: Template = {
           };
         },
         defaultItem: {
-          ...defaultGroup,
+          ...defaultGroupinfo,
         },
       },
       fields: [

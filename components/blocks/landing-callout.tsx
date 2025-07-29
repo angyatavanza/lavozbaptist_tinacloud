@@ -38,12 +38,12 @@ const transitionVariants = {
 
 export const Callout = ({ data }: { data: PageBlocksCallout }) => {
     return (
-        <Section background={data.background!} className="py-6"  >
+        <Section background={data.background!} className="py-6 pt-9">
             <AnimatedGroup variants={transitionVariants}>
                 <Link
                     data-tina-field={tinaField(data, "url")}
                     href={data.url!}
-                    className="hover:bg-background dark:hover:border-t-border bg-muted group mx-auto flex w-fit items-center gap-3.75  rounded-full border p-1 pl-4 shadow-md shadow-zinc-950/5 transition-colors duration-300 dark:border-t-white/5 dark:shadow-zinc-950">
+                    className="hover:bg-background dark:hover:border-t-border bg-muted group mx-auto flex w-fit items-center gap-3.75 rounded-full border p-1 pl-4 shadow-md shadow-zinc-950/5 transition-colors duration-300 dark:border-t-white/5 dark:shadow-zinc-950">
                     <span data-tina-field={tinaField(data, "text")} className="text-foreground text-sm">{data.text}</span>
                     <span className="dark:border-background block h-4 w-0.5 border-l bg-white dark:bg-zinc-700"></span>
 

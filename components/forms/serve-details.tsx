@@ -7,23 +7,23 @@ import { SocialMedia } from "@/components/layout/nav/social-media";
 export const ServeDetails = () => {
   return (
     <FadeIn>
-      <h2 className="font-display text-base font-nunito font-medium text-primary">
+      <h2 className=" text-base font-nunito font-medium text-primary">
        Nuestra ubicación y horario de servicios
       </h2>
       <p className="mt-6 text-base text-neutral-600">
         Le invitamos a unirse a nuestros estudios bíblicos entre semana y al servicio general del Domingo.
       </p>
-      <ServiceTimes className="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-2" />
+              <ServiceTimes className="mt-10 grid grid-cols-2 gap-3.75 md:grid-cols-12" />
       <Border className="mt-16 pt-16">
-        <h2 className="font-display text-base font-nunito font-medium text-primary">
+        <h2 className=" text-base font-nunito font-medium text-primary">
           Ponte en Serve
         </h2>
-        <dl className="mt-6 grid grid-cols-1 gap-8 text-sm sm:grid-cols-2">
+        <dl className="mt-6 grid grid-cols-2 gap-3.75 text-sm md:grid-cols-12">
           {([
             ["Correo electrónico", "info@ministerioslavoz.com"],
             ["Teléfono", "(704) 537-7133"],
           ] as [string, string][]).map(([label, email]) => (
-            <div key={email}>
+            <div key={email} className="col-span-1 md:col-span-6">
               <dt className="font-medium text-primary">{label}</dt>
               <dd>
                 <Link
@@ -38,7 +38,7 @@ export const ServeDetails = () => {
         </dl>
       </Border>
       <Border className="mt-16 pt-16">
-        <h2 className="font-display text-base font-nunito font-medium text-primary">
+        <h2 className=" text-base font-nunito font-medium text-primary">
           Síguenos
         </h2>
         <SocialMedia className="mt-6" />

@@ -55,6 +55,7 @@ export const components: Components<{
     disclaimer?: TinaMarkdownContent;
   };
   video: PageBlocksVideo;
+  LaVoz: {};
 }> = {
   code_block: (props) => {
     if (!props) {
@@ -100,16 +101,20 @@ export const components: Components<{
    
     return (
       <>
-        <PageIntro eyebrow="Contact us" title="Let’s work together">
+        <PageIntro eyebrow="Contact us" title="Let's work together">
           <TinaMarkdown content={props.children} />
         </PageIntro>
-        <Container className="mt-24 sm:mt-32 lg:mt-40">
-          <div className="grid grid-cols-1 gap-x-8 gap-y-24 lg:grid-cols-2">
-            <FTVisitorDetails />
-            <FTVisitorForm
-            placeholder={props.placeholder} 
-            buttonText={props.buttonText} 
-            />
+        <Container className="mt-20 md:mt-28">
+          <div className="grid grid-cols-2 gap-x-3.75 gap-y-24 md:grid-cols-12">
+            <div className="col-span-2 md:col-span-6">
+              <FTVisitorDetails />
+            </div>
+            <div className="col-span-2 md:col-span-6">
+              <FTVisitorForm
+                placeholder={props.placeholder} 
+                buttonText={props.buttonText} 
+              />
+            </div>
           </div>
           <div className="mt-3 text-sm text-gray-500">
             {props.disclaimer && <TinaMarkdown content={props.disclaimer} />}
@@ -122,16 +127,20 @@ export const components: Components<{
 
     return (
        <>
-        <PageIntro eyebrow="Contact us" title="Let’s work together">
+        <PageIntro eyebrow="Contact us" title="Let's work together">
           <TinaMarkdown content={props.children} />
         </PageIntro>
-        <Container className="mt-24 sm:mt-32 lg:mt-40">
-          <div className="grid grid-cols-1 gap-x-8 gap-y-24 lg:grid-cols-2">
-            <ResourcesDetails />
-            <ResourcesForm 
-            placeholder={props.placeholder} 
-            buttonText={props.buttonText} 
-            />
+        <Container className="mt-20 md:mt-28">
+          <div className="grid grid-cols-2 gap-x-3.75 gap-y-24 md:grid-cols-12">
+            <div className="col-span-2 md:col-span-6">
+              <ResourcesDetails />
+            </div>
+            <div className="col-span-2 md:col-span-6">
+              <ResourcesForm 
+                placeholder={props.placeholder} 
+                buttonText={props.buttonText} 
+              />
+            </div>
           </div>
           <div className="mt-3 text-sm text-gray-500">
             {props.disclaimer && <TinaMarkdown content={props.disclaimer} />}
@@ -144,16 +153,20 @@ export const components: Components<{
 
     return (
       <>
-        <PageIntro eyebrow="Contact us" title="Let’s work together">
+        <PageIntro eyebrow="Contact us" title="Let's work together">
           <TinaMarkdown content={props.children} />
         </PageIntro>
-        <Container className="mt-24 sm:mt-32 lg:mt-40">
-          <div className="grid grid-cols-1 gap-x-8 gap-y-24 lg:grid-cols-2">
-            <ContactDetails />
-            <ContactForm 
-            placeholder={props.placeholder} 
-            buttonText={props.buttonText} 
-            />
+        <Container className="mt-20 md:mt-28">
+          <div className="grid grid-cols-2 gap-x-3.75 gap-y-24 md:grid-cols-12">
+            <div className="col-span-2 md:col-span-6">
+              <ContactDetails />
+            </div>
+            <div className="col-span-2 md:col-span-6">
+              <ContactForm 
+                placeholder={props.placeholder} 
+                buttonText={props.buttonText} 
+              />
+            </div>
           </div>
           <div className="mt-3 text-sm text-gray-500">
             {props.disclaimer && <TinaMarkdown content={props.disclaimer} />}
@@ -166,16 +179,20 @@ export const components: Components<{
 
     return (
       <>
-        <PageIntro eyebrow="Contact us" title="Let’s work together">
+        <PageIntro eyebrow="Contact us" title="Let's work together">
           <TinaMarkdown content={props.children} />
         </PageIntro>
-        <Container className="mt-24 sm:mt-32 lg:mt-40">
-          <div className="grid grid-cols-1 gap-x-8 gap-y-24 lg:grid-cols-2">
-            <ServeDetails />
-            <ServeForm 
-            placeholder={props.placeholder} 
-            buttonText={props.buttonText} 
-            />
+        <Container className="mt-20 md:mt-28">
+          <div className="grid grid-cols-2 gap-x-3.75 gap-y-24 md:grid-cols-12">
+            <div className="col-span-2 md:col-span-6">
+              <ServeDetails />
+            </div>
+            <div className="col-span-2 md:col-span-6">
+              <ServeForm 
+                placeholder={props.placeholder} 
+                buttonText={props.buttonText} 
+              />
+            </div>
           </div>
           <div className="mt-3 text-sm text-gray-500">
             {props.disclaimer && <TinaMarkdown content={props.disclaimer} />}
@@ -198,4 +215,13 @@ export const components: Components<{
   video: (props) => {
     return <Video data={props} />;
   },
+  LaVoz: () => (
+    <>
+      {" "}
+      <strong className="font-medium text-primary">
+        La Voz
+      </strong>
+      {""}
+    </>
+  ),
 };

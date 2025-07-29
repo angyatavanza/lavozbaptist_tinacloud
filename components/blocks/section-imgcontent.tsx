@@ -5,7 +5,7 @@ import Image from "next/image";
 import { Card, CardContent } from "@/components/ui/card";
 import { tinaField } from "tinacms/dist/react";
 import { sectionBlockSchemaField } from '@/components/layout/section';
-
+import { BlogSection } from "../connections-placeholder";
 //done 50: serve page: add button to mission trips, change the field name in the template for contentandimage contentandimagevariant
 //to-do 97: update the ui of the ContentAndImage block component in the /content/community+serve pages FRONTEND
 //to-do 57: replace text + images in content/serve and details components TINA CMS CONTENT
@@ -17,19 +17,20 @@ export const ContentAndImage = ({ data }: { data: PageBlocksContentandimage }) =
         <h2 className="text-title text-3xl font-nunito font-medium" data-tina-field={tinaField(data, 'title')}>{data.title}</h2>
         <p className="text-body mt-6" data-tina-field={tinaField(data, 'description')}>{data.description}</p>
       </div>
-      <div className="mt-8 [column-width:300px] [column-gap:1.5rem] md:mt-12">
+      <div className="mt-8 grid grid-cols-2 md:grid-cols-12 gap-3.75 mx-6 md:mt-12">
         {data.contentandimages?.map((contentandimage, index) => (
           <ContentandimageCard key={index} contentandimage={contentandimage!} />
         ))}
       </div>
+      <BlogSection />
     </Section>
   );
 };
 
 const ContentandimageCard = ({ contentandimage }: { contentandimage: PageBlocksContentandimageContentandimages }) => {
   return (
-    <Card className="mb-6 break-inside-avoid">
-      <CardContent className="grid grid-cols-[auto_1fr] gap-3 pt-6">
+    <Card className="col-span-1 md:col-span-6 mb-6">
+      <CardContent className="grid grid-cols-2 gap-3 pt-6">
         <div  data-tina-field={tinaField(contentandimage, 'img')}>
           {contentandimage.img && (
             <Image alt={contentandimage.quotetitle!} src={contentandimage.img} loading="lazy" width="120" height="120" />
