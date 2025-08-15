@@ -1,7 +1,7 @@
 import { FadeIn, FadeInStagger } from "../motion-primitives/fade-in";
 import clsx from "clsx";
-import { Border } from "@/components/ui/border";
 import { ReactNode } from "react";
+import { Border } from "./border";
 
 interface GridListProps {
   className?: string;
