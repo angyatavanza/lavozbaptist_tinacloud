@@ -2,7 +2,6 @@
 import React from "react";
 import { es } from "date-fns/locale";
 import Image from "next/image";
-import Link from "next/link";
 import { TinaIcon } from "@/components/ui/icon";
 import { Button } from "@/components/ui/button";
 import { format } from "date-fns";
