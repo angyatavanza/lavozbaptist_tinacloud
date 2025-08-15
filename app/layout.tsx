@@ -15,9 +15,6 @@ import "@/styles.css";
 import "video.js/dist/video-js.css";
 import { TailwindIndicator } from "@/components/ui/breakpoint-indicator";
 
-//done 53: add Roboto, Libre_Baskerville, Libre_Franklin font
-//done 84: ask carmen which form fields should be required:  address, email, phone, name \ nunito+rob font, \& sentence case
-
 const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
@@ -52,20 +49,8 @@ const lato = Lato({
 
 export const metadata: Metadata = {
   title: "La Voz de la Esperanza",
-  description: "Iglesia La Voz de la Esperanza",
+  description: "Iglesia La Voz de La Esperanza",
 };
-{
-  /*
-  <html
-      lang="en"
-      className="h-full bg-primary text-base antialiased text-neutral-100"
-    >
-      <body className="flex min-h-full flex-col">
-        <RootLayout>{children}</RootLayout>
-      </body>
-    </html>
-  */
-}
 
 export default function RootLayout({
   children,
@@ -84,7 +69,7 @@ export default function RootLayout({
         roboto.variable
       )}
     >
-      <body className="min-h-screen bg-background font-roboto antialiased">
+      <body className="min-h-screen bg-primary-background font-roboto antialiased">
         <VideoDialogProvider>
           {children}
           <VideoDialog />

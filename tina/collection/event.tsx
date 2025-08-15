@@ -192,7 +192,7 @@ const Event: Collection = {
           if (!name) return _internalSys.path;
 
           return (
-            <p className="flex min-h-8 items-center gap-4">
+            <p className="flex min-h-8 items-center gap-5">
               <Avatar>
                 {avatar && <AvatarImage src={avatar} alt={`${name} Profile`} />}
                 <AvatarFallback>

@@ -33,14 +33,14 @@ export default function MessagesVideoDialog({
         href={videoSrc}
         target="_blank"
         rel="noopener noreferrer"
-        className="group relative block cursor-pointer"
+        className="group relative  block h-full cursor-pointer"
       >
         <img
           src={thumbnailSrc}
           alt={thumbnailAlt}
           width={1920}
           height={1080}
-          className="w-full rounded-md border shadow-lg transition-all duration-200 ease-out group-hover:brightness-[0.8]"
+          className="w-full h-full object-cover rounded-t-xl border shadow-lg transition-all duration-200 ease-out group-hover:brightness-[0.8]"
         />
         {/* Top-left overlay: Avatar + Title */}
         <div className="absolute top-3 left-3 flex items-center gap-2 z-10 px-3 py-2 rounded-lg">
@@ -63,10 +63,10 @@ export default function MessagesVideoDialog({
             )}
           </Avatar>
           <div className="flex flex-col">
-            <span className="text-white text-sm font-nunito font-bold group-hover:underline">
+            <span className="text-white text-xs font-nunito font-bold group-hover:underline">
               {title}
             </span>
-            <span className="text-white font-nunito text-xs">
+            <span className="text-white font-nunito font-medium text-xs">
               {coordinator?.name || "La Voz De La Esperanza was live"}
             </span>
           </div>
@@ -87,4 +87,3 @@ export default function MessagesVideoDialog({
     </div>
   );
 }
-

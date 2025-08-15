@@ -7,73 +7,51 @@ import {
 import Image from "next/image";
 import { Section, sectionBlockSchemaField } from "@/components/layout/section";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardHeader2,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardFooter,
+  CardAction,
+} from "@/components/ui/card";
 import { tinaField } from "tinacms/dist/react";
 import { ArrowRight } from "lucide-react";
 import { iconSchema } from "@/tina/fields/icon";
 import { TinaIcon } from "@/components/ui/icon";
-import { AnimatedGroup } from "@/components/motion-primitives/animated-group";
-import { Transition } from "motion/react";
-
-const transitionVariants = {
-  container: {
-    visible: {
-      transition: {
-        staggerChildren: 0.05,
-        delayChildren: 0.75,
-      },
-    },
-  },
-  item: {
-    hidden: {
-      opacity: 0,
-      filter: "blur(12px)",
-      y: 12,
-    },
-    visible: {
-      opacity: 1,
-      filter: "blur(0px)",
-      y: 0,
-      transition: {
-        type: "spring",
-        bounce: 0.3,
-        duration: 1.5,
-      } as Transition,
-    },
-  },
-};
 
 export const Group = ({ data }: { data: PageBlocksGroup }) => {
   return (
-    <Section background={data.background!}>
-      <div className="w-full py-20 flex flex-col items-center gap-10 bg-[#FCFBF7]">
-        <div className="flex flex-col items-center gap-4">
+    <Section background={data.background!} className="mx-auto">
+      <div className="flex w-full mx-auto px-4 md:px-30 py-10 md:py-15 lg:py-20 flex-col items-center gap-5 lg:gap-5">
+        {/* Header Section */}
+        <div className="flex w-full max-w-none flex-col items-center text-center gap-5 mx-auto">
           <h2
-            className="text-3xl md:text-4xl lg:text-[42px] font-bold text-[#15171A] leading-[1.4] text-center px-4 font-nunito"
-            data-tina-field={tinaField(data, "title")}
+            data-tina-field={tinaField(data, "headline")}
+            className="font-nunito font-semibold text-pretty text-center text-[34px] leading-[44px] md:text-5xl md:leading-[60px] text-foreground max-w-2xl"
           >
-            {data.title}
+            {data.headline}
           </h2>
-          <p
-            className="max-w-[632px] w-full text-center text-base text-[#3F444D] leading-[1.5] px-4 font-roboto"
+          <div
             data-tina-field={tinaField(data, "description")}
+            className="font-normal text-balance text-center text-base leading-[24px] md:text-xl md:leading-[28px] max-w-xl"
           >
             {data.description}
-          </p>
-        </div>
-
-        <div className="w-full px-4 md:px-8 lg:px-[120px]">
-          <div className="grid grid-cols-2 md:grid-cols-12 gap-3.75 mx-6">
-            {data.groups?.map((group, index) => (
-              <GroupCard key={index} group={group!} />
-            ))}
           </div>
         </div>
 
+        <div className="grid grid-cols-2 md:grid-cols-12 gap-5 px-4 md:px-5 w-full">
+          {data.groups?.map((group, index) => (
+            <GroupCard key={index} group={group!} />
+          ))}
+        </div>
+
         {/* Slider/Pagination */}
-        <div className="flex items-center gap-[15px]">
-          <div className="w-16 h-2 bg-[#60388C]"></div>
-          <div className="w-16 h-2 bg-[#D9DADB]"></div>
+        <div className="flex items-center gap-5">
+          <div className="w-16 h-2 bg-primary"></div>
+          <div className="w-16 h-2 bg-border"></div>
         </div>
       </div>
     </Section>
@@ -82,11 +60,29 @@ export const Group = ({ data }: { data: PageBlocksGroup }) => {
 
 const GroupCard = ({ group }: { group: PageBlocksGroupGroups }) => {
   return (
-    <Card className="col-span-2 md:col-span-6 lg:col-span-6 3xl:col-span-6 flex items-center gap-5 p-5 border-[#D9DADB] bg-white">
-      <CardContent className="flex flex-col items-start gap-6 flex-1 p-0">
-        <div className="flex flex-col items-start gap-4 self-stretch">
+    <Card className="col-span-2 md:col-span-6 lg:col-span-6 3xl:col-span-6 bg-card border border-border p-3 md:p-4 flex flex-col gap-5 md:gap-5 group hover:shadow-lg transition-shadow">
+      {/* Image Container with hover overlay */}
+      <CardHeader2 className="relative w-full h-64 lg:h-80 overflow-hidden rounded-xl px-2 md:px-5 group">
+        {group.image?.src && (
+          <>
+            <Image
+              data-tina-field={tinaField(group, "image")}
+              src={group.image.src}
+              alt={group.image.alt || ""}
+              fill
+              className="object-cover object-center"
+            />
+            {/* Separate overlay that appears on hover */}
+            <div className="absolute inset-0 opacity-0 group-hover:opacity-50 group-hover:bg-accent transition-opacity duration-300 pointer-events-none" />
+          </>
+        )}
+      </CardHeader2>
+
+      {/* Icon & Title Header - kept together */}
+      <CardHeader>
+        <CardTitle data-tina-field={tinaField(group, "title")}>
           {/* Icon & Text */}
-          <div className="flex items-center gap-4 self-stretch">
+          <div className="flex items-center gap-5 self-stretch">
             {/* Groups Icon */}
             <div className="flex w-10 h-10 justify-center items-center shrink-0">
               {group.icon && (
@@ -96,61 +92,44 @@ const GroupCard = ({ group }: { group: PageBlocksGroupGroups }) => {
                 />
               )}
             </div>
-
             {/* Heading */}
-            <h3
-              className="flex-1 text-xl font-semibold text-[#15171A] line-clamp-2 font-nunito"
-              data-tina-field={tinaField(group, "title")}
-            >
-              {group.title}
-            </h3>
+            {group.title}
           </div>
+        </CardTitle>
+      </CardHeader>
 
-          {/* Description */}
-          <p
-            className="self-stretch text-base text-[#3F444D] leading-[1.5] line-clamp-3"
-            data-tina-field={tinaField(group, "description")}
-          >
-            {group.description}
-          </p>
-          {/* Image */}
-          {group.image?.src && (
-            <Image
-              src={group.image.src}
-              alt={group.image.alt || ""}
-              width={300}
-              height={200}
-              className="flex-1 self-stretch object-cover min-h-[200px]"
-              data-tina-field={tinaField(group, "image")}
-            />
-          )}
-          {/* Actions */}
-          <AnimatedGroup
-            variants={transitionVariants}
-            className="flex flex-col items-center justify-center gap-2 md:gap-2 md:flex-row"
-          >
+      {/* Description */}
+      <CardContent className="flex items-center relative w-full">
+        <CardDescription data-tina-field={tinaField(group, "description")}>
+          {group.description}
+        </CardDescription>
+      </CardContent>
+
+      {/* Footer with Action */}
+      <CardFooter>
+        <CardAction>
+          <div className="flex flex-col items-start justify-start gap-3 md:gap-5 md:flex-row">
             {group.actions &&
               group.actions.map((action) => (
-                <div
+                <Button
                   key={action!.label}
-                  data-tina-field={tinaField(action)}
-                  className="bg-foreground/10 rounded-[calc(var(--radius-xl)+0.125rem)] border p-[0.4px] w-full md:w-auto"
+                  asChild
+                  size="default"
+                  variant={action!.type === "link" ? "ghost" : "default"}
+                  className=""
                 >
-                  <Button
-                    asChild
-                    size="lg"
-                    variant={action!.type === "link" ? "outline" : "default"}
-                    className="rounded-xl py-[1.1px] md:py-[3.6px] w-full md:w-auto"
+                  <Link
+                    href={action!.link!}
+                    data-tina-field={tinaField(action)}
                   >
-                    <Link href={action!.link!}>
-                      <span className="text-nowrap">{action!.label}</span>
-                    </Link>
-                  </Button>
-                </div>
+                    <span className="text-nowrap">{action!.label}</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
+                </Button>
               ))}
-          </AnimatedGroup>
-        </div>
-      </CardContent>
+          </div>
+        </CardAction>
+      </CardFooter>
     </Card>
   );
 };
@@ -161,7 +140,7 @@ export const groupBlockSchema: Template = {
   ui: {
     previewSrc: "/blocks/group.png",
     defaultItem: {
-      title: "Una Iglesia, Un Lugar Para Todos",
+      headline: "Una Iglesia, Un Lugar Para Todos",
       description:
         "We provide a range of resources and guidance to support their physical, cognitive, emotional, and social growth.",
       groups: [
@@ -228,8 +207,8 @@ export const groupBlockSchema: Template = {
     sectionBlockSchemaField as any,
     {
       type: "string",
-      label: "Title",
-      name: "title",
+      label: "Headline",
+      name: "headline",
     },
     {
       type: "string",

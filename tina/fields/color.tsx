@@ -29,7 +29,7 @@ export const ColorPickerInput = wrapFieldsWithMeta(({ input }) => {
   return (
     <>
       <input type="text" id={input.name} className="hidden" {...input} />
-      <div className="flex gap-2 flex-wrap">
+      <div className="flex gap-5 flex-wrap">
         {colorOptions.map((color) => {
           return (
             <button

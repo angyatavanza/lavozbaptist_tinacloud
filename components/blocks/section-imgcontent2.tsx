@@ -3,99 +3,87 @@ import {
   PageBlocksContentandimagevariant,
   PageBlocksContentandimagevariantContentandimagevariants,
 } from "@/tina/__generated__/types";
-import { Section } from "@/components/layout/section";
 import Image from "next/image";
-import Link from "next/link";
+import { Section, sectionBlockSchemaField } from "@/components/layout/section";
 import { Button } from "@/components/ui/button";
-import { iconSchema } from "@/tina/fields/icon";
-import { Card, CardContent } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardHeader2,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardFooter,
+  CardAction,
+} from "@/components/ui/card";
 import { tinaField } from "tinacms/dist/react";
+import { ServiceTimes } from "@/components/layout/nav/service-times";
+import { ArrowRight } from "lucide-react";
+import { iconSchema } from "@/tina/fields/icon";
 import { TinaIcon } from "@/components/ui/icon";
-import { sectionBlockSchemaField } from "@/components/layout/section";
-import { AnimatedGroup } from "@/components/motion-primitives/animated-group";
-import { Transition } from "motion/react";
 
-//to-do 95: update the ui of the ContentAndImageVariant block component in the /content/community+serve pages FRONTEND
-const transitionVariants = {
-  container: {
-    visible: {
-      transition: {
-        staggerChildren: 0.05,
-        delayChildren: 0.75,
-      },
-    },
-  },
-  item: {
-    hidden: {
-      opacity: 0,
-      filter: "blur(12px)",
-      y: 12,
-    },
-    visible: {
-      opacity: 1,
-      filter: "blur(0px)",
-      y: 0,
-      transition: {
-        type: "spring",
-        bounce: 0.3,
-        duration: 1.5,
-      } as Transition,
-    },
-  },
-};
-
-export const ContentAndImageVariant = ({
-  data,
-}: {
-  data: PageBlocksContentandimagevariant;
-}) => {
+export const ContentAndImageVariant = ({ data }: { data: PageBlocksContentandimagevariant }) => {
   return (
-    <Section background={data.background!}>
-       <div className="w-full py-20 flex flex-col items-center gap-10 bg-[#FCFBF7]">
-        <div className="flex flex-col items-center gap-4">
+    <Section background={data.background!} className="mx-auto">
+      <div className="flex w-full mx-auto px-4 md:px-30 py-10 md:py-15 lg:py-20 flex-col items-center gap-5 lg:gap-5">
+        {/* Header Section */}
+        <div className="flex w-full max-w-none flex-col items-center text-center gap-5 mx-auto">
           <h2
-            className="text-3xl md:text-4xl lg:text-[42px] font-bold text-[#15171A] leading-[1.4] text-center px-4 font-nunito"
-            data-tina-field={tinaField(data, "title")}
+            data-tina-field={tinaField(data, "headline")}
+            className="font-nunito font-semibold text-pretty text-center text-[34px] leading-[44px] md:text-5xl md:leading-[60px] text-foreground max-w-2xl"
           >
-            {data.title}
+            {data.headline}
           </h2>
-          <p
-            className="max-w-[632px] w-full text-center text-base text-[#3F444D] leading-[1.5] px-4 font-roboto"
+          <div
             data-tina-field={tinaField(data, "description")}
+            className="font-normal text-balance text-center text-base leading-[24px] md:text-xl md:leading-[28px] max-w-xl"
           >
             {data.description}
-          </p>
-        </div>
-        <div className="w-full px-4 md:px-8 lg:px-[120px]">
-          <div className="grid grid-cols-2 md:grid-cols-12 gap-3.75 mx-6">
-            {data.contentandimagevariants?.map((contentandimagevariant, index) => (
-              <ContentandimagevariantCard key={index}
-            contentandimagevariant={contentandimagevariant!} />
-            ))}
           </div>
         </div>
+
+        <div className="grid grid-cols-2 md:grid-cols-12 gap-5 px-4 md:px-5 w-full">
+          {data.contentandimagevariants?.map((contentandimagevariant, index) => (
+            <ContentandimagevariantCard key={index} contentandimagevariant={contentandimagevariant!} />
+          ))}
+        </div>
+
         {/* Slider/Pagination */}
-        <div className="flex items-center gap-[15px]">
-          <div className="w-16 h-2 bg-[#60388C]"></div>
-          <div className="w-16 h-2 bg-[#D9DADB]"></div>
+        <div className="flex items-center gap-5">
+          <div className="w-16 h-2 bg-primary"></div>
+          <div className="w-16 h-2 bg-border"></div>
         </div>
       </div>
     </Section>
   );
 };
 
-const ContentandimagevariantCard = ({
-  contentandimagevariant,
-}: {
-  contentandimagevariant: PageBlocksContentandimagevariantContentandimagevariants;
-}) => {
+const ContentandimagevariantCard = ({ contentandimagevariant }: { contentandimagevariant: PageBlocksContentandimagevariantContentandimagevariants }) => {
   return (
-    <Card className="col-span-2 md:col-span-6 lg:col-span-6 3xl:col-span-6 flex items-center gap-5 p-5 border-[#D9DADB] bg-white">
-      <CardContent className="flex flex-col items-start gap-6 flex-1 p-0">
-        <div className="flex flex-col items-start gap-4 self-stretch">
+    <Card className="col-span-2 md:col-span-6 lg:col-span-6 3xl:col-span-6 bg-card border border-border p-3 md:p-4 flex flex-col gap-5 md:gap-5 group hover:shadow-lg transition-shadow">
+      {/* Image Container with hover overlay */}
+      <CardHeader2 className="relative w-full h-64 lg:h-80 overflow-hidden rounded-xl px-2 md:px-5 group">
+        {contentandimagevariant.image?.src && (
+          <>
+            <Image
+              data-tina-field={tinaField(contentandimagevariant, "image")}
+              src={contentandimagevariant.image.src}
+              alt={contentandimagevariant.image.alt || ""}
+              fill
+              className="object-cover object-center"
+            />
+            {/* Separate overlay that appears on hover */}
+            <div className="absolute inset-0 opacity-0 group-hover:opacity-50 group-hover:bg-accent transition-opacity duration-300 pointer-events-none" />
+          </>
+        )}
+      </CardHeader2>
+
+      {/* Icon & Title Header - kept together */}
+      <CardHeader>
+        <CardTitle data-tina-field={tinaField(contentandimagevariant, "title")}>
           {/* Icon & Text */}
-          <div className="flex items-center gap-4 self-stretch">
-            {/* Groups Icon */}
+          <div className="flex items-center gap-5 self-stretch">
+            {/*  Content and image variant Icon */}
             <div className="flex w-10 h-10 justify-center items-center shrink-0">
               {contentandimagevariant.icon && (
                 <TinaIcon
@@ -104,61 +92,49 @@ const ContentandimagevariantCard = ({
                 />
               )}
             </div>
-
             {/* Heading */}
-            <h3
-              className="flex-1 text-xl font-semibold text-[#15171A] line-clamp-2 font-nunito"
-              data-tina-field={tinaField(contentandimagevariant, "title")}
-            >
-              {contentandimagevariant.title}
-            </h3>
+            {contentandimagevariant.title}
           </div>
+        </CardTitle>
+      </CardHeader>
 
-          {/* Description */}
-          <p
-            className="self-stretch text-base text-[#3F444D] leading-[1.5] line-clamp-3"
-            data-tina-field={tinaField(contentandimagevariant, "description")}
-          >
-            {contentandimagevariant.description}
-          </p>
-          {/* Image */}
-          {contentandimagevariant.image?.src && (
-            <Image
-              src={contentandimagevariant.image.src}
-              alt={contentandimagevariant.image.alt || ""}
-              width={400}
-              height={500}
-              className="flex-1 self-stretch object-cover min-h-[200px]"
-              data-tina-field={tinaField(contentandimagevariant, "image")}
-            />
-          )}
-          {/* Actions */}
-          <AnimatedGroup
-            variants={transitionVariants}
-            className="flex flex-col items-center justify-center gap-2 md:gap-2 md:flex-row"
-          >
-            {contentandimagevariant.actions &&
-              contentandimagevariant.actions.map((action) => (
-                <div
-                  key={action!.label}
-                  data-tina-field={tinaField(action)}
-                  className="bg-foreground/10 rounded-[calc(var(--radius-xl)+0.125rem)] border p-[0.4px] w-full md:w-auto"
-                >
-                  <Button
-                    asChild
-                    size="lg"
-                    variant={action!.type === "link" ? "outline" : "default"}
-                    className="rounded-xl py-[1.1px] md:py-[3.6px] w-full md:w-auto"
-                  >
-                    <Link href={action!.link!}>
-                      <span className="text-nowrap">{action!.label}</span>
-                    </Link>
-                  </Button>
-                </div>
-              ))}
-          </AnimatedGroup>
-        </div>
+      {/* Description */}
+      <CardContent className="flex items-start relative w-full flex-col gap-2">
+        <CardDescription className="text-foreground text-[19px] leading-[24px] md:text-[19px] md:leading-[24px]" data-tina-field={tinaField(contentandimagevariant, "description")}>
+          {contentandimagevariant.description}
+        </CardDescription>
+        <CardDescription data-tina-field={tinaField(contentandimagevariant, "details")}>
+          {contentandimagevariant.details}
+        </CardDescription>
       </CardContent>
+
+      {/* Footer with Action */}
+      <CardFooter>
+        <CardAction>
+          <div className="flex flex-col items-start justify-start gap-3 md:gap-5 md:flex-row">
+          {contentandimagevariant.actions &&
+            contentandimagevariant.actions.map((action) => (
+              <Button
+                key={action!.label}
+                asChild
+                size="default"
+                variant={action!.type === "link" ? "ghost" : "default"}
+                className=""
+              >
+                <a
+                  href={action!.link!}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-tina-field={tinaField(action)}
+                >
+                  <span className="text-nowrap">{action!.label}</span>
+                  <ArrowRight className="w-4 h-4" />
+                </a>
+              </Button>
+            ))}
+          </div>
+        </CardAction>
+      </CardFooter>
     </Card>
   );
 };
@@ -169,7 +145,7 @@ export const contentandimagevariantBlockSchema: Template = {
   ui: {
     previewSrc: "/blocks/contentandimagevariant.png",
     defaultItem: {
-      title: 'Built to cover your needs',
+      headline: 'Built to cover your needs',
       description: 'We have a lot of features to cover your needs',
       icon: {
         color: "",
@@ -210,8 +186,8 @@ export const contentandimagevariantBlockSchema: Template = {
     sectionBlockSchemaField as any,
     {
       type: "string",
-      label: "Title",
-      name: "title",
+      label: "Headline",
+      name: "headline",
     },
     {
       type: "string",
@@ -228,9 +204,9 @@ export const contentandimagevariantBlockSchema: Template = {
       name: "contentandimagevariants",
       ui: {
         defaultItem: {
-          quote:
+          title:
             "There are only two hard things in Computer Science: cache invalidation and naming things.",
-          quotetitle: "Phil Karlton",
+          description: "Phil Karlton",
           actions: [
             {
               label: "Get Started",
@@ -246,7 +222,7 @@ export const contentandimagevariantBlockSchema: Template = {
         },
         itemProps: (item) => {
           return {
-            label: `${item.quote} - ${item.quotetitle}`,
+            label: `${item.title} - ${item.description}`,
           };
         },
       },
@@ -267,8 +243,8 @@ export const contentandimagevariantBlockSchema: Template = {
         iconSchema as any,
         {
           type: "string",
-          label: "Requirements",
-          name: "requirements",
+          label: "Details",
+          name: "details",
         },
         {
           type: "object",
@@ -284,13 +260,6 @@ export const contentandimagevariantBlockSchema: Template = {
               name: "alt",
               label: "Alt Text",
               type: "string",
-            },
-            {
-              name: "videoUrl",
-              label: "Video URL",
-              type: "string",
-              description:
-                "If using a YouTube video, make sure to use the embed version of the video URL",
             },
           ],
         },

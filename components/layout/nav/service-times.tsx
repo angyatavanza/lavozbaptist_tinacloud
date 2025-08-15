@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import React, {  ReactElement, ReactNode, HTMLAttributes } from "react";
-//to-do 62:edit content in service-times page
+
 type ServiceTimeProps = {
   name: string;
   children: ReactNode;
@@ -15,7 +15,7 @@ function ServiceTime({ name, children, invert = false }: ServiceTimeProps): Reac
         invert ? "text-neutral-300" : "text-neutral-600"
       )}
     >
-      <strong className={invert ? "text-primary" : "text-white"}>
+      <strong className={invert ? "text-white" : "text-primary"}>
         {name}
       </strong>
       <br />

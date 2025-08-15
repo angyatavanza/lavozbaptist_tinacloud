@@ -5,55 +5,52 @@ import { PageBlocksCta } from "@/tina/__generated__/types";
 import { Section, sectionBlockSchemaField } from "@/components/layout/section";
 import { Button } from "@/components/ui/button";
 import { tinaField } from "tinacms/dist/react";
-import { ArrowRight } from "lucide-react";
-
-//to-do 15: change layout of data.img to be to the side of the cta banner?) in call to action component FRONTEND
 
 export const CallToAction = ({ data }: { data: PageBlocksCta }) => {
   return (
-    <Section background={data.background!}>
-      <div className="grid grid-cols-2 md:grid-cols-12 items-center gap-3.75 py-20">
+    <Section background={data.background!} className="mx-auto">
+      <div className="grid grid-cols-2 md:grid-cols-12 gap-5 px-10 lg:px-15 py-10 md:py-15 items-center">
         {data.image?.src && (
-          <div className="col-span-2 md:col-span-5 py-20">
+          <div className="col-span-2 md:col-span-5">
             <Image
               data-tina-field={tinaField(data, "image")}
               src={data.image.src}
               alt={data.image.alt || "CTA Image"}
               width={438}
               height={328}
-              className="w-full h-auto object-cover"
+              className="w-full h-full object-cover rounded-lg"
             />
           </div>
         )}
-        <div className="col-span-2 md:col-span-7 bg-[#60388C] px-6 md:px-10 lg:px-16 py-20 flex flex-col items-start gap-8">
-          <div className="flex flex-col items-start gap-4 w-full">
+        <div className="col-span-2 md:col-span-7 flex flex-col items-start gap-5 px-4 md:px-5">
+          <div className="flex flex-col items-start gap-5 w-full">
             <h2
-              className="text-white font-nunito text-2xl md:text-3xl lg:text-4xl font-semibold leading-normal"
-              data-tina-field={tinaField(data, "title")}
+              className="font-nunito font-semibold text-balance text-left text-[28px] leading-[36px] md:text-[40px] md:leading-[52px] text-primary-button-foreground max-w-lg"
+              data-tina-field={tinaField(data, "headline")}
             >
-              {data.title}
+              {data.headline}
             </h2>
             <p
-              className="text-white text-sm leading-[150%] max-w-[649px]"
+              className="text-primary-button-foreground font-normal text-balance text-left text-base leading-[24px] max-w-xl md:mb-5"
               data-tina-field={tinaField(data, "description")}
             >
               {data.description}
             </p>
           </div>
 
-          <div className="flex flex-wrap gap-4">
+          <div className="flex flex-wrap gap-5">
             {data.actions &&
               data.actions.map((action) => (
                 <div
                   key={action!.label}
                   data-tina-field={tinaField(action)}
-                  className="bg-foreground/10 rounded-[calc(var(--radius-xl)+0.125rem)] border p-0.5"
+                  className="bg-foreground/10 rounded-[calc(var(--radius-sm)+0.125rem)] border p-0.5"
                 >
                   <Button
                     asChild
-                    size="lg"
-                    variant={action!.type === "link" ? "ghost" : "default"}
-                    className="rounded-xl px-5 text-base"
+                    size="default"
+                    variant={action!.type === "link" ? "outline" : "secondary"}
+                    className=""
                   >
                     <Link href={action!.link!}>
                       <span className="text-nowrap">{action!.label}</span>
@@ -74,7 +71,7 @@ export const ctaBlockSchema: Template = {
   ui: {
     previewSrc: "/blocks/cta.png",
     defaultItem: {
-      title: "Start Building",
+      headline: "Start Building",
       description:
         "Get started with TinaCMS today and take your content management to the next level.",
       actions: [
@@ -95,8 +92,8 @@ export const ctaBlockSchema: Template = {
     sectionBlockSchemaField as any,
     {
       type: "string",
-      label: "Title",
-      name: "title",
+      label: "Headline",
+      name: "headline",
     },
     {
       type: "string",

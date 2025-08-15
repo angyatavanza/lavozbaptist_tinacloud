@@ -1,13 +1,19 @@
   import React from "react";
+  import { cn } from "@/lib/utils";
 
-  export const DecorativeIcon = () => (
+  type DecorativeIconProps = React.SVGProps<SVGSVGElement> & {
+    className?: string;
+  };
+
+  export const DecorativeIcon: React.FC<DecorativeIconProps> = ({ className, ...props }) => (
     <svg
       width="28"
       height="29"
       viewBox="0 0 28 29"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className="w-7 h-7 text-secondary"
+      className={cn("w-7 h-7 text-secondary", className)}
+      {...props}
     >
       <path
         fillRule="evenodd"

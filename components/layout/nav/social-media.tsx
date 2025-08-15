@@ -44,7 +44,7 @@ export const SocialMedia = ({ className, invert = false }: SocialMediaProps) => 
     <ul
       role="list"
       className={clsx(
-        "flex gap-x-10",
+        "flex gap-5",
         invert ? "text-white" : "text-primary",
         className
       )}
@@ -56,7 +56,7 @@ export const SocialMedia = ({ className, invert = false }: SocialMediaProps) => 
             aria-label={item.title}
             className={clsx(
               "transition",
-              invert ? "hover:text-neutral-200" : "hover:text-neutral-700"
+              invert ? "hover:text-neutral-200" : "hover:text-primary"
             )}
           >
             <item.icon className="h-6 w-6 fill-current" />

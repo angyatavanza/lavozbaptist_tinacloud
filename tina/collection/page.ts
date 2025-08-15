@@ -16,13 +16,13 @@ import { visionBlockSchema } from "@/components/blocks/section-vision";
 import { groupinfoBlockSchema } from "@/components/blocks/landing-groups";
 import { videoBlockSchema } from "@/components/blocks/section-video";
 import { calloutBlockSchema } from "@/components/blocks/landing-callout";
-import { freqaskedquestionsBlockSchema } from "@/components/blocks/section-faqcontent";
+import { freqaskedquestionsBlockSchema } from "@/components/blocks/landing-faqcontent";
 import { contentandimageBlockSchema } from "@/components/blocks/section-imgcontent";
 import { contentandimagevariantBlockSchema } from "@/components/blocks/section-imgcontent2";
 import { latesteventsBlockSchema } from "@/components/blocks/landing-latest-events";
 import { latestmessagesBlockSchema } from "@/components/blocks/landing-latest-messages";
 import { groupBlockSchema } from "@/components/blocks/section-groups";
-import { missionBlockSchema } from "@/components/blocks/section-mission";
+import { valuesBlockSchema } from "@/components/blocks/section-values";
 import { listcontentBlockSchema } from "@/components/blocks/section-listcontent";
 import { nextstepsBlockSchema } from "@/components/blocks/section-first-steps";
 import { contactsectionBlockSchema } from "@/components/blocks/section-contact";
@@ -74,7 +74,7 @@ const Page: Collection = {
         freqaskedquestionsBlockSchema,
         contentandimageBlockSchema,
         visionBlockSchema,
-        missionBlockSchema,
+        valuesBlockSchema,
         listcontentBlockSchema,
         leadershipBlockSchema,
         nextstepsBlockSchema,

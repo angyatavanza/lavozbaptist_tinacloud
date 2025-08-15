@@ -6,8 +6,6 @@ import { Button } from "@/components/ui/second-button";
 import MailSentState from "@/components/forms/mail-sent-state";
 import { useState } from 'react';
 
-//done 41: add functionality to ftvisitor-form  TINA CMS/BACKEND
-
 interface FTVisitorFormInputs {
   name: string;
   lastname: string;
@@ -67,9 +65,9 @@ export const FTVisitorForm: React.FC<FTVisitorFormProps> = ({
   return (
     <FadeIn>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <h2 className=" text-base font-nunito font-medium text-primary">
-          Tiene preguntas? Contáctenos un mensaje:
-        </h2>
+        <h4 className="text-base font-nunito font-medium text-primary">
+         Completa el formulario de visita:
+        </h4>
 
         {hasError && (
           <p className="text-red-500 text-sm mt-2">
@@ -137,7 +135,7 @@ export const FTVisitorForm: React.FC<FTVisitorFormProps> = ({
             <fieldset>
               <legend className="text-base/6 text-neutral-500">Estoy Visitando:</legend>
             </fieldset>
-            <div className="mt-6 grid grid-cols-2 md:grid-cols-12 gap-3.75">
+            <div className="mt-6 grid grid-cols-2 md:grid-cols-12 gap-5">
               {["1a. Vez", "2a. Vez" ].map((value) => (
                 <div key={value} className="col-span-1 md:col-span-6">
                   <RadioInput
@@ -155,7 +153,7 @@ export const FTVisitorForm: React.FC<FTVisitorFormProps> = ({
             <fieldset>
               <legend className="text-base/6 text-neutral-500">Me Gustaría:</legend>
             </fieldset>
-            <div className="mt-6 grid grid-cols-2 md:grid-cols-12 gap-3.75">
+            <div className="mt-6 grid grid-cols-2 md:grid-cols-12 gap-5">
               {["Conocer más acerca de Jesús", "Buscar un lugar para reunirme", "Visita del pastor", "Ser bautizado","Unirme a un grupo","Ser parte de la familia espiritual"].map((value) => (
                 <div key={value} className="col-span-1 md:col-span-6">
                   <RadioInput

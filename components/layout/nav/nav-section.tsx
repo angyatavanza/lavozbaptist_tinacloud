@@ -12,12 +12,12 @@ interface NavigationSection {
 
 export const createNavigation = (latestMessageUrl?: string): NavigationSection[] => [
   {
-    title: "Quiénes Somos",
+    title: "Quiénes somos",
     links: [
-      { title: "Sobre Nosotros", href: "/about" },
-      { title: "Propósito, Misión y valores", href: "/purpose" },
-      { title: "Nuestro Pastor", href: "/our-pastor" },
-      { title: "Nuestro Equipo", href: "/staff" },
+      { title: "Sobre nosotros", href: "/about" },
+      { title: "Propósito, misión y valores", href: "/purpose" },
+      { title: "Nuestro pastor", href: "/our-pastor" },
+      { title: "Nuestro equipo", href: "/staff" },
     ],
   },
   {
@@ -26,26 +26,26 @@ export const createNavigation = (latestMessageUrl?: string): NavigationSection[]
       { title: "Mensajes", href: "/messages" },
       { title: (
           <>
-            Último Mensaje <span aria-hidden="true">&rarr;</span>
+            Mensaje más reciente <span aria-hidden="true">&rarr;</span>
           </>
         ), href: latestMessageUrl || "/messages" },
-      { title: "Horario de Servicios", href: "/service-times" },
+      { title: "Horario de servicios", href: "/service-times" },
     ],
   },
   {
-    title: "Conectate",
+    title: "Conéctate",
     links: [
-      { title: "Jornada de Crecimiento", href: "/first-steps" },
+      { title: "Primeros pasos", href: "/first-steps" },
       { title: "Grupos", href: "/groups" },
       { title: "Servir", href: "/serve" },
       { title: "Eventos", href: "/events" },
     ],
   },
   {
-    title: "Recursos Comunitarios",
+    title: "Recursos comunitarios",
     links: [
-      { title: "Recursos Comunitarios", href: "/community-resources" },
-      { title: "Haz tu Donación en Linea", href: "/donations" },
+      { title: "Recursos comunitarios", href: "/community-resources" },
+      { title: "Haz tu donación en línea", href: "/donations" },
     ],
   },
 ];

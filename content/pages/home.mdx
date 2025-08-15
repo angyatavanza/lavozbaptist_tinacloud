@@ -1,51 +1,87 @@
 ---
-title: Iglesia La Voz de la Esperanza
+title: Iglesia La Voz de La Esperanza
 blocks:
-  - background: bg-default
+  - background: bg-primary-background
     text: Acompáñanos en línea o en persona este domingo
     url: /service-times
     _template: callout
-  - background: bg-default
-    headline: "Llevamos esperanza a la Ciudad de Charlotte"
-    tagline: BIENVENIDOS A LA VOZ DE LA ESPERANZA
+  - background: bg-primary-background
+    headline: Llevamos esperanza a la ciudad de Charlotte
+    tagline: Bienvenidos a La Voz de la Esperanza
     actions:
       - label: Conózcanos
         type: button
         link: /about
-      - label: Servicios Dominicales
+      - label: Servicios dominicales
         type: link
         link: /service-times
     image:
       src: ''
-      alt: La Voz Welcome Video
+      alt: La Voz welcome video
       videoUrl: 'https://player.vimeo.com/video/1090191725?h=d6eb5ef7c8'
     _template: hero
-  - background: bg-default
-    headline: 'Somos una comunidad bautista hispana en Charlotte, NC'
-    tagline: SOBRE NOSOTROS
+  - background: bg-primary-background
+    headline: Una comunidad para crecer en la fe
+    tagline: Sobre nosotros
     description: >-
-      En la Iglesia La Voz de la Esperanza, somos una comunidad bautista
-      hispana en Charlotte, NC, dedicada a adorar a Dios, enseñar Su Palabra y
-      servir con amor. Aquí encontrarás un lugar para crecer en la fe, conectar
-      con otros y vivir la esperanza de Cristo.
+      En la Iglesia La Voz de La Esperanza, somos una comunidad bautista hispana
+      en Charlotte, NC, dedicada a adorar a Dios, enseñar su Palabra y servir
+      con amor. Aquí encontrarás un lugar para crecer en la fe, conectar con
+      otros y vivir la esperanza de Cristo.
     actions:
-      - label: Descubrir Más
+      - label: Descubrir más
         type: button
         link: /about
     image:
-      src: /uploads/groups/men/varones-IMG-1186.jpg
+      src: /uploads/pages/congregation-IMG-1132.jpg
       alt: About
     _template: aboutus
-  - title: Vida en la Iglesia
-    description: >-
-      Fuimos diseñados para la relación y la conexión. La Voz ofrece tres
-      experiencias grupales: Grupos de primeros pasos, Grupos de conexión, y
-      Grupos de servicio.
+  - background: bg-primary-background
     items:
-      - cover: /uploads/coordinators/llamantha.png
-        title: Primeros Pasos
+      - icon:
+          name: BiBulb
+          color: purple
+          style: float
+        title: Planifica tu visita
+        actions:
+          - label: Planifica tu visita
+            type: link
+            link: /first-steps-form
+      - icon:
+          name: BiCalendarAlt
+          color: purple
+          style: float
+        title: Horario de servicios
+        actions:
+          - label: Horario de servicios
+            type: link
+            link: /service-times
+      - icon:
+          name: BiDonateHeart
+          color: purple
+          style: float
+        title: 'Haz tu donación '
+        actions:
+          - label: 'Haz tu donación '
+            type: link
+            link: /donations
+      - icon:
+          name: BiHomeSmile
+          color: purple
+          style: float
+        title: Recursos comunitarios
+        actions:
+          - label: Recursos comunitarios
+            type: link
+            link: /community-resources
+    _template: ctalinks
+  - background: bg-secondary-background-purple
+    headline: Vida en la iglesia
+    items:
+      - cover: /uploads/pages/congregation-IMG-1137.jpg
+        title: Primeros pasos
         text: >
-          ¿Nuevo en la fe o en la iglesia? Nuestras clases de Primeros Pasos te
+          ¿Nuevo en la fe o en la iglesia? Nuestras clases de primeros pasos te
           guiarán a conocer nuestras creencias, visión y cómo convertirte en
           miembro. Son cuatro clases diseñadas para ayudarte a comenzar con
           firmeza tu camino espiritual.
@@ -53,20 +89,21 @@ blocks:
           - label: Aprender más
             type: button
             link: /groups
-      - cover: /uploads/coordinators/llamantha.png
-        title: Conexiones (Grupos de Conexión)
+      - cover: /uploads/pages/congregation-IMG-1031.jpg
+        title: Grupos de conexión
         text: >
-          No fuimos creados para vivir la fe solos. Únete a un Grupo de Conexión
-          y crece en comunidad mientras compartes, aprendes y fortaleces tu vida
-          espiritual junto a otros.
+          ¿Te gustaría compartir tu fe con otros? No fuimos creados para vivir
+          la fe solos. Únete a un grupo de conexión y crece en comunidad
+          mientras compartes, aprendes y fortaleces tu vida espiritual junto a
+          otros.
         actions:
           - label: Aprender más
             type: button
             link: /groups
-      - cover: /uploads/coordinators/llamantha.png
-        title: Servicio
+      - cover: /uploads/pages/tech-IMG-1022.jpg
+        title: Servir
         text: >
-          En La Voz, creemos que cada persona tiene un propósito en el cuerpo de
+          En la Voz, creemos que cada persona tiene un propósito en el cuerpo de
           Cristo. Descubre cómo puedes servir con tus dones en los diferentes
           ministerios de la iglesia y ser parte activa de lo que Dios está
           haciendo.
@@ -75,85 +112,19 @@ blocks:
             type: button
             link: /groups
     _template: connections
-  - background: bg-primary
-    title: Últimos mensajes
-    limit: 3
-    actions:
-      - label: Ver todos
-        type: link
-        link: /messages
-    _template: latestmessages
-  - title: FAQ's
-    description: Preguntas frequentes
-    image:
-      src: /uploads/pages/exterior-IMG-1119.jpg
-      alt: La Voz FAQ Image
-    items:
-      - title: 1. ⁠¿Qué puedo esperar al asistir por primera vez?
-        text: |
-          En nuestra iglesia te recibirán con los brazos abiertos. Nuestro
-          servicio incluye alabanza, oración y un mensaje basado en la Palabra
-          de Dios. No importa si es tu primera vez en una iglesia, queremos que
-          te sientas en casa.
-      - title: 2. ¿Tienen ministerios para niños y jóvenes?
-        text: |
-          Sí. Contamos con clases bíblicas para niños durante el servicio, y
-          también reuniones y actividades especiales para adolescentes y
-          jóvenes. Nuestro deseo es que cada generación crezca en su fe y tenga
-          un espacio seguro para aprender y compartir.
-      - title: ⁠3. ¿Cómo puedo involucrarme o ser parte de la iglesia?
-        text: |
-          Hay muchas formas de participar como por ejemplo puedes unirte a un
-          grupo de estudio bíblico, asistir a nuestras reuniones semanales, o
-          servir en alguno de nuestros ministerios. También puedes hablar con
-          uno de nuestros líderes después del servicio o contactarnos por medio
-          del formulario en esta página.
-      - title: ⁠"4. ¿Y los niños?"
-        text: >
-          "¡Tenemos un espacio especial para ellos! Los niños tienen su propio
-
-          programa donde aprenden sobre el amor de Dios a través de juegos,
-
-          historias y actividades. Están bien cuidados por un equipo
-          comprometido y alegre."
-      - title: ⁠5. ¿Qué debo vestir?
-        text: >
-          No hay un código de vestimenta. Algunas personas vienen con ropa
-          casual y
-
-          otras un poco más formal. Ven como te sientas cómodo.
-      - title: ⁠6. ¿Qué pasa cuando llego?
-        text: >
-          Serás recibido con una sonrisa por nuestro equipo de bienvenida.
-
-          Si vienes con niños, te ayudaremos a registrarlos. Y si tienes
-          preguntas,
-
-          estaremos allí para ayudarte en todo lo que necesites.
-      - title: ⁠7. ¿Y si quiero quedarme después?
-        text: >
-          "¡Nos encantaría! Siempre hay oportunidades para conocernos mejor,
-          tomar un café
-
-          y, si deseas, conocer más sobre nuestros grupos o clases de Primeros
-          Pasos."
-    _template: freqaskedquestions
-  - title: Próximos Eventos
+  - background: bg-secondary-background-offwhite
+    headline: Próximos eventos
+    tagline: Eventos
+    description: Manténgase al tanto de lo que está sucediendo en la Iglesia La Voz
     limit: 3
     actions:
       - label: Ver todos
         type: button
         link: /events
     _template: latestevents
-  - title: 'Una Iglesia, Un Lugar Para Todos'
-    description: >-
-      Nunca es el plan de Dios que nos sintamos aislados y solos. ¿Tienes un
-      lugar donde puedes ser verdaderamente honesto acerca de lo que está
-      pasando en tu vida y en tu corazón? Ayudar a crear el ambiente donde usted
-      puede encontrar este tipo de conexión significativa es el latido del
-      corazón detrás de los grupos en la Iglesia de Definición. En Definition,
-      ofrecemos tres experiencias grupales: Grupos de conexión, Grupos
-      comunitarios y Grupos de atención.
+  - background: bg-primary-background
+    headline: 'Una iglesia, un lugar para todos'
+    description: ''
     items:
       - cover: /uploads/groups/kids/kidz-IMG-1177.jpg
         title: Niños
@@ -184,81 +155,83 @@ blocks:
             type: button
             link: /groups
     _template: groupsinfo
-  - background: bg-violet-50/80
+  - background: bg-secondary-background-gray
+    headline: Últimos mensajes
+    tagline: Mensajes
+    description: Vea nuestros mensajes más recientes
+    limit: 3
+    actions:
+      - label: Ver todos
+        type: button
+        link: /messages
+    _template: latestmessages
+  - background: bg-primary-background
+    headline: Preguntas frecuentes
+    tagline: FAQ
     image:
-      src:  /uploads/pages/congregation-IMG-1140.jpg
-      alt: La Voz Welcome Video
-    title: ¡Estamos listos para recibirte!
+      src: /uploads/pages/exterior-IMG-1119.jpg
+      alt: La Voz faq image
+    items:
+      - title: 1. ⁠¿Qué puedo esperar al asistir por primera vez?
+        text: |
+          En nuestra iglesia te recibirán con los brazos abiertos. Nuestro
+          servicio incluye alabanza, oración y un mensaje basado en la Palabra
+          de Dios. No importa si es tu primera vez en una iglesia, queremos que
+          te sientas en casa.
+      - title: 2. ¿Tienen ministerios para niños y jóvenes?
+        text: |
+          Sí. Contamos con clases bíblicas para niños durante el servicio, y
+          también reuniones y actividades especiales para adolescentes y
+          jóvenes. Nuestro deseo es que cada generación crezca en su fe y tenga
+          un espacio seguro para aprender y compartir.
+      - title: ⁠3. ¿Cómo puedo involucrarme o ser parte de la iglesia?
+        text: |
+          Hay muchas formas de participar como por ejemplo puedes unirte a un
+          grupo de estudio bíblico, asistir a nuestras reuniones semanales, o
+          servir en alguno de nuestros ministerios. También puedes hablar con
+          uno de nuestros líderes después del servicio o contactarnos por medio
+          del formulario en esta página.
+      - title: ⁠4. ¿Y los niños?
+        text: >
+          ¡Tenemos un espacio especial para ellos! Los niños tienen su propio
+          programa donde aprenden sobre el amor de Dios a través de juegos,
+          historias y actividades. Están bien cuidados por un equipo
+          comprometido y alegre.
+      - title: ⁠5. ¿Qué debo vestir?
+        text: >
+          No hay un código de vestimenta. Algunas personas vienen con ropa
+          casual y otras un poco más formal. Ven como te sientas cómodo.
+      - title: ⁠6. ¿Qué pasa cuando llego?
+        text: >
+          Serás recibido con una sonrisa por nuestro equipo de bienvenida.   Si
+          vienes con niños, te ayudaremos a registrarlos. Y si tienes preguntas,
+          estaremos allí para ayudarte en todo lo que necesites.
+      - title: ⁠7. ¿Y si quiero quedarme después?
+        text: >
+          ¡Nos encantaría! Siempre hay oportunidades para conocernos mejor,
+          tomar un café y, si deseas, conocer más sobre nuestros grupos o clases
+          de primeros pasos.
+    _template: freqaskedquestions
+  - background: bg-primary
+    headline: ¡Estamos listos para recibirte!
     description: >-
       ¡Nos alegra que estés considerando visitarnos! Queremos hacerte sentir
-      como en casa desde el primer momento. Haznos saber que vienes llenando un peqxueño formulario
-      (opcional), o simplemente llega. Te esperamos con los brazos abiertos.
+      como en casa desde el primer momento. Haznos saber que vienes llenando un
+      pequeño formulario (opcional), o simplemente llega. Te esperamos con los
+      brazos abiertos.
+    image:
+      src: /uploads/pages/congregation-IMG-1140.jpg
+      alt: La Voz welcome video
     actions:
-      - label: Empieza aquí
-        type: button
-        link: /first-steps
       - label: Planifica tu visita
-        type: link
+        type: button
         link: /first-steps-form
     _template: cta
-  - title: Tiene preguntas? Contáctenos
+  - headline: ¿Tiene preguntas? Contáctanos
     actions:
-      - label: Contáctenos
-        type: link
+      - label: Contáctanos
+        type: button
         link: /contact
     _template: contactsection
-  - title: cta links
-    description: ''
-    items:
-      - icon:
-          name: BiFoodMenu
-          color: purple
-          style: float
-        title: Complete el formulario de entrega
-        text: |
-          Llene un un breve formulario para compartir con nosotros su área de
-          interés para servir.
-        actions:
-          - label: Planifica tu visita
-            type: link
-            link: /contact
-      - icon:
-          name: BiChalkboard
-          color: purple
-          style: float
-        title: Asistir a la orientación de servicio
-        text: |
-          Elige un equipo, aprende sobre las expectativas de servicio, y hacer
-          una prueba con un equipo para ver si es un "right fit" durante la
-          orientación.
-        actions:
-          - label: Horario de servicios
-            type: link
-            link: /contact
-      - icon:
-          name: BiChalkboard
-          color: purple
-          style: float
-        title: Unirte a un equipo
-        text: |
-          Después de la orientación, puede unirse a su equipo seleccionado para
-          comenzar a servir.
-        actions:
-          - label: Haz tu Donación
-            type: link
-            link: /contact
-      - icon:
-          name: BiChalkboard
-          color: purple
-          style: float
-        title: Unirte a un equipo
-        text: |
-          Después de la orientación, puede unirse a su equipo seleccionado para
-          comenzar a servir.
-        actions:
-          - label: Nuestro Equipo
-            type: link
-            link: /contact
-    _template: ctalinks
 ---
 

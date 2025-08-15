@@ -1,51 +1,127 @@
 import type { Template } from "tinacms";
-import { PageBlocksTeammember, PageBlocksTeammemberTeammembers } from "@/tina/__generated__/types";
+import {
+  PageBlocksTeammember,
+  PageBlocksTeammemberTeammembers,
+} from "@/tina/__generated__/types";
 import { Section } from "@/components/layout/section";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, Card2, CardContent, CardHeader2, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import Image from "next/image";
 import { tinaField } from "tinacms/dist/react";
-import { sectionBlockSchemaField } from '@/components/layout/section';
-
-//to-do 96: update the ui of the teammembers block component in the /about page FRONTEND
+import { sectionBlockSchemaField } from "@/components/layout/section";
 
 export const TeamMember = ({ data }: { data: PageBlocksTeammember }) => {
   return (
-    <Section  background={data.background!}>
-      <div className="text-center">
-        <h2 className="text-title text-3xl font-nunito font-medium" data-tina-field={tinaField(data, 'title')}>{data.title}</h2>
-        <p className="text-body mt-6" data-tina-field={tinaField(data, 'description')}>{data.description}</p>
-      </div>
-      <div className="mt-8 grid grid-cols-2 md:grid-cols-12 gap-3.75 mx-6 md:mt-12">
-        {data.teammembers?.map((teammember, index) => (
-          <TeammemberCard key={index} teammember={teammember!} />
-        ))}
+    <Section background={data.background!} className="mx-auto">
+      <div className="flex w-full mx-auto px-4 md:px-5 py-10 md:py-15 lg:py-20 flex-col items-center gap-5 lg:gap-5">
+        {/* Header Section */}
+        <div className="flex w-full max-w-none flex-col items-center text-center gap-5 mx-auto">
+          <h2
+            data-tina-field={tinaField(data, "headline")}
+            className="font-nunito font-semibold text-pretty text-center text-[34px] leading-[44px] md:text-5xl md:leading-[60px] text-foreground max-w-xl"
+          >
+            {data.headline}
+          </h2>
+          <div
+            data-tina-field={tinaField(data, "description")}
+            className="font-normal text-balance text-center text-base leading-[24px] md:text-xl md:leading-[28px] max-w-lg"
+          >
+            {data.description}
+          </div>
+        </div>
+        <div className="grid grid-cols-2 md:grid-cols-12 gap-5 px-4 md:px-5 w-full">
+          {data.teammembers?.map((teammember, index) => (
+            <TeammemberCard key={index} teammember={teammember!} />
+          ))}
+        </div>
       </div>
     </Section>
   );
 };
 
-const TeammemberCard = ({ teammember }: { teammember: PageBlocksTeammemberTeammembers }) => {
+const TeammemberCard = ({
+  teammember,
+}: {
+  teammember: PageBlocksTeammemberTeammembers;
+}) => {
   return (
-    <Card className="col-span-1 md:col-span-3 mb-6">
-      <CardContent className="grid grid-cols-2 gap-3 pt-6">
-        <Avatar className="size-9" data-tina-field={tinaField(teammember, 'avatar')}>
-          {teammember.avatar && (
-            <AvatarImage alt={teammember.coordinator!} src={teammember.avatar} loading="lazy" width="120" height="120" />
-          )}
-          <AvatarFallback>{teammember.coordinator!.split(" ").map((word) => word[0]).join("")}</AvatarFallback>
-        </Avatar>
 
-        <div>
-          <h3 className="font-nunito font-medium" data-tina-field={tinaField(teammember, 'coordinator')}>{teammember.coordinator}</h3>
+    <Card2 className="border border-grey-0 flex flex-col col-span-2 md:col-span-4 text-primary-foreground">
+      {/* Image Container with hover buttons */}
+      <CardHeader2 className="relative w-full h-64 lg:h-80 p-0 overflow-hidden group rounded-xl">
+        {teammember.avatar && (
+          <>
+            <Image
+              data-tina-field={tinaField(teammember, "avatar")}
+              src={teammember.avatar}
+              alt={teammember.coordinator || ""}
+              fill
+              className="object-cover object-center"
+            />
+            <div className="absolute inset-0 opacity-0 group-hover:opacity-20 group-hover:bg-accent transition-opacity duration-300 pointer-events-none" />
+          </>
+        )}
 
-          <span className="text-muted-foreground block text-sm tracking-wide" data-tina-field={tinaField(teammember, 'role')}>{teammember.role}</span>
+        {/* Hover overlay with buttons */}
+        {teammember.actions && teammember.actions.length > 0 && (
+          <div className="absolute inset-0 z-30 bg-background/35 dark:bg-zinc-900/35 backdrop-blur-[2px] ring-1 ring-border/20 flex items-end justify-start opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+             <div className="flex flex-row gap-3 p-4 md:p-6">
+              {teammember.actions &&
+                teammember.actions.map((action, idx) => (
+                  <div
+                    key={action!.label}
+                    data-tina-field={tinaField(action)}
+                    className="bg-foreground/10 rounded-[calc(var(--radius-sm)+0.125rem)] border p-0.5 translate-y-3 group-hover:translate-y-0 transition-transform duration-300 ease-out"
+                    style={{ transitionDelay: `${idx * 60}ms` }}
+                  >
+                    <Button
+                      asChild
+                      size="sm"
+                      variant={action!.type === "link" ? "ghost" : "secondary"}
+                      className=""
+                    >
+                      <Link href={action!.link!}>
+                        <span className="text-nowrap">{action!.label}</span>
+                      </Link>
+                    </Button>
+                  </div>
+                ))}
+            </div>
+          </div>
+        )}
+      </CardHeader2>
+      <CardHeader>
+        <CardTitle>
+          <div>
+            <h3
+              className="text-[19px] leading-[24px] md:text-[19px] md:leading-[24px]"
+              data-tina-field={tinaField(teammember, "coordinator")}
+            >
+              {teammember.coordinator}
+            </h3>
 
-          <blockquote className="mt-3" data-tina-field={tinaField(teammember, 'quote')}>
-            <p className="text-gray-700 dark:text-gray-300">{teammember.quote}</p>
+            <span
+              className="text-muted-foreground block text-sm tracking-wide"
+              data-tina-field={tinaField(teammember, "role")}
+            >
+              {teammember.role}
+            </span>
+          </div>
+        </CardTitle>
+      </CardHeader>
+      <CardContent className="flex gap-5 pt-6">
+          <blockquote
+            className="mt-3"
+            data-tina-field={tinaField(teammember, "quote")}
+          >
+            <p className="text-gray-700 dark:text-gray-300">
+              {teammember.quote}
+            </p>
           </blockquote>
-        </div>
       </CardContent>
-    </Card>
+    </Card2>
   );
 };
 
@@ -68,8 +144,8 @@ export const teammemberBlockSchema: Template = {
     sectionBlockSchemaField as any,
     {
       type: "string",
-      label: "Title",
-      name: "title",
+      label: "Headline",
+      name: "headline",
     },
     {
       type: "string",
@@ -86,7 +162,8 @@ export const teammemberBlockSchema: Template = {
       name: "teammembers",
       ui: {
         defaultItem: {
-          quote: "There are only two hard things in Computer Science: cache invalidation and naming things.",
+          quote:
+            "There are only two hard things in Computer Science: cache invalidation and naming things.",
           coordinator: "Phil Karlton",
         },
         itemProps: (item) => {

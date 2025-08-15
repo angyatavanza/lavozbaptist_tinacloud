@@ -14,7 +14,7 @@ interface TagListItemProps {
 
 export function TagList({ className, children }: TagListProps) {
   return (
-    <ul role="list" className={clsx(className, "flex flex-wrap gap-4")}>
+    <ul role="list" className={clsx(className, "flex flex-wrap gap-5")}>
       {children}
     </ul>
   );

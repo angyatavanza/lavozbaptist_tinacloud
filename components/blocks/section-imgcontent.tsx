@@ -1,49 +1,119 @@
+import Link from "next/link";
 import type { Template } from "tinacms";
-import { PageBlocksContentandimage, PageBlocksContentandimageContentandimages } from "@/tina/__generated__/types";
-import { Section } from "@/components/layout/section";
+import {
+  PageBlocksContentandimage,
+  PageBlocksContentandimageContentandimages,
+} from "@/tina/__generated__/types";
 import Image from "next/image";
-import { Card, CardContent } from "@/components/ui/card";
+import { Section, sectionBlockSchemaField } from "@/components/layout/section";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardTitle,
+  CardDescription,
+  CardAction,
+} from "@/components/ui/card";
 import { tinaField } from "tinacms/dist/react";
-import { sectionBlockSchemaField } from '@/components/layout/section';
-import { BlogSection } from "../connections-placeholder";
-//done 50: serve page: add button to mission trips, change the field name in the template for contentandimage contentandimagevariant
-//to-do 97: update the ui of the ContentAndImage block component in the /content/community+serve pages FRONTEND
-//to-do 57: replace text + images in content/serve and details components TINA CMS CONTENT
+import { ArrowRight } from "lucide-react";
 
-export const ContentAndImage = ({ data }: { data: PageBlocksContentandimage }) => {
+export const ContentAndImage = ({
+  data,
+}: {
+  data: PageBlocksContentandimage;
+}) => {
   return (
-    <Section  background={data.background!}>
-      <div className="text-center">
-        <h2 className="text-title text-3xl font-nunito font-medium" data-tina-field={tinaField(data, 'title')}>{data.title}</h2>
-        <p className="text-body mt-6" data-tina-field={tinaField(data, 'description')}>{data.description}</p>
+    <Section background={data.background!} className="mx-auto">
+      <div className="flex w-full mx-auto px-4 md:px-30 py-10 md:py-15 lg:py-20 flex-col items-center gap-5 lg:gap-5">
+        {/* Header Section */}
+        <div className="flex w-full max-w-none flex-col items-center text-center gap-5 mx-auto">
+          <h2
+            data-tina-field={tinaField(data, "headline")}
+            className="font-nunito font-semibold text-pretty text-center text-[34px] leading-[44px] md:text-5xl md:leading-[60px] text-foreground max-w-2xl"
+          >
+            {data.headline}
+          </h2>
+          <div
+            data-tina-field={tinaField(data, "description")}
+            className="font-normal text-balance text-center text-base leading-[24px] md:text-xl md:leading-[28px] max-w-xl"
+          >
+            {data.description}
+          </div>
+        </div>
+
+        <div className="grid grid-cols-2 md:grid-cols-12 gap-5 px-4 md:px-5 w-full">
+          {data.contentandimages?.map((contentandimage, index) => (
+            <ContentandimageCard
+              key={index}
+              contentandimage={contentandimage!}
+            />
+          ))}
+        </div>
+
+        {/* Slider/Pagination */}
+        <div className="flex items-center gap-5">
+          <div className="w-16 h-2 bg-primary"></div>
+          <div className="w-16 h-2 bg-border"></div>
+        </div>
       </div>
-      <div className="mt-8 grid grid-cols-2 md:grid-cols-12 gap-3.75 mx-6 md:mt-12">
-        {data.contentandimages?.map((contentandimage, index) => (
-          <ContentandimageCard key={index} contentandimage={contentandimage!} />
-        ))}
-      </div>
-      <BlogSection />
     </Section>
   );
 };
 
-const ContentandimageCard = ({ contentandimage }: { contentandimage: PageBlocksContentandimageContentandimages }) => {
+const ContentandimageCard = ({
+  contentandimage,
+}: {
+  contentandimage: PageBlocksContentandimageContentandimages;
+}) => {
   return (
-    <Card className="col-span-1 md:col-span-6 mb-6">
-      <CardContent className="grid grid-cols-2 gap-3 pt-6">
-        <div  data-tina-field={tinaField(contentandimage, 'img')}>
-          {contentandimage.img && (
-            <Image alt={contentandimage.quotetitle!} src={contentandimage.img} loading="lazy" width="120" height="120" />
+    <Card className="col-span-2 md:col-span-6 lg:col-span-6 3xl:col-span-6 bg-card border border-border p-3 md:p-4 grid grid-cols-2 md:grid-cols-12 gap-4 md:gap-5 group hover:shadow-lg transition-shadow overflow-hidden">
+      {/* Title and Description (left) + Image (right) in one content area */}
+      <CardContent className="col-span-2 md:col-span-12">
+        <div className="grid grid-cols-2 md:grid-cols-12 gap-4 md:gap-5 items-start">
+          <div className="col-span-2 md:col-span-7">
+          <CardTitle data-tina-field={tinaField(contentandimage, "title")} className="mb-2">
+            {contentandimage.title}
+          </CardTitle>
+          <CardDescription data-tina-field={tinaField(contentandimage, "description")} className="mb-4">
+            {contentandimage.description}
+          </CardDescription>
+          <CardAction>
+          <div className="flex flex-col items-start justify-start gap-3 md:gap-5 md:flex-row">
+            {contentandimage.actions &&
+              contentandimage.actions.map((action) => (
+                <Button
+                  key={action!.label}
+                  asChild
+                  size="default"
+                  variant={action!.type === "link" ? "ghost" : "default"}
+                  className=""
+                >
+                  <Link
+                    href={action!.link!}
+                    data-tina-field={tinaField(action)}
+                  >
+                    <span className="text-nowrap">{action!.label}</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
+                </Button>
+              ))}
+          </div>
+        </CardAction>
+          </div>
+          {contentandimage.image?.src && (
+            <div className="col-span-2 md:col-span-5">
+              <div className="relative w-full aspect-[4/3] rounded-xl overflow-hidden">
+                <Image
+                  data-tina-field={tinaField(contentandimage, "image")}
+                  src={contentandimage.image.src}
+                  alt={contentandimage.image.alt || ""}
+                  fill
+                  sizes="(min-width:768px) 41vw, 100vw"
+                  className="object-cover object-center"
+                />
+              </div>
+            </div>
           )}
-        </div>
-        <div>
-          <h3 className="font-nunito font-medium" data-tina-field={tinaField(contentandimage, 'quotetitle')}>{contentandimage.quotetitle}</h3>
-
-          <span className="text-muted-foreground block text-sm tracking-wide" data-tina-field={tinaField(contentandimage, 'requirements')}>{contentandimage.requirements}</span>
-
-          <blockquote className="mt-3" data-tina-field={tinaField(contentandimage, 'quote')}>
-            <p className="text-gray-700 dark:text-gray-300">{contentandimage.quote}</p>
-          </blockquote>
         </div>
       </CardContent>
     </Card>
@@ -56,11 +126,39 @@ export const contentandimageBlockSchema: Template = {
   ui: {
     previewSrc: "/blocks/contentandimage.png",
     defaultItem: {
+      headline: "Built to cover your needs",
+      description: "We have a lot of features to cover your needs",
+      icon: {
+        color: "",
+        style: "float",
+        name: "",
+      },
       contentandimages: [
         {
-          quote:
-            "There are only two hard things in Computer Science: cache invalidation and naming things.",
-          quotetitle: "Phil Karlton",
+          title: "Niños",
+          description:
+            "Un espacio seguro y divertido donde los más pequeños aprenden sobre el amor de Dios a través de historias bíblicas, juegos y actividades que fortalecen su fe desde temprana edad.",
+          icon: {
+            name: "BiBookmarks",
+            color: "primary",
+            size: "medium",
+          },
+          image: {
+            src: "/uploads/groups/kids/kidz-IMG-1173.jpg",
+            alt: "Kids group image",
+          },
+          actions: [
+            {
+              label: "Get Started",
+              type: "button",
+              link: "/",
+            },
+            {
+              label: "Placeholder Button",
+              type: "link",
+              link: "/",
+            },
+          ],
         },
       ],
     },
@@ -69,8 +167,8 @@ export const contentandimageBlockSchema: Template = {
     sectionBlockSchemaField as any,
     {
       type: "string",
-      label: "Title",
-      name: "title",
+      label: "Headline",
+      name: "headline",
     },
     {
       type: "string",
@@ -87,28 +185,41 @@ export const contentandimageBlockSchema: Template = {
       name: "contentandimages",
       ui: {
         defaultItem: {
-          quote: "There are only two hard things in Computer Science: cache invalidation and naming things.",
-          quotetitle: "Phil Karlton",
+          title:
+            "There are only two hard things in Computer Science: cache invalidation and naming things.",
+          description: "Phil Karlton",
+          actions: [
+            {
+              label: "Get Started",
+              type: "button",
+              link: "/",
+            },
+            {
+              label: "Placeholder Button",
+              type: "link",
+              link: "/",
+            },
+          ],
         },
         itemProps: (item) => {
           return {
-            label: `${item.quote} - ${item.quotetitle}`,
+            label: `${item.title} - ${item.description}`,
           };
         },
       },
       fields: [
         {
           type: "string",
-          ui: {
-            component: "textarea",
-          },
-          label: "Quote",
-          name: "quote",
+          label: "Section Img Content Title",
+          name: "title",
         },
         {
           type: "string",
-          label: "Quote Title",
-          name: "quotetitle",
+          ui: {
+            component: "textarea",
+          },
+          label: "Section Img Content Description",
+          name: "description",
         },
         {
           type: "string",
@@ -116,10 +227,57 @@ export const contentandimageBlockSchema: Template = {
           name: "requirements",
         },
         {
-          type: "image",
+          type: "object",
           label: "Image",
-          name: "img",
-        }
+          name: "image",
+          fields: [
+            {
+              name: "src",
+              label: "Image Source",
+              type: "image",
+            },
+            {
+              name: "alt",
+              label: "Alt Text",
+              type: "string",
+            },
+          ],
+        },
+        {
+          label: "Actions",
+          name: "actions",
+          type: "object",
+          list: true,
+          ui: {
+            defaultItem: {
+              label: "Action Label",
+              type: "button",
+              link: "/",
+            },
+            itemProps: (item) => ({ label: item.label }),
+          },
+          fields: [
+            {
+              label: "Label",
+              name: "label",
+              type: "string",
+            },
+            {
+              label: "Type",
+              name: "type",
+              type: "string",
+              options: [
+                { label: "Button", value: "button" },
+                { label: "Link", value: "link" },
+              ],
+            },
+            {
+              label: "Link",
+              name: "link",
+              type: "string",
+            },
+          ],
+        },
       ],
     },
   ],

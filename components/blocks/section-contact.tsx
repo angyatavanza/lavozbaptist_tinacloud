@@ -8,8 +8,6 @@ import { tinaField } from "tinacms/dist/react";
 import type { Template } from "tinacms";
 import { PageBlocksContactsection } from "@/tina/__generated__/types";
 
-//done 16: add data.title and data.actions to section-contact
-//done 26: add contactsection to sections
 
 export const ContactSection = ({
   data,
@@ -17,28 +15,28 @@ export const ContactSection = ({
   data: PageBlocksContactsection;
 }) => {
   return (
-    <Container className="mt-20 md:mt-28">
-      <FadeIn className="-mx-6 rounded-4xl bg-primary px-6 py-20 md:mx-0 md:py-32 md:px-12">
+    <Container className="mt-10 md:mt-15 lg:mt-20">
+      <FadeIn className="-mx-6 rounded-4xl bg-sidebar-background px-6 py-20 md:mx-0 md:py-32 lg:px-12">
         <div className="max-w-4xl mx-auto">
           <h2
-            className=" text-3xl font-nunito font-medium text-white [text-wrap:balance] md:text-4xl"
-            data-tina-field={tinaField(data, "title")}
+            className="font-nunito font-semibold text-balance text-left text-[34px] leading-[44px] md:text-5xl md:leading-[60px] text-sidebar-foreground md:mb-10"
+            data-tina-field={tinaField(data, "headline")}
           >
-            {data.title}
+            {data.headline}
           </h2>
-          <div className="mt-6 flex">
+          <div className="mt-5 flex">
             {data.actions &&
               data.actions.map((action) => (
                 <div
                   key={action!.label}
                   data-tina-field={tinaField(action)}
-                  className="bg-foreground/10 rounded-[calc(var(--radius-xl)+0.125rem)] border p-0.5"
+                  className="bg-foreground/10 rounded-[calc(var(--radius-sm)+0.125rem)] border p-0.5"
                 >
                   <Button
                     asChild
-                    size="lg"
-                    variant={action!.type === "link" ? "ghost" : "default"}
-                    className="rounded-xl px-5 text-base"
+                    size="default"
+                    variant={action!.type === "link" ? "outline" : "secondary"}
+                    className=""
                   >
                     <Link href={action!.link!}>
                       <span className="text-nowrap">{action!.label}</span>
@@ -47,13 +45,12 @@ export const ContactSection = ({
                 </div>
               ))}
           </div>
-          <div className="mt-10 border-t border-white/10 pt-10">
-            <h3 className=" text-base font-nunito font-medium text-white">
+          <div className="mt-10 border-t border-sidebar-accent pt-10">
+            <h4 className="text-base font-nunito font-medium text-sidebar-foreground">
               Nuestra ubicación y horario de servicios
-            </h3>
+            </h4>
             <ServiceTimes
-              invert
-              className="mt-6 grid grid-cols-2 gap-3.75 md:grid-cols-12"
+              className="mt-6 grid grid-cols-2 md:grid-cols-12 gap-5 px-4 md:px-5"
             />
           </div>
         </div>
@@ -68,7 +65,7 @@ export const contactsectionBlockSchema: Template = {
   ui: {
     previewSrc: "/blocks/contactsection.png",
     defaultItem: {
-      title: "Start Building",
+      headline: "Start Building",
       description:
         "Get started with TinaCMS today and take your content management to the next level.",
       actions: [
@@ -88,8 +85,8 @@ export const contactsectionBlockSchema: Template = {
   fields: [
     {
       type: "string",
-      label: "Title",
-      name: "title",
+      label: "Headline",
+      name: "headline",
     },
     {
       label: "Actions",

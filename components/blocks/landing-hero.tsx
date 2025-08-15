@@ -15,13 +15,6 @@ import { TextEffect } from "../motion-primitives/text-effect";
 import HeroVideoDialog from "@/components/ui/hero-video-dialog";
 import { Transition } from "motion/react";
 
-//done 2: embed video from vimeo
-//done 3: change video type to be vimeo + make video autoplay
-//done 4: fix thumbnail errors + move both headline and tagline to be an overlay over video + move tagline so it is above the headline
-//done 5: update herocontent component to match landing-hero
-//done 6: fix problem with vimeo + extend the width of the div for the hero video to be full-width + remove the white looking border around the video + fix the section width of the section background of the blocks 
-//done 17: change the button in the hero section to "outline" : "default"
-
 const transitionVariants = {
   container: {
     visible: {
@@ -80,18 +73,18 @@ export const Hero = ({ data }: { data: PageBlocksHero }) => {
           />
           <ImageBlock image={data.image} />
           {/* Overlay content with grid system */}
-          <div className="absolute inset-0 z-20 flex items-center justify-center px-4 md:px-18">
-            <div className="w-full max-w-7xl grid grid-cols-2 md:grid-cols-12 gap-3.75">
-              <div className="col-span-2 md:col-span-8 md:col-start-3 flex flex-col items-center text-center gap-1 md:gap-2">
+          <div className="absolute inset-0 z-20 flex items-center justify-start px-4 md:px-18">
+            <div className="w-full max-w-7xl grid grid-cols-2 md:grid-cols-12 gap-5">
+              <div className="col-span-2 md:col-span-8 md:col-start-3 flex flex-col items-start text-left gap-5 md:gap-5">
                 {data.tagline && (
-                  <div data-tina-field={tinaField(data, "tagline")}>
+                  <div data-tina-field={tinaField(data, "tagline")} className="hidden md:block">
                     <TextEffect
                       per="line"
                       preset="fade-in-blur"
                       speedSegment={0.3}
                       delay={0.5}
                       as="p"
-                      className="font-nunito font-bold text-white/60 text-sm md:text-base leading-6 max-w-md"
+                      className="font-nunito font-medium text-balance text-left text-base leading-[24px] text-white/60 uppercase mx-0 mt-6"
                     >
                       {data.tagline!}
                     </TextEffect>
@@ -106,7 +99,7 @@ export const Hero = ({ data }: { data: PageBlocksHero }) => {
                       preset="fade-in-blur"
                       speedSegment={0.3}
                       as="h1"
-                      className="hidden lg:block font-nunito font-medium text-white text-[40px] leading-[52px] md:text-6xl md:leading-[76px]"
+                      className="font-nunito font-semibold text-white text-[40px] leading-[52px] md:text-6xl md:leading-[76px]"
                     >
                       {data.headline!}
                     </TextEffect>
@@ -114,14 +107,14 @@ export const Hero = ({ data }: { data: PageBlocksHero }) => {
                 )}
                 <AnimatedGroup
                   variants={transitionVariants}
-                  className="flex flex-col items-center justify-center gap-2 md:gap-2 md:flex-row"
+                  className="flex flex-row items-start justify-start gap-3 md:gap-5"
                 >
                   {data.actions &&
                     data.actions.map((action) => (
                       <div
                         key={action!.label}
                         data-tina-field={tinaField(action)}
-                        className="bg-foreground/10 rounded-[calc(var(--radius-xl)+0.125rem)] border p-[0.4px] w-full md:w-auto"
+                        className="bg-foreground/10 rounded-[calc(var(--radius-sm)+0.125rem)] border"
                       >
                         <Button
                           asChild
@@ -129,7 +122,7 @@ export const Hero = ({ data }: { data: PageBlocksHero }) => {
                           variant={
                             action!.type === "link" ? "outline" : "default"
                           }
-                          className="rounded-xl py-[1.1px] md:py-[3.6px] w-full md:w-auto"
+                          className=""
                         >
                           <Link href={action!.link!}>
                             <span className="text-nowrap">{action!.label}</span>

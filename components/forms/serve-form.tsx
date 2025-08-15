@@ -5,8 +5,6 @@ import { RadioInput } from "./radio-input";
 import { Button } from "@/components/ui/second-button";
 import MailSentState from "@/components/forms/mail-sent-state";
 import { useState } from "react";
-//done 49: add functionality to serve-form  TINA CMS/BACKEND
-
 
 interface ServeFormInputs {
   name: string;
@@ -64,9 +62,9 @@ export const ServeForm: React.FC<ServeFormProps> = ({
   return (
     <FadeIn>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <h2 className=" text-base font-nunito font-medium text-primary">
-          Tiene preguntas? Contáctenos un mensaje:
-        </h2>
+        <h4 className="text-base font-nunito font-medium text-primary">
+        Cuéntanos en qué área te gustaría servir:
+        </h4>
 
         {hasError && (
           <p className="text-red-500 text-sm mt-2">
@@ -119,7 +117,7 @@ export const ServeForm: React.FC<ServeFormProps> = ({
                 Mi edad:
               </legend>
             </fieldset>
-            <div className="mt-6 grid grid-cols-2 md:grid-cols-12 gap-3.75">
+            <div className="mt-6 grid grid-cols-2 md:grid-cols-12 gap-5">
               {["13 - 28", "29 - 44", "45 - 60", "61 - 70"].map((value) => (
                 <div key={value} className="col-span-1 md:col-span-6">
                   <RadioInput
@@ -142,7 +140,7 @@ export const ServeForm: React.FC<ServeFormProps> = ({
                 ¿Qué área le interesa servir?
               </legend>
             </fieldset>
-            <div className="mt-6 grid grid-cols-2 md:grid-cols-12 gap-3.75">
+            <div className="mt-6 grid grid-cols-2 md:grid-cols-12 gap-5">
               {[
                 "Compañerismo",
                 "Comunitario",
@@ -150,6 +148,7 @@ export const ServeForm: React.FC<ServeFormProps> = ({
                 "Jóvenes",
                 "Niños",
                 "Bienvenida",
+                "Limpieza",
                 "Transportación",
               ].map((value) => (
                 <div key={value} className="col-span-1 md:col-span-6">

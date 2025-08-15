@@ -31,7 +31,7 @@ function BlockquoteWithImage({
   return (
     <figure
       className={clsx(
-        "grid grid-cols-2 items-center gap-x-4 gap-y-8 md:grid-cols-12 md:grid-rows-[1fr,auto,auto,1fr] md:gap-x-10 lg:gap-x-16",
+        "grid grid-cols-2 md:grid-cols-12 gap-5 px-4 md:px-5 items-center md:grid-rows-[1fr,auto,auto,1fr] ",
         className
       )}
     >

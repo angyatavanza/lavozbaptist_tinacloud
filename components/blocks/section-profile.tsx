@@ -1,57 +1,160 @@
+import React from "react";
+import Image from "next/image";
+import Link from "next/link";
 import type { Template } from "tinacms";
-import { PageBlocksProfile, PageBlocksProfileProfiles } from "@/tina/__generated__/types";
+import { Button } from "@/components/ui/button";
+import {
+  PageBlocksProfile,
+  PageBlocksProfileImage,
+} from "@/tina/__generated__/types";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card, CardContent } from "@/components/ui/card";
 import { tinaField } from "tinacms/dist/react";
-import { Section, sectionBlockSchemaField } from '@/components/layout/section';
+import { AnimatedGroup } from "@/components/motion-primitives/animated-group";
+import { Section, sectionBlockSchemaField } from "@/components/layout/section";
 import { Blockquote } from "@/components/ui/blockquote";
+import { TextEffect } from "../motion-primitives/text-effect";
+import { Transition } from "motion/react";
 
+const transitionVariants = {
+  container: {
+    visible: {
+      transition: {
+        staggerChildren: 0.05,
+        delayChildren: 0.75,
+      },
+    },
+  },
+  item: {
+    hidden: {
+      opacity: 0,
+      filter: "blur(12px)",
+      y: 12,
+    },
+    visible: {
+      opacity: 1,
+      filter: "blur(0px)",
+      y: 0,
+      transition: {
+        type: "spring",
+        bounce: 0.3,
+        duration: 1.5,
+      } as Transition,
+    },
+  },
+};
 export const Profile = ({ data }: { data: PageBlocksProfile }) => {
   return (
-    <Section  background={data.background!}>
-      <div className="text-center">
-        <h2 className="text-title text-3xl font-nunito font-medium" data-tina-field={tinaField(data, 'title')}>{data.title}</h2>
-        <p className="text-body mt-6" data-tina-field={tinaField(data, 'description')}>{data.description}</p>
-      </div>
-      <div className="mt-8 grid grid-cols-2 md:grid-cols-12 gap-3.75 mx-6 md:mt-12">
-        {data.profiles?.map((profile, index) => (
-          <ProfileCard key={index} profile={profile!} />
-        ))}
+    <Section background={data.background!} className="mx-auto">
+      <div className="grid grid-cols-2 md:grid-cols-12 gap-5 px-4 md:px-5 items-center">
+        {/* Image Section */}
+        {data.image && (
+          <div
+            className="col-span-2 md:col-span-6 relative"
+            data-tina-field={tinaField(data, "image")}
+          >
+            <div className="relative h-[490px] aspect-[4/3] w-full">
+              {/* Image container with padding from edges */}
+              <div className="absolute top-5 left-6 right-6 bottom-5 z-20">
+                <ImageBlock image={data.image} />
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Content Section */}
+        <div className="col-span-2 md:col-span-6 flex flex-col gap-5">
+          {/* Tagline header (Headline 06 in QBDS Web+Responsive 20/28 BDM) */}
+          {data.tagline && (
+            <div data-tina-field={tinaField(data, "tagline")}>
+              <TextEffect
+                per="line"
+                preset="fade-in-blur"
+                speedSegment={0.3}
+                delay={0.5}
+                as="p"
+                className="font-nunito font-medium text-balance text-left text-base leading-[24px] text-primary uppercase mx-auto mt-6"
+              >
+                {data.tagline!}
+              </TextEffect>
+            </div>
+          )}
+
+          {/* Main headline (Headline 01 in QBDS Web 48/60 B + Responsive 34/44 B)*/}
+          {data.headline && (
+            <div data-tina-field={tinaField(data, "headline")}>
+              <TextEffect
+                preset="fade-in-blur"
+                speedSegment={0.3}
+                as="h2"
+                className="font-nunito font-semibold text-balance text-left text-[28px] leading-[36px] md:text-[40px] md:leading-[52px] text-foreground max-w-lg"
+              >
+                {data.headline!}
+              </TextEffect>
+            </div>
+          )}
+
+          {/* Description (Body 01 in QBDS Web 20/28 MR + Responsive 16/24 MR)*/}
+          {data.description && (
+            <div data-tina-field={tinaField(data, "description")}>
+              <TextEffect
+                per="line"
+                preset="fade-in-blur"
+                speedSegment={0.3}
+                delay={0.5}
+                as="p"
+                className="font-normal text-balance text-left text-base leading-[24px] max-w-xl md:mb-5"
+              >
+                {data.description!}
+              </TextEffect>
+            </div>
+          )}
+
+          {/* Actions/Buttons */}
+          <AnimatedGroup
+            variants={transitionVariants}
+            className="flex flex-wrap gap-5"
+          >
+            {data.actions &&
+              data.actions.map((action) => (
+                <div
+                  key={action!.label}
+                  data-tina-field={tinaField(action)}
+                  className="bg-foreground/10 rounded-[calc(var(--radius-sm)+0.125rem)] border p-0.5"
+                >
+                  <Button
+                    asChild
+                    size="default"
+                    variant={action!.type === "link" ? "outline" : "default"}
+                    className=""
+                  >
+                    <Link href={action!.link!}>
+                      <span className="text-nowrap">{action!.label}</span>
+                    </Link>
+                  </Button>
+                </div>
+              ))}
+          </AnimatedGroup>
+        </div>
       </div>
     </Section>
   );
 };
 
-const ProfileCard = ({ profile }: { profile: PageBlocksProfileProfiles }) => {
-  return (
-    <Card className="col-span-1 md:col-span-6 mb-6">
-      <CardContent className="grid grid-cols-2 gap-3 pt-6">
-        <Avatar className="size-9" data-tina-field={tinaField(profile, 'avatar')}>
-          {profile.avatar && (
-            <AvatarImage alt={profile.coordinator!} src={profile.avatar} loading="lazy" width="120" height="120" />
-          )}
-          <AvatarFallback>{profile.coordinator!.split(" ").map((word) => word[0]).join("")}</AvatarFallback>
-        </Avatar>
+const ImageBlock = ({ image }: { image: PageBlocksProfileImage }) => {
+  if (image.src) {
+    return (
+      <Image
+        className="h-full object-cover rounded-lg"
+        alt={image!.alt || ""}
+        src={image!.src!}
+        fill
+        sizes="(max-width: 479px) 90vw, (max-width: 767px) 88vw, (max-width: 991px) 90vw, 38vw"
+      />
+    );
+  }
 
-        <div>
-          <h3 className="font-nunito font-medium" data-tina-field={tinaField(profile, 'coordinator')}>{profile.coordinator}</h3>
-
-          <span className="text-muted-foreground block text-sm tracking-wide" data-tina-field={tinaField(profile, 'role')}>{profile.role}</span>
-
-          <blockquote className="mt-3" data-tina-field={tinaField(profile, 'quote')}>
-            <p className="text-gray-700 dark:text-gray-300">{profile.quote}</p>
-          </blockquote>
-          <Blockquote
-                    coordinator={{ name: "Debra Fiscal", role: "CEO of Unseal" }}
-                    className="mt-12"
-                  >
-                    Studio_clone were so regular with their progress updates we almost
-                    began to think they were automated!
-                  </Blockquote>
-        </div>
-      </CardContent>
-    </Card>
-  );
+  return null;
 };
 
 export const profileBlockSchema: Template = {
@@ -60,11 +163,19 @@ export const profileBlockSchema: Template = {
   ui: {
     previewSrc: "/blocks/profile.png",
     defaultItem: {
-      profiles: [
+      title: "Start Building",
+      description:
+        "Get started with TinaCMS today and take your content management to the next level.",
+      actions: [
         {
-          quote:
-            "There are only two hard things in Computer Science: cache invalidation and naming things.",
-          coordinator: "Phil Karlton",
+          label: "Get Started",
+          type: "button",
+          link: "/",
+        },
+        {
+          label: "Placeholder Button",
+          type: "link",
+          link: "/",
         },
       ],
     },
@@ -73,57 +184,76 @@ export const profileBlockSchema: Template = {
     sectionBlockSchemaField as any,
     {
       type: "string",
-      label: "Title",
-      name: "title",
+      label: "Headline",
+      name: "headline",
+    },
+    {
+      type: "string",
+      label: "Tagline",
+      name: "tagline",
     },
     {
       type: "string",
       label: "Description",
       name: "description",
-      ui: {
-        component: "textarea",
-      },
     },
     {
+      label: "Actions",
+      name: "actions",
       type: "object",
       list: true,
-      label: "Profiles",
-      name: "profiles",
       ui: {
         defaultItem: {
-          quote: "There are only two hard things in Computer Science: cache invalidation and naming things.",
-          coordinator: "Phil Karlton",
+          label: "Action Label",
+          type: "button",
+          link: "/",
         },
-        itemProps: (item) => {
-          return {
-            label: `${item.quote} - ${item.coordinator}`,
-          };
-        },
+        itemProps: (item) => ({ label: item.label }),
       },
       fields: [
         {
+          label: "Label",
+          name: "label",
           type: "string",
-          ui: {
-            component: "textarea",
-          },
-          label: "Quote",
-          name: "quote",
         },
         {
+          label: "Type",
+          name: "type",
           type: "string",
-          label: "Coordinator",
-          name: "coordinator",
+          options: [
+            { label: "Button", value: "button" },
+            { label: "Link", value: "link" },
+          ],
         },
         {
+          label: "Link",
+          name: "link",
           type: "string",
-          label: "Role",
-          name: "role",
         },
+      ],
+    },
+    {
+      type: "object",
+      label: "Image",
+      name: "image",
+      fields: [
         {
+          name: "src",
+          label: "Image Source",
           type: "image",
-          label: "Avatar",
-          name: "avatar",
-        }
+        },
+        {
+          name: "alt",
+          label: "Alt Text",
+          type: "string",
+        },
+        {
+          name: "videoUrl",
+          label: "Video URL",
+          type: "string",
+          description:
+            "If using a YouTube video, make sure to use the embed version of the video URL",
+        },
       ],
     },
   ],

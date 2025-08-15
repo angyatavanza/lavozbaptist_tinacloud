@@ -22,13 +22,13 @@ export const PageIntro = ({
     >
        <FadeIn>
         <h1>
-          <span className="block font-nunito text-base font-semibold text-primary">
+          <span className="block font-nunito font-medium text-balance text-left text-base leading-[24px] text-primary uppercase mx-auto">
             {eyebrow}
           </span>
           <span className="sr-only"> - </span>
           <span
             className={clsx(
-              "font-nunito mt-6 block max-w-5xl tracking-tight text-4xl font-medium text-primary [text-wrap:balance] md:text-5xl",
+              "mt-6 block max-w-5xl tracking-tight text-4xl font-nunito font-semibold text-primary [text-wrap:balance] md:text-5xl",
               centered && "mx-auto"
             )}
           >

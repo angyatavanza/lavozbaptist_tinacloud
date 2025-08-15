@@ -6,16 +6,6 @@ import { Button } from "@/components/ui/second-button";
 import MailSentState from "@/components/forms/mail-sent-state";
 import { useState } from 'react';
 
-/*En la forma no se que idea tengas.  
-No se si poner un listado de los recursos o bien que ellos pongan directamente .
-Y pues lo datos que necesitamos en nombre, 
-teléfono y dirección (la dirección es porque hasta ahorita la mayor 
-parte de los servicios disponibles (que yo conozco) es en el condado de Mecklenburg
-*/
-//done 51b: add address to resource form fields + change radioinput options
-//to-do 85: replace text + images in content/resources+serve and details components TINA CMS CONTENT
-//done 55: implement address, email, phone, name fields required in resources/visitor/contact/serve forms + add the options to serve form BACKEND
-
 interface ResourcesFormInputs {
   name: string;
   lastname: string;
@@ -75,9 +65,9 @@ export const ResourcesForm: React.FC<ResourcesFormProps> = ({
   return (
     <FadeIn>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <h2 className=" text-base font-nunito font-medium text-primary">
-          Para poder apoyarte mejor, nos gustaría saber más sobre tu situación:
-        </h2>
+        <h4 className="text-base font-nunito font-medium text-primary">
+        Llena este formulario para acceder a recursos y apoyo:
+        </h4>
 
         {hasError && (
           <p className="text-red-500 text-sm mt-2">
@@ -152,7 +142,7 @@ export const ResourcesForm: React.FC<ResourcesFormProps> = ({
             <fieldset>
               <legend className="text-base/6 text-neutral-500">¿De qué manera podemos asistirte?</legend>
             </fieldset>
-            <div className="mt-6 grid grid-cols-2 md:grid-cols-12 gap-3.75">
+            <div className="mt-6 grid grid-cols-2 md:grid-cols-12 gap-5">
               
               {["Productos para el Cuidado Infantil", "Servicios y Apoyos Locales", "Otros Artículos de Primera Necesidad"].map((value) => (
                 <div key={value} className="col-span-1 md:col-span-6">

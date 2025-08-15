@@ -43,13 +43,13 @@ export const FooterNavigation = () => {
 
   return (
     <nav>
-      <ul role="list" className="grid grid-cols-2 gap-3.75 md:grid-cols-12">
+      <ul role="list" className="grid grid-cols-2 md:grid-cols-12 gap-5 px-4 md:px-5">
         {navigation.map((item) => (
           <li key={item.title} className="col-span-1 md:col-span-3">
-            <div className="font-nunito text-sm font-medium tracking-wider text-primary">
+            <div className="font-roboto text-base leading-[24px] font-semibold tracking-wider text-primary">
               {item.title}
             </div>
-            <ul role="list" className="mt-4 text-sm text-neutral-700">
+            <ul role="list" className="mt-5 text-base leading-[24px] font-normal text-nav-foreground">
               {item.links.map((link, index) => (
                 <li key={`${link.title}-${index}`} className="mt-4">
                   <Link

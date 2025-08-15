@@ -101,11 +101,11 @@ export const components: Components<{
    
     return (
       <>
-        <PageIntro eyebrow="Contact us" title="Let's work together">
+        <PageIntro eyebrow="Planifica tu primera visita" title="Queremos darte la mejor bienvenida">
           <TinaMarkdown content={props.children} />
         </PageIntro>
-        <Container className="mt-20 md:mt-28">
-          <div className="grid grid-cols-2 gap-x-3.75 gap-y-24 md:grid-cols-12">
+        <Container className="mt-10 md:mt-15 lg:mt-15">
+          <div className="grid grid-cols-2 md:grid-cols-12 gap-5 px-4 md:px-5">
             <div className="col-span-2 md:col-span-6">
               <FTVisitorDetails />
             </div>
@@ -127,11 +127,11 @@ export const components: Components<{
 
     return (
        <>
-        <PageIntro eyebrow="Contact us" title="Let's work together">
+        <PageIntro eyebrow="Recursos Comunitarios" title="Estamos aquí para apoyarte">
           <TinaMarkdown content={props.children} />
         </PageIntro>
-        <Container className="mt-20 md:mt-28">
-          <div className="grid grid-cols-2 gap-x-3.75 gap-y-24 md:grid-cols-12">
+        <Container className="mt-10 md:mt-15 lg:mt-20">
+          <div className="grid grid-cols-2 md:grid-cols-12 gap-5 px-4 md:px-5">
             <div className="col-span-2 md:col-span-6">
               <ResourcesDetails />
             </div>
@@ -153,11 +153,11 @@ export const components: Components<{
 
     return (
       <>
-        <PageIntro eyebrow="Contact us" title="Let's work together">
+        <PageIntro eyebrow="Contáctanos" title="Envíanos un mensaje">
           <TinaMarkdown content={props.children} />
         </PageIntro>
-        <Container className="mt-20 md:mt-28">
-          <div className="grid grid-cols-2 gap-x-3.75 gap-y-24 md:grid-cols-12">
+        <Container className="mt-10 md:mt-15 lg:mt-20">
+          <div className="grid grid-cols-2 md:grid-cols-12 gap-5 px-4 md:px-5">
             <div className="col-span-2 md:col-span-6">
               <ContactDetails />
             </div>
@@ -179,11 +179,11 @@ export const components: Components<{
 
     return (
       <>
-        <PageIntro eyebrow="Contact us" title="Let's work together">
+        <PageIntro eyebrow="Sirve en La Voz" title="Te espera tu lugar para servir">
           <TinaMarkdown content={props.children} />
         </PageIntro>
-        <Container className="mt-20 md:mt-28">
-          <div className="grid grid-cols-2 gap-x-3.75 gap-y-24 md:grid-cols-12">
+        <Container className="mt-10 md:mt-15 lg:mt-20">
+          <div className="grid grid-cols-2 md:grid-cols-12 gap-5 px-4 md:px-5">
             <div className="col-span-2 md:col-span-6">
               <ServeDetails />
             </div>

@@ -1,5 +1,4 @@
 // /lib/token-helper.ts
-//done 77: extend duration of FACEBOOK_ACCESS_TOKEN TINA CMS/BACKEND
 export type StoredAccessToken = {
   accessToken: string;
   expiresAt: number; // UNIX timestamp in seconds

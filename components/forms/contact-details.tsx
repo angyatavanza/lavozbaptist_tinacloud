@@ -3,26 +3,22 @@ import { ServiceTimes } from "@/components/layout/nav/service-times";
 import { Border } from "@/components/ui/border";
 import Link from "next/link";
 import { SocialMedia } from "@/components/layout/nav/social-media";
-//done 42: add functionality to contact-form TINA CMS/BACKEND
-    //done 42b: (add errors, mail-sent confirmation, to contact-form ?) TINA CMS/BACKEND
-//done 43:  add contact page to /content + add form-details component to /form page TINA CMS/BACKEND
-//done 44: remove newsletter-form TINA CMS/BACKEND
 
 export const ContactDetails = () => {
   return (
     <FadeIn>
-      <h2 className=" text-base font-nunito font-medium text-primary">
+      <h4 className="text-base font-nunito font-medium text-primary">
        Nuestra ubicación y horario de servicios
-      </h2>
-      <p className="mt-6 text-base text-neutral-600">
-        Le invitamos a unirse a nuestros estudios bíblicos entre semana y al servicio general del Domingo. Contamos con estacionamiento gratuito y fácil acceso al edificio. El servicio tiene una duración aproximada de 1 hora y 30 minutos. Incluye tiempos de alabanza, enseñanza bíblica práctica y momentos de oración
+      </h4>
+      <p className="mt-6 text-base text-body-foreground">
+        Te invitamos a participar en nuestros estudios bíblicos entre semana y en el servicio general del domingo. Contamos con estacionamiento gratuito y fácil acceso al edificio. El servicio tiene una duración aproximada de 1 hora y 30 minutos. Incluye tiempos de alabanza, enseñanza bíblica práctica y momentos de oración.
       </p>
-              <ServiceTimes className="mt-10 grid grid-cols-2 gap-3.75 md:grid-cols-12" />
-      <Border className="mt-16 pt-16">
-        <h2 className=" text-base font-nunito font-medium text-primary">
-          Ponte en contacto
-        </h2>
-        <dl className="mt-6 grid grid-cols-2 gap-3.75 text-sm md:grid-cols-12">
+      <ServiceTimes className="mt-10 grid grid-cols-2 md:grid-cols-12 gap-5" />
+      <Border className="mt-10 pt-10">
+        <h4 className="text-base font-nunito font-medium text-primary">
+          Contacto
+        </h4>
+        <dl className="mt-6 grid grid-cols-2 md:grid-cols-12 gap-5 text-sm ">
           {([
             ["Correo electrónico", "info@ministerioslavoz.com"],
             ["Teléfono", "(704) 537-7133"],
@@ -41,10 +37,10 @@ export const ContactDetails = () => {
           ))}
         </dl>
       </Border>
-      <Border className="mt-16 pt-16">
-        <h2 className=" text-base font-nunito font-medium text-primary">
+      <Border className="mt-10 pt-10">
+        <h4 className=" text-base font-nunito font-medium text-primary">
           Síguenos
-        </h2>
+        </h4>
         <SocialMedia className="mt-6" />
       </Border>
     </FadeIn>

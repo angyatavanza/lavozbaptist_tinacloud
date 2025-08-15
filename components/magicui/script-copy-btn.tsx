@@ -79,9 +79,9 @@ export function ScriptCopyBtn({
                       <div className="h-4 w-px bg-border" aria-hidden="true" />
                     )}
                     <Button
-                      variant="ghost"
+                      variant="outline"
                       size="sm"
-                      className={`relative rounded-none bg-background px-2 py-1 hover:bg-background ${
+                      className={`relative rounded-none bg-primary-background px-2 py-1 hover:bg-primary-background ${
                         packageManager === pm
                           ? "text-primary"
                           : "text-muted-foreground"

@@ -6,37 +6,69 @@ import {
 import type { Template } from "tinacms";
 import { tinaField } from "tinacms/dist/react";
 import { TinaMarkdown } from "tinacms/dist/rich-text";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Card2, CardContent, CardHeader2 } from "@/components/ui/card";
+import { TextEffect } from "../motion-primitives/text-effect";
 import { Section } from "@/components/layout/section";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Image from "next/image";
 import { sectionBlockSchemaField } from "@/components/layout/section";
-//done 13: add buttons to each card in groupsinfo component
-//to-do 18: change layout of group items cards in landing-groupsinfo component FRONTEND
 
 export const Groupsinfo = ({ data }: { data: PageBlocksGroupsinfo }) => {
   return (
-    <Section background={data.background!}>
-      <div className="flex w-full max-w-7xl mx-auto px-6 md:px-12 lg:px-32 py-12 lg:py-20 flex-col items-start gap-12 lg:gap-16">
+    <Section background={data.background!} className="mx-auto">
+      <div className="flex w-full mx-auto px-4 md:px-5 py-10 md:py-15 lg:py-20 flex-col items-center gap-5 lg:gap-5">
         {/* Header Section */}
-        <div className="flex w-full max-w-md flex-col items-start gap-1">
-          <h2
-            data-tina-field={tinaField(data, "title")}
-            className="text-slate-900 font-nunito text-3xl lg:text-5xl font-bold leading-normal"
-          >
-            {data.title}
-          </h2>
-          <div
-            data-tina-field={tinaField(data, "description")}
-            className="text-primary font-roboto text-xl lg:text-2xl font-semibold leading-normal"
-          >
-            {data.description}
-          </div>
+        <div className="flex w-full max-w-none flex-col items-center text-center gap-5 mx-auto">
+          {/* Tagline header (Body 02 in QBDS Web+Responsive 16/24 BDM) */}
+          {data.tagline && (
+            <div data-tina-field={tinaField(data, "tagline")}>
+              <TextEffect
+                per="line"
+                preset="fade-in-blur"
+                speedSegment={0.3}
+                delay={0.5}
+                as="p"
+                className="font-nunito font-medium text-balance text-center text-base leading-[24px] text-primary-magenta1 uppercase mx-auto "
+              >
+                {data.tagline!}
+              </TextEffect>
+            </div>
+          )}
+
+          {/* Main headline (Headline 01 in QBDS Web 48/60 B + Responsive 34/44 B)*/}
+          {data.headline && (
+            <div data-tina-field={tinaField(data, "headline")}>
+              <TextEffect
+                preset="fade-in-blur"
+                speedSegment={0.3}
+                as="h2"
+                className="font-nunito font-semibold text-pretty text-center text-[34px] leading-[44px] md:text-5xl md:leading-[60px] text-foreground max-w-xl"
+              >
+                {data.headline!}
+              </TextEffect>
+            </div>
+          )}
+
+          {/* Description (Body 01 in QBDS Web 20/28 MR + Responsive 16/24 MR)*/}
+          {data.description && (
+            <div data-tina-field={tinaField(data, "description")}>
+              <TextEffect
+                per="line"
+                preset="fade-in-blur"
+                speedSegment={0.3}
+                delay={0.5}
+                as="p"
+                className="font-normal text-balance text-center text-base leading-[24px] md:text-xl md:leading-[28px] max-w-lg"
+              >
+                {data.description!}
+              </TextEffect>
+            </div>
+          )}
         </div>
 
-        {/* Team Cards Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-12 gap-3.75 mx-6 w-full">
+        {/* Group Cards Grid */}
+        <div className="grid grid-cols-2 md:grid-cols-12 gap-5 px-4 md:px-5 w-full">
           {data.items &&
             data.items.map(function (block, i) {
               return <Group key={i} {...block!} />;
@@ -49,9 +81,9 @@ export const Groupsinfo = ({ data }: { data: PageBlocksGroupsinfo }) => {
 
 export const Group: React.FC<PageBlocksGroupsinfoItems> = (data) => {
   return (
-    <Card className="col-span-1 md:col-span-3 flex w-full max-w-sm flex-col items-center relative overflow-hidden shadow-none border-0 bg-transparent group">
+    <Card2 className="col-span-1 md:col-span-3 border border-grey-0 flex flex-col text-primary-foreground">
       {/* Image Container with hover buttons */}
-      <CardHeader className="relative w-full h-64 lg:h-80 bg-pink-200 p-0 overflow-hidden group">
+      <CardHeader2 className="relative w-full h-64 lg:h-80 p-0 overflow-hidden group rounded-xl">
         {data.cover && (
           <>
             <Image
@@ -61,27 +93,38 @@ export const Group: React.FC<PageBlocksGroupsinfoItems> = (data) => {
               fill
               className="object-cover object-center"
             />
-            {/* Separate overlay that appears on hover */}
-            <div className="absolute inset-0 opacity-0 group-hover:opacity-50 group-hover:bg-accent transition-opacity duration-300 pointer-events-none" />
+            {/* Bottom gradient for readability */}
+            <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-foreground/10 to-transparent z-10" />
+            {/* Title aligned bottom-left (moves up on hover to avoid overlap with actions) */}
+            <div className="absolute inset-x-0 bottom-0 z-20 flex items-end justify-start p-4 md:p-6 translate-y-0 group-hover:-translate-y-8 md:group-hover:-translate-y-10 transition-transform duration-300 ease-out pointer-events-none">
+              <h4
+                data-tina-field={tinaField(data, "title")}
+                className="font-nunito font-medium text-[24px] leading-[32px] md:text-[28px] md:leading-[36px] text-primary-foreground drop-shadow-md"
+              >
+                {data.title}
+              </h4>
+            </div>
+            <div className="absolute inset-0 opacity-0 group-hover:opacity-20 group-hover:bg-accent transition-opacity duration-300 pointer-events-none" />
           </>
         )}
 
         {/* Hover overlay with buttons */}
         {data.actions && data.actions.length > 0 && (
-          <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-            <div className="flex flex-col gap-2 px-4">
+           <div className="absolute inset-0 z-30 bg-background/35 dark:bg-zinc-900/35 backdrop-blur-[2px] ring-1 ring-border/20 flex items-end justify-start opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+             <div className="flex flex-row gap-3 p-4 md:p-6">
               {data.actions &&
-                data.actions.map((action) => (
+                data.actions.map((action, idx) => (
                   <div
                     key={action!.label}
                     data-tina-field={tinaField(action)}
-                    className="bg-foreground/10 rounded-[calc(var(--radius-xl)+0.125rem)] border p-0.5"
+                    className="bg-foreground/10 rounded-[calc(var(--radius-sm)+0.125rem)] border p-0.5 translate-y-3 group-hover:translate-y-0 transition-transform duration-300 ease-out"
+                    style={{ transitionDelay: `${idx * 60}ms` }}
                   >
                     <Button
                       asChild
-                      size="lg"
-                      variant={action!.type === "link" ? "ghost" : "default"}
-                      className="rounded-xl px-5 text-base"
+                      size="sm"
+                      variant={action!.type === "link" ? "ghost" : "secondary"}
+                      className=""
                     >
                       <Link href={action!.link!}>
                         <span className="text-nowrap">{action!.label}</span>
@@ -92,26 +135,8 @@ export const Group: React.FC<PageBlocksGroupsinfoItems> = (data) => {
             </div>
           </div>
         )}
-      </CardHeader>
-
-      {/* Text Overlay - Show for all cards */}
-      <CardContent className="flex px-4 py-3 items-center bg-card relative w-full z-20 -mt-10">
-        <div className="flex w-full flex-col items-start gap-1">
-          <h2
-            data-tina-field={tinaField(data, "title")}
-            className="text-slate-50 font-nunito text-lg lg:text-2xl font-semibold leading-normal"
-          >
-            {data.title}
-          </h2>
-          <div className="text-gray-300 font-roboto text-base lg:text-xl font-medium leading-normal">
-            <TinaMarkdown
-              data-tina-field={tinaField(data, "text")}
-              content={data.text}
-            />
-          </div>
-        </div>
-      </CardContent>
-    </Card>
+      </CardHeader2>
+    </Card2>
   );
 };
 
@@ -141,8 +166,13 @@ export const groupinfoBlockSchema: Template = {
     sectionBlockSchemaField as any,
     {
       type: "string",
-      label: "Title",
-      name: "title",
+      label: "Headline",
+      name: "headline",
+    },
+    {
+      type: "string",
+      label: "Tagline",
+      name: "tagline",
     },
     {
       type: "string",

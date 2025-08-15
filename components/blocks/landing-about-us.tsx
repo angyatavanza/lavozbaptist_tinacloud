@@ -12,13 +12,7 @@ import { Button } from "@/components/ui/button";
 import { Section, sectionBlockSchemaField } from "@/components/layout/section";
 import { AnimatedGroup } from "../motion-primitives/animated-group";
 import { TextEffect } from "../motion-primitives/text-effect";
-import HeroVideoDialog from "@/components/ui/hero-video-dialog";
 import { Transition } from "motion/react";
-
-//done 7: add text to aboutus in homepage
-//done 8: decide if short aboutus or short mission should be on the homepage
-//to-do 21: add margins + update the ui of the the AboutUs component to have an image on the left and content on the right
-
 
 const transitionVariants = {
   container: {
@@ -50,8 +44,8 @@ const transitionVariants = {
 
 export const AboutUs = ({ data }: { data: PageBlocksAboutus }) => {
   return (
-    <Section background={data.background!}>
-      <div className="grid grid-cols-2 md:grid-cols-12 gap-3.75 mx-6 items-center">
+    <Section background={data.background!} className="mx-auto">
+      <div className="grid grid-cols-2 md:grid-cols-12 gap-5 px-4 md:px-5 py-10 md:py-15 items-center">
         {/* Image Section */}
         {data.image && (
           <div
@@ -59,10 +53,8 @@ export const AboutUs = ({ data }: { data: PageBlocksAboutus }) => {
             data-tina-field={tinaField(data, "image")}
           >
             <div className="relative h-[490px] w-full">
-              {/* Purple background overlay */}
-              <div className="absolute inset-0 z-10 rounded-lg bg-primary/20" />
               {/* Image container with padding from edges */}
-              <div className="absolute top-5 left-7 right-7 bottom-10 z-20">
+              <div className="absolute top-5 left-6 right-6 bottom-5 z-20">
                 <ImageBlock image={data.image} />
               </div>
             </div>
@@ -70,41 +62,38 @@ export const AboutUs = ({ data }: { data: PageBlocksAboutus }) => {
         )}
 
         {/* Content Section */}
-        <div className="col-span-2 md:col-span-6 flex flex-col gap-6">
-          {/* Tagline header with line */}
+        <div className="col-span-2 md:col-span-6 flex flex-col gap-5">
+          {/* Tagline header (Body 02 in QBDS Web+Responsive 16/24 BDM) */}
           {data.tagline && (
-            <div className="flex items-center gap-[10px]">
-              <div data-tina-field={tinaField(data, "tagline")}>
-                <TextEffect
-                  per="line"
-                  preset="fade-in-blur"
-                  speedSegment={0.3}
-                  delay={0.5}
-                  as="p"
-                  className="mx-auto mt-8 font-roboto font-semibold text-lg leading-7 text-foreground text-balance"
-                >
-                  {data.tagline!}
-                </TextEffect>
-              </div>
-              <div className="w-[60px] h-px bg-black/20" />
+            <div data-tina-field={tinaField(data, "tagline")}>
+              <TextEffect
+                per="line"
+                preset="fade-in-blur"
+                speedSegment={0.3}
+                delay={0.5}
+                as="p"
+                className="font-nunito font-medium text-balance text-left text-base leading-[24px] text-primary uppercase mx-auto"
+              >
+                {data.tagline!}
+              </TextEffect>
             </div>
           )}
 
-          {/* Main headline */}
+          {/* Main headline (mb-5 + gap-5 makes 40 px / Headline 01 in QBDS Web 48/60 B + Responsive 34/44 B)*/}
           {data.headline && (
             <div data-tina-field={tinaField(data, "headline")}>
               <TextEffect
                 preset="fade-in-blur"
                 speedSegment={0.3}
                 as="h2"
-                className="mt-8 text-balance font-nunito font-bold text-[40px] leading-[50px] text-foreground max-w-lg"
+                className="font-nunito font-semibold text-balance text-left text-[34px] leading-[44px] md:text-5xl md:leading-[60px] text-foreground md:mb-5 max-w-lg"
               >
                 {data.headline!}
               </TextEffect>
             </div>
           )}
 
-          {/* Description */}
+          {/* Description (Body 01 in QBDS Web 20/28 MR + Responsive 16/24 MR)*/}
           {data.description && (
             <div data-tina-field={tinaField(data, "description")}>
               <TextEffect
@@ -113,7 +102,7 @@ export const AboutUs = ({ data }: { data: PageBlocksAboutus }) => {
                 speedSegment={0.3}
                 delay={0.5}
                 as="p"
-                className="mx-auto mt-8 max-w-2xl text-balance text-lg"
+                className="font-normal text-balance text-left text-base leading-[24px] md:text-xl md:leading-[28px] max-w-md"
               >
                 {data.description!}
               </TextEffect>
@@ -123,22 +112,20 @@ export const AboutUs = ({ data }: { data: PageBlocksAboutus }) => {
           {/* Actions/Buttons */}
           <AnimatedGroup
             variants={transitionVariants}
-            className="mt-6 flex flex-col items-center justify-center gap-2 md:flex-row"
+            className="flex flex-wrap gap-5"
           >
             {data.actions &&
               data.actions.map((action) => (
                 <div
                   key={action!.label}
                   data-tina-field={tinaField(action)}
-                  className="bg-foreground/10 rounded-[calc(var(--radius-xl)+0.125rem)] border p-0.5"
+                  className="bg-foreground/10 rounded-[calc(var(--radius-sm)+0.125rem)] border p-0.5"
                 >
                   <Button
                     asChild
-                    size="lg"
-                    variant={
-                      action!.type === "link" ? "ghost" : "default"
-                    }
-                    className="rounded-xl px-5 text-base"
+                    size="default"
+                    variant={action!.type === "link" ? "outline" : "default"}
+                    className=""
                   >
                     <Link href={action!.link!}>
                       <span className="text-nowrap">{action!.label}</span>

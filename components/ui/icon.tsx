@@ -63,8 +63,8 @@ const iconColorClass: {
     circle: "bg-pink-400 dark:bg-pink-500 text-pink-50",
   },
   purple: {
-    regular: "text-purple-400",
-    circle: "bg-purple-400 dark:bg-purple-500 text-purple-50",
+    regular: "text-primary-button",
+    circle: "bg-primary-button dark:bg-primary-bold text-primary-muted-200",
   },
   orange: {
     regular: "text-orange-400",
@@ -78,6 +78,10 @@ const iconColorClass: {
     regular: "text-white opacity-80",
     circle: "bg-white-400 dark:bg-white-500 text-white-50",
   },
+  black: {
+    regular: "text-foreground",
+    circle: "bg-black-400 dark:bg-black-500 text-black-50",
+  }
 };
 
 const iconSizeClass = {
@@ -86,7 +90,7 @@ const iconSizeClass = {
   medium: "w-12 h-12 shrink-0",
   large: "w-14 h-14 shrink-0",
   xl: "w-16 h-16 shrink-0",
-  custom: "",
+  custom: "w-4 h-4 shrink-0",
 };
 
 export const TinaIcon = ({

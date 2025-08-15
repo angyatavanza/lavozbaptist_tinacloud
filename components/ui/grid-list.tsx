@@ -14,7 +14,7 @@ export function GridList({ className, children }: GridListProps) {
       <ul
         role="list"
         className={clsx(
-          "grid grid-cols-2 gap-3.75 md:grid-cols-12",
+          "grid grid-cols-2 md:grid-cols-12 gap-5 px-4 md:px-5",
           className
         )}
       >

@@ -6,7 +6,7 @@ interface RadioInputProps extends InputHTMLAttributes<HTMLInputElement> {
 
 export const RadioInput = ({ label, ...props }: RadioInputProps) => {
   return (
-    <label className="flex gap-x-3">
+    <label className="flex gap-5">
       <input
         type="radio"
         {...props}

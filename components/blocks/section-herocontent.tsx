@@ -11,8 +11,6 @@ import { Section, sectionBlockSchemaField } from "@/components/layout/section";
 import { TextEffect } from "../motion-primitives/text-effect";
 import HeroVideoDialog from "@/components/ui/hero-video-dialog";
 
-//done 92: extend the width of the div for the Hero content component to be full-width + remove the white looking border around the video + fix the section width of the section background of the blocks when the url goes to /home or /about
-
 export const Herocontent = ({ data }: { data: PageBlocksHerocontent }) => {
     // Extract the background style logic into a more readable format
   let gradientStyle: React.CSSProperties | undefined = undefined;
@@ -30,7 +28,7 @@ export const Herocontent = ({ data }: { data: PageBlocksHerocontent }) => {
   }
 
   return (
-    <Section background={data.background!} className="py-6 pt-9">
+    <Section background={data.background!} className="pt-15 mx-auto">
       {data.image && (
         <div
           className="relative overflow-hidden"
@@ -44,8 +42,8 @@ export const Herocontent = ({ data }: { data: PageBlocksHerocontent }) => {
           <ImageBlock image={data.image} />
           {/* Overlay content with grid system */}
           <div className="absolute inset-0 z-20 flex items-center justify-center px-4 md:px-18">
-            <div className="w-full max-w-7xl grid grid-cols-2 md:grid-cols-12 gap-3.75">
-              <div className="col-span-2 md:col-span-10 lg:col-span-8 md:col-start-2 lg:col-start-3 flex flex-col items-start text-left gap-1 md:gap-2">
+            <div className="w-full max-w-7xl grid grid-cols-2 md:grid-cols-12 gap-5">
+              <div className="col-span-2 md:col-span-10 lg:col-span-8 md:col-start-2 lg:col-start-3 flex flex-col items-start text-left gap-5 md:gap-5">
                 {data.tagline && (
                   <div data-tina-field={tinaField(data, "tagline")}>
                     <TextEffect
@@ -54,7 +52,7 @@ export const Herocontent = ({ data }: { data: PageBlocksHerocontent }) => {
                       speedSegment={0.3}
                       delay={0.5}
                       as="p"
-                      className="font-nunito font-bold text-left text-white text-sm md:text-base leading-6 max-w-md uppercase"
+                      className="font-nunito font-medium text-balance text-left text-base leading-[24px] text-white uppercase mx-auto mt-6"
                     >
                       {data.tagline!}
                     </TextEffect>
@@ -69,7 +67,7 @@ export const Herocontent = ({ data }: { data: PageBlocksHerocontent }) => {
                       preset="fade-in-blur"
                       speedSegment={0.3}
                       as="h1"
-                      className="lg:block text-left font-nunito font-medium text-white text-[40px] leading-[52px] md:text-6xl md:leading-[76px]"
+                      className="lg:block text-left font-nunito font-semibold text-white text-[40px] leading-[52px] md:text-6xl md:leading-[76px]"
                     >
                       {data.headline!}
                     </TextEffect>

@@ -1,132 +1,90 @@
 import React from "react";
 import { SectionIntro } from "@/components/layout/section-intro";
-import { Container } from "@/components/layout/container";
-import { FadeIn } from "../motion-primitives/fade-in";
-import { StylizedImage } from "@/components/ui/stylized-image";
-import {List, ListItem } from "@/components/ui/list";
-import type { Template } from 'tinacms';
+import { tinaField } from "tinacms/dist/react";
+import { TagList, TagListItem } from "@/components/ui/tag-list";
+import { List, ListItem } from "@/components/ui/list";
+import type { Template } from "tinacms";
 import { PageBlocksListcontent } from "@/tina/__generated__/types";
 
-//to-do 65: replace "content" template with "listcontent" in /resources page 
-export const Listcontent  = ({ data }: { data: PageBlocksListcontent }) => {
+export const Listcontent = ({ data }: { data: PageBlocksListcontent }) => {
   return (
-    <>
+    <div className="mx-auto px-4 md:px-5 mt-24 mb-10 md:mb-15 lg:mb-20 space-y-24 [counter-reset:section] md:mt-32 md:space-y-32 lg:mt-40 lg:space-y-40">
       <SectionIntro
-        eyebrow="Grupos"
-        title="Fuimos creados para estar en comunidad unos con otros."
-        className="mt-20 md:mt-28"
+        title={data.title ?? "Servicio comunitario"}
+        image={{ src: "/uploads/pages/interior-IMG-1120.jpg", shape: 1 }}
+        data-tina-field={tinaField(data, "title")}
       >
-        <p>
-          Nunca es el plan de Dios que nos sintamos aislados y solos.
-          El propósito detrás de los ministerios de La Voz es ayudarte a encontrar conexiónes significativas que te invitan a ser realmente honesto acerca de lo que está sucediendo en tu vida y en tu corazón. En La Voz, ofrecemos cinco experiencias de 
-          grupo: Misiones, Mujeres, Varones, Jovenes, y Kids.
-        </p>
-      </SectionIntro>
-      <Container className="mt-16">
-        <div className="lg:flex lg:items-center lg:justify-end">
-          <div className="flex justify-center lg:w-1/2 lg:justify-end lg:pr-12">
-            <FadeIn className="w-[33.75rem] flex-none lg:w-[45rem]">
-              <StylizedImage
-                src={"/whiteboard.jpg"}
-                alt=""
-                sizes="(min-width: 1024px) 41rem, 31rem"
-                className="justify-center lg:justify-end"
-              />
-            </FadeIn>
-          </div>
-          <List className="mt-16 lg:mt-0 lg:w-1/2 lg:min-w-[33rem] lg:pl-4">
-            <ListItem title="Misiones">
-              El ministerio, Misiones La Voz, comparte el amor de Jesús, suple necesidades físicas y apoya el inicio de siembra de Iglesias en diferentes países.
-            </ListItem>
-            <ListItem title="Mujeres">
-              El ministerio, Mujeres La Voz, nace en el corazón de Dios para edificar la vida emocional y espiritual de las mujeres.
-            </ListItem>
-            <ListItem title="Varones">
-              El ministerio, Varones La Voz, nace en el corazón de Dios para edificar la vida emocional y espiritual de los varones.
-            </ListItem>
-            <ListItem title="Jóvenes">
-              El ministerio, Jóvenes La Voz, nace en el corazón de Dios para edificar la vida emocional y espiritual de las jóvenes.
-            </ListItem>
-            <ListItem title="Kids">
-              El ministerio, Kids La Voz, nace en el corazón de Dios para edificar la vida emocional y espiritual de las kids.
-            </ListItem>
-          </List>
+        <div className="space-y-6 text-base text-body-foreground">
+          <p data-tina-field={tinaField(data, "description1")}>
+            {data.description1}
+          </p>
+          <p data-tina-field={tinaField(data, "description2")}>
+            {data.description2}
+          </p>
         </div>
-      </Container>
-    </>
+        <h3 className="mt-12 text-base font-nunito font-medium text-primary">
+         Ofrecemos suministros esenciales como:
+        </h3>
+        <TagList className="mt-4">
+          <TagListItem>Pañales</TagListItem>
+          <TagListItem>Biberones</TagListItem>
+          <TagListItem>Shampoo y jabón para bebé</TagListItem>
+          <TagListItem>Toallitas húmedas</TagListItem>
+          <TagListItem>Otros artículos de primera necesidad</TagListItem>
+        </TagList>
+        <h3 className="mt-12 text-base font-nunito font-medium text-primary">
+        Además, conectamos a las familias con recursos comunitarios como:
+        </h3>
+        <List className="mt-4">
+          <ListItem title="">
+          Clínicas de salud
+          </ListItem>
+          <ListItem title="">
+          Bancos de comida
+          </ListItem>
+          <ListItem title="">
+          Programas de apoyo local.
+          </ListItem>
+        </List>
+      </SectionIntro>
+    </div>
   );
 };
 
 export const listcontentBlockSchema: Template = {
-    name: "listcontent",
-    label: "Listcontent",
-    ui: {
-        previewSrc: "/blocks/listcontent.png",
-        defaultItem: {
-            title: "Start Building",
-            description: "Get started with TinaCMS today and take your content management to the next level.",
-            actions: [
-                {
-                    label: 'Get Started',
-                    type: 'button',
-                    link: '/',
-                },
-                {
-                    label: 'Placeholder Button',
-                    type: 'link',
-                    link: '/',
-                },
-            ],
-        },
+  name: "listcontent",
+  label: "Listcontent",
+  ui: {
+    previewSrc: "/blocks/listcontent.png",
+    defaultItem: {
+      title: "Servicio comunitario",
+      description1:
+        "En La Voz de la Esperanza, creemos en mostrar el amor de Cristo a través de acciones concretas.",
+      description2:
+        "Nuestro deseo es ser un puente de ayuda en los momentos más importantes de la vida.",  
     },
-    fields: [
-        {
-            type: "string",
-            label: "Title",
-            name: "title",
-        },
-        {
-            type: "string",
-            label: "Description",
-            name: "description",
-            ui: {
-                component: "textarea",
-            },
-        },
-        {
-            label: 'Actions',
-            name: 'actions',
-            type: 'object',
-            list: true,
-            ui: {
-                defaultItem: {
-                    label: 'Action Label',
-                    type: 'button',
-                    link: '/',
-                },
-                itemProps: (item) => ({ label: item.label }),
-            },
-            fields: [
-                {
-                    label: 'Label',
-                    name: 'label',
-                    type: 'string',
-                },
-                {
-                    label: 'Type',
-                    name: 'type',
-                    type: 'string',
-                    options: [
-                        { label: 'Button', value: 'button' },
-                        { label: 'Link', value: 'link' },
-                    ],
-                },
-                {
-                    label: 'Link',
-                    name: 'link',
-                    type: 'string',
-                },
-            ],
-        },
-    ],
+  },
+  fields: [
+    {
+      type: "string",
+      label: "Title",
+      name: "title",
+    },
+    {
+      type: "string",
+      label: "Description",
+      name: "description1",
+      ui: {
+        component: "textarea",
+      },
+    },
+    {
+      type: "string",
+      label: "Description",
+      name: "description2",
+      ui: {
+        component: "textarea",
+      },
+    },
+  ],
 };

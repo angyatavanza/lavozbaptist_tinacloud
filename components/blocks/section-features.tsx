@@ -3,25 +3,33 @@ import {
   PageBlocksFeatures,
   PageBlocksFeaturesItems,
 } from "@/tina/__generated__/types";
-import type { Template } from 'tinacms';
+import type { Template } from "tinacms";
 import { tinaField } from "tinacms/dist/react";
 import { TinaMarkdown } from "tinacms/dist/rich-text";
 import { TinaIcon } from "@/components/ui/icon";
-import { iconSchema }from "@/tina/fields/icon";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { iconSchema } from "@/tina/fields/icon";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Section, sectionBlockSchemaField } from "@/components/layout/section";
-
-//to-do 100: update the ui of the features block component in the /serve+service-times page FRONTEND
 
 export const Features = ({ data }: { data: PageBlocksFeatures }) => {
   return (
-    <Section background={data.background!}>
-      <div className="@container mx-auto max-w-5xl px-6">
-        <div className="text-center">
-          <h2 data-tina-field={tinaField(data, 'title')} className="text-balance text-4xl font-nunito font-medium lg:text-5xl">{data.title}</h2>
-          <p data-tina-field={tinaField(data, 'description')} className="mt-4">{data.description}</p>
+    <Section background={data.background!} className="mx-auto">
+      <div className="@container flex flex-col w-full mx-auto max-w-5xl px-6 py-10 md:py-15 items-center gap-5 lg:gap-5">
+        <div className="flex flex-col items-start gap-5 w-full">
+          <h2
+            className="font-nunito font-semibold text-balance text-foreground text-left text-[28px] leading-[36px] md:text-[40px] md:leading-[52px] max-w-lg"
+            data-tina-field={tinaField(data, "headline")}
+          >
+            {data.headline}
+          </h2>
         </div>
-        <Card className="mx-auto mt-8 grid grid-cols-2 md:grid-cols-12 gap-3.75 mx-6 overflow-hidden shadow-zinc-950/5 md:mt-16">
+        <Card className="mx-auto grid grid-cols-2 md:grid-cols-12 gap-6 px-4 md:px-5 overflow-hidden shadow-zinc-950/5">
           {data.items &&
             data.items.map(function (block, i) {
               return <Feature key={i} {...block!} />;
@@ -29,43 +37,35 @@ export const Features = ({ data }: { data: PageBlocksFeatures }) => {
         </Card>
       </div>
     </Section>
-  )
-}
-
-const CardDecorator = ({ children }: { children: React.ReactNode }) => (
-  <div className="relative mx-auto size-36 duration-200 [--color-border:color-mix(in_oklab,var(--color-zinc-950)10%,transparent)] group-hover:[--color-border:color-mix(in_oklab,var(--color-zinc-950)20%,transparent)] dark:[--color-border:color-mix(in_oklab,var(--color-white)15%,transparent)] dark:group-hover:bg-white/5 dark:group-hover:[--color-border:color-mix(in_oklab,var(--color-white)20%,transparent)]">
-    <div aria-hidden className="absolute inset-0 bg-[linear-gradient(to_right,var(--color-border)_1px,transparent_1px),linear-gradient(to_bottom,var(--color-border)_1px,transparent_1px)] bg-[size:24px_24px]" />
-    <div aria-hidden className="bg-radial to-background absolute inset-0 from-transparent to-75%" />
-    <div className="bg-background absolute inset-0 m-auto flex size-12 items-center justify-center border-l border-t">{children}</div>
-  </div>
-)
+  );
+};
 
 export const Feature: React.FC<PageBlocksFeaturesItems> = (data) => {
   return (
-    <div className="group col-span-2 md:col-span-4 lg:col-span-4 3xl:col-span-4 shadow-zinc-950/5 text-center5">
-      <CardHeader className="pb-3">
-        <CardDecorator>
+    <div className="group col-span-2 md:col-span-4 lg:col-span-4 3xl:col-span-4 shadow-zinc-950/5 text-left">
+      <CardHeader className="pb-3 items-start text-left px-0">
+        <div className="flex h-16 w-16 items-center justify-center rounded-full bg-secondary/10 text-primary">
           {data.icon && (
             <TinaIcon
               tinaField={tinaField(data, "icon")}
               data={{ size: "large", ...data.icon }}
             />
           )}
-        </CardDecorator>
-
-        <h3
+        </div>
+        <CardTitle
+          className="mt-4 text-[19px] leading-[24px] md:text-[19px] md:leading-[24px] text-left"
           data-tina-field={tinaField(data, "title")}
-          className="mt-6 font-nunito font-medium"
         >
           {data.title}
-        </h3>
+        </CardTitle>
       </CardHeader>
-
-      <CardContent className="text-sm pb-8">
-        <TinaMarkdown
-          data-tina-field={tinaField(data, "text")}
-          content={data.text}
-        />
+      <CardContent>
+        <CardDescription>
+          <TinaMarkdown
+            data-tina-field={tinaField(data, "text")}
+            content={data.text}
+          />
+        </CardDescription>
       </CardContent>
     </div>
   );
@@ -87,8 +87,8 @@ export const featureBlockSchema: Template = {
   ui: {
     previewSrc: "/blocks/features.png",
     defaultItem: {
-      title: 'Built to cover your needs',
-      description: 'We have a lot of features to cover your needs',
+      headline: "Built to cover your needs",
+      description: "We have a lot of features to cover your needs",
       items: [defaultFeature, defaultFeature, defaultFeature],
     },
   },
@@ -96,13 +96,8 @@ export const featureBlockSchema: Template = {
     sectionBlockSchemaField as any,
     {
       type: "string",
-      label: "Title",
-      name: "title",
-    },
-    {
-      type: "string",
-      label: "Description",
-      name: "description",
+      label: "Headline",
+      name: "headline",
     },
     {
       type: "object",

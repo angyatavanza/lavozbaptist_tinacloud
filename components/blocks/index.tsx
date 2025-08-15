@@ -9,14 +9,14 @@ import { LatestEvents } from "./landing-latest-events";
 import { LatestMessages } from "./landing-latest-messages";
 import { CallToAction } from "./section-call-to-action";
 import { CallToActionLinks } from "./section-cta-links";
-import { FreqAskedQuestions } from "./section-faqcontent";
+import { FreqAskedQuestions } from "./landing-faqcontent";
 import { Herocontent } from "./section-herocontent";
 import { Herodonation } from "./section-herodonation";
 import { Profile } from "./section-profile";
 import { TeamMember } from "./section-our-team";
 import { Vision } from "./section-vision";
 import { NextSteps } from "./section-first-steps";
-import { Mission } from "./section-mission";
+import { Values } from "./section-values";
 import { Aboutsectionsinfo } from "./section-about";
 import { Group } from "./section-groups";
 import { Leadership } from "./section-leadership";
@@ -114,8 +114,8 @@ const Block = ({
       return <Listcontent data={block} />;
     case "PageBlocksNextsteps":
       return <NextSteps data={block} />;
-    case "PageBlocksMission":
-      return <Mission data={block} />;
+    case "PageBlocksValues":
+      return <Values data={block} />;
     case "PageBlocksContactsection":
       return <ContactSection data={block} />; 
     default:

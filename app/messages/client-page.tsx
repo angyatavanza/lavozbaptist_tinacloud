@@ -2,6 +2,7 @@
 import * as React from "react";
 import Link from "next/link";
 import { format } from "date-fns";
+import LatestMessagesVideoDialog from "@/components/ui/latest-messages-video-dialog";
 import MessagesVideoDialog from "@/components/ui/messages-video-dialog";
 import { TinaMarkdown } from "tinacms/dist/rich-text";
 import {
@@ -10,25 +11,22 @@ import {
 } from "@/tina/__generated__/types";
 import ErrorBoundary from "@/components/error-boundary";
 import { ArrowRight, UserRound } from "lucide-react";
-import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  Card2,
+  CardContent,
+  CardHeader2,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardFooter,
+  CardAction,
+} from "@/components/ui/card";
 import { PageIntro } from "@/components/layout/page-intro";
 import { Container } from "@/components/layout/container";
+import { es } from "date-fns/locale";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-
-//to-do 30: change all tailwind class colors to be Oklch color FRONTEND
-//done 31: pass on creating a message-archive page FRONTEND
-//done 32: add tina field to accept a link to Vimeo video in messages page TINA CMS/BACKEND
-//to-do 33: redesign the all messages page to be a "home" page + change layout of all messages cards FRONTEND
-//to-do 34: ensure UX Design is responsive accross screen sizes (i.e hero section homepage) & add margin padding! FRONTEND
-//to-do 37: make text responsive on messagesvideodialog + redesign messages-latest-message/indiv message page FRONTEND
-
-//line 144: <ReactPlayer width="100%" height="100%" style={{ margin: "auto" }} playing={!!message.image.autoPlay} loop={!!message.image.loop} controls={true} url={message.image.videoUrl}/>
-/*<MessagesVideoDialog
-  videoSrc={message.image.videoUrl}
-  thumbnailSrc={thumbnailSrc}
-  thumbnailAlt="Messages Video"
-  />
-*/
 
 interface ClientMessageProps {
   data: MessageConnectionQuery;
@@ -37,128 +35,165 @@ interface ClientMessageProps {
 }
 
 export default function MessagesClientPage(props: ClientMessageProps) {
-  const messages = props.data?.messageConnection.edges!.map((messageData) => {
-    const message = messageData!.node!;
-    const date = new Date(message.date!);
-    let formattedDate = "";
-    if (!isNaN(date.getTime())) {
-      formattedDate = format(date, "MMM dd, yyyy");
-    }
-    return {
-      id: message.id,
-      published: formattedDate,
-      title: message.title,
-      tags: message.tags?.map((tag) => tag?.tag?.name) || [],
-      url: `/messages/${message._sys.breadcrumbs.join("/")}`,
-      excerpt: message.excerpt,
-      image: message.image,
-      coordinator: {
-        name: message.coordinator?.name || "Anonymous",
-        avatar: message.coordinator?.avatar,
-      },
-    };
-  });
+  const messages =
+    props.data?.messageConnection
+      .edges!.map((messageData) => {
+        const message = messageData!.node!;
+        const date = new Date(message.date!);
+        let formattedDate = "";
+        if (!isNaN(date.getTime())) {
+          formattedDate = format(date, "MMM dd, yyyy", { locale: es });
+        }
+        return {
+          id: message.id,
+          published: formattedDate,
+          title: message.title,
+          tags: message.tags?.map((tag) => tag?.tag?.name) || [],
+          url: `/messages/${message._sys.breadcrumbs.join("/")}`,
+          excerpt: message.excerpt,
+          image: message.image,
+          coordinator: {
+            name: message.coordinator?.name || "Anonymous",
+            avatar: message.coordinator?.avatar,
+          },
+        };
+      })
+      .filter(Boolean) || [];
+
+  if (!messages || messages.length === 0) {
+    return (
+      <ErrorBoundary>
+        <PageIntro eyebrow="Mensajes recientes" title="Mensajes más recientes">
+          <p>Por el momento, no hay mensajes disponibles</p>
+        </PageIntro>
+      </ErrorBoundary>
+    );
+  }
+
+  // Get featured video (first message)
+  const featuredVideo = messages[0];
+  const otherMessages = messages.slice(1);
+  const thumbnailSrc = "/fallback2.jpg";
 
   return (
     <ErrorBoundary>
-      <PageIntro eyebrow="Mensajes Recientes" title="Mensajes Recientes">
-        <p>Mensajes Recientes</p>
+      <PageIntro eyebrow="Mensajes" title="Mensaje más reciente">
+        <p> Escucha el mensaje más reciente</p>
       </PageIntro>
-      <Container className="mt-20 md:mt-28">
-        <div className="container flex flex-col items-center gap-16">
-          {/* Cards Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-12 gap-3.75 relative">
-            {messages.map((message) => {
-              const thumbnailSrc = "/fallback2.jpg";
-              return (
-                <Card
-                  key={message.id}
-                  className="bg-white border border-grey-0 p-3 md:p-4 flex flex-col gap-3 md:gap-4 group hover:shadow-lg transition-shadow col-span-1 md:col-span-4"
-                >
-                  {message.image?.embeddable && message.image?.videoUrl ? (
-                    <Link
-                      href= {message.url}
-                      className="block"
-                    >
-                      <div className="aspect-[16/9] overflow-clip rounded-lg border border-border">
-                        <div
-                          className="fb-video"
-                          data-href={message.image.videoUrl}
-                          data-allowfullscreen="true"
-                          data-width="500"
-                        ></div>
-                      </div>
-                    </Link>
-                  ) : (
-                    <div className="aspect-[16/9] overflow-clip rounded-lg border border-border relative">
-                      <MessagesVideoDialog
-                        videoSrc={message.image?.videoUrl || ""}
-                        thumbnailSrc={thumbnailSrc}
-                        thumbnailAlt="Messages Video"
-                        title={message.title}
-                        coordinator={{
-                          avatar: message.coordinator?.avatar || "",
-                          name: message.coordinator?.name || "",
-                        }}
-                      />
-                    </div>
-                  )}
-                  <div className="col-span-2 md:col-span-6">
-                    <div className="mb-4 md:mb-6">
-                      <div className="flex flex-wrap gap-3 text-xs uppercase tracking-wider text-muted-foreground md:gap-5 lg:gap-6">
-                        {message.tags?.map((tag) => (
-                          <span key={tag}>{tag}</span>
-                        ))}
-                      </div>
-                    </div>
-                    <h3 className="text-xl font-nunito font-medium md:text-2xl lg:text-3xl">
-                      <Link href={message.url} className="hover:underline">
-                        {message.title}
-                      </Link>
-                    </h3>
-                    <div className="mt-4 text-muted-foreground md:mt-5">
-                      <TinaMarkdown content={message.excerpt} />
-                    </div>
-                    <div className="mt-6 flex items-center space-x-4 text-sm md:mt-8">
-                      <Avatar>
-                        {message.coordinator.avatar && (
-                          <AvatarImage
-                            src={message.coordinator.avatar}
-                            alt={message.coordinator.name}
-                            className="h-8 w-8"
-                          />
-                        )}
-                        <AvatarFallback>
-                          <UserRound
-                            size={16}
-                            strokeWidth={2}
-                            className="opacity-60"
-                            aria-hidden="true"
-                          />
-                        </AvatarFallback>
-                      </Avatar>
-                      <span className="text-muted-foreground">
-                        {message.coordinator.name}
-                      </span>
-                      <span className="text-muted-foreground">•</span>
-                      <span className="text-muted-foreground">
-                        {message.published}
-                      </span>
-                    </div>
-                    <div className="mt-6 flex items-center space-x-2 md:mt-8">
-                      <Link
-                        href={message.url}
-                        className="inline-flex items-center font-medium hover:underline md:text-base"
-                      >
-                        <span>Ver ahora</span>
-                        <ArrowRight className="ml-2 size-4 transition-transform" />
-                      </Link>
-                    </div>
+      {/* Container */}
+      <Container className="mt-10 md:mt-15 lg:mt-20">
+        <div className="grid grid-cols-2 md:grid-cols-12 gap-5">
+          {/* Featured Video Section */}
+          <section className="col-span-2 md:col-span-8 md:col-start-3">
+            <div className="text-white overflow-hidden relative rounded-lg">
+              {/* Background image or video thumbnail */}
+              {featuredVideo.image?.embeddable &&
+              featuredVideo.image?.videoUrl ? (
+                <Link href={featuredVideo.url} className="block">
+                  <div className="aspect-[16/9] overflow-clip rounded-lg">
+                    <div
+                      className="fb-video w-full h-full"
+                      data-href={featuredVideo.image.videoUrl}
+                      data-allowfullscreen="true"
+                      data-width="1024"
+                    ></div>
                   </div>
-                </Card>
-              );
-            })}
-          </div>
+                </Link>
+              ) : (
+                <div className="aspect-[16/9] overflow-clip relative rounded-lg">
+                  <LatestMessagesVideoDialog
+                    videoSrc={featuredVideo.image?.videoUrl || ""}
+                    thumbnailSrc={thumbnailSrc}
+                    thumbnailAlt="Messages Video"
+                    title={featuredVideo.title}
+                    coordinator={{
+                      avatar: featuredVideo.coordinator?.avatar || "",
+                      name: featuredVideo.coordinator?.name || "",
+                    }}
+                  />
+                </div>
+              )}
+              <div className="absolute inset-0 pointer-events-none">
+                <div className="absolute bottom-5 right-5 bg-white rounded px-2 py-1">
+                  <span className="capitalize font-nunito font-bold text-foreground text-[10px] tracking-[0.50px] leading-[10px]">
+                    {featuredVideo.published}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* Messages Grid Section */}
+          <section className="col-span-2 md:col-span-12 mt-10">
+            <h2 className="mb-5 mt-6 block font-nunito font-semibold text-balance text-left text-[28px] leading-[36px] md:text-[40px] md:leading-[52px] text-primary max-w-lg">
+              Mensajes recientes
+            </h2>
+
+            <div className="grid grid-cols-2 md:grid-cols-12 gap-5">
+              {otherMessages.map((message) => {
+                const thumbnailSrc = "/fallback2.jpg";
+                return (
+                  <Card2
+                    key={message.id}
+                    className="border border-grey-0 flex flex-col col-span-2 md:col-span-4"
+                  >
+                    {/* FB Video Container */}
+                    <CardHeader2 className="relative w-full rounded-t-xl">
+                      {message.image?.embeddable && message.image?.videoUrl ? (
+                        <Link href={message.url} className="block h-full">
+                          <div className="aspect-[16/9] w-full overflow-clip rounded-t-xl">
+                            <div
+                              className="fb-video w-full max-w-full overflow-hidden rounded-t-xl border shadow-lg transition-all duration-200 ease-out group-hover:brightness-[0.8] h-full"
+                              data-href={message.image.videoUrl}
+                              data-allowfullscreen="true"
+                              data-width="auto"
+                            ></div>
+                          </div>
+                        </Link>
+                      ) : (
+                        <div className="aspect-[16/9] w-full overflow-clip rounded-t-xl">
+                          <MessagesVideoDialog
+                            videoSrc={message.image?.videoUrl || ""}
+                            thumbnailSrc={thumbnailSrc}
+                            thumbnailAlt="Messages Video"
+                            title={message.title}
+                            coordinator={{
+                              avatar: message.coordinator?.avatar || "",
+                              name: message.coordinator?.name || "",
+                            }}
+                            className="h-full"
+                          />
+                        </div>
+                      )}
+                    </CardHeader2>
+                    {/* Title Header */}
+                    <CardHeader>
+                      <CardTitle className="text-[19px] leading-[24px] md:text-[19px] md:leading-[24px]">
+                        {message.title}
+                      </CardTitle>
+                    </CardHeader>
+                    {/* Date Info */}
+                    <CardContent className="flex items-center relative w-full">
+                      <CardDescription className="capitalize">{message.published}</CardDescription>
+                    </CardContent>
+
+                    {/* Footer with Action */}
+                    <CardFooter>
+                      <CardAction>
+                        <Link
+                          href={message.url}
+                          className="flex items-center gap-3 text-primary font-roboto font-semibold text-sm leading-[20px] hover:gap-5 transition-all"
+                        >
+                          Ver ahora
+                          <ArrowRight className="w-4 h-4" />
+                        </Link>
+                      </CardAction>
+                    </CardFooter>
+                  </Card2>
+                );
+              })}
+            </div>
+          </section>
         </div>
       </Container>
     </ErrorBoundary>

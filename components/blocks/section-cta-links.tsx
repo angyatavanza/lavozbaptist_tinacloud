@@ -3,71 +3,22 @@ import type { Template } from "tinacms";
 import { tinaField } from "tinacms/dist/react";
 import { iconSchema } from "@/tina/fields/icon";
 import { Button } from "@/components/ui/button";
-import { TinaMarkdown } from "tinacms/dist/rich-text";
 import {
   PageBlocksCtalinks,
   PageBlocksCtalinksItems,
 } from "@/tina/__generated__/types";
 import { TinaIcon } from "@/components/ui/icon";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { AnimatedGroup } from "../motion-primitives/animated-group";
-import { Transition } from "motion/react";
+import { Card, CardHeader } from "@/components/ui/card";
 import { Section, sectionBlockSchemaField } from "@/components/layout/section";
-
-//done 23: add  data.bannerimg code TINA CMS/BACKEND
-//done 67: add section-banner to MDX pages TINA CMS CONTENT
-//to-do 76: edit layout of Linkscta component (4 cards with links) FRONTEND
-
-const transitionVariants = {
-  container: {
-    visible: {
-      transition: {
-        staggerChildren: 0.05,
-        delayChildren: 0.75,
-      },
-    },
-  },
-  item: {
-    hidden: {
-      opacity: 0,
-      filter: "blur(12px)",
-      y: 12,
-    },
-    visible: {
-      opacity: 1,
-      filter: "blur(0px)",
-      y: 0,
-      transition: {
-        type: "spring",
-        bounce: 0.3,
-        duration: 1.5,
-      } as Transition,
-    },
-  },
-};
 
 export const CallToActionLinks = ({ data }: { data: PageBlocksCtalinks }) => {
   return (
-    <Section background={data.background!}>
-      <div className="@container px-6">
-        <div className="text-center">
-          <h2
-            data-tina-field={tinaField(data, "title")}
-            className="text-balance text-4xl font-nunito font-medium lg:text-5xl"
-          >
-            {data.title}
-          </h2>
-          <p data-tina-field={tinaField(data, "description")} className="mt-4">
-            {data.description}
-          </p>
-        </div>
-        {/* Updated grid layout to match Groups component grid system */}
-        <div className="mx-auto mt-8 grid grid-cols-2 md:grid-cols-12 gap-3.75 mx-6 mx-6 overflow-hidden shadow-zinc-950/5 md:mt-16">
-          {data.items &&
-            data.items.map(function (block, i) {
-              return <Ctalink key={i} {...block!} />;
-            })}
-        </div>
+    <Section background={data.background!} className="mx-auto">
+      <div className="mx-auto grid grid-cols-2 md:grid-cols-12 gap-5 px-4 md:px-5 overflow-hidden py-10 md:py-15">
+        {data.items &&
+          data.items.map(function (block, i) {
+            return <Ctalink key={i} {...block!} />;
+          })}
       </div>
     </Section>
   );
@@ -75,7 +26,7 @@ export const CallToActionLinks = ({ data }: { data: PageBlocksCtalinks }) => {
 
 export const Ctalink: React.FC<PageBlocksCtalinksItems> = (data) => {
   return (
-    <Card className="col-span-2 md:col-span-3 lg:col-span-3 3xl:col-span-3 group bg-gray-100 hover:bg-gray-200 transition-colors duration-200 shadow-sm">
+    <Card className="col-span-2 md:col-span-3 lg:col-span-3 3xl:col-span-3 group overflow-hidden bg-sidebar-background hover:bg-sidebar-accent transition-colors duration-200 shadow-none">
       <CardHeader className="pb-3">
         <div className="flex flex-col items-center text-center">
           {data.icon && (
@@ -83,29 +34,25 @@ export const Ctalink: React.FC<PageBlocksCtalinksItems> = (data) => {
               <TinaIcon
                 tinaField={tinaField(data, "icon")}
                 data={{ size: "large", ...data.icon }}
+                className="text-sidebar-foreground transition-colors group-hover:text-sidebar-primary"
               />
             </div>
           )}
         </div>
-        <div className="flex flex-col items-center justify-center gap-2 md:gap-2 md:flex-row">
+        <div className="flex flex-col items-center justify-center gap-5 md:gap-5 md:flex-row min-w-0">
           {data.actions &&
             data.actions.map((action) => (
-              <div
+              <Button
                 key={action!.label}
-                data-tina-field={tinaField(action)}
-                className="bg-foreground/10 rounded-[calc(var(--radius-xl)+0.125rem)] border p-0.5"
+                asChild
+                size="default"
+                variant={action!.type === "link" ? "ghost" : "default"}
+                className="text-base leading-[24px] text-sidebar-foreground hover:text-sidebar-primary transition-colors max-w-full"
               >
-                <Button
-                  asChild
-                  size="lg"
-                  variant={action!.type === "link" ? "ghost" : "default"}
-                  className="rounded-xl px-5 text-base"
-                >
-                  <Link href={action!.link!}>
-                    <span className="text-nowrap">{action!.label}</span>
-                  </Link>
-                </Button>
-              </div>
+                <Link href={action!.link!} data-tina-field={tinaField(action)}>
+                  <span className="text-center break-words">{action!.label}</span>
+                </Link>
+              </Button>
             ))}
         </div>
       </CardHeader>
@@ -114,12 +61,11 @@ export const Ctalink: React.FC<PageBlocksCtalinksItems> = (data) => {
 };
 
 const defaultCtalink = {
-  title: "Here's Another Ctalink",
-  text: "This is where you might talk about the ctalink, if this wasn't just filler text.",
+  title: "Recursos comunitarios",
   icon: {
-    color: "",
+    color: "purple",
     style: "float",
-    name: "",
+    name: "BiHomeSmile",
   },
 };
 
@@ -129,23 +75,11 @@ export const ctalinkBlockSchema: Template = {
   ui: {
     previewSrc: "/blocks/ctalinks.png",
     defaultItem: {
-      title: "Built to cover your needs",
-      description: "We have a lot of ctalinks to cover your needs",
       items: [defaultCtalink, defaultCtalink, defaultCtalink],
     },
   },
   fields: [
     sectionBlockSchemaField as any,
-    {
-      type: "string",
-      label: "Title",
-      name: "title",
-    },
-    {
-      type: "string",
-      label: "Description",
-      name: "description",
-    },
     {
       type: "object",
       label: "Ctalink Items",
@@ -167,11 +101,6 @@ export const ctalinkBlockSchema: Template = {
           type: "string",
           label: "Title",
           name: "title",
-        },
-        {
-          type: "rich-text",
-          label: "Text",
-          name: "text",
         },
         {
           label: "Actions",

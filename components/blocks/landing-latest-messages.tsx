@@ -2,33 +2,37 @@
 import React from "react";
 import { Message, PageBlocksLatestmessages } from "@/tina/__generated__/types";
 import type { Template } from "tinacms";
-import { Card } from "@/components/ui/card";
+import {
+  Card2,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardHeader2,
+  CardFooter,
+  CardAction,
+} from "@/components/ui/card";
 import { tinaField } from "tinacms/dist/react";
 import { Button } from "@/components/ui/button";
-import MessagesVideoDialog from "@/components/ui/messages-video-dialog";
+import LatestMessagesVideoDialog from "@/components/ui/latest-messages-video-dialog";
 import { ArrowRight, UserRound } from "lucide-react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DecorativeIcon,
   LargeDecorativeIcon,
 } from "@/components/ui/decorative-icon";
 import { format } from "date-fns";
+import { es } from "date-fns/locale";
+import { TextEffect } from "../motion-primitives/text-effect";
 import { Section, sectionBlockSchemaField } from "@/components/layout/section";
 import Link from "next/link";
 
-//done 12: create a latestmessages component that extract the latest 3 messages in homepage
-//done 29: add fb video API (Graph APi) to messages videoUrls and thumbnails in the messages page TINA CMS/BACKEND
-//done 29b: find workaround to 5 copyrighted videos: https://www.facebook.com/video/copyright/claim/?match_id=24630578953196706&is_from_action_center_v2=0
-//done 77: extend duration of FACEBOOK_ACCESS_TOKEN
-//done 19: change layout of /landing-latest-messages component- div< title top left, description, view all button to the far right>, div< 3 column video "cards" with grid-column-gap: 50px, FB Play button center, circle logo/title/account top left.
-
-//line 55 p< mx-auto max-w-2xl text-muted-foreground md:text-lg ?
 interface LatestMessagesProps {
   data: PageBlocksLatestmessages;
   messages: Message[];
 }
 export const LatestMessages = ({ data, messages }: LatestMessagesProps) => {
   const limit = Math.min(Math.max(data.limit ?? 3, 1), 10);
-  const title = data.title || "Mensajes";
 
   // Filter future or recent messages by date and sort descending by date
   const filteredMessages = messages
@@ -37,39 +41,78 @@ export const LatestMessages = ({ data, messages }: LatestMessagesProps) => {
     .slice(0, limit);
 
   return (
-    <Section background={data.background!} className="relative py-16 px-24 md:px-24 lg:px-24 3xl:px-119 overflow-hidden">
+    <Section background={data.background!} className="mx-auto">
       {/* Header */}
-      <div className="flex flex-col lg:flex-row lg:justify-between lg:items-start gap-8 lg:gap-0 mb-12 lg:mb-16">
-        <div className="flex flex-col gap-2">
-          <span className="font-nunito font-bold text-lg text-secondary">
-            Mensajes
-          </span>
-          <div className="relative">
-            <h2 className="font-nunito font-bold text-3xl md:text-4xl lg:text-[42px] text-white leading-[1.4] max-w-md lg:max-w-lg">
-              {title}
-            </h2>
-            <div className="absolute -top-2 right-4 md:right-0 lg:right-0 lg:top-0">
-              <DecorativeIcon />
+      <div className="flex flex-col lg:flex-row lg:justify-between lg:items-start gap-5 lg:gap-5 px-4 md:px-5 py-5 md:py-10 lg:py-15">
+        <div className="flex flex-col gap-5">
+          {data.tagline && (
+            <div data-tina-field={tinaField(data, "tagline")}>
+              <TextEffect
+                per="line"
+                preset="fade-in-blur"
+                speedSegment={0.3}
+                delay={0.5}
+                as="p"
+                className="font-nunito font-medium text-balance text-left text-base leading-[24px] text-secondary uppercase mx-auto "
+              >
+                {data.tagline!}
+              </TextEffect>
             </div>
-          </div>
-          <p className="mx-auto max-w-2xl text-muted-foreground md:text-lg">
-            Manténgase al tanto de lo que está sucediendo en la Iglesia La Voz
-          </p>
+          )}
+
+          {/* Main headline (Headline 01 in QBDS Web 48/60 B + Responsive 34/44 B)*/}
+          {data.headline && (
+            <div
+              data-tina-field={tinaField(data, "headline")}
+              className="flex items-center gap-1 md:gap-2"
+            >
+              <TextEffect
+                preset="fade-in-blur"
+                speedSegment={0.3}
+                as="h2"
+                className="font-nunito font-semibold text-balance text-left text-[34px] leading-[44px] md:text-5xl md:leading-[60px] text-foreground max-w-2/3 md:max-w-lg"
+              >
+                {data.headline!}
+              </TextEffect>
+              <div className="relative bottom-[0px] md:bottom-[20px]">
+                <DecorativeIcon
+                  className="text-secondary w-5 h-5 md:w-7 md:h-7 shrink-0"
+                  aria-hidden="true"
+                />
+              </div>
+            </div>
+          )}
+
+          {/* Description (Body 01 in QBDS Web 20/28 MR + Responsive 16/24 MR)*/}
+          {data.description && (
+            <div data-tina-field={tinaField(data, "description")}>
+              <TextEffect
+                per="line"
+                preset="fade-in-blur"
+                speedSegment={0.3}
+                delay={0.5}
+                as="p"
+                className="font-normal text-balance text-left text-base leading-[24px] md:text-xl md:leading-[28px] max-w-md"
+              >
+                {data.description || "Mensajes"}
+              </TextEffect>
+            </div>
+          )}
         </div>
         {/* Header Button */}
-        <div className="mt-12 flex flex-wrap justify-center gap-4">
+        <div className="md:mt-12 flex flex-wrap justify-center gap-5">
           {data.actions &&
             data.actions.map((action) => (
               <div
                 key={action!.label}
                 data-tina-field={tinaField(action)}
-                className="bg-foreground/10 rounded-[calc(var(--radius-xl)+0.125rem)] border p-0.5"
+                className="bg-foreground/10 rounded-[calc(var(--radius-sm)+0.125rem)] border p-0.5"
               >
                 <Button
                   asChild
-                  size="lg"
-                  variant={action!.type === "link" ? "ghost" : "default"}
-                  className="flex items-center gap-3 px-6 md:px-8 py-3 md:py-4 border border-white text-white font-nunito font-bold  text-sm md:text-base hover:bg-white hover:text-primary transition-colors self-start lg:self-auto"
+                  size="default"
+                  variant={action!.type === "link" ? "outline" : "default"}
+                  className=""
                 >
                   <Link href={action!.link!}>
                     <span className="text-nowrap">{action!.label}</span>
@@ -81,46 +124,76 @@ export const LatestMessages = ({ data, messages }: LatestMessagesProps) => {
         </div>
       </div>
       {/* Cards Grid */}
-      <div className="grid grid-cols-2 md:grid-cols-12 gap-3.75 mx-6 relative">
+      <div className="grid grid-cols-2 md:grid-cols-12 gap-5 px-4 md:px-5 pb-5 md:pb-10 lg:pb-15 relative">
         {filteredMessages.map((message) => {
           const thumbnailSrc = "/fallback2.jpg";
           const postedDate = message.date
-            ? format(new Date(message.date), "MMM dd, yyyy")
+            ? format(new Date(message.date), "MMM dd, yyyy", { locale: es })
             : "";
           return (
-            <Card
+            <Card2
               key={message.id}
-              className="bg-white border border-grey-0 p-3 md:p-4 flex flex-col gap-3 md:gap-4 group hover:shadow-lg transition-shadow col-span-1 md:col-span-4"
+              className="border border-grey-0 flex flex-col col-span-2 md:col-span-4"
             >
-              {message.image?.embeddable && message.image?.videoUrl ? (
-                <Link
-                  href={`/messages/${message._sys.breadcrumbs.join("/")}`}
-                  className="block"
-                >
-                  <div className="aspect-[16/9] overflow-clip rounded-lg border border-border">
-                    <div
-                      className="fb-video"
-                      data-href={message.image.videoUrl}
-                      data-allowfullscreen="true"
-                      data-width="500"
-                    ></div>
+              {/* FB Video Container 356x200px on mobile 425x239px on larger screens*/}
+              <CardHeader2 className="relative w-full rounded-t-xl">
+                {message.image?.embeddable && message.image?.videoUrl ? (
+                  <Link
+                    href={`/messages/${message._sys.breadcrumbs.join("/")}`}
+                    className="block h-full"
+                  >
+                    <div className="aspect-[16/9] w-full overflow-clip rounded-t-xl">
+                      <div
+                        className="fb-video w-full max-w-full overflow-hidden rounded-t-xl border shadow-lg transition-all duration-200 ease-out group-hover:brightness-[0.8] h-full"
+                        data-href={message.image.videoUrl}
+                        data-allowfullscreen="true"
+                        data-width="auto"
+                      ></div>
+                    </div>
+                  </Link>
+                ) : (
+                  <div className="aspect-[16/9] w-full overflow-clip rounded-t-xl">
+                    <LatestMessagesVideoDialog
+                      videoSrc={message.image?.videoUrl || ""}
+                      thumbnailSrc={thumbnailSrc}
+                      thumbnailAlt="Messages Video"
+                      title={message.title}
+                      coordinator={{
+                        avatar: message.coordinator?.avatar || "",
+                        name: message.coordinator?.name || "",
+                      }}
+                      className="h-full"
+                    />
                   </div>
-                </Link>
-              ) : (
-              <div className="aspect-[16/9] overflow-clip rounded-lg border border-border relative">
-                <MessagesVideoDialog
-                  videoSrc={message.image?.videoUrl || ""}
-                  thumbnailSrc={thumbnailSrc}
-                  thumbnailAlt="Messages Video"
-                  title={message.title}
-                  coordinator={{
-                    avatar: message.coordinator?.avatar || "",
-                    name: message.coordinator?.name || "",
-                  }}
-                />
-              </div>
-              )}
-            </Card>
+                )}
+              </CardHeader2>
+              {/* Title Header */}
+              <CardHeader>
+                <CardTitle
+                  className="text-[19px] leading-[24px] md:text-[19px] md:leading-[24px]"
+                  data-tina-field={tinaField(message, "title")}
+                >
+                  {message.title}
+                </CardTitle>
+              </CardHeader>
+              {/* Coordinator and Date Info */}
+              <CardContent className="flex items-center relative w-full">
+                <CardDescription className="capitalize">{postedDate}</CardDescription>
+              </CardContent>
+
+              {/* Footer with Action */}
+              <CardFooter>
+                <CardAction>
+                  <Link
+                    href={`/messages/${message._sys.breadcrumbs.join("/")}`}
+                    className="flex items-center gap-3 text-primary font-roboto font-semibold text-sm leading-[20px] hover:gap-5 transition-all"
+                  >
+                    Ver ahora
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
+                </CardAction>
+              </CardFooter>
+            </Card2>
           );
         })}
         {/* Large Decorative Icon */}
@@ -146,8 +219,18 @@ export const latestmessagesBlockSchema: Template = {
     sectionBlockSchemaField as any,
     {
       type: "string",
-      label: "Section Title",
-      name: "title",
+      label: "Headline",
+      name: "headline",
+    },
+    {
+      type: "string",
+      label: "Tagline",
+      name: "tagline",
+    },
+    {
+      type: "string",
+      label: "Description",
+      name: "description",
     },
     {
       type: "number",

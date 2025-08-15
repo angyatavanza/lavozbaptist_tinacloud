@@ -14,9 +14,6 @@ import { TextEffect } from "../motion-primitives/text-effect";
 import HeroVideoDialog from "@/components/ui/hero-video-dialog";
 import { Transition } from "motion/react";
 
-//done 52: add paypal button to donations page TINA CMS/BACKEND
-//done 98: extend the width of the div for the Hero donation component to be full-width + remove the white looking border around the video + fix the section width of the section background of the blocks when the url goes to /home or /about
-
 const transitionVariants = {
   container: {
     visible: {
@@ -62,7 +59,7 @@ export const Herodonation = ({ data }: { data: PageBlocksHerodonation }) => {
   }
 
   return (
-    <Section background={data.background!} className="py-6 pt-9">
+    <Section background={data.background!} className="pt-15 pb-6 mx-auto">
       {data.image && (
         <div
           className="relative overflow-hidden"
@@ -76,8 +73,8 @@ export const Herodonation = ({ data }: { data: PageBlocksHerodonation }) => {
           <ImageBlock image={data.image} />
           {/* Overlay content with grid system */}
           <div className="absolute inset-0 z-20 flex items-center justify-center px-4 md:px-18">
-            <div className="w-full max-w-7xl grid grid-cols-2 md:grid-cols-12 gap-3.75">
-              <div className="col-span-2 md:col-span-10 lg:col-span-8 md:col-start-2 lg:col-start-3 flex flex-col items-start text-left gap-1 md:gap-2">
+            <div className="w-full max-w-7xl grid grid-cols-2 md:grid-cols-12 gap-5">
+              <div className="col-span-2 md:col-span-10 lg:col-span-8 md:col-start-2 lg:col-start-3 flex flex-col items-start text-left gap-5 md:gap-5">
                 {data.tagline && (
                   <div data-tina-field={tinaField(data, "tagline")}>
                     <TextEffect
@@ -86,7 +83,7 @@ export const Herodonation = ({ data }: { data: PageBlocksHerodonation }) => {
                       speedSegment={0.3}
                       delay={0.5}
                       as="p"
-                      className="font-nunito font-bold text-white text-sm md:text-base leading-6 max-w-md uppercase"
+                      className="font-nunito font-medium text-balance text-left text-base leading-[24px] text-white uppercase mx-auto mt-6"
                     >
                       {data.tagline!}
                     </TextEffect>
@@ -101,7 +98,7 @@ export const Herodonation = ({ data }: { data: PageBlocksHerodonation }) => {
                       preset="fade-in-blur"
                       speedSegment={0.3}
                       as="h1"
-                      className="lg:block font-nunito font-medium text-white text-[40px] leading-[52px] md:text-6xl md:leading-[76px]"
+                      className="lg:block font-nunito font-semibold text-white text-[40px] leading-[52px] md:text-6xl md:leading-[76px]"
                     >
                       {data.headline!}
                     </TextEffect>
@@ -112,7 +109,7 @@ export const Herodonation = ({ data }: { data: PageBlocksHerodonation }) => {
               <div className="col-span-2 md:col-span-12 flex justify-center">
                 <AnimatedGroup
                   variants={transitionVariants}
-                  className="flex flex-col items-center justify-center gap-2 md:gap-2 md:flex-row"
+                  className="flex flex-col items-center justify-center gap-5 md:gap-5 md:flex-row"
                 >
                   <form
                     action="https://www.paypal.com/donate"

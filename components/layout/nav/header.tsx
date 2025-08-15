@@ -24,10 +24,10 @@ export const Header = ({ panelId, invert = false, icon: Icon, expanded, onToggle
     <Container>
       <div className="flex items-center justify-between">
         <Link href="/" aria-label="home" className="flex items-center space-x-2">
-          <Logo invert={invert} />
+          <Logo className="h-16" invert={invert} />
         </Link>
         <div className="hidden lg:block">
-          <ul className="flex gap-8 text-sm">
+          <ul className="flex gap-5 text-base leading-[24px] font-normal">
             {header.nav!.map((item, index) => (
               <li key={index}>
                 <Link
@@ -39,7 +39,7 @@ export const Header = ({ panelId, invert = false, icon: Icon, expanded, onToggle
             ))}
           </ul>
         </div>
-        <div className="flex items-center gap-x-8">
+        <div className="flex items-center gap-5">
           <Button href="/contact" invert={invert}>Contacto</Button>
           <button
             ref={toggleRef}
@@ -49,13 +49,14 @@ export const Header = ({ panelId, invert = false, icon: Icon, expanded, onToggle
             aria-controls={panelId}
             className={clsx(
               "group -m-2.5 rounded-full p-2.5 transition",
-              invert ? "hover:bg-white/10" : "hover:bg-primary/10"
+              invert ? "hover:bg-primary-background/10" : "hover:bg-primary/10"
             )}
             aria-label="Toggle navigation"
           >
             <Icon className={clsx(
               "h-6 w-6",
-              invert ? "fill-white group-hover:fill-neutral-200" : "fill-primary group-hover:fill-neutral-500"
+              invert ? "fill-sidebar-primary-foreground group-hover:fill-sidebar-accent-foreground"
+       : "fill-sidebar-foreground group-hover:fill-sidebar-primary"
             )} />
           </button>
         </div>

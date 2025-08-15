@@ -15,12 +15,12 @@ export const AccordionItem = ({
   open = false,
 }: Props) => {
   return (
-    <article className="faq-item-container flex items-start self-stretch relative bg-white border border-[#D9DADB] rounded-xl p-[18px_20px] gap-4 max-[768px]:p-[18px_20px] max-[768px]:gap-4 min-[769px]:p-[22px_30px] min-[769px]:gap-[26px]">
-      <div className="faq-content-container flex flex-col justify-center items-start gap-[14px] flex-1 self-stretch relative">
+    <article className="faq-item-container flex items-start self-stretch relative bg-white border border-border rounded-xl p-[18px_20px] gap-5 max-[768px]:p-[18px_20px] max-[768px]:gap-5 min-[769px]:p-[22px_30px] min-[769px]:gap-5">
+      <div className="faq-content-container flex flex-col justify-center items-start gap-5 flex-1 self-stretch relative">
         <div
           onClick={onClick}
           className={`faq-title-clickable self-stretch cursor-pointer text-base font-semibold relative ${
-            open ? "text-[#60388C] font-nunito" : "text-[#3F444D] font-nunito"
+            open ? "text-primary font-nunito" : "text-body-foreground font-nunito"
           }`}
         >
           {title}
@@ -28,15 +28,15 @@ export const AccordionItem = ({
         {open && (
           <>
             <div className="faq-separator w-full max-w-[585px] h-px bg-[#E5EFFF] relative" />
-            <div className="faq-content self-stretch text-sm font-normal leading-[150%] text-[#3F444D] relative font-nunito">
+            <div className="faq-content self-stretch text-sm font-normal leading-[150%] text-body-foreground relative font-nunito">
               {children}
             </div>
           </>
         )}
       </div>
       <div
-        className={`faq-button flex p-[10px] items-start gap-[10px] rounded-[52px] relative cursor-pointer ${
-          open ? "bg-[#60388C]" : "bg-[#FAFAFA]"
+        className={`faq-button flex p-[10px] items-start gap-5 rounded-[52px] relative cursor-pointer ${
+          open ? "bg-primary" : "bg-[#FAFAFA]"
         }`}
         onClick={onClick}
       >

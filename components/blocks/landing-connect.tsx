@@ -3,134 +3,153 @@ import {
   PageBlocksConnections,
   PageBlocksConnectionsItems,
 } from "@/tina/__generated__/types";
-import type { Template } from 'tinacms';
+import type { Template } from "tinacms";
 import { tinaField } from "tinacms/dist/react";
 import { TinaMarkdown } from "tinacms/dist/rich-text";
-import { ArrowRight } from "lucide-react";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import {
+  Card,
+  CardAction,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardHeader2,
+  CardTitle,
+} from "@/components/ui/card";
 import { Section, sectionBlockSchemaField } from "@/components/layout/section";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { TextEffect } from "../motion-primitives/text-effect";
 import Image from "next/image";
-//to-do 14: merge placeholder + change layout of each connections card: Image with overlay text of the name, tag, button FRONTEND 
 
 export const Connections = ({ data }: { data: PageBlocksConnections }) => {
   return (
-    <Section background={data.background!}>
-      <div className="flex w-full max-w-7xl mx-auto px-6 md:px-12 lg:px-32 py-12 lg:py-20 flex-col items-start gap-12 lg:gap-16">
+    <Section background={data.background!} className="mx-auto">
+      <div className="flex flex-col w-full mx-auto px-4 md:px-5 py-10 md:py-15 lg:py-20 items-center gap-5 lg:gap-5">
         {/* Header Section */}
-        <div className="flex w-full max-w-md flex-col items-start gap-1">
-            <h2
-              data-tina-field={tinaField(data, "title")}
-              className="text-slate-900 font-nunito text-3xl lg:text-5xl font-bold leading-normal"
-            >
-              {data.title}
-            </h2>
-            <div
-              data-tina-field={tinaField(data, "description")}
-              className="text-primary font-roboto text-xl lg:text-2xl font-semibold leading-normal"
-            >
-              {data.description}
+        <div className="flex w-full max-w-none flex-col items-center text-center gap-5 mx-auto">
+          {/* Tagline header (Body 02 in QBDS Web+Responsive 16/24 BDM) */}
+          {data.tagline && (
+            <div data-tina-field={tinaField(data, "tagline")}>
+              <TextEffect
+                per="line"
+                preset="fade-in-blur"
+                speedSegment={0.3}
+                delay={0.5}
+                as="p"
+                className="font-nunito font-medium text-balance text-center text-base leading-[24px] text-primary-magenta1 uppercase mx-auto "
+              >
+                {data.tagline!}
+              </TextEffect>
             </div>
-          </div>
-  
-          {/* Connection Cards Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-12 gap-3.75 mx-6 relative">
-            {data.items &&
-              data.items.map(function (block, i) {
-                return <Connection key={i} {...block!} />;
-              })}
-          </div>
-        </div>
-      </Section>
-    );
-  };
+          )}
 
-const CardDecorator = ({ children }: { children: React.ReactNode }) => (
-  <div className="relative mx-auto size-36 duration-200 [--color-border:color-mix(in_oklab,var(--color-zinc-950)10%,transparent)] group-hover:[--color-border:color-mix(in_oklab,var(--color-zinc-950)20%,transparent)] dark:[--color-border:color-mix(in_oklab,var(--color-white)15%,transparent)] dark:group-hover:bg-white/5 dark:group-hover:[--color-border:color-mix(in_oklab,var(--color-white)20%,transparent)]">
-    <div aria-hidden className="absolute inset-0 bg-[linear-gradient(to_right,var(--color-border)_1px,transparent_1px),linear-gradient(to_bottom,var(--color-border)_1px,transparent_1px)] bg-[size:24px_24px]" />
-    <div aria-hidden className="bg-radial to-background absolute inset-0 from-transparent to-75%" />
-    <div className="bg-background absolute inset-0 m-auto flex size-12 items-center justify-center border-l border-t">{children}</div>
-  </div>
-)
+          {/* Main headline (Headline 01 in QBDS Web 48/60 B + Responsive 34/44 B)*/}
+          {data.headline && (
+            <div data-tina-field={tinaField(data, "headline")}>
+              <TextEffect
+                preset="fade-in-blur"
+                speedSegment={0.3}
+                as="h2"
+                className="font-nunito font-semibold text-balance text-center text-[34px] leading-[44px] md:text-5xl md:leading-[60px] text-foreground max-w-xl"
+              >
+                {data.headline!}
+              </TextEffect>
+            </div>
+          )}
+
+          {/* Description (Body 01 in QBDS Web 20/28 MR + Responsive 16/24 MR)*/}
+          {data.description && (
+            <div data-tina-field={tinaField(data, "description")}>
+              <TextEffect
+                per="line"
+                preset="fade-in-blur"
+                speedSegment={0.3}
+                delay={0.5}
+                as="p"
+                className="font-normal text-balance text-center text-base leading-[24px] md:text-xl md:leading-[28px] max-w-lg"
+              >
+                {data.description!}
+              </TextEffect>
+            </div>
+          )}
+        </div>
+
+        {/* Connection Cards Grid */}
+        <div className="grid grid-cols-2 md:grid-cols-12 gap-5 px-4 md:px-5 w-full">
+          {data.items &&
+            data.items.map(function (block, i) {
+              return <Connection key={i} {...block!} />;
+            })}
+        </div>
+      </div>
+    </Section>
+  );
+};
 
 export const Connection: React.FC<PageBlocksConnectionsItems> = (data) => {
-    return (
-      <Card className="col-span-2 md:col-span-4 bg-white border border-grey-0 p-3 md:p-4 flex flex-col gap-3 md:gap-4 group hover:shadow-lg transition-shadow group">
-        {/* Image Container with hover buttons */}
-        <CardHeader className="relative w-full h-64 lg:h-80 bg-pink-200 p-0 overflow-hidden group">
-          {data.cover && (
-            <>
-              <Image
-                data-tina-field={tinaField(data, "cover")}
-                src={data.cover}
-                alt={data.title || ""}
-                fill
-                className="w-full h-full object-cover"
-              />
-              {/* Separate overlay that appears on hover */}
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-50 group-hover:bg-accent transition-opacity duration-300 pointer-events-none" />
-            </>
-          )}
-  
-          {/* Hover overlay with buttons */}
+  return (
+    <Card className="border border-grey-0 flex flex-col col-span-2 md:col-span-4 text-card-foreground">
+      {/* Image Container with hover buttons */}
+      <CardHeader2 className="relative w-full h-64 lg:h-80 overflow-hidden group rounded-xl px-2 md:px-5">
+        {data.cover && (
+          <>
+            <Image
+              data-tina-field={tinaField(data, "cover")}
+              src={data.cover}
+              alt={data.title || ""}
+              fill
+              className="object-cover object-center"
+            />
+          </>
+        )}
+      </CardHeader2>
+      <CardHeader className="items-center justify-items-center text-center">
+        <CardTitle data-tina-field={tinaField(data, "title")}>
+          {data.title}
+        </CardTitle>
+      </CardHeader>
+      <CardContent className="flex items-center justify-center text-center relative w-full">
+        {/* Content */}
+        <CardDescription>
+          <TinaMarkdown
+            data-tina-field={tinaField(data, "text")}
+            content={data.text}
+          />
+        </CardDescription>
+      </CardContent>
+      <CardFooter className="justify-center">
+        {/* Button */}
+        <CardAction className="self-center">
+          {/* buttons */}
           {data.actions && data.actions.length > 0 && (
-            <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              <div className="flex flex-col gap-2 px-4">
-                {data.actions &&
-                  data.actions.map((action) => (
-                    <div
-                      key={action!.label}
-                      data-tina-field={tinaField(action)}
-                      className="bg-foreground/10 rounded-[calc(var(--radius-xl)+0.125rem)] border p-0.5"
+            <div className="flex flex-col items-center justify-center gap-5 md:gap-5 md:flex-row">
+              {data.actions &&
+                data.actions.map((action, idx) => (
+                  <div
+                    key={action!.label}
+                    data-tina-field={tinaField(action)}
+                    className="bg-foreground/10 rounded-[calc(var(--radius-sm)+0.125rem)] border p-0.5 translate-y-3 group-hover:translate-y-0 transition-transform duration-300 ease-out"
+                    style={{ transitionDelay: `${idx * 60}ms` }}
+                  >
+                    <Button
+                      asChild
+                      size="default"
+                      variant={action!.type === "link" ? "ghost" : "default"}
+                      className=""
                     >
-                      <Button
-                        asChild
-                        size="lg"
-                        variant={action!.type === "link" ? "ghost" : "default"}
-                        className="rounded-xl px-5 text-base"
-                      >
-                        <Link href={action!.link!}>
-                          <span className="text-nowrap">{action!.label}</span>
-                        </Link>
-                      </Button>
-                    </div>
-                  ))}
-              </div>
+                      <Link href={action!.link!}>
+                        <span className="text-nowrap">{action!.label}</span>
+                      </Link>
+                    </Button>
+                  </div>
+                ))}
             </div>
           )}
-        </CardHeader>
-  
-        {/* Text Overlay - Show for all cards */}
-        <CardContent className="flex px-4 py-3 items-center relative w-full z-20 -mt-10">
-         
-          {/* Content */}
-            <div className="flex flex-col gap-5">
-              <div className="flex flex-col gap-2 md:gap-3">
-                <h3  data-tina-field={tinaField(data, "title")} className="font-nunito font-bold  text-xl md:text-2xl text-grey-900 leading-normal">
-                  {data.title}
-                </h3>
-                <div className="text-sm md:text-base text-grey-500 leading-[1.5] leading-normal">
-              <TinaMarkdown
-                data-tina-field={tinaField(data, "text")}
-                content={data.text}
-              />
-            </div>
-              </div>
-
-              {/* Button */}
-              <div className="flex flex-col gap-1">
-                <button className="flex items-center gap-1 text-primary font-nunito font-bold  text-sm md:text-base group-hover:gap-2 transition-all">
-                  Ver ahora
-                  <ArrowRight className="w-4 h-4" />
-                </button>
-                
-              </div>
-            </div>
-        </CardContent>
-      </Card>
-    );
+        </CardAction>
+      </CardFooter>
+    </Card>
+  );
 };
 
 const defaultConnection = {
@@ -149,8 +168,8 @@ export const connectionBlockSchema: Template = {
   ui: {
     previewSrc: "/blocks/connections.png",
     defaultItem: {
-      title: 'Built to cover your needs',
-      description: 'We have a lot of connections to cover your needs',
+      title: "Built to cover your needs",
+      description: "We have a lot of connections to cover your needs",
       items: [defaultConnection, defaultConnection, defaultConnection],
     },
   },
@@ -158,8 +177,13 @@ export const connectionBlockSchema: Template = {
     sectionBlockSchemaField as any,
     {
       type: "string",
-      label: "Title",
-      name: "title",
+      label: "Headline",
+      name: "headline",
+    },
+    {
+      type: "string",
+      label: "Tagline",
+      name: "tagline",
     },
     {
       type: "string",

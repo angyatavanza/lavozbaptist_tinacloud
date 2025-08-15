@@ -18,10 +18,10 @@ export const Button = ({
 }: ButtonProps) => {
   const combinedClassName = clsx(
     className,
-    "inline-flex rounded-full px-4 py-1.5 text-sm font-roboto font-bold transition",
+    "inline-flex rounded-sm px-4.5 py-1.5 text-sm leading-[20px] font-roboto font-semibold transition focus:outline-none",
     invert
-      ? "bg-white text-primary hover:bg-neutral-200"
-      : "bg-primary text-white hover:bg-primary-muted-4 active:bg-primary-bold focus:outline-none focus:shadow-outline"
+      ? "bg-white text-sidebar-primary ring-1 ring-sidebar-accent hover:bg-sidebar-accent/30"
+      : "bg-primary-button text-primary-button-foreground hover:bg-primary-button/90"
   );
 
   const inner = <span>{children}</span>;
