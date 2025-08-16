@@ -106,7 +106,7 @@ const Page: Collection = {
           ],
         },
         {
-          name: "DateTime",
+          name: "DateTime", 
           label: "Date & Time",
           inline: true,
           fields: [
