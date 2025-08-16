@@ -1,0 +1,613 @@
+fragment PageParts on Page {
+  __typename
+  blocks {
+    __typename
+    ... on PageBlocksHero {
+      background
+      headline
+      tagline
+      actions {
+        __typename
+        label
+        type
+        link
+      }
+      image {
+        __typename
+        src
+        alt
+        videoUrl
+      }
+    }
+    ... on PageBlocksCtalinks {
+      background
+      items {
+        __typename
+        icon {
+          __typename
+          name
+          color
+          style
+        }
+        title
+        actions {
+          __typename
+          label
+          type
+          link
+        }
+      }
+    }
+    ... on PageBlocksAboutsectionsinfo {
+      background
+      headline
+      description
+      items {
+        __typename
+        cover
+        title
+        actions {
+          __typename
+          label
+          type
+          link
+        }
+      }
+    }
+    ... on PageBlocksAboutus {
+      background
+      headline
+      tagline
+      description
+      actions {
+        __typename
+        label
+        type
+        link
+      }
+      image {
+        __typename
+        src
+        alt
+        videoUrl
+      }
+    }
+    ... on PageBlocksCallout {
+      background
+      text
+      url
+    }
+    ... on PageBlocksConnections {
+      background
+      headline
+      tagline
+      description
+      items {
+        __typename
+        cover
+        title
+        text
+        actions {
+          __typename
+          label
+          type
+          link
+        }
+      }
+    }
+    ... on PageBlocksFeatures {
+      background
+      headline
+      items {
+        __typename
+        icon {
+          __typename
+          name
+          color
+          style
+        }
+        title
+        text
+      }
+    }
+    ... on PageBlocksGroupsinfo {
+      background
+      headline
+      tagline
+      description
+      items {
+        __typename
+        cover
+        title
+        text
+        actions {
+          __typename
+          label
+          type
+          link
+        }
+      }
+    }
+    ... on PageBlocksLatestevents {
+      background
+      headline
+      tagline
+      description
+      limit
+      actions {
+        __typename
+        label
+        type
+        link
+      }
+    }
+    ... on PageBlocksLatestmessages {
+      background
+      headline
+      tagline
+      description
+      limit
+      actions {
+        __typename
+        label
+        type
+        link
+      }
+    }
+    ... on PageBlocksContent {
+      background
+      body
+    }
+    ... on PageBlocksCta {
+      background
+      headline
+      description
+      image {
+        __typename
+        src
+        alt
+        videoUrl
+      }
+      actions {
+        __typename
+        label
+        type
+        link
+      }
+    }
+    ... on PageBlocksGroup {
+      background
+      headline
+      description
+      groups {
+        __typename
+        title
+        description
+        icon {
+          __typename
+          name
+          color
+          style
+        }
+        image {
+          __typename
+          src
+          alt
+          videoUrl
+        }
+        actions {
+          __typename
+          label
+          type
+          link
+        }
+      }
+    }
+    ... on PageBlocksVideo {
+      background
+      color
+      url
+      autoPlay
+      loop
+    }
+    ... on PageBlocksHerocontent {
+      background
+      headline
+      tagline
+      image {
+        __typename
+        src
+        alt
+        videoUrl
+      }
+    }
+    ... on PageBlocksHerodonation {
+      background
+      headline
+      tagline
+      image {
+        __typename
+        src
+        alt
+        videoUrl
+      }
+    }
+    ... on PageBlocksProfile {
+      background
+      headline
+      tagline
+      description
+      actions {
+        __typename
+        label
+        type
+        link
+      }
+      image {
+        __typename
+        src
+        alt
+        videoUrl
+      }
+    }
+    ... on PageBlocksTeammember {
+      background
+      headline
+      description
+      teammembers {
+        __typename
+        quote
+        coordinator
+        role
+        avatar
+        actions {
+          __typename
+          label
+          type
+          link
+        }
+      }
+    }
+    ... on PageBlocksContentandimagevariant {
+      background
+      headline
+      description
+      contentandimagevariants {
+        __typename
+        title
+        description
+        icon {
+          __typename
+          name
+          color
+          style
+        }
+        details
+        image {
+          __typename
+          src
+          alt
+        }
+        actions {
+          __typename
+          label
+          type
+          link
+        }
+      }
+    }
+    ... on PageBlocksFreqaskedquestions {
+      background
+      headline
+      tagline
+      description
+      image {
+        __typename
+        src
+        alt
+        videoUrl
+      }
+      items {
+        __typename
+        icon {
+          __typename
+          name
+          color
+          style
+        }
+        title
+        text
+      }
+    }
+    ... on PageBlocksContentandimage {
+      background
+      headline
+      description
+      contentandimages {
+        __typename
+        title
+        description
+        requirements
+        image {
+          __typename
+          src
+          alt
+        }
+        actions {
+          __typename
+          label
+          type
+          link
+        }
+      }
+    }
+    ... on PageBlocksVision {
+      title
+      description
+    }
+    ... on PageBlocksValues {
+      headline
+      description
+    }
+    ... on PageBlocksListcontent {
+      title
+      description1
+      description2
+    }
+    ... on PageBlocksLeadership {
+      background
+      headline
+      tagline
+      description
+      actions {
+        __typename
+        label
+        type
+        link
+      }
+      image {
+        __typename
+        src
+        alt
+        videoUrl
+      }
+    }
+    ... on PageBlocksNextsteps {
+      title
+      description
+      title2
+      description2
+      title3
+      description3
+      title4
+      description4
+    }
+    ... on PageBlocksContactsection {
+      headline
+      actions {
+        __typename
+        label
+        type
+        link
+      }
+    }
+  }
+  _body
+}
+
+fragment MessageParts on Message {
+  __typename
+  color
+  title
+  image {
+    __typename
+    src
+    alt
+    videoUrl
+    embeddable
+    autoPlay
+    loop
+  }
+  excerpt
+  coordinator {
+    ... on Coordinator {
+      __typename
+      name
+      avatar
+    }
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+  }
+  date
+  tags {
+    __typename
+    tag {
+      ... on Tag {
+        __typename
+        name
+      }
+      ... on Document {
+        _sys {
+          filename
+          basename
+          hasReferences
+          breadcrumbs
+          path
+          relativePath
+          extension
+        }
+        id
+      }
+    }
+  }
+  _body
+}
+
+fragment EventParts on Event {
+  __typename
+  title
+  heroImg
+  description
+  actions {
+    __typename
+    label
+    type
+    icon {
+      __typename
+      name
+      color
+      style
+    }
+    link
+  }
+  date
+  endtime
+  icon {
+    __typename
+    name
+    color
+    style
+  }
+  icon2 {
+    __typename
+    name
+    color
+    style
+  }
+  reccuringeventdetails {
+    __typename
+    recurring
+    frequency
+    recstartdate
+    recenddate
+    icon2 {
+      __typename
+      name
+      color
+      style
+    }
+    label
+    type
+    icon {
+      __typename
+      name
+      color
+      style
+    }
+    link
+  }
+  coordinator {
+    ... on Coordinator {
+      __typename
+      name
+      avatar
+    }
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+  }
+  locationdetails {
+    __typename
+    location
+    label
+    type
+    icon {
+      __typename
+      name
+      color
+      style
+    }
+    link
+  }
+  tags {
+    __typename
+    tag {
+      ... on Tag {
+        __typename
+        name
+      }
+      ... on Document {
+        _sys {
+          filename
+          basename
+          hasReferences
+          breadcrumbs
+          path
+          relativePath
+          extension
+        }
+        id
+      }
+    }
+  }
+  _body
+}
+
+fragment CoordinatorParts on Coordinator {
+  __typename
+  name
+  avatar
+}
+
+fragment TagParts on Tag {
+  __typename
+  name
+}
+
+fragment GlobalParts on Global {
+  __typename
+  header {
+    __typename
+    icon {
+      __typename
+      name
+      color
+      style
+    }
+    name
+    color
+    nav {
+      __typename
+      href
+      label
+    }
+  }
+  footer {
+    __typename
+    social {
+      __typename
+      icon {
+        __typename
+        name
+        color
+        style
+      }
+      url
+    }
+  }
+  theme {
+    __typename
+    color
+    font
+    darkMode
+  }
+}
