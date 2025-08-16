@@ -47,7 +47,7 @@ const Page: Collection = {
       type: "object",
       list: true,
       name: "blocks",
-      label: "Sections",
+      label: "Sections", 
       ui: {
         visualSelector: true,
       },
