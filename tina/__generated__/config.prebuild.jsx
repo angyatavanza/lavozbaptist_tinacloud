@@ -33,7 +33,7 @@ var init_mermaid_renderer = __esm({
   }
 });
 
-// tina/config.ts
+// tina/config.tsx
 import { defineConfig } from "tinacms";
 
 // next.config.ts
@@ -5288,14 +5288,28 @@ var Tag = {
 };
 var tag_default = Tag;
 
-// tina/config.ts
-var branch = process.env.NEXT_PUBLIC_TINA_BRANCH || // custom branch env override
-process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_REF || // Vercel branch env
-process.env.HEAD;
-var config = defineConfig({
+// tina/config.tsx
+var branch = process.env.NEXT_PUBLIC_TINA_BRANCH || process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_REF || "";
+var config_default = defineConfig({
   branch,
-  clientId: process.env.NEXT_PUBLIC_TINA_CLIENT_ID,
   token: process.env.TINA_TOKEN,
+  clientId: process.env.NEXT_PUBLIC_TINA_CLIENT_ID,
+  build: {
+    publicFolder: "public",
+    // The public asset folder for your framework
+    outputFolder: "admin",
+    // within the public folder
+    basePath: next_config_default.basePath?.replace(/^\//, "") || ""
+    // The base path of the app (could be /blog)
+  },
+  schema: {
+    collections: [page_default, message_default, event_default, coordinator_default, tag_default, global_default]
+  },
+  ui: {
+    previewUrl: (context) => {
+      return { url: `https://lavozbaptist-tinacloud-git-${context.branch}.vercel.app` };
+    }
+  },
   media: {
     // If you wanted cloudinary do this
     // loadCustomStore: async () => {
@@ -5307,20 +5321,8 @@ var config = defineConfig({
       publicFolder: "public",
       mediaRoot: "uploads"
     }
-  },
-  build: {
-    publicFolder: "public",
-    // The public asset folder for your framework
-    outputFolder: "admin",
-    // within the public folder
-    basePath: next_config_default.basePath?.replace(/^\//, "") || ""
-    // The base path of the app (could be /blog)
-  },
-  schema: {
-    collections: [page_default, message_default, event_default, coordinator_default, tag_default, global_default]
   }
 });
-var config_default = config;
 export {
   config_default as default
 };
