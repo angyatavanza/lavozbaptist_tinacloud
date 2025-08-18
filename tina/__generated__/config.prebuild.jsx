@@ -1195,7 +1195,7 @@ var queries = (client2) => {
 };
 
 // tina/__generated__/client.ts
-var client = createClient2({ cacheDir: "/Users/angyaguilar/Documents/GitHub/tina-cloud-starter/tina/__generated__/.cache/1755550911882", url: "https://content.tinajs.io/1.6/content/49245b1e-a7ee-4385-98f5-befbf4d19b59/github/la_voz_tinaCMS", token: "a85d5ee699ff1356512bdde5c2565bf1e435053f", queries });
+var client = createClient2({ url: "http://localhost:4001/graphql", token: "a85d5ee699ff1356512bdde5c2565bf1e435053f", queries });
 
 // components/layout/layout.tsx
 import React10 from "react";
