@@ -159,7 +159,11 @@ export const groupinfoBlockSchema: Template = {
       title: "Grupos",
       description:
         "En La Iglesia La Voz, hay algo para todos. Ofrecemos los siguientes Ministerios: Varones, Mujeres, Jovenes, y Niños",
-      items: [defaultGroupinfo, defaultGroupinfo, defaultGroupinfo],
+      items: [
+        { ...defaultGroupinfo, icon: defaultGroupinfo.icon ? { ...defaultGroupinfo.icon } : undefined },
+        { ...defaultGroupinfo, icon: defaultGroupinfo.icon ? { ...defaultGroupinfo.icon } : undefined },
+        { ...defaultGroupinfo, icon: defaultGroupinfo.icon ? { ...defaultGroupinfo.icon } : undefined },
+      ],
     },
   },
   fields: [
@@ -195,7 +199,7 @@ export const groupinfoBlockSchema: Template = {
         },
       },
       fields: [
-        //iconSchema as any,
+        //iconField as any,
         {
           type: "image",
           label: "CoverImg",

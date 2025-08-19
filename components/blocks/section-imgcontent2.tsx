@@ -19,7 +19,8 @@ import {
 import { tinaField } from "tinacms/dist/react";
 import { ServiceTimes } from "@/components/layout/nav/service-times";
 import { ArrowRight } from "lucide-react";
-import { iconSchema } from "@/tina/fields/icon";
+import { IconPickerInput } from "@/tina/fields/icon";
+import { ColorPickerInput } from "@/tina/fields/color";
 import { TinaIcon } from "@/components/ui/icon";
 
 export const ContentAndImageVariant = ({ data }: { data: PageBlocksContentandimagevariant }) => {
@@ -139,6 +140,25 @@ const ContentandimagevariantCard = ({ contentandimagevariant }: { contentandimag
   );
 };
 
+const iconField = {
+  type: "object",
+  label: "Icon",
+  name: "icon",
+  fields: [
+    { type: "string", label: "Icon", name: "name", ui: { component: IconPickerInput } },
+    { type: "string", label: "Color", name: "color", ui: { component: ColorPickerInput } },
+    {
+      name: "style",
+      label: "Style",
+      type: "string",
+      options: [
+        { label: "Circle", value: "circle" },
+        { label: "Float", value: "float" },
+      ],
+    },
+  ],
+};
+
 export const contentandimagevariantBlockSchema: Template = {
   name: "contentandimagevariant",
   label: "Contentandimagevariant",
@@ -240,7 +260,7 @@ export const contentandimagevariantBlockSchema: Template = {
           label: "Section Img Content Description",
           name: "description",
         },
-        iconSchema as any,
+        iconField as any,
         {
           type: "string",
           label: "Details",

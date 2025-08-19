@@ -131,9 +131,9 @@ export const aboutsectioninfoBlockSchema: Template = {
       description:
         "En La Iglesia La Voz, hay algo para todos. Ofrecemos los siguientes Ministerios: Varones, Mujeres, Jovenes, y Niños",
       items: [
-        defaultAboutsectioninfo,
-        defaultAboutsectioninfo,
-        defaultAboutsectioninfo,
+          { ...defaultAboutsectioninfo, icon: { ...defaultAboutsectioninfo.icon } },
+          { ...defaultAboutsectioninfo, icon: { ...defaultAboutsectioninfo.icon } },
+          { ...defaultAboutsectioninfo, icon: { ...defaultAboutsectioninfo.icon } },
       ],
     },
   },
@@ -165,7 +165,7 @@ export const aboutsectioninfoBlockSchema: Template = {
         },
       },
       fields: [
-        //iconSchema as any,
+        //iconField as any,
         {
           type: "image",
           label: "CoverImg",

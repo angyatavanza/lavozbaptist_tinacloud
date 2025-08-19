@@ -1,7 +1,27 @@
 import type { Collection } from "tinacms";
-import { ColorPickerInput } from "../fields/color";
 import { iconSchema } from "../fields/icon";
 import { icon } from "mermaid/dist/rendering-util/rendering-elements/shapes/icon.js";
+import { IconPickerInput } from "@/tina/fields/icon";
+import { ColorPickerInput } from "@/tina/fields/color";
+
+const iconField = {
+  type: "object",
+  label: "Icon",
+  name: "icon",
+  fields: [
+    { type: "string", label: "Icon", name: "name", ui: { component: IconPickerInput } },
+    { type: "string", label: "Color", name: "color", ui: { component: ColorPickerInput } },
+    {
+      name: "style",
+      label: "Style",
+      type: "string",
+      options: [
+        { label: "Circle", value: "circle" },
+        { label: "Float", value: "float" },
+      ],
+    },
+  ],
+};
 
 const Global: Collection = {
   label: "Global",
@@ -17,7 +37,7 @@ const Global: Collection = {
       label: "Header",
       name: "header",
       fields: [
-        iconSchema as any,
+        iconField as any,
         {
           type: "string",
           label: "Name",
@@ -77,7 +97,7 @@ const Global: Collection = {
             },
           },
           fields: [
-            iconSchema as any,
+            iconField as any,
             {
               type: "string",
               label: "Url",

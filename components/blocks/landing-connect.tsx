@@ -170,7 +170,11 @@ export const connectionBlockSchema: Template = {
     defaultItem: {
       title: "Built to cover your needs",
       description: "We have a lot of connections to cover your needs",
-      items: [defaultConnection, defaultConnection, defaultConnection],
+      items: [
+        { ...defaultConnection, icon: { ...defaultConnection.icon } },
+        { ...defaultConnection, icon: { ...defaultConnection.icon } },
+        { ...defaultConnection, icon: { ...defaultConnection.icon } },
+      ],
     },
   },
   fields: [
@@ -206,7 +210,7 @@ export const connectionBlockSchema: Template = {
         },
       },
       fields: [
-        //iconSchema as any,
+        //iconField as any,
         {
           type: "image",
           label: "CoverImg",

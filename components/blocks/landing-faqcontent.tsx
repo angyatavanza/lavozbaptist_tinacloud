@@ -8,7 +8,8 @@ import {
 } from "@/tina/__generated__/types";
 import { tinaField } from "tinacms/dist/react";
 import { AccordionItem } from "@/components/ui/accordion-item";
-import { iconSchema } from "@/tina/fields/icon";
+import { IconPickerInput } from "@/tina/fields/icon";
+import { ColorPickerInput } from "@/tina/fields/color";
 import { TextEffect } from "../motion-primitives/text-effect";
 import { Section } from "@/components/layout/section";
 import { sectionBlockSchemaField } from "@/components/layout/section";
@@ -148,6 +149,25 @@ const defaultQuestion = {
   },
 };
 
+const iconField = {
+  type: "object",
+  label: "Icon",
+  name: "icon",
+  fields: [
+    { type: "string", label: "Icon", name: "name", ui: { component: IconPickerInput } },
+    { type: "string", label: "Color", name: "color", ui: { component: ColorPickerInput } },
+    {
+      name: "style",
+      label: "Style",
+      type: "string",
+      options: [
+        { label: "Circle", value: "circle" },
+        { label: "Float", value: "float" },
+      ],
+    },
+  ],
+};
+
 export const freqaskedquestionsBlockSchema: Template = {
   name: "freqaskedquestions",
   label: "Freqaskedquestions",
@@ -160,7 +180,11 @@ export const freqaskedquestionsBlockSchema: Template = {
         src: "https://cdn.builder.io/api/v1/image/assets/TEMP/8fa3a68a541052d3b421c33ebf1fcbc32eae6398?width=1420",
         alt: "FAQ Image",
       },
-      items: [defaultQuestion, defaultQuestion, defaultQuestion],
+      items: [
+        { ...defaultQuestion, icon: { ...defaultQuestion.icon } },
+        { ...defaultQuestion, icon: { ...defaultQuestion.icon } },
+        { ...defaultQuestion, icon: { ...defaultQuestion.icon } },
+      ],
     },
   },
   fields: [
@@ -220,7 +244,7 @@ export const freqaskedquestionsBlockSchema: Template = {
         },
       },
       fields: [
-        iconSchema as any,
+        iconField as any,
         {
           type: "string",
           label: "Title",

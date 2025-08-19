@@ -2029,46 +2029,26 @@ var IconPickerInput = wrapFieldsWithMeta2(({ input }) => {
     )
   ))));
 });
-var iconSchema = {
+
+// tina/collection/event.tsx
+var iconField = {
   type: "object",
   label: "Icon",
   name: "icon",
   fields: [
-    {
-      type: "string",
-      label: "Icon",
-      name: "name",
-      ui: {
-        component: IconPickerInput
-      }
-    },
-    {
-      type: "string",
-      label: "Color",
-      name: "color",
-      ui: {
-        component: ColorPickerInput
-      }
-    },
+    { type: "string", label: "Icon", name: "name", ui: { component: IconPickerInput } },
+    { type: "string", label: "Color", name: "color", ui: { component: ColorPickerInput } },
     {
       name: "style",
       label: "Style",
       type: "string",
       options: [
-        {
-          label: "Circle",
-          value: "circle"
-        },
-        {
-          label: "Float",
-          value: "float"
-        }
+        { label: "Circle", value: "circle" },
+        { label: "Float", value: "float" }
       ]
     }
   ]
 };
-
-// tina/collection/event.tsx
 var Event = {
   label: "Eventos",
   name: "event",
@@ -2134,7 +2114,7 @@ var Event = {
             { label: "Link", value: "link" }
           ]
         },
-        iconSchema,
+        iconField,
         {
           label: "Link",
           name: "link",
@@ -2161,9 +2141,9 @@ var Event = {
         timeFormat: "hh:mm A"
       }
     },
-    iconSchema,
+    iconField,
     {
-      ...iconSchema,
+      ...iconField,
       name: "icon2"
     },
     {
@@ -2172,10 +2152,9 @@ var Event = {
       type: "object",
       list: true,
       ui: {
-        defaultItem: {
+        // Use a function and avoid dynamic values to prevent schema drift
+        defaultItem: () => ({
           recurring: false,
-          date: (/* @__PURE__ */ new Date()).toISOString(),
-          enddate: (/* @__PURE__ */ new Date()).toISOString(),
           label: "Date Label",
           type: "button",
           icon: {
@@ -2183,7 +2162,7 @@ var Event = {
             color: ""
           },
           link: "/"
-        },
+        }),
         itemProps: (item) => ({ label: item.label })
       },
       fields: [
@@ -2216,7 +2195,7 @@ var Event = {
           }
         },
         {
-          ...iconSchema,
+          ...iconField,
           name: "icon2"
         },
         {
@@ -2233,7 +2212,7 @@ var Event = {
             { label: "Link", value: "link" }
           ]
         },
-        iconSchema,
+        iconField,
         {
           label: "Link",
           name: "link",
@@ -2293,7 +2272,7 @@ var Event = {
             { label: "Link", value: "link" }
           ]
         },
-        iconSchema,
+        iconField,
         {
           label: "Link",
           name: "link",
@@ -2404,6 +2383,24 @@ var Event = {
 var event_default = Event;
 
 // tina/collection/global.ts
+var iconField2 = {
+  type: "object",
+  label: "Icon",
+  name: "icon",
+  fields: [
+    { type: "string", label: "Icon", name: "name", ui: { component: IconPickerInput } },
+    { type: "string", label: "Color", name: "color", ui: { component: ColorPickerInput } },
+    {
+      name: "style",
+      label: "Style",
+      type: "string",
+      options: [
+        { label: "Circle", value: "circle" },
+        { label: "Float", value: "float" }
+      ]
+    }
+  ]
+};
 var Global = {
   label: "Global",
   name: "global",
@@ -2418,7 +2415,7 @@ var Global = {
       label: "Header",
       name: "header",
       fields: [
-        iconSchema,
+        iconField2,
         {
           type: "string",
           label: "Name",
@@ -2478,7 +2475,7 @@ var Global = {
             }
           },
           fields: [
-            iconSchema,
+            iconField2,
             {
               type: "string",
               label: "Url",
@@ -2675,13 +2672,35 @@ var defaultCtalink = {
     name: "BiHomeSmile"
   }
 };
+var iconField3 = {
+  type: "object",
+  label: "Icon",
+  name: "icon",
+  fields: [
+    { type: "string", label: "Icon", name: "name", ui: { component: IconPickerInput } },
+    { type: "string", label: "Color", name: "color", ui: { component: ColorPickerInput } },
+    {
+      name: "style",
+      label: "Style",
+      type: "string",
+      options: [
+        { label: "Circle", value: "circle" },
+        { label: "Float", value: "float" }
+      ]
+    }
+  ]
+};
 var ctalinkBlockSchema = {
   name: "ctalinks",
   label: "Ctalinks",
   ui: {
     previewSrc: "/blocks/ctalinks.png",
     defaultItem: {
-      items: [defaultCtalink, defaultCtalink, defaultCtalink]
+      items: [
+        { ...defaultCtalink, icon: { ...defaultCtalink.icon } },
+        { ...defaultCtalink, icon: { ...defaultCtalink.icon } },
+        { ...defaultCtalink, icon: { ...defaultCtalink.icon } }
+      ]
     }
   },
   fields: [
@@ -2702,7 +2721,7 @@ var ctalinkBlockSchema = {
         }
       },
       fields: [
-        iconSchema,
+        iconField3,
         {
           type: "string",
           label: "Title",
@@ -3137,9 +3156,9 @@ var aboutsectioninfoBlockSchema = {
       headline: "Grupos",
       description: "En La Iglesia La Voz, hay algo para todos. Ofrecemos los siguientes Ministerios: Varones, Mujeres, Jovenes, y Ni\xF1os",
       items: [
-        defaultAboutsectioninfo,
-        defaultAboutsectioninfo,
-        defaultAboutsectioninfo
+        { ...defaultAboutsectioninfo, icon: { ...defaultAboutsectioninfo.icon } },
+        { ...defaultAboutsectioninfo, icon: { ...defaultAboutsectioninfo.icon } },
+        { ...defaultAboutsectioninfo, icon: { ...defaultAboutsectioninfo.icon } }
       ]
     }
   },
@@ -3171,7 +3190,7 @@ var aboutsectioninfoBlockSchema = {
         }
       },
       fields: [
-        //iconSchema as any,
+        //iconField as any,
         {
           type: "image",
           label: "CoverImg",
@@ -3523,7 +3542,11 @@ var connectionBlockSchema = {
     defaultItem: {
       title: "Built to cover your needs",
       description: "We have a lot of connections to cover your needs",
-      items: [defaultConnection, defaultConnection, defaultConnection]
+      items: [
+        { ...defaultConnection, icon: { ...defaultConnection.icon } },
+        { ...defaultConnection, icon: { ...defaultConnection.icon } },
+        { ...defaultConnection, icon: { ...defaultConnection.icon } }
+      ]
     }
   },
   fields: [
@@ -3559,7 +3582,7 @@ var connectionBlockSchema = {
         }
       },
       fields: [
-        //iconSchema as any,
+        //iconField as any,
         {
           type: "image",
           label: "CoverImg",
@@ -3627,6 +3650,24 @@ var defaultFeature = {
     name: ""
   }
 };
+var iconField4 = {
+  type: "object",
+  label: "Icon",
+  name: "icon",
+  fields: [
+    { type: "string", label: "Icon", name: "name", ui: { component: IconPickerInput } },
+    { type: "string", label: "Color", name: "color", ui: { component: ColorPickerInput } },
+    {
+      name: "style",
+      label: "Style",
+      type: "string",
+      options: [
+        { label: "Circle", value: "circle" },
+        { label: "Float", value: "float" }
+      ]
+    }
+  ]
+};
 var featureBlockSchema = {
   name: "features",
   label: "Features",
@@ -3635,7 +3676,11 @@ var featureBlockSchema = {
     defaultItem: {
       headline: "Built to cover your needs",
       description: "We have a lot of features to cover your needs",
-      items: [defaultFeature, defaultFeature, defaultFeature]
+      items: [
+        { ...defaultFeature, icon: { ...defaultFeature.icon } },
+        { ...defaultFeature, icon: { ...defaultFeature.icon } },
+        { ...defaultFeature, icon: { ...defaultFeature.icon } }
+      ]
     }
   },
   fields: [
@@ -3661,7 +3706,7 @@ var featureBlockSchema = {
         }
       },
       fields: [
-        iconSchema,
+        iconField4,
         {
           type: "string",
           label: "Title",
@@ -3842,7 +3887,11 @@ var groupinfoBlockSchema = {
     defaultItem: {
       title: "Grupos",
       description: "En La Iglesia La Voz, hay algo para todos. Ofrecemos los siguientes Ministerios: Varones, Mujeres, Jovenes, y Ni\xF1os",
-      items: [defaultGroupinfo, defaultGroupinfo, defaultGroupinfo]
+      items: [
+        { ...defaultGroupinfo, icon: defaultGroupinfo.icon ? { ...defaultGroupinfo.icon } : void 0 },
+        { ...defaultGroupinfo, icon: defaultGroupinfo.icon ? { ...defaultGroupinfo.icon } : void 0 },
+        { ...defaultGroupinfo, icon: defaultGroupinfo.icon ? { ...defaultGroupinfo.icon } : void 0 }
+      ]
     }
   },
   fields: [
@@ -3878,7 +3927,7 @@ var groupinfoBlockSchema = {
         }
       },
       fields: [
-        //iconSchema as any,
+        //iconField as any,
         {
           type: "image",
           label: "CoverImg",
@@ -3988,6 +4037,24 @@ var defaultQuestion = {
     name: ""
   }
 };
+var iconField5 = {
+  type: "object",
+  label: "Icon",
+  name: "icon",
+  fields: [
+    { type: "string", label: "Icon", name: "name", ui: { component: IconPickerInput } },
+    { type: "string", label: "Color", name: "color", ui: { component: ColorPickerInput } },
+    {
+      name: "style",
+      label: "Style",
+      type: "string",
+      options: [
+        { label: "Circle", value: "circle" },
+        { label: "Float", value: "float" }
+      ]
+    }
+  ]
+};
 var freqaskedquestionsBlockSchema = {
   name: "freqaskedquestions",
   label: "Freqaskedquestions",
@@ -4000,7 +4067,11 @@ var freqaskedquestionsBlockSchema = {
         src: "https://cdn.builder.io/api/v1/image/assets/TEMP/8fa3a68a541052d3b421c33ebf1fcbc32eae6398?width=1420",
         alt: "FAQ Image"
       },
-      items: [defaultQuestion, defaultQuestion, defaultQuestion]
+      items: [
+        { ...defaultQuestion, icon: { ...defaultQuestion.icon } },
+        { ...defaultQuestion, icon: { ...defaultQuestion.icon } },
+        { ...defaultQuestion, icon: { ...defaultQuestion.icon } }
+      ]
     }
   },
   fields: [
@@ -4059,7 +4130,7 @@ var freqaskedquestionsBlockSchema = {
         }
       },
       fields: [
-        iconSchema,
+        iconField5,
         {
           type: "string",
           label: "Title",
@@ -4245,6 +4316,24 @@ var contentandimageBlockSchema = {
 import Image16 from "next/image";
 import { tinaField as tinaField19 } from "tinacms/dist/react";
 import { ArrowRight as ArrowRight6 } from "lucide-react";
+var iconField6 = {
+  type: "object",
+  label: "Icon",
+  name: "icon",
+  fields: [
+    { type: "string", label: "Icon", name: "name", ui: { component: IconPickerInput } },
+    { type: "string", label: "Color", name: "color", ui: { component: ColorPickerInput } },
+    {
+      name: "style",
+      label: "Style",
+      type: "string",
+      options: [
+        { label: "Circle", value: "circle" },
+        { label: "Float", value: "float" }
+      ]
+    }
+  ]
+};
 var contentandimagevariantBlockSchema = {
   name: "contentandimagevariant",
   label: "Contentandimagevariant",
@@ -4344,7 +4433,7 @@ var contentandimagevariantBlockSchema = {
           label: "Section Img Content Description",
           name: "description"
         },
-        iconSchema,
+        iconField6,
         {
           type: "string",
           label: "Details",
@@ -4567,6 +4656,24 @@ import Link23 from "next/link";
 import Image18 from "next/image";
 import { tinaField as tinaField22 } from "tinacms/dist/react";
 import { ArrowRight as ArrowRight9 } from "lucide-react";
+var iconField7 = {
+  type: "object",
+  label: "Icon",
+  name: "icon",
+  fields: [
+    { type: "string", label: "Icon", name: "name", ui: { component: IconPickerInput } },
+    { type: "string", label: "Color", name: "color", ui: { component: ColorPickerInput } },
+    {
+      name: "style",
+      label: "Style",
+      type: "string",
+      options: [
+        { label: "Circle", value: "circle" },
+        { label: "Float", value: "float" }
+      ]
+    }
+  ]
+};
 var groupBlockSchema = {
   name: "group",
   label: "Groups Section",
@@ -4685,7 +4792,7 @@ var groupBlockSchema = {
           label: "Groups Description",
           name: "description"
         },
-        iconSchema,
+        iconField7,
         {
           type: "object",
           label: "Image",

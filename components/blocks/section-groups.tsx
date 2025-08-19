@@ -19,7 +19,8 @@ import {
 } from "@/components/ui/card";
 import { tinaField } from "tinacms/dist/react";
 import { ArrowRight } from "lucide-react";
-import { iconSchema } from "@/tina/fields/icon";
+import { IconPickerInput } from "@/tina/fields/icon";
+import { ColorPickerInput } from "@/tina/fields/color";
 import { TinaIcon } from "@/components/ui/icon";
 
 export const Group = ({ data }: { data: PageBlocksGroup }) => {
@@ -132,6 +133,25 @@ const GroupCard = ({ group }: { group: PageBlocksGroupGroups }) => {
       </CardFooter>
     </Card>
   );
+};
+
+const iconField = {
+  type: "object",
+  label: "Icon",
+  name: "icon",
+  fields: [
+    { type: "string", label: "Icon", name: "name", ui: { component: IconPickerInput } },
+    { type: "string", label: "Color", name: "color", ui: { component: ColorPickerInput } },
+    {
+      name: "style",
+      label: "Style",
+      type: "string",
+      options: [
+        { label: "Circle", value: "circle" },
+        { label: "Float", value: "float" },
+      ],
+    },
+  ],
 };
 
 export const groupBlockSchema: Template = {
@@ -257,7 +277,7 @@ export const groupBlockSchema: Template = {
           label: "Groups Description",
           name: "description",
         },
-        iconSchema as any,
+        iconField as any,
         {
           type: "object",
           label: "Image",

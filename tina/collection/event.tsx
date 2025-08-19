@@ -2,7 +2,27 @@ import React from "react";
 import { videoBlockSchema } from "@/components/blocks/section-video";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import type { Collection } from "tinacms";
-import { iconSchema } from "../fields/icon";
+import { IconPickerInput } from "@/tina/fields/icon";
+import { ColorPickerInput } from "@/tina/fields/color";
+
+const iconField = {
+  type: "object",
+  label: "Icon",
+  name: "icon",
+  fields: [
+    { type: "string", label: "Icon", name: "name", ui: { component: IconPickerInput } },
+    { type: "string", label: "Color", name: "color", ui: { component: ColorPickerInput } },
+    {
+      name: "style",
+      label: "Style",
+      type: "string",
+      options: [
+        { label: "Circle", value: "circle" },
+        { label: "Float", value: "float" },
+      ],
+    },
+  ],
+};
 
 const Event: Collection = {
   label: "Eventos",
@@ -69,7 +89,7 @@ const Event: Collection = {
             { label: "Link", value: "link" },
           ],
         },
-        iconSchema as any,
+        iconField as any,
         {
           label: "Link",
           name: "link",
@@ -95,21 +115,19 @@ const Event: Collection = {
         timeFormat: "hh:mm A",
       },
     },
-    iconSchema as any,
-    {
-          ...iconSchema,
-          name: "icon2",
-        } as any,
+    iconField as any,
+    { 
+      ...iconField,
+      name: "icon2" } as any,
     {
       label: "Reccuring Event Details",
       name: "reccuringeventdetails",
       type: "object",
       list: true,
       ui: {
-        defaultItem: {
+        // Use a function and avoid dynamic values to prevent schema drift
+        defaultItem: () => ({
           recurring: false,
-          date: new Date().toISOString(),
-          enddate: new Date().toISOString(),
           label: "Date Label",
           type: "button",
           icon: {
@@ -117,7 +135,7 @@ const Event: Collection = {
             color: "",
           },
           link: "/",
-        },
+        }),
         itemProps: (item) => ({ label: item.label }),
       },
       fields: [
@@ -150,7 +168,7 @@ const Event: Collection = {
           },
         },
         {
-          ...iconSchema,
+          ...iconField,
           name: "icon2",
         } as any,
         {
@@ -167,7 +185,7 @@ const Event: Collection = {
             { label: "Link", value: "link" },
           ],
         },
-        iconSchema as any,
+        iconField as any,
         {
           label: "Link",
           name: "link",
@@ -247,7 +265,7 @@ const Event: Collection = {
             { label: "Link", value: "link" },
           ],
         },
-        iconSchema as any,
+        iconField as any,
         {
           label: "Link",
           name: "link",

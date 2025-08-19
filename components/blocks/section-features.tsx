@@ -7,7 +7,8 @@ import type { Template } from "tinacms";
 import { tinaField } from "tinacms/dist/react";
 import { TinaMarkdown } from "tinacms/dist/rich-text";
 import { TinaIcon } from "@/components/ui/icon";
-import { iconSchema } from "@/tina/fields/icon";
+import { IconPickerInput } from "@/tina/fields/icon";
+import { ColorPickerInput } from "@/tina/fields/color";
 import {
   Card,
   CardContent,
@@ -81,6 +82,26 @@ const defaultFeature = {
   },
 };
 
+const iconField = {
+  type: "object",
+  label: "Icon",
+  name: "icon",
+  fields: [
+    { type: "string", label: "Icon", name: "name", ui: { component: IconPickerInput } },
+    { type: "string", label: "Color", name: "color", ui: { component: ColorPickerInput } },
+    {
+      name: "style",
+      label: "Style",
+      type: "string",
+      options: [
+        { label: "Circle", value: "circle" },
+        { label: "Float", value: "float" },
+      ],
+    },
+  ],
+};
+
+
 export const featureBlockSchema: Template = {
   name: "features",
   label: "Features",
@@ -89,7 +110,11 @@ export const featureBlockSchema: Template = {
     defaultItem: {
       headline: "Built to cover your needs",
       description: "We have a lot of features to cover your needs",
-      items: [defaultFeature, defaultFeature, defaultFeature],
+      items: [
+        { ...defaultFeature, icon: { ...defaultFeature.icon } },
+        { ...defaultFeature, icon: { ...defaultFeature.icon } },
+        { ...defaultFeature, icon: { ...defaultFeature.icon } },
+      ],
     },
   },
   fields: [
@@ -115,7 +140,7 @@ export const featureBlockSchema: Template = {
         },
       },
       fields: [
-        iconSchema as any,
+        iconField as any,
         {
           type: "string",
           label: "Title",
