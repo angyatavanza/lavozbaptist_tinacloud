@@ -21,6 +21,10 @@ concurrency:
 jobs:
   build:
     environment: github-pages
+    env:
+      NEXT_PUBLIC_TINA_CLIENT_ID: ${{ secrets.NEXT_PUBLIC_TINA_CLIENT_ID }}
+      NEXT_PUBLIC_TINA_BRANCH: ${{ github.ref_name }}
+      TINA_TOKEN: ${{ secrets.TINA_TOKEN }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
