@@ -20,38 +20,91 @@ concurrency:
 
 jobs:
   build:
+    environment: github-pages
+    env:
+      NEXT_PUBLIC_TINA_CLIENT_ID: ${{ secrets.NEXT_PUBLIC_TINA_CLIENT_ID }}
+      NEXT_PUBLIC_TINA_BRANCH: ${{ github.ref_name }}
+      TINA_TOKEN: ${{ secrets.TINA_TOKEN }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Detect package manager
+        id: detect-package-manager
+        run: |
+          if [ -f "${{ github.workspace }}/pnpm-lock.yaml" ]; then
+            echo "✅ Detected pnpm"
+            echo "manager=pnpm" >> $GITHUB_OUTPUT
+            echo "command=install" >> $GITHUB_OUTPUT
+            echo "runner=pnpm" >> $GITHUB_OUTPUT
+            exit 0
+          elif [ -f "${{ github.workspace }}/yarn.lock" ]; then
+            echo "manager=yarn" >> $GITHUB_OUTPUT
+            echo "command=install --frozen-lockfile" >> $GITHUB_OUTPUT
+            echo "runner=yarn" >> $GITHUB_OUTPUT
+            exit 0
+          elif [ -f "${{ github.workspace }}/package.json" ]; then
+            echo "manager=npm" >> $GITHUB_OUTPUT
+            echo "command=ci" >> $GITHUB_OUTPUT
+            echo "runner=npx --no-install" >> $GITHUB_OUTPUT
+            exit 0
+          else
+            echo "Unable to determine package manager"
+            exit 1
+          fi
+
+      - name: Setup pnpm
+        if: steps.detect-package-manager.outputs.manager == 'pnpm'
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+          
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "22"
           cache: ${{ steps.detect-package-manager.outputs.manager }}
+
+      - name: Enable Corepack (for pnpm)
+        run: corepack enable
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
         with:
           static_site_generator: next
+
       - name: Restore cache
         uses: actions/cache@v4
         with:
           path: |
             .next/cache
-          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/pnpm-lock.yaml') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
+          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/pnpm-lock.yaml', '**/package-lock.json', '**/yarn.lock') }}-${{ hashFiles('**/*.[jt]s', '**/*.[jt]sx') }}
           restore-keys: |
-            ${{ runner.os }}-nextjs-${{ hashFiles('**/pnpm-lock.yaml') }}-
-      - name: Install pnpm
-        run: npm install -g pnpm
+            ${{ runner.os }}-nextjs-${{ hashFiles('**/pnpm-lock.yaml', '**/package-lock.json', '**/yarn.lock') }}-
+
       - name: Install dependencies
-        run: pnpm install
+        run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
+
+      - name: Verify Tina secrets
+        env:
+          TINA_PUBLIC_CLIENT_ID: ${{ secrets.NEXT_PUBLIC_TINA_CLIENT_ID}}
+          TINA_TOKEN: ${{ secrets.TINA_TOKEN }}
+        run: |
+          test -n "$NEXT_PUBLIC_TINA_CLIENT_ID" && echo "NEXT_PUBLIC_TINA_CLIENT_ID set" || { echo "NEXT_PUBLIC_TINA_CLIENT_ID missing"; exit 1; }
+          test -n "$TINA_TOKEN" && echo "TINA_TOKEN set" || { echo "TINA_TOKEN missing"; exit 1; }
+
       - name: Build TinaCMS
         env:
-          TINA_PUBLIC_CLIENT_ID: ${{ secrets.TINA_PUBLIC_CLIENT_ID }}
+          TINA_PUBLIC_CLIENT_ID: ${{ secrets.NEXT_PUBLIC_TINA_CLIENT_ID}}
           TINA_TOKEN: ${{ secrets.TINA_TOKEN }}
-        run: pnpm build
+          TINA_BRANCH: ${{ github.ref_name }}
+        run: pnpm run build
+        # Assumes your "build" script in package.json is "tinacms build"
+
       - name: Build with Next.js
-        run: pnpm next build
+        run: ${{ steps.detect-package-manager.outputs.runner }} next build
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
