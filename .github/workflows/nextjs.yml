@@ -84,15 +84,15 @@ jobs:
 
       - name: Verify Tina secrets
         env:
-          TINA_PUBLIC_CLIENT_ID: ${{ secrets.TINA_PUBLIC_CLIENT_ID }}
+          TINA_PUBLIC_CLIENT_ID: ${{ secrets.NEXT_PUBLIC_TINA_CLIENT_ID}}
           TINA_TOKEN: ${{ secrets.TINA_TOKEN }}
         run: |
-          test -n "$TINA_PUBLIC_CLIENT_ID" && echo "TINA_PUBLIC_CLIENT_ID set" || { echo "TINA_PUBLIC_CLIENT_ID missing"; exit 1; }
+          test -n "$NEXT_PUBLIC_TINA_CLIENT_ID" && echo "NEXT_PUBLIC_TINA_CLIENT_ID set" || { echo "NEXT_PUBLIC_TINA_CLIENT_ID missing"; exit 1; }
           test -n "$TINA_TOKEN" && echo "TINA_TOKEN set" || { echo "TINA_TOKEN missing"; exit 1; }
 
       - name: Build TinaCMS
         env:
-          TINA_PUBLIC_CLIENT_ID: ${{ secrets.TINA_PUBLIC_CLIENT_ID }}
+          TINA_PUBLIC_CLIENT_ID: ${{ secrets.NEXT_PUBLIC_TINA_CLIENT_ID}}
           TINA_TOKEN: ${{ secrets.TINA_TOKEN }}
           TINA_BRANCH: ${{ github.ref_name }}
         run: pnpm run build
