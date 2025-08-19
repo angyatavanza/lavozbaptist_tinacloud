@@ -94,6 +94,13 @@ jobs:
           test -n "$NEXT_PUBLIC_TINA_CLIENT_ID" && echo "NEXT_PUBLIC_TINA_CLIENT_ID set" || { echo "NEXT_PUBLIC_TINA_CLIENT_ID missing"; exit 1; }
           test -n "$TINA_TOKEN" && echo "TINA_TOKEN set" || { echo "TINA_TOKEN missing"; exit 1; }
 
+      - name: Print Tina versions
+        run: pnpm list @tinacms/cli @tinacms/graphql @tinacms/schema-tools --depth=0
+
+      - name: Verify deep-clone present
+        run: | 
+          grep -R "namespace: \\[...namespace\\]" node_modules/@tinacms -n || echo "deep-clone pattern not found"
+        
       - name: Build TinaCMS
         env:
           TINA_PUBLIC_CLIENT_ID: ${{ secrets.NEXT_PUBLIC_TINA_CLIENT_ID}}
