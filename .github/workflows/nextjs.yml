@@ -85,6 +85,7 @@ jobs:
         env:
           TINA_PUBLIC_CLIENT_ID: ${{ secrets.TINA_PUBLIC_CLIENT_ID }}
           TINA_TOKEN: ${{ secrets.TINA_TOKEN }}
+          TINA_BRANCH: ${{ github.head_ref || github.ref_name }}
         run: pnpm run build
         # Assumes your "build" script in package.json is "tinacms build"
 
