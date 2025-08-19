@@ -10,9 +10,10 @@ export const dynamicParams = false;
 export default async function EventPage({
   params,
 }: {
-  params: { urlSegments: string[] };
+  params: Promise<{ urlSegments: string[] }>;
 }) {
-  const filepath = params.urlSegments.join('/');
+  const resolvedParams = await params;
+  const filepath = resolvedParams.urlSegments.join('/');
   const data = await client.queries.event({
     relativePath: `${filepath}.mdx`,
   });
