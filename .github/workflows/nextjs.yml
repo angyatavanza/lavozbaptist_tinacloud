@@ -81,11 +81,19 @@ jobs:
       - name: Install dependencies
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
 
+      - name: Verify Tina secrets
+        env:
+          TINA_PUBLIC_CLIENT_ID: ${{ secrets.TINA_PUBLIC_CLIENT_ID }}
+          TINA_TOKEN: ${{ secrets.TINA_TOKEN }}
+        run: |
+          test -n "$TINA_PUBLIC_CLIENT_ID" && echo "TINA_PUBLIC_CLIENT_ID set" || { echo "TINA_PUBLIC_CLIENT_ID missing"; exit 1; }
+          test -n "$TINA_TOKEN" && echo "TINA_TOKEN set" || { echo "TINA_TOKEN missing"; exit 1; }
+
       - name: Build TinaCMS
         env:
           TINA_PUBLIC_CLIENT_ID: ${{ secrets.TINA_PUBLIC_CLIENT_ID }}
           TINA_TOKEN: ${{ secrets.TINA_TOKEN }}
-          TINA_BRANCH: ${{ github.head_ref || github.ref_name }}
+          TINA_BRANCH: ${{ github.ref_name }}
         run: pnpm run build
         # Assumes your "build" script in package.json is "tinacms build"
 
