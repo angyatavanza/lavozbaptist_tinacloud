@@ -4,14 +4,15 @@ import Layout from '@/components/layout/layout';
 import EventClientPage from './client-page';
 
 export const revalidate = 300;
+export const dynamic = 'force-static';
+export const dynamicParams = false;
 
 export default async function EventPage({
   params,
 }: {
-  params: Promise<{ urlSegments: string[] }>;
+  params: { urlSegments: string[] };
 }) {
-  const resolvedParams = await params;
-  const filepath = resolvedParams.urlSegments.join('/');
+  const filepath = params.urlSegments.join('/');
   const data = await client.queries.event({
     relativePath: `${filepath}.mdx`,
   });

@@ -7,30 +7,8 @@ import ClientPage from "./client-page";
 
 export const revalidate = 300;
 
-export default async function Page({
-  params,
-}: {
-  params: Promise<{ urlSegments: string[] }>;
-}) {
-  const resolvedParams = await params;
-  const filepath = resolvedParams.urlSegments.join("/");  
-  let data;
-  try {
-    data = await client.queries.page({
-      relativePath: `${filepath}.mdx`,
-    });
-  } catch (error) {
-    notFound();
-  }
-
-  return (
-    <Layout rawPageData={data}>
-      <Section>
-        <ClientPage {...data} />
-      </Section>
-    </Layout>
-  );
-}
+export const dynamic = 'force-static';
+export const dynamicParams = false; // requires generateStaticParams()
 
 export async function generateStaticParams() {
   let pages = await client.queries.pageConnection();
@@ -60,4 +38,25 @@ export async function generateStaticParams() {
     .filter((x) => !x.urlSegments.every((x) => x === "home")); // exclude the home page
 
   return params;
+}
+
+export default async function Page({ params }: { params: { urlSegments: string[] } }) {
+  const resolvedParams = await params;
+  const filepath = resolvedParams.urlSegments.join("/");  
+  let data;
+  try {
+    data = await client.queries.page({
+      relativePath: `${filepath}.mdx`,
+    });
+  } catch (error) {
+    notFound();
+  }
+
+  return (
+    <Layout rawPageData={data}>
+      <Section>
+        <ClientPage {...data} />
+      </Section>
+    </Layout>
+  );
 }

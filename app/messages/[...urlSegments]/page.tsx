@@ -5,15 +5,17 @@ import MessageClientPage from "./client-page";
 import { fetchFacebookVideos } from "../page";
 import { MessageQuery } from "@/tina/__generated__/types";
 
+export const dynamic = 'force-static';
+export const dynamicParams = false;
+
 export const revalidate = 300;
 
 export default async function MessagePage({
   params,
 }: {
-  params: Promise<{ urlSegments: string[] }>;
+  params: { urlSegments: string[] };
 }) {
-  const resolvedParams = await params;
-  const filepath = resolvedParams.urlSegments.join("/");
+  const filepath = params.urlSegments.join("/");
   // First, try loading the MDX message (TinaCMS)
   try {
     const data = await client.queries.message({
