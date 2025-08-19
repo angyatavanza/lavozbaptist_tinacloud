@@ -13,9 +13,10 @@ export const revalidate = 300;
 export default async function MessagePage({
   params,
 }: {
-  params: { urlSegments: string[] };
+  params: Promise<{ urlSegments: string[] }>;
 }) {
-  const filepath = params.urlSegments.join("/");
+  const resolvedParams = await params;
+  const filepath = resolvedParams.urlSegments.join("/");
   // First, try loading the MDX message (TinaCMS)
   try {
     const data = await client.queries.message({
