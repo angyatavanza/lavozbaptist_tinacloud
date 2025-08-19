@@ -105,47 +105,38 @@ export default async function MessagePage({
 }
 
 export async function generateStaticParams() {
-  let messages = await client.queries.messageConnection();
-  const allMessages = messages;
+  try {
+    let messages = await client.queries.messageConnection();
+    const allMessages = messages;
 
-  if (!allMessages.data.messageConnection.edges) {
-    return [];
-  }
-
-  while (messages.data?.messageConnection.pageInfo.hasNextPage) {
-    messages = await client.queries.messageConnection({
-      after: messages.data.messageConnection.pageInfo.endCursor,
-    });
-
-    if (!messages.data.messageConnection.edges) {
-      break;
+    if (!allMessages.data.messageConnection.edges) {
+      return [];
     }
 
-    allMessages.data.messageConnection.edges.push(
-      ...messages.data.messageConnection.edges
-    );
+    while (messages.data?.messageConnection.pageInfo.hasNextPage) {
+      messages = await client.queries.messageConnection({
+        after: messages.data.messageConnection.pageInfo.endCursor,
+      });
+
+      if (!messages.data.messageConnection.edges) {
+        break;
+      }
+
+      allMessages.data.messageConnection.edges.push(
+        ...messages.data.messageConnection.edges
+      );
+    }
+
+    const tinaParams =
+      allMessages.data?.messageConnection.edges
+        .map((edge) => ({
+          urlSegments: edge?.node?._sys.breadcrumbs || [],
+        }))
+        .filter((p) => p.urlSegments.length > 0) || [];
+
+    // Omit Facebook slugs for static export
+    return tinaParams;
+  } catch {
+    return [];
   }
-
-  const tinaParams =
-    allMessages.data?.messageConnection.edges.map((edge) => ({
-      urlSegments: edge?.node?._sys.breadcrumbs,
-    })) || [];
-
-  // Facebook videos
-  const facebookVideos = await fetchFacebookVideos();
-
-  const facebookParams = facebookVideos.map((video) => {
-    const dateSlug = video.date?.split("T")[0];
-    const safeSlug = video.title
-      .toLowerCase()
-      .replace(/[^a-z0-9]+/g, "-")
-      .replace(/(^-|-$)/g, "")
-      .slice(0, 50);
-
-    return {
-      urlSegments: [`${dateSlug}-${safeSlug}`],
-    };
-  });
-
-  return [...tinaParams, ...facebookParams];
 }
