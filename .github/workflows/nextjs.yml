@@ -51,12 +51,8 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "22"
           cache: ${{ steps.detect-package-manager.outputs.manager }}
-          cache-dependency-path: |
-            pnpm-lock.yaml
-            yarn.lock
-            package-lock.json
 
       - name: Enable Corepack (for pnpm)
         run: corepack enable
