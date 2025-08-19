@@ -41,8 +41,7 @@ export async function generateStaticParams() {
 }
 
 export default async function Page({ params }: { params: { urlSegments: string[] } }) {
-  const resolvedParams = await params;
-  const filepath = resolvedParams.urlSegments.join("/");  
+  const filepath = params.urlSegments.join("/");  
   let data;
   try {
     data = await client.queries.page({
