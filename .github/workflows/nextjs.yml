@@ -41,6 +41,8 @@ jobs:
           key: ${{ runner.os }}-nextjs-${{ hashFiles('**/pnpm-lock.yaml') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
           restore-keys: |
             ${{ runner.os }}-nextjs-${{ hashFiles('**/pnpm-lock.yaml') }}-
+      - name: Install pnpm
+        run: npm install -g pnpm
       - name: Install dependencies
         run: pnpm install
       - name: Build TinaCMS
