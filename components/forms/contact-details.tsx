@@ -23,7 +23,7 @@ export const ContactDetails = () => {
             ["Correo electrónico", "info@ministerioslavoz.com"],
             ["Teléfono", "(704) 537-7133"],
           ] as [string, string][]).map(([label, email]) => (
-            <div key={email} className="col-span-1 md:col-span-6">
+            <div key={email} className="col-span-2 md:col-span-6">
               <dt className="font-medium text-primary">{label}</dt>
               <dd>
                 <Link
