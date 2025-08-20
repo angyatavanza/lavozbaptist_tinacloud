@@ -375,6 +375,8 @@ fragment PageParts on Page {
     ... on PageBlocksNextsteps {
       title
       description
+      title1
+      description1
       title2
       description2
       title3

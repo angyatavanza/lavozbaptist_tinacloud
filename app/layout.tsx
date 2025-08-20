@@ -48,8 +48,8 @@ const lato = Lato({
 });
 
 export const metadata: Metadata = {
-  title: "La Voz de la Esperanza",
-  description: "Iglesia La Voz de La Esperanza",
+  title: "La Voz de La Esperanza",
+  description: "En Iglesia La Voz de la Esperanza, somos una comunidad bautista hispana en Charlotte, Carolina del Norte, dedicada a adorar a Dios, enseñar Su Palabra y servir con amor. Aquí encontrarás un lugar para crecer en la fe, conectar con otros y vivir la esperanza de Cristo.",
 };
 
 export default function RootLayout({

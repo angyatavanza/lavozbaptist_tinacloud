@@ -59,7 +59,7 @@ export const listcontentBlockSchema: Template = {
     defaultItem: {
       title: "Servicio comunitario",
       description1:
-        "En La Voz de la Esperanza, creemos en mostrar el amor de Cristo a través de acciones concretas.",
+        "En La Voz de La Esperanza, creemos en mostrar el amor de Cristo a través de acciones concretas.",
       description2:
         "Nuestro deseo es ser un puente de ayuda en los momentos más importantes de la vida.",  
     },

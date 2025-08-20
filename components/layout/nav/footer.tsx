@@ -54,7 +54,7 @@ export const Footer = () => {
               ))}
             </div>
             <p className="text-sm text-neutral-700 text-center">
-              © {new Date().getFullYear()} Iglesia La Voz de La Esperanza. Todos los derechos reservados.
+              © {new Date().getFullYear()} Iglesia La Voz de la Esperanza. Todos los derechos reservados.
             </p>
             <Link href="/privacy-policy" className="text-sm underline text-neutral-700 hover:text-primary">
               Política de Privacidad

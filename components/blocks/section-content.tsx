@@ -12,17 +12,19 @@ import { scriptCopyBlockSchema, ScriptCopyBtn } from "../magicui/script-copy-btn
 
 export const Content = ({ data }: { data: PageBlocksContent }) => {
   return (
-    <Section  background={data.background!}
-      className="prose prose-lg"
-      data-tina-field={tinaField(data, "body")}
-    >
-      <TinaMarkdown
-        content={data.body}
-        components={{
-          mermaid: (props: any) => <Mermaid {...props} />,
-          scriptCopyBlock: (props: any) => <ScriptCopyBtn {...props} />,
-        }}
-      />
+    <Section background={data.background!}>
+      <div 
+        className="prose prose-lg max-w-7xl mx-auto pt-15 pb-8 px-4 md:px-8 lg:px-16 xl:px-24"
+        data-tina-field={tinaField(data, "body")}
+      >
+        <TinaMarkdown
+          content={data.body}
+          components={{
+            mermaid: (props: any) => <Mermaid {...props} />,
+            scriptCopyBlock: (props: any) => <ScriptCopyBtn {...props} />,
+          }}
+        />
+      </div>
     </Section>
   );
 };

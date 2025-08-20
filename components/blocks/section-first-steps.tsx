@@ -9,19 +9,30 @@ export const NextSteps = ({ data }: { data: PageBlocksNextsteps }) => {
   return (
     <div className="mx-auto px-4 md:px-5 mt-24 mb-10 md:mb-15 lg:mb-20 space-y-24 [counter-reset:section] md:mt-32 md:space-y-32 lg:mt-40 lg:space-y-40">
       <StepsSection
-        title={data.title ?? "Descubre"}
+        title={data.title ?? "¿Nuevo en la fe o en la iglesia?"}
         image={{ src: "/uploads/pages/congregation-IMG-1038.jpg", shape: 1 }}
         data-tina-field={tinaField(data, "title")}
       >
         <div className="space-y-6 text-base text-neutral-600">
           <p data-tina-field={tinaField(data, "description")}>
-          Ayudará a entender el funcionamiento básico de <components.LaVoz />. {data.description}
+            {data.description}
+          </p>
+        </div>
+      </StepsSection>
+      <StepsSection
+        title={data.title1 ?? "Descubre"}
+        image={{ src: "/uploads/pages/worship-IMG-1095.jpg", shape: 2 }}
+        data-tina-field={tinaField(data, "title1")}
+      >
+        <div className="space-y-6 text-base text-neutral-600">
+          <p data-tina-field={tinaField(data, "description1")}>
+          Ayudará a entender el funcionamiento básico de <components.LaVoz />. {data.description1}
           </p>
         </div>
       </StepsSection>
       <StepsSection
         title={data.title2 ?? "Desarolla tu fe"}
-        image={{ src: "/uploads/pages/congregation-IMG-1031.jpg", shape: 2 }}
+        image={{ src: "/uploads/pages/congregation-IMG-1031.jpg", shape: 1 }}
         data-tina-field={tinaField(data, "title2")}
       >
         <div className="space-y-6 text-base text-neutral-600">
@@ -32,7 +43,7 @@ export const NextSteps = ({ data }: { data: PageBlocksNextsteps }) => {
       </StepsSection>
       <StepsSection
         title={data.title3 ?? "Define tu proposito"}
-        image={{ src: "/uploads/pages/worship-IMG-1009.jpg", shape: 1 }}
+        image={{ src: "/uploads/pages/worship-IMG-1009.jpg", shape: 2 }}
         data-tina-field={tinaField(data, "title3")}
       >
         <div className="space-y-6 text-base text-neutral-600">
@@ -43,7 +54,7 @@ export const NextSteps = ({ data }: { data: PageBlocksNextsteps }) => {
       </StepsSection>
       <StepsSection
         title={data.title4 ?? "Transforma tu Vida"}
-        image={{ src: "/uploads/pages/worship-IMG-1095.jpg", shape: 2 }}
+        image={{ src: "/uploads/groups/women/mujeres-IMG-1169.jpg", shape: 1 }}
         data-tina-field={tinaField(data, "title4")}
       >
         <div className="space-y-6 text-base text-neutral-600">
@@ -77,6 +88,19 @@ export const nextstepsBlockSchema: Template = {
       type: "string",
       label: "Description",
       name: "description",
+      ui: {
+        component: "textarea",
+      },
+    },
+    {
+      type: "string",
+      label: "Title",
+      name: "title1",
+    },
+    {
+      type: "string",
+      label: "Description",
+      name: "description1",
       ui: {
         component: "textarea",
       },

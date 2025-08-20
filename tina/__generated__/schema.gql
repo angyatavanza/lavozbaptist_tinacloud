@@ -541,6 +541,8 @@ type PageBlocksLeadership {
 type PageBlocksNextsteps {
   title: String
   description: String
+  title1: String
+  description1: String
   title2: String
   description2: String
   title3: String
@@ -1055,6 +1057,8 @@ input PageBlocksLeadershipFilter {
 input PageBlocksNextstepsFilter {
   title: StringFilter
   description: StringFilter
+  title1: StringFilter
+  description1: StringFilter
   title2: StringFilter
   description2: StringFilter
   title3: StringFilter
@@ -2139,6 +2143,8 @@ input PageBlocksLeadershipMutation {
 input PageBlocksNextstepsMutation {
   title: String
   description: String
+  title1: String
+  description1: String
   title2: String
   description2: String
   title3: String

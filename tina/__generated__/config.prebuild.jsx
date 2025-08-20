@@ -532,6 +532,8 @@ var PagePartsFragmentDoc = gql`
     ... on PageBlocksNextsteps {
       title
       description
+      title1
+      description1
       title2
       description2
       title3
@@ -2240,7 +2242,7 @@ var Event = {
       list: true,
       ui: {
         defaultItem: {
-          location: "La Voz de la Esperanza",
+          location: "La Voz de La Esperanza",
           label: "Address Label",
           type: "button",
           icon: {
@@ -4924,7 +4926,7 @@ var listcontentBlockSchema = {
     previewSrc: "/blocks/listcontent.png",
     defaultItem: {
       title: "Servicio comunitario",
-      description1: "En La Voz de la Esperanza, creemos en mostrar el amor de Cristo a trav\xE9s de acciones concretas.",
+      description1: "En La Voz de La Esperanza, creemos en mostrar el amor de Cristo a trav\xE9s de acciones concretas.",
       description2: "Nuestro deseo es ser un puente de ayuda en los momentos m\xE1s importantes de la vida."
     }
   },
@@ -5023,6 +5025,19 @@ var nextstepsBlockSchema = {
       type: "string",
       label: "Description",
       name: "description",
+      ui: {
+        component: "textarea"
+      }
+    },
+    {
+      type: "string",
+      label: "Title",
+      name: "title1"
+    },
+    {
+      type: "string",
+      label: "Description",
+      name: "description1",
       ui: {
         component: "textarea"
       }

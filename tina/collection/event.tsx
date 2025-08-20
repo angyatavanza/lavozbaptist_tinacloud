@@ -233,7 +233,7 @@ const Event: Collection = {
       list: true,
       ui: {
         defaultItem: {
-          location: "La Voz de la Esperanza",
+          location: "La Voz de La Esperanza",
           label: "Address Label",
           type: "button",
           icon: {

@@ -84,7 +84,7 @@ export const Hero = ({ data }: { data: PageBlocksHero }) => {
                       speedSegment={0.3}
                       delay={0.5}
                       as="p"
-                      className="font-nunito font-medium text-balance text-left text-base leading-[24px] text-white/60 uppercase mx-0 mt-6"
+                      className="font-nunito font-medium text-balance text-left text-base leading-[24px] text-white/60 uppercase mx-0"
                     >
                       {data.tagline!}
                     </TextEffect>
@@ -93,13 +93,13 @@ export const Hero = ({ data }: { data: PageBlocksHero }) => {
                 {data.headline && (
                   <div
                     data-tina-field={tinaField(data, "headline")}
-                    className="mb-0 md:mb-6"
+                    className=""
                   >
                     <TextEffect
                       preset="fade-in-blur"
                       speedSegment={0.3}
                       as="h1"
-                      className="font-nunito font-semibold text-white text-[40px] leading-[52px] md:text-6xl md:leading-[76px]"
+                      className="font-nunito font-semibold text-white text-[40px] leading-[52px] md:text-6xl md:leading-[76px] md:mb-5"
                     >
                       {data.headline!}
                     </TextEffect>
@@ -107,7 +107,7 @@ export const Hero = ({ data }: { data: PageBlocksHero }) => {
                 )}
                 <AnimatedGroup
                   variants={transitionVariants}
-                  className="flex flex-row items-start justify-start gap-3 md:gap-5"
+                  className="flex flex-row items-start justify-start gap-5"
                 >
                   {data.actions &&
                     data.actions.map((action) => (

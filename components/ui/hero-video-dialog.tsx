@@ -14,15 +14,18 @@ export default function HeroVideoDialog({
 
   return (
     <div
-      className={cn("relative w-full h-auto aspect-[16/9] md:aspect-[16/9] md:h-auto overflow-hidden", className)}
+      className={cn("relative w-full h-auto aspect-[3/4] md:aspect-[16/9] md:h-auto overflow-hidden", className)}
     >
-      <iframe
-        src={vimeoUrl}
-        allowFullScreen
-        title="Vimeo video player"
-        allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
-        className="absolute inset-0 w-full h-full"
-      />
+      {/* Container for the cropped video effect */}
+      <div className="absolute inset-0 overflow-hidden">
+        <iframe
+          src={vimeoUrl}
+          allowFullScreen
+          title="Vimeo video player"
+          allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+          className="absolute inset-0 w-[170%] h-[170%] -translate-x-[35%] -translate-y-[15%] scale-[1.7] md:w-full md:h-full md:translate-x-0 md:translate-y-0 md:scale-100"
+        />
+      </div>
     </div>
   );
 }

@@ -52,7 +52,7 @@ export const Herocontent = ({ data }: { data: PageBlocksHerocontent }) => {
                       speedSegment={0.3}
                       delay={0.5}
                       as="p"
-                      className="font-nunito font-medium text-balance text-left text-base leading-[24px] text-white uppercase mx-auto mt-6"
+                      className="font-nunito font-medium text-balance text-left text-base leading-[24px] text-white uppercase mx-auto"
                     >
                       {data.tagline!}
                     </TextEffect>
@@ -61,7 +61,7 @@ export const Herocontent = ({ data }: { data: PageBlocksHerocontent }) => {
                 {data.headline && (
                   <div
                     data-tina-field={tinaField(data, "headline")}
-                    className="mb-0 md:mb-6"
+                    className=""
                   >
                     <TextEffect
                       preset="fade-in-blur"
