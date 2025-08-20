@@ -113,7 +113,7 @@ export default function MessagesClientPage(props: ClientMessageProps) {
                   />
                 </div>
               )}
-              <div className="absolute inset-0 pointer-events-none">
+              <div className="absolute inset-0 pointer-events-none hidden md:block">
                 <div className="absolute bottom-5 right-5 bg-white rounded px-2 py-1">
                   <span className="capitalize font-nunito font-bold text-foreground text-[10px] tracking-[0.50px] leading-[10px]">
                     {featuredVideo.published}
