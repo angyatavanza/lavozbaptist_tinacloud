@@ -1,6 +1,6 @@
-import React from 'react';
-import Layout from "@/components/layout/layout";
+import React from "react";
 import client from "@/tina/__generated__/client";
+import Layout from "@/components/layout/layout";
 import EventClientPage from "./client-page";
 import type { EventQuery } from "@/tina/__generated__/types";
 
@@ -9,9 +9,12 @@ export const revalidate = 300;
 export default async function EventPage({
   params,
 }: {
-  params: { urlSegments: string[] };
+  params: Promise<{ urlSegments: string[] }>;
 }) {
-  const slugParts = params.urlSegments;
+  // Resolve the async params
+  const resolvedParams = await params;
+
+  const slugParts = resolvedParams.urlSegments;
   const lastPart = slugParts[slugParts.length - 1];
 
   // Detect if this is a recurring instance
@@ -29,9 +32,9 @@ export default async function EventPage({
   const event = data.data.event;
 
   // Get recurrence detail if this is a recurring instance
-  let recurrenceDetail: NonNullable<
-    EventQuery["event"]["reccuringeventdetails"]
-  >[number] | null = null;
+  let recurrenceDetail:
+    | NonNullable<EventQuery["event"]["reccuringeventdetails"]>[number]
+    | null = null;
 
   if (
     isRecurringInstance &&
@@ -41,18 +44,22 @@ export default async function EventPage({
   ) {
     recurrenceDetail = event.reccuringeventdetails[recurrenceIndex] || null;
   }
+
   return (
     <Layout rawPageData={data}>
-      <EventClientPage
-      recurrenceDetail={recurrenceDetail}
-      {...data} 
-    />
+      <EventClientPage recurrenceDetail={recurrenceDetail} {...data} />
     </Layout>
   );
 }
 
 export async function generateStaticParams() {
-    const { data } = await client.queries.eventConnection({ first: 100 });
+  // Fetch first batch of events
+  const events = await client.queries.eventConnection();
+  const allEvents = events;
+
+  const { data } = await client.queries.eventConnection({ first: 100 });
+
+  if (!allEvents.data.eventConnection.edges) return [];
 
   // Flatten all events into base + recurring params
   const params =
@@ -61,7 +68,7 @@ export async function generateStaticParams() {
         const event = edge?.node;
         if (!event) return [];
 
-        // Base param from Tina's breadcrumbs
+        // Base param
         const baseParam = [{ urlSegments: event._sys.breadcrumbs }];
 
         // Recurring params
