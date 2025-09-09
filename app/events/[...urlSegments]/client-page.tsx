@@ -25,11 +25,10 @@ import ErrorBoundary from "@/components/error-boundary";
 
 
 interface ClientEventProps {
-  data: EventQuery;
-  variables: {
-    relativePath: string;
-  };
+  data: any; // full Tina query result
+  variables: { relativePath: string };
   query: string;
+  recurrenceDetail?: any | null; // new prop for recurring instance
 }
 
 export default function EventClientPage(props: ClientEventProps) {
@@ -37,41 +36,41 @@ export default function EventClientPage(props: ClientEventProps) {
   const { data } = useTina({ ...props });
   const event = data.event;
 
-  const start = new Date(event.date!);
-  const end = new Date(event.endtime!);
+  // Determine if rendering a recurring instance
+  const recurring = props.recurrenceDetail;
+  const start = new Date(recurring?.recstartdate || event.date!);
+  const end = new Date(recurring?.recenddate || event.endtime!);
 
-  let formattedStartDate = "";
-  let formattedStartTime = "";
-  let formattedEndTime = "";
+  const formattedStartDate = !isNaN(start.getTime())
+    ? format(start, "MMM dd", { locale: es })
+    : "";
+  const formattedStartTime = !isNaN(start.getTime())
+    ? format(start, "h:mm a")
+    : "";
+  const formattedEndTime = !isNaN(end.getTime()) ? format(end, "h:mm a") : "";
 
-  if (!isNaN(start.getTime())) {
-    formattedStartDate = format(start, "MMM dd", { locale: es });
-    formattedStartTime = format(start, "h:mm a");
-  }
-
-  if (!isNaN(end.getTime())) {
-    formattedEndTime = format(end, "h:mm a");
-  }
-
+  // Parse recurring event details for sidebar
   const parsedRecurringEventDetails =
-    event.reccuringeventdetails?.map((detail) => {
-      const start = new Date(detail?.recstartdate!);
-      const end = new Date(detail?.recenddate!);
-
+    (recurring
+      ? [recurring] // only this instance
+      : event.reccuringeventdetails || []
+    ).map((detail) => {
+      const s = new Date(detail?.recstartdate!);
+      const e = new Date(detail?.recenddate!);
       return {
         ...detail,
-        formattedRecStartDate: !isNaN(start.getTime())
-          ? format(start, "MMM dd", { locale: es })
+        formattedRecStartDate: !isNaN(s.getTime())
+          ? format(s, "MMM dd", { locale: es })
           : "",
-        formattedRecStartTime: !isNaN(start.getTime())
-          ? format(start, "EEEE h:mm a", { locale: es })
+        formattedRecStartTime: !isNaN(s.getTime())
+          ? format(s, "EEEE h:mm a", { locale: es })
           : "",
-        formattedRecEndDate: !isNaN(end.getTime())
-          ? format(end, "MMM dd", { locale: es })
+        formattedRecEndDate: !isNaN(e.getTime())
+          ? format(e, "MMM dd", { locale: es })
           : "",
-        formattedRecEndTime: !isNaN(end.getTime()) ? format(end, "h:mm a") : "",
+        formattedRecEndTime: !isNaN(e.getTime()) ? format(e, "h:mm a") : "",
       };
-    }) || [];
+    });
 
   return (
     <ErrorBoundary>
@@ -96,10 +95,7 @@ export default function EventClientPage(props: ClientEventProps) {
                     >
                       {event.coordinator.avatar && (
                         <Image
-                          data-tina-field={tinaField(
-                            event.coordinator,
-                            "avatar"
-                          )}
+                          data-tina-field={tinaField(event.coordinator, "avatar")}
                           src={event.coordinator.avatar}
                           alt={event.coordinator.name}
                           width={64}
@@ -124,16 +120,16 @@ export default function EventClientPage(props: ClientEventProps) {
                 </div>
               )}
             </CardHeader>
+
             {/* Event Title */}
             <CardHeader>
               <CardTitle data-tina-field={tinaField(event, "title")}>
                 {event.title}
               </CardTitle>
             </CardHeader>
+
             <CardContent>
-              <CardDescription
-                data-tina-field={tinaField(event, "description")}
-              >
+              <CardDescription data-tina-field={tinaField(event, "description")}>
                 <TinaMarkdown content={event.description} />
               </CardDescription>
               <CardDescription data-tina-field={tinaField(event, "_body")}>
@@ -144,147 +140,90 @@ export default function EventClientPage(props: ClientEventProps) {
 
           {/* Right Column - Event Details Sidebar */}
           <Card className="col-span-2 md:col-span-4 self-start bg-card border space-y-5 md:sticky md:top-24">
-            {/* Event Details Header*/}
             <CardHeader>
               <CardTitle className="text-[19px] leading-[24px] md:text-[19px] md:leading-[24px]">
                 Detalles del evento
               </CardTitle>
             </CardHeader>
-            {/* Event Time and Location */}
+
             <CardContent className="flex items-center relative w-full">
               <CardDescription>
-                {/* Check if it's a recurring event */}
-                {event.reccuringeventdetails &&
-                event.reccuringeventdetails.length > 0 &&
-                event.reccuringeventdetails.some(
-                  (d) => d?.recurring === true
-                ) ? (
-                  // Show recurring event details
-                  <>
-                    {parsedRecurringEventDetails.map((detail, index) => (
-                      <div key={index} className="space-y-1">
-                        <div className="flex items-center gap-5">
-                          {detail?.icon && (
-                            <TinaIcon data={{ ...detail.icon, size: "xs" }} />
-                          )}
-                          <span className="capitalize">
-                            {detail.formattedRecStartDate} -{" "}
-                            {detail.formattedRecEndDate}
-                          </span>
-                        </div>
-                        <div className="flex items-center gap-5">
-                          {detail?.icon2 && (
-                            <TinaIcon data={{ ...detail.icon2, size: "xs" }} />
-                          )}
-                          <span className="capitalize">
-                            {detail.formattedRecStartTime} -{" "}
-                            {detail.formattedRecEndTime}
-                          </span>
-                        </div>
+                {/* Recurring or non-recurring details */}
+                {parsedRecurringEventDetails.length > 0 ? (
+                  parsedRecurringEventDetails.map((detail, index) => (
+                    <div key={index} className="space-y-1">
+                      <div className="flex items-center gap-5">
+                        {detail?.icon && <TinaIcon data={{ ...detail.icon, size: "xs" }} />}
+                        <span className="capitalize">
+                          {detail.formattedRecStartDate} - {detail.formattedRecEndDate}
+                        </span>
                       </div>
-                    ))}
-                  </>
+                      <div className="flex items-center gap-5">
+                        {detail?.icon2 && <TinaIcon data={{ ...detail.icon2, size: "xs" }} />}
+                        <span className="capitalize">
+                          {detail.formattedRecStartTime} - {detail.formattedRecEndTime}
+                        </span>
+                      </div>
+                    </div>
+                  ))
                 ) : (
-                  // Show non-recurring event details
-                  <>
+                  <div className="space-y-1">
                     <div className="flex items-center gap-5">
-                      {event.icon && (
-                        <TinaIcon data={{ ...event.icon, size: "xs" }} />
-                      )}
+                      {event.icon && <TinaIcon data={{ ...event.icon, size: "xs" }} />}
                       <span className="capitalize">{formattedStartDate}</span>
                     </div>
                     <div className="flex items-center gap-5">
-                      {event.icon2 && (
-                        <TinaIcon data={{ ...event.icon2, size: "xs" }} />
-                      )}
-                      <span>
-                        {formattedStartTime} - {formattedEndTime}
-                      </span>
+                      {event.icon2 && <TinaIcon data={{ ...event.icon2, size: "xs" }} />}
+                      <span>{formattedStartTime} - {formattedEndTime}</span>
                     </div>
-                  </>
+                  </div>
                 )}
-                {/* Location Details - Show for both types */}
-                {event.locationdetails &&
-                  event.locationdetails.length > 0 &&
-                  event.locationdetails.map((loc) => (
-                    <div
-                      key={loc?.label || loc?.location}
-                      className="flex items-start gap-5"
-                    >
-                      {loc?.icon && (
-                        <TinaIcon data={{ ...loc.icon, size: "xs" }} />
-                      )}
-                      <div className="flex flex-col gap-2">
-                        {loc?.location && (
-                          <span data-tina-field={tinaField(loc!, "location")}>
-                            {loc.location}
-                          </span>
-                        )}
-                        {loc?.label && loc?.link ? (
-                          <div
-                            data-tina-field={tinaField(loc!, "label")}
-                            className=""
+
+                {/* Location Details */}
+                {event.locationdetails?.map((loc) => (
+                  <div key={loc?.label || loc?.location} className="flex items-start gap-5">
+                    {loc?.icon && <TinaIcon data={{ ...loc.icon, size: "xs" }} />}
+                    <div className="flex flex-col gap-2">
+                      {loc?.location && <span data-tina-field={tinaField(loc!, "location")}>{loc.location}</span>}
+                      {loc?.label && loc?.link ? (
+                        <div data-tina-field={tinaField(loc!, "label")}>
+                          <Button
+                            asChild
+                            size="sm"
+                            variant={loc?.type === "link" ? "ghost" : "default"}
+                            className="font-normal text-muted-foreground text-sm leading-[20px] px-0 min-w-0 justify-start"
                           >
-                            <Button
-                              asChild
-                              size="sm"
-                              variant={
-                                loc?.type === "link" ? "ghost" : "default"
-                              }
-                              className="font-normal text-muted-foreground text-sm leading-[20px] px-0 min-w-0 justify-start"
-                            >
-                              <a
-                                href={loc.link!}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                              >
-                                <span className="whitespace-pre-line break-words">
-                                  {(loc.label ?? "").replace(/,\s*/, ",\n")}
-                                </span>
-                              </a>
-                            </Button>
-                          </div>
-                        ) : (
-                          loc?.label && (
-                            <span data-tina-field={tinaField(loc!, "label")}>
-                              {loc.label}
-                            </span>
-                          )
-                        )}
-                      </div>
+                            <a href={loc.link} target="_blank" rel="noopener noreferrer">
+                              <span className="whitespace-pre-line break-words">{loc.label.replace(/,\s*/, ",\n")}</span>
+                            </a>
+                          </Button>
+                        </div>
+                      ) : (
+                        loc?.label && <span data-tina-field={tinaField(loc!, "label")}>{loc.label}</span>
+                      )}
                     </div>
-                  ))}
+                  </div>
+                ))}
               </CardDescription>
             </CardContent>
-            {/* Footer with Action */}
+
+            {/* Footer with Actions */}
             <CardFooter>
               <CardAction>
-                {event.actions &&
-                  event.actions.map((action) => (
-                    <div
-                      key={action!.label}
-                      data-tina-field={tinaField(action)}
-                      className="bg-foreground/10 rounded-[calc(var(--radius-sm)+0.125rem)] border p-0.5"
+                {event.actions?.map((action) => (
+                  <div key={action.label} data-tina-field={tinaField(action)} className="bg-foreground/10 rounded-[calc(var(--radius-sm)+0.125rem)] border p-0.5">
+                    <Button
+                      asChild
+                      size="default"
+                      variant={action.type === "link" ? "outline" : "default"}
                     >
-                      <Button
-                        asChild
-                        size="default"
-                        variant={
-                          action!.type === "link" ? "outline" : "default"
-                        }
-                        className=""
-                      >
-                        <a
-                          href={action!.link!}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          {action?.icon && <TinaIcon data={action?.icon} />}
-                          <span className="text-nowrap">{action!.label}</span>
-                        </a>
-                      </Button>
-                    </div>
-                  ))}
+                      <a href={action.link} target="_blank" rel="noopener noreferrer">
+                        {action.icon && <TinaIcon data={action.icon} />}
+                        <span className="text-nowrap">{action.label}</span>
+                      </a>
+                    </Button>
+                  </div>
+                ))}
               </CardAction>
             </CardFooter>
           </Card>

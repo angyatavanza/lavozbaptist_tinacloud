@@ -33,6 +33,54 @@ interface LatestEventsProps {
   events: Event[];
 }
 
+function expandRecurringEvents(events: any[]) {
+  return events.flatMap((event) => {
+    // if there are recurring details, create a separate object per recurring detail
+    if (event.reccuringeventdetails && event.reccuringeventdetails.length > 0) {
+      const instances = event.reccuringeventdetails
+        .filter((d: any) => d?.recurring) // only expand the recurring ones
+        .map((detail: any, idx: number) => {
+          // parse dates (fallbacks to original event.sortDate)
+          const recStart = detail?.recstartdate ? new Date(detail.recstartdate) : event.sortDate;
+          const recEnd = detail?.recenddate ? new Date(detail.recenddate) : new Date(event.sortDate);
+
+          return {
+            ...event,
+            id: `${event.id}-rec-${idx + 1}`,
+            // keep title same (you can append a label if desired)
+            title: event.title,
+            // published and time derived from the recurring detail (fallbacks kept)
+            published: detail?.formattedrecstartDate || event.published,
+            publishedtime: detail?.formattedrecstartTime || event.publishedtime,
+            publishedendtime: detail?.formattedrecendTime || event.publishedendtime,
+            // sort by the recurring start date
+            sortDate: !isNaN(recStart.getTime()) ? recStart : event.sortDate,
+            // unique url to resolve the recurring route
+            url: `${event.url}/rec-${idx + 1}`,
+            // make the card rendering still work (it expects an array)
+            reccuringeventdetails: [
+              {
+                ...detail,
+                // ensure formatted fields exist
+                formattedrecstartDate: detail?.formattedrecstartDate || "",
+                formattedrecstartTime: detail?.formattedrecstartTime || "",
+                formattedrecendDate: detail?.formattedrecendDate || "",
+                formattedrecendTime: detail?.formattedrecendTime || "",
+              },
+            ],
+            isRecurringInstance: true,
+          };
+        });
+
+      // if there were no recurring items (e.g., none had recurring === true), return the event itself
+      return instances.length > 0 ? instances : [event];
+    }
+
+    // non-recurring -> return original event object
+    return [event];
+  });
+}
+
 export const LatestEvents = ({ data, events }: LatestEventsProps) => {
   const limit = Math.min(Math.max(data.limit ?? 3, 1), 10);
   const headline = data.headline || "Eventos";
@@ -80,10 +128,10 @@ export const LatestEvents = ({ data, events }: LatestEventsProps) => {
           return {
             recurring: reccuringeventdetail?.recurring || false,
             recstartdate: reccuringeventdetail?.recstartdate || "",
-            formattedrecstartDate: !isNaN(end.getTime())
+            formattedrecstartDate: !isNaN(start.getTime())
               ? format(start, "MMM dd", { locale: es })
               : "",
-            formattedrecstartTime: !isNaN(end.getTime())
+            formattedrecstartTime: !isNaN(start.getTime())
               ? format(start, "EEEE h:mm a", { locale: es })
               : "",
             recenddate: reccuringeventdetail?.recenddate || "",
@@ -117,29 +165,15 @@ export const LatestEvents = ({ data, events }: LatestEventsProps) => {
     };
   });
 
-  // Apply recurring/non-recurring, sort, and limit logic
-  const recurringEvents = formattedEvents
-    .filter(
-      (event) =>
-        event.reccuringeventdetails &&
-        event.reccuringeventdetails.some((d) => d?.recurring === true)
-    )
-    .filter((e) => !!e.published)
-    .sort((a, b) => a.sortDate.getTime() - b.sortDate.getTime()); // Sort earliest to latest
+  // Expand recurring instances into separate objects
+  const expandedEvents = expandRecurringEvents(formattedEvents);
+  console.log("Formatted events:", formattedEvents);
+  console.log("Expanded events:", expandedEvents);
+  const now = new Date();
 
-  const nonRecurringEvents = formattedEvents
-    .filter(
-      (event) =>
-        !event.reccuringeventdetails ||
-        !event.reccuringeventdetails.some((d) => d?.recurring === true)
-    )
-    .filter((e) => !!e.published)
-    .sort((a, b) => a.sortDate.getTime() - b.sortDate.getTime()); // Sort earliest to latest
-
-  // Combine all events for the grid
-  const allEvents = [...recurringEvents, ...nonRecurringEvents];
-  const limitedEvents = allEvents
-    .sort((a, b) => a.sortDate.getTime() - b.sortDate.getTime()) // Sort closest events first
+  const upcomingEvents = expandedEvents
+    .filter((e) => !!e.published && e.sortDate >= now)
+    .sort((a, b) => a.sortDate.getTime() - b.sortDate.getTime())
     .slice(0, limit);
 
   return (
@@ -228,7 +262,7 @@ export const LatestEvents = ({ data, events }: LatestEventsProps) => {
 
       {/* Events Grid */}
       <div className="grid grid-cols-2 md:grid-cols-12 gap-5 px-4 md:px-5 pb-5 md:pb-10 lg:pb-15">
-        {limitedEvents.map((event) => (
+        {upcomingEvents.map((event) => (
           <Card
             key={event.id}
             className="relative col-span-2 border bg-card shadow-sm md:col-span-4 lg:col-span-4 3xl:col-span-4"

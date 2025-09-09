@@ -31,6 +31,42 @@ interface ClientEventProps {
   query: string;
 }
 
+function expandRecurringEvents(events: any[]) {
+  return events.flatMap((event) => {
+    if (event.reccuringeventdetails && event.reccuringeventdetails.length > 0) {
+      const instances = event.reccuringeventdetails
+        .filter((d: any) => d?.recurring)
+        .map((detail: any, idx: number) => {
+          const recStart = detail?.recstartdate ? new Date(detail.recstartdate) : event.sortDate;
+          const recEnd = detail?.recenddate ? new Date(detail.recenddate) : new Date(event.sortDate);
+          return {
+            ...event,
+            id: `${event.id}-rec-${idx + 1}`,
+            published: detail?.formattedrecstartDate || event.published,
+            publishedtime: detail?.formattedrecstartTime || event.publishedtime,
+            publishedendtime: detail?.formattedrecendTime || event.publishedendtime,
+            sortDate: !isNaN(recStart.getTime()) ? recStart : event.sortDate,
+            url: `${event.url}/rec-${idx + 1}`,
+            reccuringeventdetails: [
+              {
+                ...detail,
+                formattedrecstartDate: detail?.formattedrecstartDate || "",
+                formattedrecstartTime: detail?.formattedrecstartTime || "",
+                formattedrecendDate: detail?.formattedrecendDate || "",
+                formattedrecendTime: detail?.formattedrecendTime || "",
+              },
+            ],
+            isRecurringInstance: true,
+          };
+        });
+
+      return instances.length > 0 ? instances : [event];
+    }
+
+    return [event];
+  });
+}
+
 export default function EventsClientPage(props: ClientEventProps) {
   const events = props.data?.eventConnection.edges!.map((eventData) => {
     const event = eventData!.node!;
@@ -80,10 +116,10 @@ export default function EventsClientPage(props: ClientEventProps) {
           return {
             recurring: reccuringeventdetail?.recurring || false,
             recstartdate: reccuringeventdetail?.recstartdate || "",
-            formattedrecstartDate: !isNaN(end.getTime())
+            formattedrecstartDate: !isNaN(start.getTime())
               ? format(start, "MMM dd", { locale: es })
               : "",
-            formattedrecstartTime: !isNaN(end.getTime())
+            formattedrecstartTime: !isNaN(start.getTime())
               ? format(start, "EEEE h:mm a", { locale: es })
               : "",
             recenddate: reccuringeventdetail?.recenddate || "",
@@ -117,30 +153,14 @@ export default function EventsClientPage(props: ClientEventProps) {
     };
   });
 
-  // Apply recurring/non-recurring, sort, and limit logic
-  const recurringEvents = events
-    .filter(
-      (event) =>
-        event.reccuringeventdetails &&
-        event.reccuringeventdetails.some((d) => d?.recurring === true)
-    )
-    .filter((e) => !!e.published)
-    .sort((a, b) => a.sortDate.getTime() - b.sortDate.getTime()); // Sort earliest to latest
+  // Expand recurring instances
+  const expandedEvents = expandRecurringEvents(events || []);
 
-  const nonRecurringEvents = events
-    .filter(
-      (event) =>
-        !event.reccuringeventdetails ||
-        !event.reccuringeventdetails.some((d) => d?.recurring === true)
-    )
-    .filter((e) => !!e.published)
-    .sort((a, b) => a.sortDate.getTime() - b.sortDate.getTime()); // Sort earliest to latest
-
-  // Combine all events for the grid
-  const allEvents = [...recurringEvents, ...nonRecurringEvents];
-  const sortedEvents = allEvents.sort(
-    (a, b) => a.sortDate.getTime() - b.sortDate.getTime()
-  ); // Sort closest events first
+  // Filter/sort same as before, but now operates on expanded events
+  const now = new Date();
+  const sortedEvents = expandedEvents
+    .filter((e) => !!e.published && e.sortDate >= now)
+    .sort((a: any, b: any) => a.sortDate.getTime() - b.sortDate.getTime());
 
   return (
     <ErrorBoundary>
