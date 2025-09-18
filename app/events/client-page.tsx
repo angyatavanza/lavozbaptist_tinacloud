@@ -131,7 +131,7 @@ export default function EventsClientPage(props: ClientEventProps) {
               : "",
             label: reccuringeventdetail?.label || "",
             icon2: reccuringeventdetail?.icon2 || null,
-            frequency: reccuringeventdetail?.frequency || "Weekly",
+            frequency: reccuringeventdetail?.frequency || "Semanal",
             type: reccuringeventdetail?.type || "",
             icon: reccuringeventdetail?.icon || null,
             link: reccuringeventdetail?.link || "",
@@ -147,7 +147,7 @@ export default function EventsClientPage(props: ClientEventProps) {
         })) || [],
       heroImg: event.heroImg,
       coordinator: {
-        name: event.coordinator?.name || "Anonymous",
+        name: event.coordinator?.name || "La Voz de la Esperanza",
         avatar: event.coordinator?.avatar,
       },
     };
@@ -159,7 +159,7 @@ export default function EventsClientPage(props: ClientEventProps) {
   // Filter/sort same as before, but now operates on expanded events
   const now = new Date();
   const sortedEvents = expandedEvents
-    .filter((e) => !!e.published && e.sortDate >= now)
+    .filter((e) => e.sortDate >= now)
     .sort((a: any, b: any) => a.sortDate.getTime() - b.sortDate.getTime());
 
   return (

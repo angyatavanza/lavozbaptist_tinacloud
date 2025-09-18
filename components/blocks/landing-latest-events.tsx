@@ -88,13 +88,16 @@ export const LatestEvents = ({ data, events }: LatestEventsProps) => {
   const formattedEvents = (events ?? []).map((event) => {
     const start = new Date(event.date!);
     const end = new Date(event.endtime!);
+
     let formattedStartDate = "";
     let formattedStartTime = "";
     let formattedEndTime = "";
+
     if (!isNaN(start.getTime())) {
       formattedStartDate = format(start, "MMM dd", { locale: es });
       formattedStartTime = format(start, "h:mm a");
     }
+
     if (!isNaN(end.getTime())) {
       formattedEndTime = format(end, "h:mm a");
     }
@@ -143,7 +146,7 @@ export const LatestEvents = ({ data, events }: LatestEventsProps) => {
               : "",
             label: reccuringeventdetail?.label || "",
             icon2: reccuringeventdetail?.icon2 || null,
-            frequency: reccuringeventdetail?.frequency || "Weekly",
+            frequency: reccuringeventdetail?.frequency || "Semanal",
             type: reccuringeventdetail?.type || "",
             icon: reccuringeventdetail?.icon || null,
             link: reccuringeventdetail?.link || "",
@@ -159,7 +162,7 @@ export const LatestEvents = ({ data, events }: LatestEventsProps) => {
         })) || [],
       heroImg: event.heroImg,
       coordinator: {
-        name: event.coordinator?.name || "Anonymous",
+        name: event.coordinator?.name || "La Voz de la Esperanza",
         avatar: event.coordinator?.avatar,
       },
     };
@@ -167,12 +170,10 @@ export const LatestEvents = ({ data, events }: LatestEventsProps) => {
 
   // Expand recurring instances into separate objects
   const expandedEvents = expandRecurringEvents(formattedEvents);
-  console.log("Formatted events:", formattedEvents);
-  console.log("Expanded events:", expandedEvents);
   const now = new Date();
 
   const upcomingEvents = expandedEvents
-    .filter((e) => !!e.published && e.sortDate >= now)
+    .filter((e) => e.sortDate >= now) // <- use only sortDate
     .sort((a, b) => a.sortDate.getTime() - b.sortDate.getTime())
     .slice(0, limit);
 
