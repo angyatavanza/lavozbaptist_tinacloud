@@ -5,6 +5,7 @@ const SHEET_IDS: Record<string, string | undefined> = {
     contact: process.env.CONTACT_GOOGLE_SHEET_ID,
     serve: process.env.SERVE_GOOGLE_SHEET_ID,
     resources: process.env.RESOURCES_GOOGLE_SHEET_ID,
+    prayer: process.env.PRAYER_GOOGLE_SHEET_ID,
     ftvisitor: process.env.FTVISITOR_GOOGLE_SHEET_ID,
 };
 
@@ -37,10 +38,24 @@ export async function POST(req: NextRequest) {
     const response = await sheets.spreadsheets.values.append({
       auth,
       spreadsheetId: targetSheetId,
-      range: "A1:J1",
+      range: "A1",
       valueInputOption: "USER_ENTERED",
       requestBody: {
-        values: [[body.name, body.lastname, body.phone, body.email, body.address, body.address2, body.citystate, body.zip, body.message, body.subject, body.visitcount, body.age,]],
+        values: [[
+          new Date().toLocaleString("en-US", {
+            timeZone: "America/New_York",
+          }),
+          body.name, 
+          body.lastname, 
+          body.phone, 
+          body.email, 
+          body.address, 
+          body.citystate, 
+          body.zip, 
+          body.message, 
+          body.subject, 
+          body.visitcount, 
+          body.age,]],
       },
     });
 

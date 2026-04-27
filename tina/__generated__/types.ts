@@ -1369,6 +1369,13 @@ export type Page_BodyServeSignupFilter = {
   disclaimer?: InputMaybe<RichTextFilter>;
 };
 
+export type Page_BodyPrayerSignupFilter = {
+  children?: InputMaybe<RichTextFilter>;
+  placeholder?: InputMaybe<StringFilter>;
+  buttonText?: InputMaybe<StringFilter>;
+  disclaimer?: InputMaybe<RichTextFilter>;
+};
+
 export type Page_BodyContactSignupFilter = {
   children?: InputMaybe<RichTextFilter>;
   placeholder?: InputMaybe<StringFilter>;
@@ -1390,6 +1397,7 @@ export type Page_BodyFilter = {
   FTVisitorSignup?: InputMaybe<Page_BodyFtVisitorSignupFilter>;
   ResourcesSignup?: InputMaybe<Page_BodyResourcesSignupFilter>;
   ServeSignup?: InputMaybe<Page_BodyServeSignupFilter>;
+  PrayerSignup?: InputMaybe<Page_BodyPrayerSignupFilter>;
   ContactSignup?: InputMaybe<Page_BodyContactSignupFilter>;
   video?: InputMaybe<Page_BodyVideoFilter>;
 };

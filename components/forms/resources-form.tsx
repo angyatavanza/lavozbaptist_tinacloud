@@ -14,7 +14,6 @@ interface ResourcesFormInputs {
   message: string;
   subject: string;
   address: string;
-  address2: string;
   citystate: string;
   zip: string;
 }
@@ -99,11 +98,10 @@ export const ResourcesForm: React.FC<ResourcesFormProps> = ({
 
           <TextInput
             type="email"
-            {...register("email", { required: true })}
+            {...register("email", { required: false })}
             placeholder={placeholder}
             label="Correo electrónico"
           />
-          {errors.email && <span className="text-red-500 text-sm">Correo electrónico requerido</span>}
 
           <TextInput
             {...register("address", { required: true})}
@@ -113,16 +111,12 @@ export const ResourcesForm: React.FC<ResourcesFormProps> = ({
           {errors.address && <span className="text-red-500 text-sm">Dirección requerida</span>}
 
           <TextInput
-            {...register("address2", { required: false})}
+            {...register("citystate", { required: true})}
             placeholder=""
-            label="Línea de dirección 2 (opcional)"
+            label="Ciudad y estado"
           />
+          {errors.citystate && <span className="text-red-500 text-sm">Ciudad y estado requerido</span>}
 
-          <TextInput
-            {...register("citystate", { required: false})}
-            placeholder=""
-            label="Ciudad Estado"
-          />
           
           <TextInput
             {...register("zip", { required: true})}

@@ -224,6 +224,41 @@ const Page: Collection = {
           },
         },
         {
+          name: "PrayerSignup",
+          label: "Prayer Sign Up",
+          fields: [
+            {
+              name: "children",
+              label: "CTA",
+              type: "rich-text",
+            },
+            {
+              name: "placeholder",
+              label: "Placeholder",
+              type: "string",
+            },
+            {
+              name: "buttonText",
+              label: "Button Text",
+              type: "string",
+            },
+            {
+              name: "disclaimer",
+              label: "Disclaimer",
+              type: "rich-text",
+              overrides: {
+                toolbar: ["bold", "italic", "link"],
+              },
+            },
+          ],
+          ui: {
+            defaultItem: {
+              placeholder: "",
+              buttonText: "Notify Me",
+            },
+          },
+        },
+        {
           name: "ContactSignup",
           label: "Contact Sign Up",
           fields: [

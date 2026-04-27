@@ -5010,11 +5010,14 @@ import Link24 from "next/link";
 // components/forms/serve-details.tsx
 import Link25 from "next/link";
 
-// components/forms/resources-details.tsx
+// components/forms/prayer-details.tsx
 import Link26 from "next/link";
 
-// components/forms/visitor-details.tsx
+// components/forms/resources-details.tsx
 import Link27 from "next/link";
+
+// components/forms/visitor-details.tsx
+import Link28 from "next/link";
 
 // components/forms/contact-form.tsx
 import { useForm } from "react-hook-form";
@@ -5028,17 +5031,21 @@ import React44 from "react";
 // components/forms/contact-form.tsx
 import { useState as useState7 } from "react";
 
-// components/forms/resources-form.tsx
+// components/forms/prayer-form.tsx
 import { useForm as useForm2 } from "react-hook-form";
 import { useState as useState8 } from "react";
 
-// components/forms/serve-form.tsx
+// components/forms/resources-form.tsx
 import { useForm as useForm3 } from "react-hook-form";
 import { useState as useState9 } from "react";
 
-// components/forms/visitor-form.tsx
+// components/forms/serve-form.tsx
 import { useForm as useForm4 } from "react-hook-form";
 import { useState as useState10 } from "react";
+
+// components/forms/visitor-form.tsx
+import { useForm as useForm5 } from "react-hook-form";
+import { useState as useState11 } from "react";
 
 // components/blocks/section-first-steps.tsx
 var nextstepsBlockSchema = {
@@ -5121,7 +5128,7 @@ var nextstepsBlockSchema = {
 };
 
 // components/blocks/section-contact.tsx
-import Link28 from "next/link";
+import Link29 from "next/link";
 import { tinaField as tinaField26 } from "tinacms/dist/react";
 var contactsectionBlockSchema = {
   name: "contactsection",
@@ -5353,6 +5360,41 @@ var Page = {
         {
           name: "ServeSignup",
           label: "Serve Sign Up",
+          fields: [
+            {
+              name: "children",
+              label: "CTA",
+              type: "rich-text"
+            },
+            {
+              name: "placeholder",
+              label: "Placeholder",
+              type: "string"
+            },
+            {
+              name: "buttonText",
+              label: "Button Text",
+              type: "string"
+            },
+            {
+              name: "disclaimer",
+              label: "Disclaimer",
+              type: "rich-text",
+              overrides: {
+                toolbar: ["bold", "italic", "link"]
+              }
+            }
+          ],
+          ui: {
+            defaultItem: {
+              placeholder: "",
+              buttonText: "Notify Me"
+            }
+          }
+        },
+        {
+          name: "PrayerSignup",
+          label: "Prayer Sign Up",
           fields: [
             {
               name: "children",

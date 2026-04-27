@@ -12,9 +12,11 @@ import { PageIntro } from "./layout/page-intro";
 import { Container } from "./layout/container";
 import { ContactDetails } from "./forms/contact-details";
 import { ServeDetails } from "./forms/serve-details"; 
+import { PrayerDetails } from "./forms/prayer-details"; 
 import { ResourcesDetails } from "./forms/resources-details"; 
 import { FTVisitorDetails } from "./forms/visitor-details"; 
 import { ContactForm } from "./forms/contact-form";
+import { PrayerForm } from "./forms/prayer-form";
 import { ResourcesForm } from "./forms/resources-form";
 import { ServeForm } from "./forms/serve-form";
 import { FTVisitorForm } from "./forms/visitor-form";
@@ -43,6 +45,12 @@ export const components: Components<{
     disclaimer?: TinaMarkdownContent;
   };
   ResourcesSignup: {
+    placeholder: string;
+    buttonText: string;
+    children: TinaMarkdownContent;
+    disclaimer?: TinaMarkdownContent;
+  };
+  PrayerSignup: {
     placeholder: string;
     buttonText: string;
     children: TinaMarkdownContent;
@@ -175,11 +183,37 @@ export const components: Components<{
       </>
     );
   },
+  PrayerSignup: (props) => {
+
+    return (
+      <>
+        <PageIntro eyebrow="Peticiones de oración" title="¿Cómo podemos orar por ti? ">
+          <TinaMarkdown content={props.children} />
+        </PageIntro>
+        <Container className="mt-10 md:mt-15 lg:mt-20">
+          <div className="grid grid-cols-2 md:grid-cols-12 gap-5 px-4 md:px-5">
+            <div className="col-span-2 md:col-span-6">
+              <PrayerDetails />
+            </div>
+            <div className="col-span-2 md:col-span-6">
+              <PrayerForm 
+                placeholder={props.placeholder} 
+                buttonText={props.buttonText} 
+              />
+            </div>
+          </div>
+          <div className="mt-3 text-sm text-gray-500">
+            {props.disclaimer && <TinaMarkdown content={props.disclaimer} />}
+          </div>
+        </Container>
+      </>
+    );
+  },
   ServeSignup: (props) => {
 
     return (
       <>
-        <PageIntro eyebrow="Sirve en La Voz" title="Te espera tu lugar para servir">
+        <PageIntro eyebrow="Sirve en La Voz" title="Tu lugar para servir te espera">
           <TinaMarkdown content={props.children} />
         </PageIntro>
         <Container className="mt-10 md:mt-15 lg:mt-20">

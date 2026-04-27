@@ -96,11 +96,10 @@ export const ServeForm: React.FC<ServeFormProps> = ({
 
           <TextInput
             type="email"
-            {...register("email", { required: true })}
+            {...register("email", { required: false })}
             placeholder={placeholder}
             label="Correo electrónico"
           />
-          {errors.email && <span className="text-red-500 text-sm">Correo electrónico requerido</span>}
 
           <TextInput
             {...register("message", { required: true })}

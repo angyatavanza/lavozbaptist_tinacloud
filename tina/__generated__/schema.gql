@@ -1146,6 +1146,13 @@ input Page_bodyServeSignupFilter {
   disclaimer: RichTextFilter
 }
 
+input Page_bodyPrayerSignupFilter {
+  children: RichTextFilter
+  placeholder: StringFilter
+  buttonText: StringFilter
+  disclaimer: RichTextFilter
+}
+
 input Page_bodyContactSignupFilter {
   children: RichTextFilter
   placeholder: StringFilter
@@ -1167,6 +1174,7 @@ input Page_bodyFilter {
   FTVisitorSignup: Page_bodyFTVisitorSignupFilter
   ResourcesSignup: Page_bodyResourcesSignupFilter
   ServeSignup: Page_bodyServeSignupFilter
+  PrayerSignup: Page_bodyPrayerSignupFilter
   ContactSignup: Page_bodyContactSignupFilter
   video: Page_bodyVideoFilter
 }

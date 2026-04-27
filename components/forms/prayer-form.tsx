@@ -6,21 +6,19 @@ import { Button } from "@/components/ui/second-button";
 import MailSentState from "@/components/forms/mail-sent-state";
 import { useState } from 'react';
 
-interface ContactFormInputs {
+interface PrayerFormInputs {
   name: string;
   lastname: string;
-  email: string;
   phone: string;
   message: string;
-  subject: string;
 }
 
-interface ContactFormProps {
+interface PrayerFormProps {
   placeholder: string;
   buttonText: string;
 }
 
-export const ContactForm: React.FC<ContactFormProps> = ({
+export const PrayerForm: React.FC<PrayerFormProps> = ({
   placeholder,
   buttonText,
 }) => {
@@ -32,13 +30,13 @@ export const ContactForm: React.FC<ContactFormProps> = ({
     handleSubmit,
     reset,
     formState: { errors, isSubmitting },
-  } = useForm<ContactFormInputs>();
+  } = useForm<PrayerFormInputs>();
 
-  const onSubmit = async (data: ContactFormInputs) => {
+  const onSubmit = async (data: PrayerFormInputs) => {
     try {
       const form = {
         ...data,
-        spreadsheet: "contact",
+        spreadsheet: "prayer",
       };
 
       const response = await fetch("/api/submit", {
@@ -62,7 +60,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({
     <FadeIn>
       <form onSubmit={handleSubmit(onSubmit)}>
         <h4 className="text-base font-nunito font-medium text-primary">
-          Tiene preguntas? Envíanos un mensaje:
+          Envíanos tu petición de oración:
         </h4>
 
         {hasError && (
@@ -92,38 +90,14 @@ export const ContactForm: React.FC<ContactFormProps> = ({
             label="Número de teléfono"
           />
           {errors.phone && <span className="text-red-500 text-sm">Número de teléfono requerido</span>}
-
-          <TextInput
-            type="email"
-            {...register("email", { required: false })}
-            placeholder={placeholder}
-            label="Correo electrónico"
-          />
-
+          
           <TextInput
             {...register("message", { required: true })}
-            placeholder="Su mensaje"
-            label="Mensaje"
+            placeholder="Su petición de oración"
+            label="Petición de oración"
           />
           {errors.message && <span className="text-red-500 text-sm">Requerido</span>}
 
-          <div className="border border-neutral-300 px-6 py-8 first:rounded-t-2xl last:rounded-b-2xl">
-            <fieldset>
-              <legend className="text-base/6 text-neutral-500">Me Gustaría:</legend>
-            </fieldset>
-            <div className="mt-6 grid grid-cols-2 md:grid-cols-12 gap-5">
-              {["Hacer una petición de oración", "Unirme a un grupo", "Ser bautizado", "Discutir otro Tema"].map((value) => (
-                <div key={value} className="col-span-1 md:col-span-6">
-                  <RadioInput
-                    label={`${value}`}
-                    value={value}
-                    {...register("subject", { required: true })}
-                  />
-                </div>
-              ))}
-            </div>
-            {errors.subject && <span className="text-red-500 text-sm mt-2">Selecciona un asunto</span>}
-          </div>
         </div>
         <Button type="submit" className="mt-10" disabled={isSubmitting}>
           {buttonText}
