@@ -275,7 +275,11 @@ fragment PageParts on Page {
       contentandimagevariants {
         __typename
         title
+        descriptionheading
         description
+        description2
+        description3
+        descriptionheading2
         icon {
           __typename
           name

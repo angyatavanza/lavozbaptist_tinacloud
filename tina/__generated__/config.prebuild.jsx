@@ -432,7 +432,11 @@ var PagePartsFragmentDoc = gql`
       contentandimagevariants {
         __typename
         title
+        descriptionheading
         description
+        description2
+        description3
+        descriptionheading2
         icon {
           __typename
           name
@@ -4432,8 +4436,40 @@ var contentandimagevariantBlockSchema = {
           ui: {
             component: "textarea"
           },
+          label: "Section Img Content Description Heading",
+          name: "descriptionheading"
+        },
+        {
+          type: "string",
+          ui: {
+            component: "textarea"
+          },
           label: "Section Img Content Description",
           name: "description"
+        },
+        {
+          type: "string",
+          ui: {
+            component: "textarea"
+          },
+          label: "Section Img Content Description",
+          name: "description2"
+        },
+        {
+          type: "string",
+          ui: {
+            component: "textarea"
+          },
+          label: "Section Img Content Description",
+          name: "description3"
+        },
+        {
+          type: "string",
+          ui: {
+            component: "textarea"
+          },
+          label: "Section Img Content Description Heading",
+          name: "descriptionheading2"
         },
         iconField6,
         {

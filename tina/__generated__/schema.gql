@@ -434,7 +434,11 @@ type PageBlocksContentandimagevariantContentandimagevariantsActions {
 
 type PageBlocksContentandimagevariantContentandimagevariants {
   title: String
+  descriptionheading: String
   description: String
+  description2: String
+  description3: String
+  descriptionheading2: String
   icon: PageBlocksContentandimagevariantContentandimagevariantsIcon
   details: String
   image: PageBlocksContentandimagevariantContentandimagevariantsImage
@@ -950,7 +954,11 @@ input PageBlocksContentandimagevariantContentandimagevariantsActionsFilter {
 
 input PageBlocksContentandimagevariantContentandimagevariantsFilter {
   title: StringFilter
+  descriptionheading: StringFilter
   description: StringFilter
+  description2: StringFilter
+  description3: StringFilter
+  descriptionheading2: StringFilter
   icon: PageBlocksContentandimagevariantContentandimagevariantsIconFilter
   details: StringFilter
   image: PageBlocksContentandimagevariantContentandimagevariantsImageFilter
@@ -2036,7 +2044,11 @@ input PageBlocksContentandimagevariantContentandimagevariantsActionsMutation {
 
 input PageBlocksContentandimagevariantContentandimagevariantsMutation {
   title: String
+  descriptionheading: String
   description: String
+  description2: String
+  description3: String
+  descriptionheading2: String
   icon: PageBlocksContentandimagevariantContentandimagevariantsIconMutation
   details: String
   image: PageBlocksContentandimagevariantContentandimagevariantsImageMutation

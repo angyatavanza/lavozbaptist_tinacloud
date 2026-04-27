@@ -43,8 +43,14 @@ export const ServiceTimes = ({
       </li>
       <li className="col-span-1 md:col-span-6">
         <ServiceTime name="¿Cuándo nos reunimos?" invert={invert}>
-          Domingos a las 11:00 AM
-          <br />
+          <ServiceTime name="Miércoles" invert={invert}>
+            Estudio bíblico 7:00 pm
+          </ServiceTime>
+          <ServiceTime name="Domingo" invert={invert}>
+            Estudio bíblico 9:45 am
+            <br />
+            Servico de adoración 11:00 am
+          </ServiceTime>
         </ServiceTime>
       </li>
     </ul>

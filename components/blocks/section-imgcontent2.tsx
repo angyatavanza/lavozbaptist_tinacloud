@@ -101,8 +101,20 @@ const ContentandimagevariantCard = ({ contentandimagevariant }: { contentandimag
 
       {/* Description */}
       <CardContent className="flex items-start relative w-full flex-col gap-2">
+        <CardDescription className="text-foreground font-semibold text-[19px] leading-[24px] md:text-[19px] md:leading-[24px]" data-tina-field={tinaField(contentandimagevariant, "descriptionheading")}>
+          {contentandimagevariant.descriptionheading}
+        </CardDescription>
         <CardDescription className="text-foreground text-[19px] leading-[24px] md:text-[19px] md:leading-[24px]" data-tina-field={tinaField(contentandimagevariant, "description")}>
           {contentandimagevariant.description}
+        </CardDescription>
+        <CardDescription className="text-foreground font-semibold text-[19px] leading-[24px] md:text-[19px] md:leading-[24px]" data-tina-field={tinaField(contentandimagevariant, "descriptionheading2")}>
+          {contentandimagevariant.descriptionheading2}
+        </CardDescription>
+        <CardDescription className="text-foreground text-[19px] leading-[24px] md:text-[19px] md:leading-[24px]" data-tina-field={tinaField(contentandimagevariant, "description2")}>
+          {contentandimagevariant.description2}
+        </CardDescription>
+                <CardDescription className="text-foreground text-[19px] leading-[24px] md:text-[19px] md:leading-[24px]" data-tina-field={tinaField(contentandimagevariant, "description3")}>
+          {contentandimagevariant.description3}
         </CardDescription>
         <CardDescription data-tina-field={tinaField(contentandimagevariant, "details")}>
           {contentandimagevariant.details}
@@ -257,8 +269,40 @@ export const contentandimagevariantBlockSchema: Template = {
           ui: {
             component: "textarea",
           },
+          label: "Section Img Content Description Heading",
+          name: "descriptionheading",
+        },
+        {
+          type: "string",
+          ui: {
+            component: "textarea",
+          },
           label: "Section Img Content Description",
           name: "description",
+        },
+        {
+          type: "string",
+          ui: {
+            component: "textarea",
+          },
+          label: "Section Img Content Description",
+          name: "description2",
+        },
+        {
+          type: "string",
+          ui: {
+            component: "textarea",
+          },
+          label: "Section Img Content Description",
+          name: "description3",
+        },
+        {
+          type: "string",
+          ui: {
+            component: "textarea",
+          },
+          label: "Section Img Content Description Heading",
+          name: "descriptionheading2",
         },
         iconField as any,
         {
