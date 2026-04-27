@@ -16,7 +16,7 @@
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "incremental": true,
     "plugins": [
       {
@@ -37,6 +37,8 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    ".next/types/**/*.ts"
-, "content/pages/serve-form.mdx"  ]
+    ".next/types/**/*.ts",
+    "content/pages/serve-form.mdx",
+    ".next/dev/types/**/*.ts"
+  ]
 }
