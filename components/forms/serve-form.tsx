@@ -103,7 +103,7 @@ export const ServeForm: React.FC<ServeFormProps> = ({
 
           <TextInput
             {...register("message", { required: true })}
-            placeholder="Su respuestas"
+            placeholder="Su respuesta"
             label="¿Por qué le interesa servir?"
           />
           {errors.message && (

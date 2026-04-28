@@ -106,7 +106,7 @@ export const ResourcesForm: React.FC<ResourcesFormProps> = ({
           <TextInput
             {...register("address", { required: true})}
             placeholder=""
-            label="Línea de dirección 1"
+            label="Línea de dirección"
           />
           {errors.address && <span className="text-red-500 text-sm">Dirección requerida</span>}
 

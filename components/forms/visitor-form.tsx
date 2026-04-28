@@ -12,6 +12,7 @@ interface FTVisitorFormInputs {
   email: string;
   phone: string;
   address: string;
+  message: string; 
   citystate: string;
   zip: string;
   visitcount: string;
@@ -106,7 +107,7 @@ export const FTVisitorForm: React.FC<FTVisitorFormProps> = ({
           <TextInput
             {...register("address", { required: true})}
             placeholder=""
-            label="Línea de dirección 1"
+            label="línea de dirección"
           />
           {errors.address && <span className="text-red-500 text-sm">Dirección requerida</span>}
 
@@ -159,6 +160,11 @@ export const FTVisitorForm: React.FC<FTVisitorFormProps> = ({
             </div>
             {errors.subject && <span className="text-red-500 text-sm mt-2">Selecciona un asunto</span>}
           </div>
+          <TextInput
+            {...register("message", { required: false })}
+            placeholder=""
+            label="¿Hay algo más que nos quiera decir acerca de usted?"
+          />
         </div>
         <Button type="submit" className="mt-10" disabled={isSubmitting}>
           {buttonText}

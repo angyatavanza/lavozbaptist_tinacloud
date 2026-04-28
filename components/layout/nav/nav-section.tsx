@@ -35,6 +35,7 @@ export const createNavigation = (latestMessageUrl?: string): NavigationSection[]
   {
     title: "Conéctate",
     links: [
+      { title: "Petición de oración", href: "/prayer-request" },
       { title: "Primeros pasos", href: "/first-steps" },
       { title: "Grupos", href: "/groups" },
       { title: "Servir", href: "/serve" },
@@ -45,6 +46,7 @@ export const createNavigation = (latestMessageUrl?: string): NavigationSection[]
     title: "Recursos comunitarios",
     links: [
       { title: "Recursos comunitarios", href: "/community-resources" },
+      { title: "Acceso a recursos", href: "/community-resources-form" },
       { title: "Haz tu donación en línea", href: "/donations" },
     ],
   },

@@ -15,6 +15,7 @@ __export(mermaid_renderer_exports, {
 });
 import { useIntersectionObserver } from "usehooks-ts";
 import mermaid from "mermaid";
+import { jsx as jsx42 } from "react/jsx-runtime";
 function MermaidElement({ value }) {
   const { ref } = useIntersectionObserver({
     threshold: 0.01,
@@ -26,7 +27,7 @@ function MermaidElement({ value }) {
       }
     }
   });
-  return React.createElement("div", { contentEditable: false }, React.createElement("pre", { ref, suppressHydrationWarning: true }, value));
+  return jsx42("div", { contentEditable: false, children: jsx42("pre", { ref, suppressHydrationWarning: true, children: value }) });
 }
 var init_mermaid_renderer = __esm({
   "components/mermaid-renderer.tsx"() {
@@ -81,15 +82,8 @@ var nextConfig = {
 };
 var next_config_default = nextConfig;
 
-// tina/collection/message.tsx
-import React18 from "react";
-
 // components/blocks/section-video.tsx
-import * as React17 from "react";
 import dynamic from "next/dynamic";
-
-// components/layout/section.tsx
-import React16 from "react";
 
 // lib/utils.ts
 import { clsx as clsx8 } from "clsx";
@@ -1203,12 +1197,10 @@ var queries = (client2) => {
 // tina/__generated__/client.ts
 var client = createClient2({ url: "http://localhost:4001/graphql", token: "a85d5ee699ff1356512bdde5c2565bf1e435053f", queries });
 
-// components/layout/layout.tsx
-import React10 from "react";
-
 // components/layout/layout-context.tsx
-import React2, { useState, useContext } from "react";
-var LayoutContext = React2.createContext(void 0);
+import React, { useState, useContext } from "react";
+import { jsx } from "react/jsx-runtime";
+var LayoutContext = React.createContext(void 0);
 var useLayout = () => {
   const context = useContext(LayoutContext);
   return context || {
@@ -1227,8 +1219,8 @@ import { useEffect as useEffect2, useId, useRef, useState as useState3 } from "r
 import { motion as motion3, MotionConfig, useReducedMotion as useReducedMotion2 } from "framer-motion";
 
 // components/layout/container.tsx
-import React3 from "react";
 import clsx from "clsx";
+import { jsx as jsx2 } from "react/jsx-runtime";
 
 // components/layout/root-layout.tsx
 import Link7 from "next/link";
@@ -1237,7 +1229,7 @@ import { IoMdClose } from "react-icons/io";
 
 // components/layout/nav/service-times.tsx
 import clsx2 from "clsx";
-import React4 from "react";
+import { jsx as jsx3, jsxs } from "react/jsx-runtime";
 
 // components/layout/nav/social-media.tsx
 import Link from "next/link";
@@ -1247,14 +1239,15 @@ import {
   BsYoutube,
   BsInstagram
 } from "react-icons/bs";
+import { jsx as jsx4 } from "react/jsx-runtime";
 
 // components/layout/nav/footer.tsx
-import React8 from "react";
 import Link4 from "next/link";
 
 // components/motion-primitives/fade-in.tsx
 import { createContext, useContext as useContext2 } from "react";
 import { motion, useReducedMotion } from "framer-motion";
+import { jsx as jsx5 } from "react/jsx-runtime";
 var FadeInStaggerContext = createContext(false);
 
 // components/ui/icon.tsx
@@ -1267,31 +1260,33 @@ import {
   FaYoutube
 } from "react-icons/fa6";
 import { AiFillInstagram } from "react-icons/ai";
-import React5 from "react";
+import { jsx as jsx6, jsxs as jsxs2 } from "react/jsx-runtime";
 var IconOptions = {
-  Tina: (props) => React5.createElement(
+  Tina: (props) => jsxs2(
     "svg",
     {
       ...props,
       viewBox: "0 0 66 80",
       fill: "none",
-      xmlns: "http://www.w3.org/2000/svg"
-    },
-    React5.createElement("title", null, "Tina"),
-    React5.createElement(
-      "path",
-      {
-        d: "M39.4615 36.1782C42.763 33.4475 44.2259 17.3098 45.6551 11.5091C47.0843 5.70828 52.995 6.0025 52.995 6.0025C52.995 6.0025 51.4605 8.67299 52.0864 10.6658C52.7123 12.6587 57 14.4401 57 14.4401L56.0752 16.8781C56.0752 16.8781 54.1441 16.631 52.995 18.9297C51.8459 21.2283 53.7336 43.9882 53.7336 43.9882C53.7336 43.9882 46.8271 57.6106 46.8271 63.3621C46.8271 69.1136 49.5495 73.9338 49.5495 73.9338H45.7293C45.7293 73.9338 40.1252 67.2648 38.9759 63.9318C37.8266 60.5988 38.2861 57.2658 38.2861 57.2658C38.2861 57.2658 32.1946 56.921 26.7931 57.2658C21.3915 57.6106 17.7892 62.2539 17.1391 64.8512C16.4889 67.4486 16.2196 73.9338 16.2196 73.9338H13.1991C11.3606 68.2603 9.90043 66.2269 10.6925 63.3621C12.8866 55.4269 12.4557 50.9263 11.9476 48.9217C11.4396 46.9172 8 45.1676 8 45.1676C9.68492 41.7349 11.4048 40.0854 18.8029 39.9133C26.201 39.7413 36.1599 38.9088 39.4615 36.1782Z",
-        fill: "currentColor"
-      }
-    ),
-    React5.createElement(
-      "path",
-      {
-        d: "M20.25 63.03C20.25 63.03 21.0305 70.2533 25.1773 73.9342H28.7309C25.1773 69.9085 24.7897 59.415 24.7897 59.415C22.9822 60.0035 20.4799 62.1106 20.25 63.03Z",
-        fill: "currentColor"
-      }
-    )
+      xmlns: "http://www.w3.org/2000/svg",
+      children: [
+        jsx6("title", { children: "Tina" }),
+        jsx6(
+          "path",
+          {
+            d: "M39.4615 36.1782C42.763 33.4475 44.2259 17.3098 45.6551 11.5091C47.0843 5.70828 52.995 6.0025 52.995 6.0025C52.995 6.0025 51.4605 8.67299 52.0864 10.6658C52.7123 12.6587 57 14.4401 57 14.4401L56.0752 16.8781C56.0752 16.8781 54.1441 16.631 52.995 18.9297C51.8459 21.2283 53.7336 43.9882 53.7336 43.9882C53.7336 43.9882 46.8271 57.6106 46.8271 63.3621C46.8271 69.1136 49.5495 73.9338 49.5495 73.9338H45.7293C45.7293 73.9338 40.1252 67.2648 38.9759 63.9318C37.8266 60.5988 38.2861 57.2658 38.2861 57.2658C38.2861 57.2658 32.1946 56.921 26.7931 57.2658C21.3915 57.6106 17.7892 62.2539 17.1391 64.8512C16.4889 67.4486 16.2196 73.9338 16.2196 73.9338H13.1991C11.3606 68.2603 9.90043 66.2269 10.6925 63.3621C12.8866 55.4269 12.4557 50.9263 11.9476 48.9217C11.4396 46.9172 8 45.1676 8 45.1676C9.68492 41.7349 11.4048 40.0854 18.8029 39.9133C26.201 39.7413 36.1599 38.9088 39.4615 36.1782Z",
+            fill: "currentColor"
+          }
+        ),
+        jsx6(
+          "path",
+          {
+            d: "M20.25 63.03C20.25 63.03 21.0305 70.2533 25.1773 73.9342H28.7309C25.1773 69.9085 24.7897 59.415 24.7897 59.415C22.9822 60.0035 20.4799 62.1106 20.25 63.03Z",
+            fill: "currentColor"
+          }
+        )
+      ]
+    }
   ),
   ...BoxIcons,
   FaFacebookF,
@@ -1366,17 +1361,17 @@ var TinaIcon = ({
   const iconSizeClasses = typeof size === "string" ? iconSizeClass[size] : iconSizeClass[Object.keys(iconSizeClass)[size]];
   const iconColor = color ? color === "primary" ? theme.color : color : theme.color;
   if (style == "circle") {
-    return React5.createElement(
+    return jsx6(
       "div",
       {
         ...tinaField27 ? { "data-tina-field": tinaField27 } : {},
-        className: `relative z-10 inline-flex items-center justify-center shrink-0 ${iconSizeClasses} rounded-full ${iconColorClass[iconColor].circle} ${className}`
-      },
-      React5.createElement(IconSVG, { className: "w-2/3 h-2/3" })
+        className: `relative z-10 inline-flex items-center justify-center shrink-0 ${iconSizeClasses} rounded-full ${iconColorClass[iconColor].circle} ${className}`,
+        children: jsx6(IconSVG, { className: "w-2/3 h-2/3" })
+      }
     );
   } else {
     const iconColorClasses = iconColorClass[parentColor === "primary" && (iconColor === theme.color || iconColor === "primary") ? "white" : iconColor].regular;
-    return React5.createElement(
+    return jsx6(
       IconSVG,
       {
         ...tinaField27 ? { "data-tina-field": tinaField27 } : {},
@@ -1391,36 +1386,37 @@ import {
   AnimatePresence,
   motion as motion2
 } from "motion/react";
-import React6 from "react";
-var AnimationComponent = React6.memo(({ segment, variants, per, segmentWrapperClassName }) => {
-  const content = per === "line" ? React6.createElement(motion2.span, { variants, className: "block" }, segment) : per === "word" ? React6.createElement(
+import React2 from "react";
+import { jsx as jsx7, jsxs as jsxs3 } from "react/jsx-runtime";
+var AnimationComponent = React2.memo(({ segment, variants, per, segmentWrapperClassName }) => {
+  const content = per === "line" ? jsx7(motion2.span, { variants, className: "block", children: segment }) : per === "word" ? jsx7(
     motion2.span,
     {
       "aria-hidden": "true",
       variants,
-      className: "inline-block whitespace-pre"
-    },
-    segment
-  ) : React6.createElement(motion2.span, { className: "inline-block whitespace-pre" }, segment.split("").map((char, charIndex) => React6.createElement(
+      className: "inline-block whitespace-pre",
+      children: segment
+    }
+  ) : jsx7(motion2.span, { className: "inline-block whitespace-pre", children: segment.split("").map((char, charIndex) => jsx7(
     motion2.span,
     {
-      key: `char-${charIndex}`,
       "aria-hidden": "true",
       variants,
-      className: "inline-block whitespace-pre"
+      className: "inline-block whitespace-pre",
+      children: char
     },
-    char
-  )));
+    `char-${charIndex}`
+  )) });
   if (!segmentWrapperClassName) {
     return content;
   }
   const defaultWrapperClassName = per === "line" ? "block" : "inline-block";
-  return React6.createElement("span", { className: cn(defaultWrapperClassName, segmentWrapperClassName) }, content);
+  return jsx7("span", { className: cn(defaultWrapperClassName, segmentWrapperClassName), children: content });
 });
 AnimationComponent.displayName = "AnimationComponent";
 
 // components/layout/nav/nav-section.tsx
-import React7 from "react";
+import { Fragment, jsx as jsx8, jsxs as jsxs4 } from "react/jsx-runtime";
 var createNavigation = (latestMessageUrl) => [
   {
     title: "Qui\xE9nes somos",
@@ -1435,13 +1431,17 @@ var createNavigation = (latestMessageUrl) => [
     title: "Experiencias",
     links: [
       { title: "Mensajes", href: "/messages" },
-      { title: React7.createElement(React7.Fragment, null, "Mensaje m\xE1s reciente ", React7.createElement("span", { "aria-hidden": "true" }, "\u2192")), href: latestMessageUrl || "/messages" },
+      { title: jsxs4(Fragment, { children: [
+        "Mensaje m\xE1s reciente ",
+        jsx8("span", { "aria-hidden": "true", children: "\u2192" })
+      ] }), href: latestMessageUrl || "/messages" },
       { title: "Horario de servicios", href: "/service-times" }
     ]
   },
   {
     title: "Con\xE9ctate",
     links: [
+      { title: "Petici\xF3n de oraci\xF3n", href: "/prayer-request" },
       { title: "Primeros pasos", href: "/first-steps" },
       { title: "Grupos", href: "/groups" },
       { title: "Servir", href: "/serve" },
@@ -1452,6 +1452,7 @@ var createNavigation = (latestMessageUrl) => [
     title: "Recursos comunitarios",
     links: [
       { title: "Recursos comunitarios", href: "/community-resources" },
+      { title: "Acceso a recursos", href: "/community-resources-form" },
       { title: "Haz tu donaci\xF3n en l\xEDnea", href: "/donations" }
     ]
   }
@@ -1461,11 +1462,16 @@ var navigation = createNavigation();
 // components/layout/nav/footer-navigation.tsx
 import Link2 from "next/link";
 import { useEffect, useState as useState2 } from "react";
+import { jsx as jsx9, jsxs as jsxs5 } from "react/jsx-runtime";
 
 // components/ui/logo.tsx
 import clsx4 from "clsx";
 import Link3 from "next/link";
 import Image from "next/image";
+import { jsx as jsx10 } from "react/jsx-runtime";
+
+// components/layout/nav/footer.tsx
+import { jsx as jsx11, jsxs as jsxs6 } from "react/jsx-runtime";
 
 // components/layout/nav/header.tsx
 import Link6 from "next/link";
@@ -1473,16 +1479,22 @@ import Link6 from "next/link";
 // components/ui/second-button.tsx
 import Link5 from "next/link";
 import clsx5 from "clsx";
-import React9 from "react";
+import { jsx as jsx12 } from "react/jsx-runtime";
 
 // components/layout/nav/header.tsx
 import clsx6 from "clsx";
+import { jsx as jsx13, jsxs as jsxs7 } from "react/jsx-runtime";
+
+// components/layout/root-layout.tsx
+import { jsx as jsx14, jsxs as jsxs8 } from "react/jsx-runtime";
 
 // components/facebook-sdk-loader.tsx
 import { useEffect as useEffect3 } from "react";
 
+// components/layout/layout.tsx
+import { jsx as jsx15, jsxs as jsxs9 } from "react/jsx-runtime";
+
 // app/messages/client-page.tsx
-import * as React15 from "react";
 import Link8 from "next/link";
 import { format } from "date-fns";
 
@@ -1491,16 +1503,17 @@ import { Play } from "lucide-react";
 
 // components/ui/video-dialog-context.tsx
 import { createContext as createContext2, useContext as useContext3, useState as useState4 } from "react";
+import { jsx as jsx16 } from "react/jsx-runtime";
 var VideoDialogContext = createContext2(void 0);
 
 // components/ui/avatar.tsx
-import * as React11 from "react";
 import * as AvatarPrimitive from "@radix-ui/react-avatar";
+import { jsx as jsx17 } from "react/jsx-runtime";
 function Avatar({
   className,
   ...props
 }) {
-  return React11.createElement(
+  return jsx17(
     AvatarPrimitive.Root,
     {
       "data-slot": "avatar",
@@ -1516,7 +1529,7 @@ function AvatarImage({
   className,
   ...props
 }) {
-  return React11.createElement(
+  return jsx17(
     AvatarPrimitive.Image,
     {
       "data-slot": "avatar-image",
@@ -1529,7 +1542,7 @@ function AvatarFallback({
   className,
   ...props
 }) {
-  return React11.createElement(
+  return jsx17(
     AvatarPrimitive.Fallback,
     {
       "data-slot": "avatar-fallback",
@@ -1544,14 +1557,17 @@ function AvatarFallback({
 
 // components/ui/latest-messages-video-dialog.tsx
 import { UserRound } from "lucide-react";
+import { jsx as jsx18, jsxs as jsxs10 } from "react/jsx-runtime";
 
 // components/ui/messages-video-dialog.tsx
 import { Play as Play2 } from "lucide-react";
 import { UserRound as UserRound2 } from "lucide-react";
+import { jsx as jsx19, jsxs as jsxs11 } from "react/jsx-runtime";
 
 // components/error-boundary.tsx
-import React12 from "react";
-var ErrorBoundary = class extends React12.Component {
+import React3 from "react";
+import { jsx as jsx20 } from "react/jsx-runtime";
+var ErrorBoundary = class extends React3.Component {
   constructor(props) {
     super(props);
     this.state = { hasError: false };
@@ -1564,7 +1580,7 @@ var ErrorBoundary = class extends React12.Component {
   }
   render() {
     if (this.state.hasError) {
-      return React12.createElement("h1", null, "Something went wrong.");
+      return jsx20("h1", { children: "Something went wrong." });
     }
     return this.props.children;
   }
@@ -1574,16 +1590,20 @@ var ErrorBoundary = class extends React12.Component {
 import { ArrowRight as ArrowRight3 } from "lucide-react";
 
 // components/ui/card.tsx
-import * as React13 from "react";
+import { jsx as jsx21 } from "react/jsx-runtime";
 {
 }
 
 // components/layout/page-intro.tsx
-import React14 from "react";
 import clsx7 from "clsx";
+import { jsx as jsx22, jsxs as jsxs12 } from "react/jsx-runtime";
 
 // app/messages/client-page.tsx
 import { es } from "date-fns/locale";
+import { jsx as jsx23, jsxs as jsxs13 } from "react/jsx-runtime";
+
+// app/messages/page.tsx
+import { jsx as jsx24 } from "react/jsx-runtime";
 
 // lib/utils.ts
 function cn(...inputs) {
@@ -1591,6 +1611,7 @@ function cn(...inputs) {
 }
 
 // components/layout/section.tsx
+import { jsx as jsx25 } from "react/jsx-runtime";
 var tailwindBackgroundOptions = [
   { label: "Default", value: "bg-primary-background" },
   { label: "Peach", value: "bg-primary-background-peach" },
@@ -1637,6 +1658,7 @@ var sectionBlockSchemaField = {
 };
 
 // components/blocks/section-video.tsx
+import { jsx as jsx26 } from "react/jsx-runtime";
 var ReactPlayer = dynamic(() => import("react-player"), { ssr: false });
 var videoBlockSchema = {
   name: "video",
@@ -1678,6 +1700,7 @@ var videoBlockSchema = {
 };
 
 // tina/collection/message.tsx
+import { jsx as jsx27, jsxs as jsxs14 } from "react/jsx-runtime";
 var Message = {
   label: "Mensajes Recientes",
   name: "message",
@@ -1763,7 +1786,13 @@ var Message = {
         optionComponent: (props, _internalSys) => {
           const { name, avatar } = props;
           if (!name) return _internalSys.path;
-          return React18.createElement("p", { className: "flex min-h-8 items-center gap-5" }, React18.createElement(Avatar, null, avatar && React18.createElement(AvatarImage, { src: avatar, alt: `${name} Profile` }), React18.createElement(AvatarFallback, null, name.split(" ").map((part) => part[0]?.toUpperCase() || "").join(""))), name);
+          return jsxs14("p", { className: "flex min-h-8 items-center gap-5", children: [
+            jsxs14(Avatar, { children: [
+              avatar && jsx27(AvatarImage, { src: avatar, alt: `${name} Profile` }),
+              jsx27(AvatarFallback, { children: name.split(" ").map((part) => part[0]?.toUpperCase() || "").join("") })
+            ] }),
+            name
+          ] });
         }
       }
     },
@@ -1880,11 +1909,8 @@ var Message = {
 };
 var message_default = Message;
 
-// tina/collection/event.tsx
-import React21 from "react";
-
 // tina/fields/icon.tsx
-import React20 from "react";
+import React4 from "react";
 import { Button as Button2, wrapFieldsWithMeta as wrapFieldsWithMeta2 } from "tinacms";
 import { BiChevronRight } from "react-icons/bi";
 import { GoCircleSlash } from "react-icons/go";
@@ -1896,8 +1922,8 @@ import {
 } from "@headlessui/react";
 
 // tina/fields/color.tsx
-import React19 from "react";
 import { wrapFieldsWithMeta } from "tinacms";
+import { Fragment as Fragment2, jsx as jsx28, jsxs as jsxs15 } from "react/jsx-runtime";
 var colorOptions = [
   "blue",
   "teal",
@@ -1921,21 +1947,25 @@ var ColorPickerInput = wrapFieldsWithMeta(({ input }) => {
     purple: "bg-purple-500 border-purple-600",
     white: "bg-white border-gray-150"
   };
-  return React19.createElement(React19.Fragment, null, React19.createElement("input", { type: "text", id: input.name, className: "hidden", ...input }), React19.createElement("div", { className: "flex gap-5 flex-wrap" }, colorOptions.map((color) => {
-    return React19.createElement(
-      "button",
-      {
-        key: color,
-        className: `w-9 h-9 rounded-full shadow border ${inputClasses[color]} ${input.value === color ? "ring-[3px] ring-offset-2 ring-blue-400" : ""}`,
-        onClick: () => {
-          input.onChange(color);
-        }
-      }
-    );
-  })));
+  return jsxs15(Fragment2, { children: [
+    jsx28("input", { type: "text", id: input.name, className: "hidden", ...input }),
+    jsx28("div", { className: "flex gap-5 flex-wrap", children: colorOptions.map((color) => {
+      return jsx28(
+        "button",
+        {
+          className: `w-9 h-9 rounded-full shadow border ${inputClasses[color]} ${input.value === color ? "ring-[3px] ring-offset-2 ring-blue-400" : ""}`,
+          onClick: () => {
+            input.onChange(color);
+          }
+        },
+        color
+      );
+    }) })
+  ] });
 });
 
 // tina/fields/icon.tsx
+import { Fragment as Fragment3, jsx as jsx29, jsxs as jsxs16 } from "react/jsx-runtime";
 var parseIconName = (name) => {
   const splitName = name.split(/(?=[A-Z])/);
   if (splitName.length > 1) {
@@ -1945,98 +1975,114 @@ var parseIconName = (name) => {
   }
 };
 var IconPickerInput = wrapFieldsWithMeta2(({ input }) => {
-  const [filter, setFilter] = React20.useState("");
-  const filteredBlocks = React20.useMemo(() => {
+  const [filter, setFilter] = React4.useState("");
+  const filteredBlocks = React4.useMemo(() => {
     return Object.keys(IconOptions).filter((name) => {
       return name.toLowerCase().includes(filter.toLowerCase());
     });
   }, [filter]);
   const inputLabel = Object.keys(IconOptions).includes(input.value) ? parseIconName(input.value) : "Select Icon";
   const InputIcon = IconOptions[input.value] ? IconOptions[input.value] : null;
-  return React20.createElement("div", { className: "relative z-[1000]" }, React20.createElement("input", { type: "text", id: input.name, className: "hidden", ...input }), React20.createElement(Popover, null, ({ open }) => React20.createElement(React20.Fragment, null, React20.createElement(PopoverButton, null, React20.createElement(
-    Button2,
-    {
-      className: `text-sm h-11 px-4 ${InputIcon ? "h-11" : "h-10"}`,
-      size: "custom",
-      rounded: "full",
-      variant: open ? "secondary" : "white"
-    },
-    InputIcon && React20.createElement(InputIcon, { className: "w-7 mr-1 h-auto fill-current text-blue-500" }),
-    inputLabel,
-    !InputIcon && React20.createElement(BiChevronRight, { className: "w-5 h-auto fill-current opacity-70 ml-1" })
-  )), React20.createElement(
-    "div",
-    {
-      className: "absolute w-full min-w-[192px] max-w-2xl -bottom-2 left-0 translate-y-full",
-      style: { zIndex: 1e3 }
-    },
-    React20.createElement(
-      Transition2,
-      {
-        enter: "transition duration-150 ease-out",
-        enterFrom: "transform opacity-0 -translate-y-2",
-        enterTo: "transform opacity-100 translate-y-0",
-        leave: "transition duration-75 ease-in",
-        leaveFrom: "transform opacity-100 translate-y-0",
-        leaveTo: "transform opacity-0 -translate-y-2"
-      },
-      React20.createElement(PopoverPanel, { className: "relative overflow-hidden rounded-lg shadow-lg bg-white border border-gray-150 z-50" }, ({ close }) => React20.createElement("div", { className: "max-h-[24rem] flex flex-col w-full h-full" }, React20.createElement("div", { className: "bg-gray-50 p-2 border-b border-gray-100 z-10 shadow-sm" }, React20.createElement(
-        "input",
+  return jsxs16("div", { className: "relative z-[1000]", children: [
+    jsx29("input", { type: "text", id: input.name, className: "hidden", ...input }),
+    jsx29(Popover, { children: ({ open }) => jsxs16(Fragment3, { children: [
+      jsx29(PopoverButton, { children: jsxs16(
+        Button2,
         {
-          type: "text",
-          className: "bg-white text-sm rounded-sm border border-gray-100 shadow-inner py-1.5 px-2.5 w-full block placeholder-gray-200",
-          onClick: (event) => {
-            event.stopPropagation();
-            event.preventDefault();
-          },
-          value: filter,
-          onChange: (event) => {
-            setFilter(event.target.value);
-          },
-          placeholder: "Filter..."
+          className: `text-sm h-11 px-4 ${InputIcon ? "h-11" : "h-10"}`,
+          size: "custom",
+          rounded: "full",
+          variant: open ? "secondary" : "white",
+          children: [
+            InputIcon && jsx29(InputIcon, { className: "w-7 mr-1 h-auto fill-current text-blue-500" }),
+            inputLabel,
+            !InputIcon && jsx29(BiChevronRight, { className: "w-5 h-auto fill-current opacity-70 ml-1" })
+          ]
         }
-      )), filteredBlocks.length === 0 && React20.createElement("span", { className: "relative text-center text-xs px-2 py-3 text-gray-300 bg-gray-50 italic" }, "No matches found"), filteredBlocks.length > 0 && React20.createElement("div", { className: "w-full grid grid-cols-6 auto-rows-auto p-2 overflow-y-auto" }, React20.createElement(
-        "button",
+      ) }),
+      jsx29(
+        "div",
         {
-          className: "relative rounded-lg text-center text-xs py-2 px-3 flex-1 outline-none transition-all ease-out duration-150 hover:text-blue-500 focus:text-blue-500 focus:bg-gray-50 hover:bg-gray-50",
-          key: "clear-input",
-          onClick: () => {
-            input.onChange("");
-            setFilter("");
-            close();
-          }
-        },
-        React20.createElement(GoCircleSlash, { className: "w-6 h-auto text-gray-200" })
-      ), filteredBlocks.map((name) => {
-        return React20.createElement(
-          "button",
-          {
-            className: "relative flex items-center justify-center rounded-lg text-center text-xs py-2 px-3 flex-1 outline-none transition-all ease-out duration-150 hover:text-blue-500 focus:text-blue-500 focus:bg-gray-50 hover:bg-gray-50",
-            key: name,
-            onClick: () => {
-              input.onChange(name);
-              setFilter("");
-              close();
-            }
-          },
-          React20.createElement(
-            TinaIcon,
+          className: "absolute w-full min-w-[192px] max-w-2xl -bottom-2 left-0 translate-y-full",
+          style: { zIndex: 1e3 },
+          children: jsx29(
+            Transition2,
             {
-              data: {
-                name,
-                size: "custom",
-                color: "blue"
-              },
-              className: "w-7 h-auto"
+              enter: "transition duration-150 ease-out",
+              enterFrom: "transform opacity-0 -translate-y-2",
+              enterTo: "transform opacity-100 translate-y-0",
+              leave: "transition duration-75 ease-in",
+              leaveFrom: "transform opacity-100 translate-y-0",
+              leaveTo: "transform opacity-0 -translate-y-2",
+              children: jsx29(PopoverPanel, { className: "relative overflow-hidden rounded-lg shadow-lg bg-white border border-gray-150 z-50", children: ({ close }) => jsxs16("div", { className: "max-h-[24rem] flex flex-col w-full h-full", children: [
+                jsx29("div", { className: "bg-gray-50 p-2 border-b border-gray-100 z-10 shadow-sm", children: jsx29(
+                  "input",
+                  {
+                    type: "text",
+                    className: "bg-white text-sm rounded-sm border border-gray-100 shadow-inner py-1.5 px-2.5 w-full block placeholder-gray-200",
+                    onClick: (event) => {
+                      event.stopPropagation();
+                      event.preventDefault();
+                    },
+                    value: filter,
+                    onChange: (event) => {
+                      setFilter(event.target.value);
+                    },
+                    placeholder: "Filter..."
+                  }
+                ) }),
+                filteredBlocks.length === 0 && jsx29("span", { className: "relative text-center text-xs px-2 py-3 text-gray-300 bg-gray-50 italic", children: "No matches found" }),
+                filteredBlocks.length > 0 && jsxs16("div", { className: "w-full grid grid-cols-6 auto-rows-auto p-2 overflow-y-auto", children: [
+                  jsx29(
+                    "button",
+                    {
+                      className: "relative rounded-lg text-center text-xs py-2 px-3 flex-1 outline-none transition-all ease-out duration-150 hover:text-blue-500 focus:text-blue-500 focus:bg-gray-50 hover:bg-gray-50",
+                      onClick: () => {
+                        input.onChange("");
+                        setFilter("");
+                        close();
+                      },
+                      children: jsx29(GoCircleSlash, { className: "w-6 h-auto text-gray-200" })
+                    },
+                    "clear-input"
+                  ),
+                  filteredBlocks.map((name) => {
+                    return jsx29(
+                      "button",
+                      {
+                        className: "relative flex items-center justify-center rounded-lg text-center text-xs py-2 px-3 flex-1 outline-none transition-all ease-out duration-150 hover:text-blue-500 focus:text-blue-500 focus:bg-gray-50 hover:bg-gray-50",
+                        onClick: () => {
+                          input.onChange(name);
+                          setFilter("");
+                          close();
+                        },
+                        children: jsx29(
+                          TinaIcon,
+                          {
+                            data: {
+                              name,
+                              size: "custom",
+                              color: "blue"
+                            },
+                            className: "w-7 h-auto"
+                          }
+                        )
+                      },
+                      name
+                    );
+                  })
+                ] })
+              ] }) })
             }
           )
-        );
-      }))))
-    )
-  ))));
+        }
+      )
+    ] }) })
+  ] });
 });
 
 // tina/collection/event.tsx
+import { jsx as jsx30, jsxs as jsxs17 } from "react/jsx-runtime";
 var iconField = {
   type: "object",
   label: "Icon",
@@ -2235,7 +2281,13 @@ var Event = {
         optionComponent: (props, _internalSys) => {
           const { name, avatar } = props;
           if (!name) return _internalSys.path;
-          return React21.createElement("p", { className: "flex min-h-8 items-center gap-5" }, React21.createElement(Avatar, null, avatar && React21.createElement(AvatarImage, { src: avatar, alt: `${name} Profile` }), React21.createElement(AvatarFallback, null, name.split(" ").map((part) => part[0]?.toUpperCase() || "").join(""))), name);
+          return jsxs17("p", { className: "flex min-h-8 items-center gap-5", children: [
+            jsxs17(Avatar, { children: [
+              avatar && jsx30(AvatarImage, { src: avatar, alt: `${name} Profile` }),
+              jsx30(AvatarFallback, { children: name.split(" ").map((part) => part[0]?.toUpperCase() || "").join("") })
+            ] }),
+            name
+          ] });
         }
       }
     },
@@ -2579,9 +2631,14 @@ var Coordinator = {
 var coordinator_default = Coordinator;
 
 // components/blocks/section-herocontent.tsx
-import * as React22 from "react";
 import Image3 from "next/image";
 import { tinaField } from "tinacms/dist/react";
+
+// components/ui/hero-video-dialog.tsx
+import { jsx as jsx31 } from "react/jsx-runtime";
+
+// components/blocks/section-herocontent.tsx
+import { jsx as jsx32, jsxs as jsxs18 } from "react/jsx-runtime";
 var herocontentBlockSchema = {
   name: "herocontent",
   label: "Herocontent",
@@ -2636,9 +2693,9 @@ import Link9 from "next/link";
 import { tinaField as tinaField2 } from "tinacms/dist/react";
 
 // components/ui/button.tsx
-import * as React23 from "react";
 import { Slot } from "@radix-ui/react-slot";
 import { cva } from "class-variance-authority";
+import { jsx as jsx33 } from "react/jsx-runtime";
 var buttonVariants = cva(
   "font-roboto inline-flex items-center justify-center min-w-25 gap-3 whitespace-nowrap rounded-sm font-semibold text-sm leading-[20px] transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
   {
@@ -2670,6 +2727,7 @@ var buttonVariants = cva(
 );
 
 // components/blocks/section-cta-links.tsx
+import { jsx as jsx34, jsxs as jsxs19 } from "react/jsx-runtime";
 var defaultCtalink = {
   title: "Recursos comunitarios",
   icon: {
@@ -2777,6 +2835,7 @@ var ctalinkBlockSchema = {
 import Link10 from "next/link";
 import Image4 from "next/image";
 import { tinaField as tinaField3 } from "tinacms/dist/react";
+import { Fragment as Fragment4, jsx as jsx35, jsxs as jsxs20 } from "react/jsx-runtime";
 var teammemberBlockSchema = {
   name: "teammember",
   label: "Teammember",
@@ -2887,16 +2946,17 @@ var teammemberBlockSchema = {
 };
 
 // components/blocks/section-profile.tsx
-import React25 from "react";
 import Image5 from "next/image";
 import Link11 from "next/link";
 import { tinaField as tinaField4 } from "tinacms/dist/react";
 
 // components/motion-primitives/animated-group.tsx
 import { motion as motion4 } from "motion/react";
-import React24 from "react";
+import React5 from "react";
+import { jsx as jsx36 } from "react/jsx-runtime";
 
 // components/blocks/section-profile.tsx
+import { jsx as jsx37, jsxs as jsxs21 } from "react/jsx-runtime";
 var profileBlockSchema = {
   name: "profile",
   label: "Profile",
@@ -2998,10 +3058,10 @@ var profileBlockSchema = {
 };
 
 // components/blocks/landing-hero.tsx
-import * as React26 from "react";
 import Image6 from "next/image";
 import Link12 from "next/link";
 import { tinaField as tinaField5 } from "tinacms/dist/react";
+import { jsx as jsx38, jsxs as jsxs22 } from "react/jsx-runtime";
 var heroBlockSchema = {
   name: "hero",
   label: "Hero",
@@ -3087,9 +3147,9 @@ var heroBlockSchema = {
 };
 
 // components/blocks/section-herodonation.tsx
-import * as React27 from "react";
 import Image7 from "next/image";
 import { tinaField as tinaField6 } from "tinacms/dist/react";
+import { jsx as jsx39, jsxs as jsxs23 } from "react/jsx-runtime";
 var herodonationBlockSchema = {
   name: "herodonation",
   label: "Herodonation",
@@ -3140,10 +3200,10 @@ var herodonationBlockSchema = {
 };
 
 // components/blocks/section-about.tsx
-import * as React28 from "react";
 import Image8 from "next/image";
 import Link13 from "next/link";
 import { tinaField as tinaField7 } from "tinacms/dist/react";
+import { Fragment as Fragment5, jsx as jsx40, jsxs as jsxs24 } from "react/jsx-runtime";
 var defaultAboutsectioninfo = {
   title: "Aqu\xED hay otro grupo",
   text: "Aqu\xED puedes proveer m\xE1s informaci\xF3n sobre un grupo.",
@@ -3248,10 +3308,10 @@ var aboutsectioninfoBlockSchema = {
 };
 
 // components/blocks/landing-about-us.tsx
-import * as React29 from "react";
 import Image9 from "next/image";
 import Link14 from "next/link";
 import { tinaField as tinaField8 } from "tinacms/dist/react";
+import { jsx as jsx41, jsxs as jsxs25 } from "react/jsx-runtime";
 var aboutusBlockSchema = {
   name: "aboutus",
   label: "Aboutus",
@@ -3343,15 +3403,15 @@ var aboutusBlockSchema = {
 };
 
 // components/blocks/section-content.tsx
-import React30 from "react";
 import { TinaMarkdown } from "tinacms/dist/rich-text";
 import { tinaField as tinaField9 } from "tinacms/dist/react";
 
 // components/blocks/mermaid.tsx
 import dynamic2 from "next/dynamic";
+import { jsx as jsx43 } from "react/jsx-runtime";
 var MermaidElement2 = dynamic2(() => Promise.resolve().then(() => (init_mermaid_renderer(), mermaid_renderer_exports)), {
   ssr: false,
-  loading: () => React.createElement("div", null, "Loading diagram...")
+  loading: () => jsx43("div", { children: "Loading diagram..." })
 });
 
 // components/magicui/script-copy-btn.tsx
@@ -3359,6 +3419,7 @@ import { Check, Copy } from "lucide-react";
 import { motion as motion5 } from "motion/react";
 import { useTheme } from "next-themes";
 import { useEffect as useEffect4, useState as useState5 } from "react";
+import { jsx as jsx44, jsxs as jsxs26 } from "react/jsx-runtime";
 var scriptCopyBlockSchema = {
   name: "scriptCopyBlock",
   label: "Script Copy Block",
@@ -3402,6 +3463,7 @@ var scriptCopyBlockSchema = {
 };
 
 // components/blocks/section-content.tsx
+import { jsx as jsx45 } from "react/jsx-runtime";
 var contentBlockSchema = {
   name: "content",
   label: "Content",
@@ -3428,6 +3490,7 @@ var contentBlockSchema = {
 import Link15 from "next/link";
 import Image10 from "next/image";
 import { tinaField as tinaField10 } from "tinacms/dist/react";
+import { jsx as jsx46, jsxs as jsxs27 } from "react/jsx-runtime";
 var ctaBlockSchema = {
   name: "cta",
   label: "CTA",
@@ -3531,6 +3594,7 @@ import { tinaField as tinaField11 } from "tinacms/dist/react";
 import { TinaMarkdown as TinaMarkdown2 } from "tinacms/dist/rich-text";
 import Link16 from "next/link";
 import Image11 from "next/image";
+import { Fragment as Fragment6, jsx as jsx47, jsxs as jsxs28 } from "react/jsx-runtime";
 var defaultConnection = {
   title: "Here's Another Connection",
   text: "This is where you might talk about the connection, if this wasn't just filler text.",
@@ -3647,6 +3711,7 @@ var connectionBlockSchema = {
 // components/blocks/section-features.tsx
 import { tinaField as tinaField12 } from "tinacms/dist/react";
 import { TinaMarkdown as TinaMarkdown3 } from "tinacms/dist/rich-text";
+import { jsx as jsx48, jsxs as jsxs29 } from "react/jsx-runtime";
 var defaultFeature = {
   title: "Here's Another Feature",
   text: "This is where you might talk about the feature, if this wasn't just filler text.",
@@ -3729,10 +3794,10 @@ var featureBlockSchema = {
 };
 
 // components/blocks/section-leadership.tsx
-import React31 from "react";
 import Image12 from "next/image";
 import Link17 from "next/link";
 import { tinaField as tinaField13 } from "tinacms/dist/react";
+import { jsx as jsx49, jsxs as jsxs30 } from "react/jsx-runtime";
 var leadershipBlockSchema = {
   name: "leadership",
   label: "Leadership",
@@ -3834,7 +3899,6 @@ var leadershipBlockSchema = {
 };
 
 // components/blocks/section-vision.tsx
-import React33 from "react";
 import { tinaField as tinaField14 } from "tinacms/dist/react";
 
 // components/ui/grid-list.tsx
@@ -3842,9 +3906,13 @@ import clsx10 from "clsx";
 
 // components/ui/border.tsx
 import clsx9 from "clsx";
-import React32 from "react";
+import { jsx as jsx50 } from "react/jsx-runtime";
+
+// components/ui/grid-list.tsx
+import { jsx as jsx51, jsxs as jsxs31 } from "react/jsx-runtime";
 
 // components/blocks/section-vision.tsx
+import { jsx as jsx52, jsxs as jsxs32 } from "react/jsx-runtime";
 var visionBlockSchema = {
   name: "vision",
   label: "Vision",
@@ -3876,6 +3944,7 @@ var visionBlockSchema = {
 import { tinaField as tinaField15 } from "tinacms/dist/react";
 import Link18 from "next/link";
 import Image13 from "next/image";
+import { Fragment as Fragment7, jsx as jsx53, jsxs as jsxs33 } from "react/jsx-runtime";
 var defaultGroupinfo = {
   title: "Aqu\xED hay otro grupo",
   text: "Aqu\xED puedes proveer m\xE1s informaci\xF3n sobre un grupo.",
@@ -3990,10 +4059,10 @@ var groupinfoBlockSchema = {
 };
 
 // components/blocks/landing-callout.tsx
-import React34 from "react";
 import Link19 from "next/link";
 import { tinaField as tinaField16 } from "tinacms/dist/react";
 import { ArrowRight as ArrowRight4 } from "lucide-react";
+import { jsx as jsx54, jsxs as jsxs34 } from "react/jsx-runtime";
 var calloutBlockSchema = {
   name: "callout",
   label: "Callout",
@@ -4020,20 +4089,21 @@ var calloutBlockSchema = {
 };
 
 // components/blocks/landing-faqcontent.tsx
-import React37, { useState as useState6 } from "react";
+import { useState as useState6 } from "react";
 import { TinaMarkdown as TinaMarkdown4 } from "tinacms/dist/rich-text";
 import { tinaField as tinaField17 } from "tinacms/dist/react";
 
 // components/ui/accordion-item.tsx
-import React35 from "react";
+import { Fragment as Fragment8, jsx as jsx55, jsxs as jsxs35 } from "react/jsx-runtime";
 
 // components/blocks/landing-faqcontent.tsx
 import Image14 from "next/image";
 
 // components/ui/decorative-icon.tsx
-import React36 from "react";
+import { jsx as jsx56, jsxs as jsxs36 } from "react/jsx-runtime";
 
 // components/blocks/landing-faqcontent.tsx
+import { jsx as jsx57, jsxs as jsxs37 } from "react/jsx-runtime";
 var defaultQuestion = {
   title: "Here's Another Question",
   text: "This is where you might talk about the question, if this wasn't just filler text.",
@@ -4157,6 +4227,7 @@ import Link20 from "next/link";
 import Image15 from "next/image";
 import { tinaField as tinaField18 } from "tinacms/dist/react";
 import { ArrowRight as ArrowRight5 } from "lucide-react";
+import { jsx as jsx58, jsxs as jsxs38 } from "react/jsx-runtime";
 var contentandimageBlockSchema = {
   name: "contentandimage",
   label: "Contentandimage",
@@ -4322,6 +4393,7 @@ var contentandimageBlockSchema = {
 import Image16 from "next/image";
 import { tinaField as tinaField19 } from "tinacms/dist/react";
 import { ArrowRight as ArrowRight6 } from "lucide-react";
+import { Fragment as Fragment9, jsx as jsx59, jsxs as jsxs39 } from "react/jsx-runtime";
 var iconField6 = {
   type: "object",
   label: "Icon",
@@ -4535,13 +4607,13 @@ var contentandimagevariantBlockSchema = {
 };
 
 // components/blocks/landing-latest-events.tsx
-import React38 from "react";
 import Link21 from "next/link";
 import Image17 from "next/image";
 import { format as format2 } from "date-fns";
 import { es as es2 } from "date-fns/locale";
 import { ArrowRight as ArrowRight7 } from "lucide-react";
 import { tinaField as tinaField20 } from "tinacms/dist/react";
+import { Fragment as Fragment10, jsx as jsx60, jsxs as jsxs40 } from "react/jsx-runtime";
 var latesteventsBlockSchema = {
   name: "latestevents",
   label: "Latest Events",
@@ -4613,12 +4685,12 @@ var latesteventsBlockSchema = {
 };
 
 // components/blocks/landing-latest-messages.tsx
-import React39 from "react";
 import { tinaField as tinaField21 } from "tinacms/dist/react";
 import { ArrowRight as ArrowRight8 } from "lucide-react";
 import { format as format3 } from "date-fns";
 import { es as es3 } from "date-fns/locale";
 import Link22 from "next/link";
+import { jsx as jsx61, jsxs as jsxs41 } from "react/jsx-runtime";
 var latestmessagesBlockSchema = {
   name: "latestmessages",
   label: "Latest Messages",
@@ -4694,6 +4766,7 @@ import Link23 from "next/link";
 import Image18 from "next/image";
 import { tinaField as tinaField22 } from "tinacms/dist/react";
 import { ArrowRight as ArrowRight9 } from "lucide-react";
+import { Fragment as Fragment11, jsx as jsx62, jsxs as jsxs42 } from "react/jsx-runtime";
 var iconField7 = {
   type: "object",
   label: "Icon",
@@ -4895,8 +4968,8 @@ var groupBlockSchema = {
 };
 
 // components/blocks/section-values.tsx
-import React40 from "react";
 import { tinaField as tinaField23 } from "tinacms/dist/react";
+import { jsx as jsx63, jsxs as jsxs43 } from "react/jsx-runtime";
 var valuesBlockSchema = {
   name: "values",
   label: "Values",
@@ -4936,25 +5009,28 @@ var valuesBlockSchema = {
   ]
 };
 
-// components/blocks/section-listcontent.tsx
-import React42 from "react";
-
 // components/ui/stylized-image.tsx
 import clsx11 from "clsx";
 import Image19 from "next/image";
 import { useId as useId2 } from "react";
+import { jsx as jsx64, jsxs as jsxs44 } from "react/jsx-runtime";
+
+// components/layout/section-intro.tsx
+import { jsx as jsx65, jsxs as jsxs45 } from "react/jsx-runtime";
 
 // components/blocks/section-listcontent.tsx
 import { tinaField as tinaField24 } from "tinacms/dist/react";
 
 // components/ui/tag-list.tsx
 import clsx12 from "clsx";
+import { jsx as jsx66 } from "react/jsx-runtime";
 
 // components/ui/list.tsx
-import React41 from "react";
 import clsx13 from "clsx";
+import { jsx as jsx67, jsxs as jsxs46 } from "react/jsx-runtime";
 
 // components/blocks/section-listcontent.tsx
+import { jsx as jsx68, jsxs as jsxs47 } from "react/jsx-runtime";
 var listcontentBlockSchema = {
   name: "listcontent",
   label: "Listcontent",
@@ -4991,13 +5067,15 @@ var listcontentBlockSchema = {
   ]
 };
 
+// components/layout/steps-section.tsx
+import { jsx as jsx69, jsxs as jsxs48 } from "react/jsx-runtime";
+
 // components/blocks/section-first-steps.tsx
-import React46 from "react";
 import { tinaField as tinaField25 } from "tinacms/dist/react";
 
 // components/mdx-components.tsx
 import { format as format4 } from "date-fns";
-import React45 from "react";
+import React8 from "react";
 import {
   TinaMarkdown as TinaMarkdown5
 } from "tinacms/dist/rich-text";
@@ -5006,48 +5084,69 @@ import { Prism } from "tinacms/dist/rich-text/prism";
 
 // components/forms/contact-details.tsx
 import Link24 from "next/link";
+import { jsx as jsx70, jsxs as jsxs49 } from "react/jsx-runtime";
 
 // components/forms/serve-details.tsx
 import Link25 from "next/link";
+import { jsx as jsx71, jsxs as jsxs50 } from "react/jsx-runtime";
 
 // components/forms/prayer-details.tsx
 import Link26 from "next/link";
+import { jsx as jsx72, jsxs as jsxs51 } from "react/jsx-runtime";
 
 // components/forms/resources-details.tsx
 import Link27 from "next/link";
+import { jsx as jsx73, jsxs as jsxs52 } from "react/jsx-runtime";
 
 // components/forms/visitor-details.tsx
 import Link28 from "next/link";
+import { jsx as jsx74, jsxs as jsxs53 } from "react/jsx-runtime";
 
 // components/forms/contact-form.tsx
 import { useForm } from "react-hook-form";
 
 // components/forms/text-input.tsx
-import React43, { useId as useId3 } from "react";
+import { useId as useId3 } from "react";
+import { jsx as jsx75, jsxs as jsxs54 } from "react/jsx-runtime";
+
+// components/forms/radio-input.tsx
+import { jsx as jsx76, jsxs as jsxs55 } from "react/jsx-runtime";
 
 // components/layout/wrapper.tsx
-import React44 from "react";
+import { jsx as jsx77 } from "react/jsx-runtime";
+
+// components/forms/mail-sent-state.tsx
+import { jsx as jsx78, jsxs as jsxs56 } from "react/jsx-runtime";
 
 // components/forms/contact-form.tsx
 import { useState as useState7 } from "react";
+import { jsx as jsx79, jsxs as jsxs57 } from "react/jsx-runtime";
 
 // components/forms/prayer-form.tsx
 import { useForm as useForm2 } from "react-hook-form";
 import { useState as useState8 } from "react";
+import { jsx as jsx80, jsxs as jsxs58 } from "react/jsx-runtime";
 
 // components/forms/resources-form.tsx
 import { useForm as useForm3 } from "react-hook-form";
 import { useState as useState9 } from "react";
+import { jsx as jsx81, jsxs as jsxs59 } from "react/jsx-runtime";
 
 // components/forms/serve-form.tsx
 import { useForm as useForm4 } from "react-hook-form";
 import { useState as useState10 } from "react";
+import { jsx as jsx82, jsxs as jsxs60 } from "react/jsx-runtime";
 
 // components/forms/visitor-form.tsx
 import { useForm as useForm5 } from "react-hook-form";
 import { useState as useState11 } from "react";
+import { jsx as jsx83, jsxs as jsxs61 } from "react/jsx-runtime";
+
+// components/mdx-components.tsx
+import { Fragment as Fragment12, jsx as jsx84, jsxs as jsxs62 } from "react/jsx-runtime";
 
 // components/blocks/section-first-steps.tsx
+import { jsx as jsx85, jsxs as jsxs63 } from "react/jsx-runtime";
 var nextstepsBlockSchema = {
   name: "nextsteps",
   label: "Nextsteps",
@@ -5130,6 +5229,7 @@ var nextstepsBlockSchema = {
 // components/blocks/section-contact.tsx
 import Link29 from "next/link";
 import { tinaField as tinaField26 } from "tinacms/dist/react";
+import { jsx as jsx86, jsxs as jsxs64 } from "react/jsx-runtime";
 var contactsectionBlockSchema = {
   name: "contactsection",
   label: "Contactsection",
