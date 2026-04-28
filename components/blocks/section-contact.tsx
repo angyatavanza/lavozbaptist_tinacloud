@@ -47,7 +47,7 @@ export const ContactSection = ({
           </div>
           <div className="mt-10 border-t border-sidebar-accent pt-10">
             <h4 className="text-base font-nunito font-medium text-sidebar-foreground">
-              Nuestra ubicación y horario de servicios
+              Nuestra ubicación y horario de reuniones
             </h4>
             <ServiceTimes
               className="mt-6 grid grid-cols-2 md:grid-cols-12 gap-5 px-4 md:px-5"

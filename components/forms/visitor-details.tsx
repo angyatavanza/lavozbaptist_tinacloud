@@ -8,7 +8,7 @@ export const FTVisitorDetails = () => {
   return (
     <FadeIn>
       <h4 className="text-base font-nunito font-medium text-primary">
-       Nuestra ubicación y horario de servicios
+       Nuestra ubicación y horario de reuniones
       </h4>
       <p className="mt-6 text-base text-body-foreground">
         Te invitamos a participar en nuestros estudios bíblicos entre semana y en el servicio general del domingo. Contamos con estacionamiento gratuito y fácil acceso al edificio. El servicio tiene una duración aproximada de 1 hora y 30 minutos. Incluye tiempos de alabanza, enseñanza bíblica práctica y momentos de oración.

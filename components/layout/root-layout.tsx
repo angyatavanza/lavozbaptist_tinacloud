@@ -121,7 +121,7 @@ const RootLayoutInner = ({ children }: RootLayoutInnerProps) => {
                 <div className="grid grid-cols-2 md:grid-cols-12 gap-5 pb-16 pt-10 md:pt-16">
                   <div className="col-span-2 md:col-span-6">
                     <h4 className="text-base font-nunito font-medium text-sidebar-foreground">
-                     Nuestra ubicación y horario de servicios
+                     Nuestra ubicación y horario de reuniones
                     </h4>
                     <ServiceTimes className="mt-6 grid grid-cols-2 md:grid-cols-12 gap-5" />
                   </div>
