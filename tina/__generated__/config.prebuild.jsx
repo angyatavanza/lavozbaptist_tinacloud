@@ -15,7 +15,7 @@ __export(mermaid_renderer_exports, {
 });
 import { useIntersectionObserver } from "usehooks-ts";
 import mermaid from "mermaid";
-import { jsx as jsx42 } from "react/jsx-runtime";
+import { jsx as jsx43 } from "react/jsx-runtime";
 function MermaidElement({ value }) {
   const { ref } = useIntersectionObserver({
     threshold: 0.01,
@@ -27,7 +27,7 @@ function MermaidElement({ value }) {
       }
     }
   });
-  return jsx42("div", { contentEditable: false, children: jsx42("pre", { ref, suppressHydrationWarning: true, children: value }) });
+  return jsx43("div", { contentEditable: false, children: jsx43("pre", { ref, suppressHydrationWarning: true, children: value }) });
 }
 var init_mermaid_renderer = __esm({
   "components/mermaid-renderer.tsx"() {
@@ -171,6 +171,25 @@ var PagePartsFragmentDoc = gql`
       }
     }
     ... on PageBlocksCtalinks {
+      background
+      items {
+        __typename
+        icon {
+          __typename
+          name
+          color
+          style
+        }
+        title
+        actions {
+          __typename
+          label
+          type
+          link
+        }
+      }
+    }
+    ... on PageBlocksTapdotlinks {
       background
       items {
         __typename
@@ -1350,7 +1369,7 @@ var TinaIcon = ({
   data,
   parentColor = "",
   className = "",
-  tinaField: tinaField27 = ""
+  tinaField: tinaField28 = ""
 }) => {
   const { theme } = useLayout();
   if (IconOptions[data.name] === null || IconOptions[data.name] === void 0) {
@@ -1364,7 +1383,7 @@ var TinaIcon = ({
     return jsx6(
       "div",
       {
-        ...tinaField27 ? { "data-tina-field": tinaField27 } : {},
+        ...tinaField28 ? { "data-tina-field": tinaField28 } : {},
         className: `relative z-10 inline-flex items-center justify-center shrink-0 ${iconSizeClasses} rounded-full ${iconColorClass[iconColor].circle} ${className}`,
         children: jsx6(IconSVG, { className: "w-2/3 h-2/3" })
       }
@@ -1374,7 +1393,7 @@ var TinaIcon = ({
     return jsx6(
       IconSVG,
       {
-        ...tinaField27 ? { "data-tina-field": tinaField27 } : {},
+        ...tinaField28 ? { "data-tina-field": tinaField28 } : {},
         className: `${iconSizeClasses} ${iconColorClasses} ${className}`
       }
     );
@@ -2831,11 +2850,118 @@ var ctalinkBlockSchema = {
   ]
 };
 
-// components/blocks/section-our-team.tsx
+// components/blocks/section-tapdot-links.tsx
 import Link10 from "next/link";
-import Image4 from "next/image";
 import { tinaField as tinaField3 } from "tinacms/dist/react";
-import { Fragment as Fragment4, jsx as jsx35, jsxs as jsxs20 } from "react/jsx-runtime";
+import { jsx as jsx35, jsxs as jsxs20 } from "react/jsx-runtime";
+var defaultTapdotlink = {
+  title: "Recursos comunitarios",
+  icon: {
+    color: "purple",
+    style: "float",
+    name: "BiHomeSmile"
+  }
+};
+var iconField4 = {
+  type: "object",
+  label: "Icon",
+  name: "icon",
+  fields: [
+    { type: "string", label: "Icon", name: "name", ui: { component: IconPickerInput } },
+    { type: "string", label: "Color", name: "color", ui: { component: ColorPickerInput } },
+    {
+      name: "style",
+      label: "Style",
+      type: "string",
+      options: [
+        { label: "Circle", value: "circle" },
+        { label: "Float", value: "float" }
+      ]
+    }
+  ]
+};
+var tapdotlinkBlockSchema = {
+  name: "tapdotlinks",
+  label: "Tapdotlinks",
+  ui: {
+    previewSrc: "/blocks/tapdotlinks.png",
+    defaultItem: {
+      items: [
+        { ...defaultTapdotlink, icon: { ...defaultTapdotlink.icon } },
+        { ...defaultTapdotlink, icon: { ...defaultTapdotlink.icon } },
+        { ...defaultTapdotlink, icon: { ...defaultTapdotlink.icon } }
+      ]
+    }
+  },
+  fields: [
+    sectionBlockSchemaField,
+    {
+      type: "object",
+      label: "Tapdotlink Items",
+      name: "items",
+      list: true,
+      ui: {
+        itemProps: (item) => {
+          return {
+            label: item?.title
+          };
+        },
+        defaultItem: {
+          ...defaultTapdotlink
+        }
+      },
+      fields: [
+        iconField4,
+        {
+          type: "string",
+          label: "Title",
+          name: "title"
+        },
+        {
+          label: "Actions",
+          name: "actions",
+          type: "object",
+          list: true,
+          ui: {
+            defaultItem: {
+              label: "Action Label",
+              type: "button",
+              link: "/"
+            },
+            itemProps: (item) => ({ label: item.label })
+          },
+          fields: [
+            {
+              label: "Label",
+              name: "label",
+              type: "string"
+            },
+            {
+              label: "Type",
+              name: "type",
+              type: "string",
+              options: [
+                { label: "Button", value: "button" },
+                { label: "Link", value: "link" }
+              ]
+            },
+            {
+              label: "Link",
+              name: "link",
+              type: "string"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+};
+
+// components/blocks/section-our-team.tsx
+import Link11 from "next/link";
+import Image4 from "next/image";
+import { tinaField as tinaField4 } from "tinacms/dist/react";
+import { Fragment as Fragment4, jsx as jsx36, jsxs as jsxs21 } from "react/jsx-runtime";
 var teammemberBlockSchema = {
   name: "teammember",
   label: "Teammember",
@@ -2947,16 +3073,16 @@ var teammemberBlockSchema = {
 
 // components/blocks/section-profile.tsx
 import Image5 from "next/image";
-import Link11 from "next/link";
-import { tinaField as tinaField4 } from "tinacms/dist/react";
+import Link12 from "next/link";
+import { tinaField as tinaField5 } from "tinacms/dist/react";
 
 // components/motion-primitives/animated-group.tsx
 import { motion as motion4 } from "motion/react";
 import React5 from "react";
-import { jsx as jsx36 } from "react/jsx-runtime";
+import { jsx as jsx37 } from "react/jsx-runtime";
 
 // components/blocks/section-profile.tsx
-import { jsx as jsx37, jsxs as jsxs21 } from "react/jsx-runtime";
+import { jsx as jsx38, jsxs as jsxs22 } from "react/jsx-runtime";
 var profileBlockSchema = {
   name: "profile",
   label: "Profile",
@@ -3059,9 +3185,9 @@ var profileBlockSchema = {
 
 // components/blocks/landing-hero.tsx
 import Image6 from "next/image";
-import Link12 from "next/link";
-import { tinaField as tinaField5 } from "tinacms/dist/react";
-import { jsx as jsx38, jsxs as jsxs22 } from "react/jsx-runtime";
+import Link13 from "next/link";
+import { tinaField as tinaField6 } from "tinacms/dist/react";
+import { jsx as jsx39, jsxs as jsxs23 } from "react/jsx-runtime";
 var heroBlockSchema = {
   name: "hero",
   label: "Hero",
@@ -3148,8 +3274,8 @@ var heroBlockSchema = {
 
 // components/blocks/section-herodonation.tsx
 import Image7 from "next/image";
-import { tinaField as tinaField6 } from "tinacms/dist/react";
-import { jsx as jsx39, jsxs as jsxs23 } from "react/jsx-runtime";
+import { tinaField as tinaField7 } from "tinacms/dist/react";
+import { jsx as jsx40, jsxs as jsxs24 } from "react/jsx-runtime";
 var herodonationBlockSchema = {
   name: "herodonation",
   label: "Herodonation",
@@ -3201,9 +3327,9 @@ var herodonationBlockSchema = {
 
 // components/blocks/section-about.tsx
 import Image8 from "next/image";
-import Link13 from "next/link";
-import { tinaField as tinaField7 } from "tinacms/dist/react";
-import { Fragment as Fragment5, jsx as jsx40, jsxs as jsxs24 } from "react/jsx-runtime";
+import Link14 from "next/link";
+import { tinaField as tinaField8 } from "tinacms/dist/react";
+import { Fragment as Fragment5, jsx as jsx41, jsxs as jsxs25 } from "react/jsx-runtime";
 var defaultAboutsectioninfo = {
   title: "Aqu\xED hay otro grupo",
   text: "Aqu\xED puedes proveer m\xE1s informaci\xF3n sobre un grupo.",
@@ -3309,9 +3435,9 @@ var aboutsectioninfoBlockSchema = {
 
 // components/blocks/landing-about-us.tsx
 import Image9 from "next/image";
-import Link14 from "next/link";
-import { tinaField as tinaField8 } from "tinacms/dist/react";
-import { jsx as jsx41, jsxs as jsxs25 } from "react/jsx-runtime";
+import Link15 from "next/link";
+import { tinaField as tinaField9 } from "tinacms/dist/react";
+import { jsx as jsx42, jsxs as jsxs26 } from "react/jsx-runtime";
 var aboutusBlockSchema = {
   name: "aboutus",
   label: "Aboutus",
@@ -3404,14 +3530,14 @@ var aboutusBlockSchema = {
 
 // components/blocks/section-content.tsx
 import { TinaMarkdown } from "tinacms/dist/rich-text";
-import { tinaField as tinaField9 } from "tinacms/dist/react";
+import { tinaField as tinaField10 } from "tinacms/dist/react";
 
 // components/blocks/mermaid.tsx
 import dynamic2 from "next/dynamic";
-import { jsx as jsx43 } from "react/jsx-runtime";
+import { jsx as jsx44 } from "react/jsx-runtime";
 var MermaidElement2 = dynamic2(() => Promise.resolve().then(() => (init_mermaid_renderer(), mermaid_renderer_exports)), {
   ssr: false,
-  loading: () => jsx43("div", { children: "Loading diagram..." })
+  loading: () => jsx44("div", { children: "Loading diagram..." })
 });
 
 // components/magicui/script-copy-btn.tsx
@@ -3419,7 +3545,7 @@ import { Check, Copy } from "lucide-react";
 import { motion as motion5 } from "motion/react";
 import { useTheme } from "next-themes";
 import { useEffect as useEffect4, useState as useState5 } from "react";
-import { jsx as jsx44, jsxs as jsxs26 } from "react/jsx-runtime";
+import { jsx as jsx45, jsxs as jsxs27 } from "react/jsx-runtime";
 var scriptCopyBlockSchema = {
   name: "scriptCopyBlock",
   label: "Script Copy Block",
@@ -3463,7 +3589,7 @@ var scriptCopyBlockSchema = {
 };
 
 // components/blocks/section-content.tsx
-import { jsx as jsx45 } from "react/jsx-runtime";
+import { jsx as jsx46 } from "react/jsx-runtime";
 var contentBlockSchema = {
   name: "content",
   label: "Content",
@@ -3487,10 +3613,10 @@ var contentBlockSchema = {
 };
 
 // components/blocks/section-call-to-action.tsx
-import Link15 from "next/link";
+import Link16 from "next/link";
 import Image10 from "next/image";
-import { tinaField as tinaField10 } from "tinacms/dist/react";
-import { jsx as jsx46, jsxs as jsxs27 } from "react/jsx-runtime";
+import { tinaField as tinaField11 } from "tinacms/dist/react";
+import { jsx as jsx47, jsxs as jsxs28 } from "react/jsx-runtime";
 var ctaBlockSchema = {
   name: "cta",
   label: "CTA",
@@ -3590,11 +3716,11 @@ var ctaBlockSchema = {
 };
 
 // components/blocks/landing-connect.tsx
-import { tinaField as tinaField11 } from "tinacms/dist/react";
+import { tinaField as tinaField12 } from "tinacms/dist/react";
 import { TinaMarkdown as TinaMarkdown2 } from "tinacms/dist/rich-text";
-import Link16 from "next/link";
+import Link17 from "next/link";
 import Image11 from "next/image";
-import { Fragment as Fragment6, jsx as jsx47, jsxs as jsxs28 } from "react/jsx-runtime";
+import { Fragment as Fragment6, jsx as jsx48, jsxs as jsxs29 } from "react/jsx-runtime";
 var defaultConnection = {
   title: "Here's Another Connection",
   text: "This is where you might talk about the connection, if this wasn't just filler text.",
@@ -3709,9 +3835,9 @@ var connectionBlockSchema = {
 };
 
 // components/blocks/section-features.tsx
-import { tinaField as tinaField12 } from "tinacms/dist/react";
+import { tinaField as tinaField13 } from "tinacms/dist/react";
 import { TinaMarkdown as TinaMarkdown3 } from "tinacms/dist/rich-text";
-import { jsx as jsx48, jsxs as jsxs29 } from "react/jsx-runtime";
+import { jsx as jsx49, jsxs as jsxs30 } from "react/jsx-runtime";
 var defaultFeature = {
   title: "Here's Another Feature",
   text: "This is where you might talk about the feature, if this wasn't just filler text.",
@@ -3721,7 +3847,7 @@ var defaultFeature = {
     name: ""
   }
 };
-var iconField4 = {
+var iconField5 = {
   type: "object",
   label: "Icon",
   name: "icon",
@@ -3777,7 +3903,7 @@ var featureBlockSchema = {
         }
       },
       fields: [
-        iconField4,
+        iconField5,
         {
           type: "string",
           label: "Title",
@@ -3795,9 +3921,9 @@ var featureBlockSchema = {
 
 // components/blocks/section-leadership.tsx
 import Image12 from "next/image";
-import Link17 from "next/link";
-import { tinaField as tinaField13 } from "tinacms/dist/react";
-import { jsx as jsx49, jsxs as jsxs30 } from "react/jsx-runtime";
+import Link18 from "next/link";
+import { tinaField as tinaField14 } from "tinacms/dist/react";
+import { jsx as jsx50, jsxs as jsxs31 } from "react/jsx-runtime";
 var leadershipBlockSchema = {
   name: "leadership",
   label: "Leadership",
@@ -3899,20 +4025,20 @@ var leadershipBlockSchema = {
 };
 
 // components/blocks/section-vision.tsx
-import { tinaField as tinaField14 } from "tinacms/dist/react";
+import { tinaField as tinaField15 } from "tinacms/dist/react";
 
 // components/ui/grid-list.tsx
 import clsx10 from "clsx";
 
 // components/ui/border.tsx
 import clsx9 from "clsx";
-import { jsx as jsx50 } from "react/jsx-runtime";
+import { jsx as jsx51 } from "react/jsx-runtime";
 
 // components/ui/grid-list.tsx
-import { jsx as jsx51, jsxs as jsxs31 } from "react/jsx-runtime";
+import { jsx as jsx52, jsxs as jsxs32 } from "react/jsx-runtime";
 
 // components/blocks/section-vision.tsx
-import { jsx as jsx52, jsxs as jsxs32 } from "react/jsx-runtime";
+import { jsx as jsx53, jsxs as jsxs33 } from "react/jsx-runtime";
 var visionBlockSchema = {
   name: "vision",
   label: "Vision",
@@ -3941,10 +4067,10 @@ var visionBlockSchema = {
 };
 
 // components/blocks/landing-groups.tsx
-import { tinaField as tinaField15 } from "tinacms/dist/react";
-import Link18 from "next/link";
+import { tinaField as tinaField16 } from "tinacms/dist/react";
+import Link19 from "next/link";
 import Image13 from "next/image";
-import { Fragment as Fragment7, jsx as jsx53, jsxs as jsxs33 } from "react/jsx-runtime";
+import { Fragment as Fragment7, jsx as jsx54, jsxs as jsxs34 } from "react/jsx-runtime";
 var defaultGroupinfo = {
   title: "Aqu\xED hay otro grupo",
   text: "Aqu\xED puedes proveer m\xE1s informaci\xF3n sobre un grupo.",
@@ -4059,10 +4185,10 @@ var groupinfoBlockSchema = {
 };
 
 // components/blocks/landing-callout.tsx
-import Link19 from "next/link";
-import { tinaField as tinaField16 } from "tinacms/dist/react";
+import Link20 from "next/link";
+import { tinaField as tinaField17 } from "tinacms/dist/react";
 import { ArrowRight as ArrowRight4 } from "lucide-react";
-import { jsx as jsx54, jsxs as jsxs34 } from "react/jsx-runtime";
+import { jsx as jsx55, jsxs as jsxs35 } from "react/jsx-runtime";
 var calloutBlockSchema = {
   name: "callout",
   label: "Callout",
@@ -4091,19 +4217,19 @@ var calloutBlockSchema = {
 // components/blocks/landing-faqcontent.tsx
 import { useState as useState6 } from "react";
 import { TinaMarkdown as TinaMarkdown4 } from "tinacms/dist/rich-text";
-import { tinaField as tinaField17 } from "tinacms/dist/react";
+import { tinaField as tinaField18 } from "tinacms/dist/react";
 
 // components/ui/accordion-item.tsx
-import { Fragment as Fragment8, jsx as jsx55, jsxs as jsxs35 } from "react/jsx-runtime";
+import { Fragment as Fragment8, jsx as jsx56, jsxs as jsxs36 } from "react/jsx-runtime";
 
 // components/blocks/landing-faqcontent.tsx
 import Image14 from "next/image";
 
 // components/ui/decorative-icon.tsx
-import { jsx as jsx56, jsxs as jsxs36 } from "react/jsx-runtime";
+import { jsx as jsx57, jsxs as jsxs37 } from "react/jsx-runtime";
 
 // components/blocks/landing-faqcontent.tsx
-import { jsx as jsx57, jsxs as jsxs37 } from "react/jsx-runtime";
+import { jsx as jsx58, jsxs as jsxs38 } from "react/jsx-runtime";
 var defaultQuestion = {
   title: "Here's Another Question",
   text: "This is where you might talk about the question, if this wasn't just filler text.",
@@ -4113,7 +4239,7 @@ var defaultQuestion = {
     name: ""
   }
 };
-var iconField5 = {
+var iconField6 = {
   type: "object",
   label: "Icon",
   name: "icon",
@@ -4206,7 +4332,7 @@ var freqaskedquestionsBlockSchema = {
         }
       },
       fields: [
-        iconField5,
+        iconField6,
         {
           type: "string",
           label: "Title",
@@ -4223,11 +4349,11 @@ var freqaskedquestionsBlockSchema = {
 };
 
 // components/blocks/section-imgcontent.tsx
-import Link20 from "next/link";
+import Link21 from "next/link";
 import Image15 from "next/image";
-import { tinaField as tinaField18 } from "tinacms/dist/react";
+import { tinaField as tinaField19 } from "tinacms/dist/react";
 import { ArrowRight as ArrowRight5 } from "lucide-react";
-import { jsx as jsx58, jsxs as jsxs38 } from "react/jsx-runtime";
+import { jsx as jsx59, jsxs as jsxs39 } from "react/jsx-runtime";
 var contentandimageBlockSchema = {
   name: "contentandimage",
   label: "Contentandimage",
@@ -4391,10 +4517,10 @@ var contentandimageBlockSchema = {
 
 // components/blocks/section-imgcontent2.tsx
 import Image16 from "next/image";
-import { tinaField as tinaField19 } from "tinacms/dist/react";
+import { tinaField as tinaField20 } from "tinacms/dist/react";
 import { ArrowRight as ArrowRight6 } from "lucide-react";
-import { Fragment as Fragment9, jsx as jsx59, jsxs as jsxs39 } from "react/jsx-runtime";
-var iconField6 = {
+import { Fragment as Fragment9, jsx as jsx60, jsxs as jsxs40 } from "react/jsx-runtime";
+var iconField7 = {
   type: "object",
   label: "Icon",
   name: "icon",
@@ -4543,7 +4669,7 @@ var contentandimagevariantBlockSchema = {
           label: "Section Img Content Description Heading",
           name: "descriptionheading2"
         },
-        iconField6,
+        iconField7,
         {
           type: "string",
           label: "Details",
@@ -4607,13 +4733,13 @@ var contentandimagevariantBlockSchema = {
 };
 
 // components/blocks/landing-latest-events.tsx
-import Link21 from "next/link";
+import Link22 from "next/link";
 import Image17 from "next/image";
 import { format as format2 } from "date-fns";
 import { es as es2 } from "date-fns/locale";
 import { ArrowRight as ArrowRight7 } from "lucide-react";
-import { tinaField as tinaField20 } from "tinacms/dist/react";
-import { Fragment as Fragment10, jsx as jsx60, jsxs as jsxs40 } from "react/jsx-runtime";
+import { tinaField as tinaField21 } from "tinacms/dist/react";
+import { Fragment as Fragment10, jsx as jsx61, jsxs as jsxs41 } from "react/jsx-runtime";
 var latesteventsBlockSchema = {
   name: "latestevents",
   label: "Latest Events",
@@ -4685,12 +4811,12 @@ var latesteventsBlockSchema = {
 };
 
 // components/blocks/landing-latest-messages.tsx
-import { tinaField as tinaField21 } from "tinacms/dist/react";
+import { tinaField as tinaField22 } from "tinacms/dist/react";
 import { ArrowRight as ArrowRight8 } from "lucide-react";
 import { format as format3 } from "date-fns";
 import { es as es3 } from "date-fns/locale";
-import Link22 from "next/link";
-import { jsx as jsx61, jsxs as jsxs41 } from "react/jsx-runtime";
+import Link23 from "next/link";
+import { jsx as jsx62, jsxs as jsxs42 } from "react/jsx-runtime";
 var latestmessagesBlockSchema = {
   name: "latestmessages",
   label: "Latest Messages",
@@ -4762,12 +4888,12 @@ var latestmessagesBlockSchema = {
 };
 
 // components/blocks/section-groups.tsx
-import Link23 from "next/link";
+import Link24 from "next/link";
 import Image18 from "next/image";
-import { tinaField as tinaField22 } from "tinacms/dist/react";
+import { tinaField as tinaField23 } from "tinacms/dist/react";
 import { ArrowRight as ArrowRight9 } from "lucide-react";
-import { Fragment as Fragment11, jsx as jsx62, jsxs as jsxs42 } from "react/jsx-runtime";
-var iconField7 = {
+import { Fragment as Fragment11, jsx as jsx63, jsxs as jsxs43 } from "react/jsx-runtime";
+var iconField8 = {
   type: "object",
   label: "Icon",
   name: "icon",
@@ -4903,7 +5029,7 @@ var groupBlockSchema = {
           label: "Groups Description",
           name: "description"
         },
-        iconField7,
+        iconField8,
         {
           type: "object",
           label: "Image",
@@ -4968,8 +5094,8 @@ var groupBlockSchema = {
 };
 
 // components/blocks/section-values.tsx
-import { tinaField as tinaField23 } from "tinacms/dist/react";
-import { jsx as jsx63, jsxs as jsxs43 } from "react/jsx-runtime";
+import { tinaField as tinaField24 } from "tinacms/dist/react";
+import { jsx as jsx64, jsxs as jsxs44 } from "react/jsx-runtime";
 var valuesBlockSchema = {
   name: "values",
   label: "Values",
@@ -5013,24 +5139,24 @@ var valuesBlockSchema = {
 import clsx11 from "clsx";
 import Image19 from "next/image";
 import { useId as useId2 } from "react";
-import { jsx as jsx64, jsxs as jsxs44 } from "react/jsx-runtime";
-
-// components/layout/section-intro.tsx
 import { jsx as jsx65, jsxs as jsxs45 } from "react/jsx-runtime";
 
+// components/layout/section-intro.tsx
+import { jsx as jsx66, jsxs as jsxs46 } from "react/jsx-runtime";
+
 // components/blocks/section-listcontent.tsx
-import { tinaField as tinaField24 } from "tinacms/dist/react";
+import { tinaField as tinaField25 } from "tinacms/dist/react";
 
 // components/ui/tag-list.tsx
 import clsx12 from "clsx";
-import { jsx as jsx66 } from "react/jsx-runtime";
+import { jsx as jsx67 } from "react/jsx-runtime";
 
 // components/ui/list.tsx
 import clsx13 from "clsx";
-import { jsx as jsx67, jsxs as jsxs46 } from "react/jsx-runtime";
+import { jsx as jsx68, jsxs as jsxs47 } from "react/jsx-runtime";
 
 // components/blocks/section-listcontent.tsx
-import { jsx as jsx68, jsxs as jsxs47 } from "react/jsx-runtime";
+import { jsx as jsx69, jsxs as jsxs48 } from "react/jsx-runtime";
 var listcontentBlockSchema = {
   name: "listcontent",
   label: "Listcontent",
@@ -5068,10 +5194,10 @@ var listcontentBlockSchema = {
 };
 
 // components/layout/steps-section.tsx
-import { jsx as jsx69, jsxs as jsxs48 } from "react/jsx-runtime";
+import { jsx as jsx70, jsxs as jsxs49 } from "react/jsx-runtime";
 
 // components/blocks/section-first-steps.tsx
-import { tinaField as tinaField25 } from "tinacms/dist/react";
+import { tinaField as tinaField26 } from "tinacms/dist/react";
 
 // components/mdx-components.tsx
 import { format as format4 } from "date-fns";
@@ -5083,70 +5209,70 @@ import Image20 from "next/image";
 import { Prism } from "tinacms/dist/rich-text/prism";
 
 // components/forms/contact-details.tsx
-import Link24 from "next/link";
-import { jsx as jsx70, jsxs as jsxs49 } from "react/jsx-runtime";
-
-// components/forms/serve-details.tsx
 import Link25 from "next/link";
 import { jsx as jsx71, jsxs as jsxs50 } from "react/jsx-runtime";
 
-// components/forms/prayer-details.tsx
+// components/forms/serve-details.tsx
 import Link26 from "next/link";
 import { jsx as jsx72, jsxs as jsxs51 } from "react/jsx-runtime";
 
-// components/forms/resources-details.tsx
+// components/forms/prayer-details.tsx
 import Link27 from "next/link";
 import { jsx as jsx73, jsxs as jsxs52 } from "react/jsx-runtime";
 
-// components/forms/visitor-details.tsx
+// components/forms/resources-details.tsx
 import Link28 from "next/link";
 import { jsx as jsx74, jsxs as jsxs53 } from "react/jsx-runtime";
+
+// components/forms/visitor-details.tsx
+import Link29 from "next/link";
+import { jsx as jsx75, jsxs as jsxs54 } from "react/jsx-runtime";
 
 // components/forms/contact-form.tsx
 import { useForm } from "react-hook-form";
 
 // components/forms/text-input.tsx
 import { useId as useId3 } from "react";
-import { jsx as jsx75, jsxs as jsxs54 } from "react/jsx-runtime";
-
-// components/forms/radio-input.tsx
 import { jsx as jsx76, jsxs as jsxs55 } from "react/jsx-runtime";
 
+// components/forms/radio-input.tsx
+import { jsx as jsx77, jsxs as jsxs56 } from "react/jsx-runtime";
+
 // components/layout/wrapper.tsx
-import { jsx as jsx77 } from "react/jsx-runtime";
+import { jsx as jsx78 } from "react/jsx-runtime";
 
 // components/forms/mail-sent-state.tsx
-import { jsx as jsx78, jsxs as jsxs56 } from "react/jsx-runtime";
+import { jsx as jsx79, jsxs as jsxs57 } from "react/jsx-runtime";
 
 // components/forms/contact-form.tsx
 import { useState as useState7 } from "react";
-import { jsx as jsx79, jsxs as jsxs57 } from "react/jsx-runtime";
+import { jsx as jsx80, jsxs as jsxs58 } from "react/jsx-runtime";
 
 // components/forms/prayer-form.tsx
 import { useForm as useForm2 } from "react-hook-form";
 import { useState as useState8 } from "react";
-import { jsx as jsx80, jsxs as jsxs58 } from "react/jsx-runtime";
+import { jsx as jsx81, jsxs as jsxs59 } from "react/jsx-runtime";
 
 // components/forms/resources-form.tsx
 import { useForm as useForm3 } from "react-hook-form";
 import { useState as useState9 } from "react";
-import { jsx as jsx81, jsxs as jsxs59 } from "react/jsx-runtime";
+import { jsx as jsx82, jsxs as jsxs60 } from "react/jsx-runtime";
 
 // components/forms/serve-form.tsx
 import { useForm as useForm4 } from "react-hook-form";
 import { useState as useState10 } from "react";
-import { jsx as jsx82, jsxs as jsxs60 } from "react/jsx-runtime";
+import { jsx as jsx83, jsxs as jsxs61 } from "react/jsx-runtime";
 
 // components/forms/visitor-form.tsx
 import { useForm as useForm5 } from "react-hook-form";
 import { useState as useState11 } from "react";
-import { jsx as jsx83, jsxs as jsxs61 } from "react/jsx-runtime";
+import { jsx as jsx84, jsxs as jsxs62 } from "react/jsx-runtime";
 
 // components/mdx-components.tsx
-import { Fragment as Fragment12, jsx as jsx84, jsxs as jsxs62 } from "react/jsx-runtime";
+import { Fragment as Fragment12, jsx as jsx85, jsxs as jsxs63 } from "react/jsx-runtime";
 
 // components/blocks/section-first-steps.tsx
-import { jsx as jsx85, jsxs as jsxs63 } from "react/jsx-runtime";
+import { jsx as jsx86, jsxs as jsxs64 } from "react/jsx-runtime";
 var nextstepsBlockSchema = {
   name: "nextsteps",
   label: "Nextsteps",
@@ -5227,9 +5353,9 @@ var nextstepsBlockSchema = {
 };
 
 // components/blocks/section-contact.tsx
-import Link29 from "next/link";
-import { tinaField as tinaField26 } from "tinacms/dist/react";
-import { jsx as jsx86, jsxs as jsxs64 } from "react/jsx-runtime";
+import Link30 from "next/link";
+import { tinaField as tinaField27 } from "tinacms/dist/react";
+import { jsx as jsx87, jsxs as jsxs65 } from "react/jsx-runtime";
 var contactsectionBlockSchema = {
   name: "contactsection",
   label: "Contactsection",
@@ -5323,6 +5449,7 @@ var Page = {
       templates: [
         heroBlockSchema,
         ctalinkBlockSchema,
+        tapdotlinkBlockSchema,
         aboutsectioninfoBlockSchema,
         aboutusBlockSchema,
         calloutBlockSchema,

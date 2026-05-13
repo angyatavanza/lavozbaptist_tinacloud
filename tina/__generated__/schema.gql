@@ -145,6 +145,29 @@ type PageBlocksCtalinks {
   items: [PageBlocksCtalinksItems]
 }
 
+type PageBlocksTapdotlinksItemsIcon {
+  name: String
+  color: String
+  style: String
+}
+
+type PageBlocksTapdotlinksItemsActions {
+  label: String
+  type: String
+  link: String
+}
+
+type PageBlocksTapdotlinksItems {
+  icon: PageBlocksTapdotlinksItemsIcon
+  title: String
+  actions: [PageBlocksTapdotlinksItemsActions]
+}
+
+type PageBlocksTapdotlinks {
+  background: String
+  items: [PageBlocksTapdotlinksItems]
+}
+
 type PageBlocksAboutsectionsinfoItemsActions {
   label: String
   type: String
@@ -566,7 +589,7 @@ type PageBlocksContactsection {
   actions: [PageBlocksContactsectionActions]
 }
 
-union PageBlocks = PageBlocksHero | PageBlocksCtalinks | PageBlocksAboutsectionsinfo | PageBlocksAboutus | PageBlocksCallout | PageBlocksConnections | PageBlocksFeatures | PageBlocksGroupsinfo | PageBlocksLatestevents | PageBlocksLatestmessages | PageBlocksContent | PageBlocksCta | PageBlocksGroup | PageBlocksVideo | PageBlocksHerocontent | PageBlocksHerodonation | PageBlocksProfile | PageBlocksTeammember | PageBlocksContentandimagevariant | PageBlocksFreqaskedquestions | PageBlocksContentandimage | PageBlocksVision | PageBlocksValues | PageBlocksListcontent | PageBlocksLeadership | PageBlocksNextsteps | PageBlocksContactsection
+union PageBlocks = PageBlocksHero | PageBlocksCtalinks | PageBlocksTapdotlinks | PageBlocksAboutsectionsinfo | PageBlocksAboutus | PageBlocksCallout | PageBlocksConnections | PageBlocksFeatures | PageBlocksGroupsinfo | PageBlocksLatestevents | PageBlocksLatestmessages | PageBlocksContent | PageBlocksCta | PageBlocksGroup | PageBlocksVideo | PageBlocksHerocontent | PageBlocksHerodonation | PageBlocksProfile | PageBlocksTeammember | PageBlocksContentandimagevariant | PageBlocksFreqaskedquestions | PageBlocksContentandimage | PageBlocksVision | PageBlocksValues | PageBlocksListcontent | PageBlocksLeadership | PageBlocksNextsteps | PageBlocksContactsection
 
 type Page implements Node & Document {
   blocks: [PageBlocks]
@@ -631,6 +654,29 @@ input PageBlocksCtalinksItemsFilter {
 input PageBlocksCtalinksFilter {
   background: StringFilter
   items: PageBlocksCtalinksItemsFilter
+}
+
+input PageBlocksTapdotlinksItemsIconFilter {
+  name: StringFilter
+  color: StringFilter
+  style: StringFilter
+}
+
+input PageBlocksTapdotlinksItemsActionsFilter {
+  label: StringFilter
+  type: StringFilter
+  link: StringFilter
+}
+
+input PageBlocksTapdotlinksItemsFilter {
+  icon: PageBlocksTapdotlinksItemsIconFilter
+  title: StringFilter
+  actions: PageBlocksTapdotlinksItemsActionsFilter
+}
+
+input PageBlocksTapdotlinksFilter {
+  background: StringFilter
+  items: PageBlocksTapdotlinksItemsFilter
 }
 
 input PageBlocksAboutsectionsinfoItemsActionsFilter {
@@ -1089,6 +1135,7 @@ input PageBlocksContactsectionFilter {
 input PageBlocksFilter {
   hero: PageBlocksHeroFilter
   ctalinks: PageBlocksCtalinksFilter
+  tapdotlinks: PageBlocksTapdotlinksFilter
   aboutsectionsinfo: PageBlocksAboutsectionsinfoFilter
   aboutus: PageBlocksAboutusFilter
   callout: PageBlocksCalloutFilter
@@ -1763,6 +1810,29 @@ input PageBlocksCtalinksMutation {
   items: [PageBlocksCtalinksItemsMutation]
 }
 
+input PageBlocksTapdotlinksItemsIconMutation {
+  name: String
+  color: String
+  style: String
+}
+
+input PageBlocksTapdotlinksItemsActionsMutation {
+  label: String
+  type: String
+  link: String
+}
+
+input PageBlocksTapdotlinksItemsMutation {
+  icon: PageBlocksTapdotlinksItemsIconMutation
+  title: String
+  actions: [PageBlocksTapdotlinksItemsActionsMutation]
+}
+
+input PageBlocksTapdotlinksMutation {
+  background: String
+  items: [PageBlocksTapdotlinksItemsMutation]
+}
+
 input PageBlocksAboutsectionsinfoItemsActionsMutation {
   label: String
   type: String
@@ -2187,6 +2257,7 @@ input PageBlocksContactsectionMutation {
 input PageBlocksMutation {
   hero: PageBlocksHeroMutation
   ctalinks: PageBlocksCtalinksMutation
+  tapdotlinks: PageBlocksTapdotlinksMutation
   aboutsectionsinfo: PageBlocksAboutsectionsinfoMutation
   aboutus: PageBlocksAboutusMutation
   callout: PageBlocksCalloutMutation

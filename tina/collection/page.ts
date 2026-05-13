@@ -1,6 +1,7 @@
 import type { Collection } from "tinacms";
 import { herocontentBlockSchema } from "@/components/blocks/section-herocontent";
 import { ctalinkBlockSchema } from "@/components/blocks/section-cta-links";
+import { tapdotlinkBlockSchema } from "@/components/blocks/section-tapdot-links";
 import { teammemberBlockSchema } from "@/components/blocks/section-our-team";
 import { profileBlockSchema } from "@/components/blocks/section-profile";
 import { heroBlockSchema } from "@/components/blocks/landing-hero";
@@ -54,6 +55,7 @@ const Page: Collection = {
       templates: [
         heroBlockSchema,
         ctalinkBlockSchema,
+        tapdotlinkBlockSchema,
         aboutsectioninfoBlockSchema,
         aboutusBlockSchema,
         calloutBlockSchema,

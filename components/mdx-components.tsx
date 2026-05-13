@@ -115,13 +115,13 @@ export const components: Components<{
         <Container className="mt-10 md:mt-15 lg:mt-15">
           <div className="grid grid-cols-2 md:grid-cols-12 gap-5 px-4 md:px-5">
             <div className="col-span-2 md:col-span-6">
-              <FTVisitorDetails />
-            </div>
-            <div className="col-span-2 md:col-span-6">
               <FTVisitorForm
                 placeholder={props.placeholder} 
                 buttonText={props.buttonText} 
               />
+            </div>
+            <div className="col-span-2 md:col-span-6">
+              <FTVisitorDetails />
             </div>
           </div>
           <div className="mt-3 text-sm text-gray-500">
@@ -141,13 +141,13 @@ export const components: Components<{
         <Container className="mt-10 md:mt-15 lg:mt-20">
           <div className="grid grid-cols-2 md:grid-cols-12 gap-5 px-4 md:px-5">
             <div className="col-span-2 md:col-span-6">
-              <ResourcesDetails />
-            </div>
-            <div className="col-span-2 md:col-span-6">
               <ResourcesForm 
                 placeholder={props.placeholder} 
                 buttonText={props.buttonText} 
               />
+            </div>
+            <div className="col-span-2 md:col-span-6">
+              <ResourcesDetails />
             </div>
           </div>
           <div className="mt-3 text-sm text-gray-500">
@@ -167,13 +167,13 @@ export const components: Components<{
         <Container className="mt-10 md:mt-15 lg:mt-20">
           <div className="grid grid-cols-2 md:grid-cols-12 gap-5 px-4 md:px-5">
             <div className="col-span-2 md:col-span-6">
-              <ContactDetails />
-            </div>
-            <div className="col-span-2 md:col-span-6">
               <ContactForm 
                 placeholder={props.placeholder} 
                 buttonText={props.buttonText} 
               />
+            </div>
+            <div className="col-span-2 md:col-span-6">
+              <ContactDetails />
             </div>
           </div>
           <div className="mt-3 text-sm text-gray-500">
@@ -193,13 +193,13 @@ export const components: Components<{
         <Container className="mt-10 md:mt-15 lg:mt-20">
           <div className="grid grid-cols-2 md:grid-cols-12 gap-5 px-4 md:px-5">
             <div className="col-span-2 md:col-span-6">
-              <PrayerDetails />
-            </div>
-            <div className="col-span-2 md:col-span-6">
               <PrayerForm 
                 placeholder={props.placeholder} 
                 buttonText={props.buttonText} 
               />
+            </div>
+            <div className="col-span-2 md:col-span-6">
+              <PrayerDetails />
             </div>
           </div>
           <div className="mt-3 text-sm text-gray-500">
@@ -219,13 +219,13 @@ export const components: Components<{
         <Container className="mt-10 md:mt-15 lg:mt-20">
           <div className="grid grid-cols-2 md:grid-cols-12 gap-5 px-4 md:px-5">
             <div className="col-span-2 md:col-span-6">
-              <ServeDetails />
-            </div>
-            <div className="col-span-2 md:col-span-6">
               <ServeForm 
                 placeholder={props.placeholder} 
                 buttonText={props.buttonText} 
               />
+            </div>
+            <div className="col-span-2 md:col-span-6">
+              <ServeDetails />
             </div>
           </div>
           <div className="mt-3 text-sm text-gray-500">

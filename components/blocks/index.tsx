@@ -9,6 +9,7 @@ import { LatestEvents } from "./landing-latest-events";
 import { LatestMessages } from "./landing-latest-messages";
 import { CallToAction } from "./section-call-to-action";
 import { CallToActionLinks } from "./section-cta-links";
+import { TapDotLinks } from "./section-tapdot-links";
 import { FreqAskedQuestions } from "./landing-faqcontent";
 import { Herocontent } from "./section-herocontent";
 import { Herodonation } from "./section-herodonation";
@@ -68,6 +69,8 @@ const Block = ({
       return <Video data={block} />;
     case "PageBlocksCtalinks":
       return <CallToActionLinks data={block} />;
+    case "PageBlocksTapdotlinks":
+      return <TapDotLinks data={block} />;  
     case "PageBlocksProfile":
       return <Profile data={block} />;
     case "PageBlocksHero":

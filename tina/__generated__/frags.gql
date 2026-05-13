@@ -38,6 +38,25 @@ fragment PageParts on Page {
         }
       }
     }
+    ... on PageBlocksTapdotlinks {
+      background
+      items {
+        __typename
+        icon {
+          __typename
+          name
+          color
+          style
+        }
+        title
+        actions {
+          __typename
+          label
+          type
+          link
+        }
+      }
+    }
     ... on PageBlocksAboutsectionsinfo {
       background
       headline
