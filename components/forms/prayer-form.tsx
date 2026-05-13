@@ -85,11 +85,10 @@ export const PrayerForm: React.FC<PrayerFormProps> = ({
 
           <TextInput
             type="tel"
-            {...register("phone", { required: true })}
+            {...register("phone", { required: false })}
             placeholder=""
             label="Número de teléfono"
           />
-          {errors.phone && <span className="text-red-500 text-sm">Número de teléfono requerido</span>}
           
           <TextInput
             {...register("message", { required: true })}
