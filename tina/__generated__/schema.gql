@@ -5,6 +5,9 @@ scalar Reference
 """"""
 scalar JSON
 
+"""A rich-text document, renderable by TinaMarkdown"""
+scalar RichText
+
 type SystemInfo {
   filename: String!
   title: String
@@ -223,7 +226,7 @@ type PageBlocksConnectionsItemsActions {
 type PageBlocksConnectionsItems {
   cover: String
   title: String
-  text: JSON
+  text: RichText
   actions: [PageBlocksConnectionsItemsActions]
 }
 
@@ -244,7 +247,7 @@ type PageBlocksFeaturesItemsIcon {
 type PageBlocksFeaturesItems {
   icon: PageBlocksFeaturesItemsIcon
   title: String
-  text: JSON
+  text: RichText
 }
 
 type PageBlocksFeatures {
@@ -262,7 +265,7 @@ type PageBlocksGroupsinfoItemsActions {
 type PageBlocksGroupsinfoItems {
   cover: String
   title: String
-  text: JSON
+  text: RichText
   actions: [PageBlocksGroupsinfoItemsActions]
 }
 
@@ -306,7 +309,7 @@ type PageBlocksLatestmessages {
 
 type PageBlocksContent {
   background: String
-  body: JSON
+  body: RichText
 }
 
 type PageBlocksCtaImage {
@@ -490,7 +493,7 @@ type PageBlocksFreqaskedquestionsItemsIcon {
 type PageBlocksFreqaskedquestionsItems {
   icon: PageBlocksFreqaskedquestionsItemsIcon
   title: String
-  text: JSON
+  text: RichText
 }
 
 type PageBlocksFreqaskedquestions {
@@ -593,7 +596,7 @@ union PageBlocks = PageBlocksHero | PageBlocksCtalinks | PageBlocksTapdotlinks |
 
 type Page implements Node & Document {
   blocks: [PageBlocks]
-  _body: JSON
+  _body: RichText
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
@@ -1263,11 +1266,11 @@ type Message implements Node & Document {
   color: String
   title: String!
   image: MessageImage
-  excerpt: JSON
+  excerpt: RichText
   coordinator: MessageCoordinator
   date: String!
   tags: [MessageTags]
-  _body: JSON
+  _body: RichText
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
@@ -1429,7 +1432,7 @@ type EventTags {
 type Event implements Node & Document {
   title: String!
   heroImg: String
-  description: JSON
+  description: RichText
   actions: [EventActions]
   date: String!
   endtime: String
@@ -1439,7 +1442,7 @@ type Event implements Node & Document {
   coordinator: EventCoordinator
   locationdetails: [EventLocationdetails]
   tags: [EventTags]
-  _body: JSON
+  _body: RichText
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
@@ -1888,7 +1891,7 @@ input PageBlocksConnectionsItemsActionsMutation {
 input PageBlocksConnectionsItemsMutation {
   cover: String
   title: String
-  text: JSON
+  text: RichText
   actions: [PageBlocksConnectionsItemsActionsMutation]
 }
 
@@ -1909,7 +1912,7 @@ input PageBlocksFeaturesItemsIconMutation {
 input PageBlocksFeaturesItemsMutation {
   icon: PageBlocksFeaturesItemsIconMutation
   title: String
-  text: JSON
+  text: RichText
 }
 
 input PageBlocksFeaturesMutation {
@@ -1927,7 +1930,7 @@ input PageBlocksGroupsinfoItemsActionsMutation {
 input PageBlocksGroupsinfoItemsMutation {
   cover: String
   title: String
-  text: JSON
+  text: RichText
   actions: [PageBlocksGroupsinfoItemsActionsMutation]
 }
 
@@ -1971,7 +1974,7 @@ input PageBlocksLatestmessagesMutation {
 
 input PageBlocksContentMutation {
   background: String
-  body: JSON
+  body: RichText
 }
 
 input PageBlocksCtaImageMutation {
@@ -2155,7 +2158,7 @@ input PageBlocksFreqaskedquestionsItemsIconMutation {
 input PageBlocksFreqaskedquestionsItemsMutation {
   icon: PageBlocksFreqaskedquestionsItemsIconMutation
   title: String
-  text: JSON
+  text: RichText
 }
 
 input PageBlocksFreqaskedquestionsMutation {
@@ -2287,7 +2290,7 @@ input PageBlocksMutation {
 
 input PageMutation {
   blocks: [PageBlocksMutation]
-  _body: JSON
+  _body: RichText
 }
 
 input MessageImageMutation {
@@ -2307,11 +2310,11 @@ input MessageMutation {
   color: String
   title: String
   image: MessageImageMutation
-  excerpt: JSON
+  excerpt: RichText
   coordinator: String
   date: String
   tags: [MessageTagsMutation]
-  _body: JSON
+  _body: RichText
 }
 
 input EventActionsIconMutation {
@@ -2384,7 +2387,7 @@ input EventTagsMutation {
 input EventMutation {
   title: String
   heroImg: String
-  description: JSON
+  description: RichText
   actions: [EventActionsMutation]
   date: String
   endtime: String
@@ -2394,7 +2397,7 @@ input EventMutation {
   coordinator: String
   locationdetails: [EventLocationdetailsMutation]
   tags: [EventTagsMutation]
-  _body: JSON
+  _body: RichText
 }
 
 input CoordinatorMutation {

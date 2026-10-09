@@ -7,13 +7,13 @@
     })
     return str
   }
-  export type Maybe<T> = T | null;
-export type InputMaybe<T> = Maybe<T>;
-export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
-export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
-export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
-export type MakeEmpty<T extends { [key: string]: unknown }, K extends keyof T> = { [_ in K]?: never };
+  import type { TinaMarkdownContent } from 'tinacms/dist/rich-text';
+/** Internal type. DO NOT USE DIRECTLY. */
+type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
+/** Internal type. DO NOT USE DIRECTLY. */
 export type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never };
+export type Maybe<T> = T | null;
+export type InputMaybe<T> = Maybe<T>;
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: { input: string; output: string; }
@@ -24,6 +24,8 @@ export type Scalars = {
   /** References another document, used as a foreign key */
   Reference: { input: any; output: any; }
   JSON: { input: any; output: any; }
+  /** A rich-text document, renderable by TinaMarkdown */
+  RichText: { input: TinaMarkdownContent; output: TinaMarkdownContent; }
 };
 
 export type SystemInfo = {
@@ -396,7 +398,7 @@ export type PageBlocksConnectionsItems = {
   __typename?: 'PageBlocksConnectionsItems';
   cover?: Maybe<Scalars['String']['output']>;
   title?: Maybe<Scalars['String']['output']>;
-  text?: Maybe<Scalars['JSON']['output']>;
+  text?: Maybe<Scalars['RichText']['output']>;
   actions?: Maybe<Array<Maybe<PageBlocksConnectionsItemsActions>>>;
 };
 
@@ -420,7 +422,7 @@ export type PageBlocksFeaturesItems = {
   __typename?: 'PageBlocksFeaturesItems';
   icon?: Maybe<PageBlocksFeaturesItemsIcon>;
   title?: Maybe<Scalars['String']['output']>;
-  text?: Maybe<Scalars['JSON']['output']>;
+  text?: Maybe<Scalars['RichText']['output']>;
 };
 
 export type PageBlocksFeatures = {
@@ -441,7 +443,7 @@ export type PageBlocksGroupsinfoItems = {
   __typename?: 'PageBlocksGroupsinfoItems';
   cover?: Maybe<Scalars['String']['output']>;
   title?: Maybe<Scalars['String']['output']>;
-  text?: Maybe<Scalars['JSON']['output']>;
+  text?: Maybe<Scalars['RichText']['output']>;
   actions?: Maybe<Array<Maybe<PageBlocksGroupsinfoItemsActions>>>;
 };
 
@@ -491,7 +493,7 @@ export type PageBlocksLatestmessages = {
 export type PageBlocksContent = {
   __typename?: 'PageBlocksContent';
   background?: Maybe<Scalars['String']['output']>;
-  body?: Maybe<Scalars['JSON']['output']>;
+  body?: Maybe<Scalars['RichText']['output']>;
 };
 
 export type PageBlocksCtaImage = {
@@ -702,7 +704,7 @@ export type PageBlocksFreqaskedquestionsItems = {
   __typename?: 'PageBlocksFreqaskedquestionsItems';
   icon?: Maybe<PageBlocksFreqaskedquestionsItemsIcon>;
   title?: Maybe<Scalars['String']['output']>;
-  text?: Maybe<Scalars['JSON']['output']>;
+  text?: Maybe<Scalars['RichText']['output']>;
 };
 
 export type PageBlocksFreqaskedquestions = {
@@ -820,7 +822,7 @@ export type PageBlocks = PageBlocksHero | PageBlocksCtalinks | PageBlocksTapdotl
 export type Page = Node & Document & {
   __typename?: 'Page';
   blocks?: Maybe<Array<Maybe<PageBlocks>>>;
-  _body?: Maybe<Scalars['JSON']['output']>;
+  _body?: Maybe<Scalars['RichText']['output']>;
   id: Scalars['ID']['output'];
   _sys: SystemInfo;
   _values: Scalars['JSON']['output'];
@@ -1495,11 +1497,11 @@ export type Message = Node & Document & {
   color?: Maybe<Scalars['String']['output']>;
   title: Scalars['String']['output'];
   image?: Maybe<MessageImage>;
-  excerpt?: Maybe<Scalars['JSON']['output']>;
+  excerpt?: Maybe<Scalars['RichText']['output']>;
   coordinator?: Maybe<MessageCoordinator>;
   date: Scalars['String']['output'];
   tags?: Maybe<Array<Maybe<MessageTags>>>;
-  _body?: Maybe<Scalars['JSON']['output']>;
+  _body?: Maybe<Scalars['RichText']['output']>;
   id: Scalars['ID']['output'];
   _sys: SystemInfo;
   _values: Scalars['JSON']['output'];
@@ -1674,7 +1676,7 @@ export type Event = Node & Document & {
   __typename?: 'Event';
   title: Scalars['String']['output'];
   heroImg?: Maybe<Scalars['String']['output']>;
-  description?: Maybe<Scalars['JSON']['output']>;
+  description?: Maybe<Scalars['RichText']['output']>;
   actions?: Maybe<Array<Maybe<EventActions>>>;
   date: Scalars['String']['output'];
   endtime?: Maybe<Scalars['String']['output']>;
@@ -1684,7 +1686,7 @@ export type Event = Node & Document & {
   coordinator?: Maybe<EventCoordinator>;
   locationdetails?: Maybe<Array<Maybe<EventLocationdetails>>>;
   tags?: Maybe<Array<Maybe<EventTags>>>;
-  _body?: Maybe<Scalars['JSON']['output']>;
+  _body?: Maybe<Scalars['RichText']['output']>;
   id: Scalars['ID']['output'];
   _sys: SystemInfo;
   _values: Scalars['JSON']['output'];
@@ -2257,7 +2259,7 @@ export type PageBlocksConnectionsItemsActionsMutation = {
 export type PageBlocksConnectionsItemsMutation = {
   cover?: InputMaybe<Scalars['String']['input']>;
   title?: InputMaybe<Scalars['String']['input']>;
-  text?: InputMaybe<Scalars['JSON']['input']>;
+  text?: InputMaybe<Scalars['RichText']['input']>;
   actions?: InputMaybe<Array<InputMaybe<PageBlocksConnectionsItemsActionsMutation>>>;
 };
 
@@ -2278,7 +2280,7 @@ export type PageBlocksFeaturesItemsIconMutation = {
 export type PageBlocksFeaturesItemsMutation = {
   icon?: InputMaybe<PageBlocksFeaturesItemsIconMutation>;
   title?: InputMaybe<Scalars['String']['input']>;
-  text?: InputMaybe<Scalars['JSON']['input']>;
+  text?: InputMaybe<Scalars['RichText']['input']>;
 };
 
 export type PageBlocksFeaturesMutation = {
@@ -2296,7 +2298,7 @@ export type PageBlocksGroupsinfoItemsActionsMutation = {
 export type PageBlocksGroupsinfoItemsMutation = {
   cover?: InputMaybe<Scalars['String']['input']>;
   title?: InputMaybe<Scalars['String']['input']>;
-  text?: InputMaybe<Scalars['JSON']['input']>;
+  text?: InputMaybe<Scalars['RichText']['input']>;
   actions?: InputMaybe<Array<InputMaybe<PageBlocksGroupsinfoItemsActionsMutation>>>;
 };
 
@@ -2340,7 +2342,7 @@ export type PageBlocksLatestmessagesMutation = {
 
 export type PageBlocksContentMutation = {
   background?: InputMaybe<Scalars['String']['input']>;
-  body?: InputMaybe<Scalars['JSON']['input']>;
+  body?: InputMaybe<Scalars['RichText']['input']>;
 };
 
 export type PageBlocksCtaImageMutation = {
@@ -2524,7 +2526,7 @@ export type PageBlocksFreqaskedquestionsItemsIconMutation = {
 export type PageBlocksFreqaskedquestionsItemsMutation = {
   icon?: InputMaybe<PageBlocksFreqaskedquestionsItemsIconMutation>;
   title?: InputMaybe<Scalars['String']['input']>;
-  text?: InputMaybe<Scalars['JSON']['input']>;
+  text?: InputMaybe<Scalars['RichText']['input']>;
 };
 
 export type PageBlocksFreqaskedquestionsMutation = {
@@ -2656,7 +2658,7 @@ export type PageBlocksMutation = {
 
 export type PageMutation = {
   blocks?: InputMaybe<Array<InputMaybe<PageBlocksMutation>>>;
-  _body?: InputMaybe<Scalars['JSON']['input']>;
+  _body?: InputMaybe<Scalars['RichText']['input']>;
 };
 
 export type MessageImageMutation = {
@@ -2676,11 +2678,11 @@ export type MessageMutation = {
   color?: InputMaybe<Scalars['String']['input']>;
   title?: InputMaybe<Scalars['String']['input']>;
   image?: InputMaybe<MessageImageMutation>;
-  excerpt?: InputMaybe<Scalars['JSON']['input']>;
+  excerpt?: InputMaybe<Scalars['RichText']['input']>;
   coordinator?: InputMaybe<Scalars['String']['input']>;
   date?: InputMaybe<Scalars['String']['input']>;
   tags?: InputMaybe<Array<InputMaybe<MessageTagsMutation>>>;
-  _body?: InputMaybe<Scalars['JSON']['input']>;
+  _body?: InputMaybe<Scalars['RichText']['input']>;
 };
 
 export type EventActionsIconMutation = {
@@ -2753,7 +2755,7 @@ export type EventTagsMutation = {
 export type EventMutation = {
   title?: InputMaybe<Scalars['String']['input']>;
   heroImg?: InputMaybe<Scalars['String']['input']>;
-  description?: InputMaybe<Scalars['JSON']['input']>;
+  description?: InputMaybe<Scalars['RichText']['input']>;
   actions?: InputMaybe<Array<InputMaybe<EventActionsMutation>>>;
   date?: InputMaybe<Scalars['String']['input']>;
   endtime?: InputMaybe<Scalars['String']['input']>;
@@ -2763,7 +2765,7 @@ export type EventMutation = {
   coordinator?: InputMaybe<Scalars['String']['input']>;
   locationdetails?: InputMaybe<Array<InputMaybe<EventLocationdetailsMutation>>>;
   tags?: InputMaybe<Array<InputMaybe<EventTagsMutation>>>;
-  _body?: InputMaybe<Scalars['JSON']['input']>;
+  _body?: InputMaybe<Scalars['RichText']['input']>;
 };
 
 export type CoordinatorMutation = {
@@ -2820,152 +2822,1147 @@ export type GlobalMutation = {
   theme?: InputMaybe<GlobalThemeMutation>;
 };
 
-export type LayoutQueryFragmentFragment = { __typename?: 'Query', global: { __typename: 'Global', header?: { __typename: 'GlobalHeader', name?: string | null, color?: string | null, icon?: { __typename: 'GlobalHeaderIcon', name?: string | null, color?: string | null, style?: string | null } | null, nav?: Array<{ __typename: 'GlobalHeaderNav', href?: string | null, label?: string | null } | null> | null } | null, footer?: { __typename: 'GlobalFooter', social?: Array<{ __typename: 'GlobalFooterSocial', url?: string | null, icon?: { __typename: 'GlobalFooterSocialIcon', name?: string | null, color?: string | null, style?: string | null } | null } | null> | null } | null, theme?: { __typename: 'GlobalTheme', color?: string | null, font?: string | null, darkMode?: string | null } | null } };
+export type StringFilter = {
+  startsWith?: string | null | undefined;
+  eq?: string | null | undefined;
+  exists?: boolean | null | undefined;
+  in?: Array<string | null | undefined> | null | undefined;
+};
+
+export type PageBlocksHeroActionsFilter = {
+  label?: StringFilter | null | undefined;
+  type?: StringFilter | null | undefined;
+  link?: StringFilter | null | undefined;
+};
+
+export type ImageFilter = {
+  startsWith?: string | null | undefined;
+  eq?: string | null | undefined;
+  exists?: boolean | null | undefined;
+  in?: Array<string | null | undefined> | null | undefined;
+};
+
+export type PageBlocksHeroImageFilter = {
+  src?: ImageFilter | null | undefined;
+  alt?: StringFilter | null | undefined;
+  videoUrl?: StringFilter | null | undefined;
+};
+
+export type PageBlocksHeroFilter = {
+  background?: StringFilter | null | undefined;
+  headline?: StringFilter | null | undefined;
+  tagline?: StringFilter | null | undefined;
+  actions?: PageBlocksHeroActionsFilter | null | undefined;
+  image?: PageBlocksHeroImageFilter | null | undefined;
+};
+
+export type PageBlocksCtalinksItemsIconFilter = {
+  name?: StringFilter | null | undefined;
+  color?: StringFilter | null | undefined;
+  style?: StringFilter | null | undefined;
+};
+
+export type PageBlocksCtalinksItemsActionsFilter = {
+  label?: StringFilter | null | undefined;
+  type?: StringFilter | null | undefined;
+  link?: StringFilter | null | undefined;
+};
+
+export type PageBlocksCtalinksItemsFilter = {
+  icon?: PageBlocksCtalinksItemsIconFilter | null | undefined;
+  title?: StringFilter | null | undefined;
+  actions?: PageBlocksCtalinksItemsActionsFilter | null | undefined;
+};
+
+export type PageBlocksCtalinksFilter = {
+  background?: StringFilter | null | undefined;
+  items?: PageBlocksCtalinksItemsFilter | null | undefined;
+};
+
+export type PageBlocksTapdotlinksItemsIconFilter = {
+  name?: StringFilter | null | undefined;
+  color?: StringFilter | null | undefined;
+  style?: StringFilter | null | undefined;
+};
+
+export type PageBlocksTapdotlinksItemsActionsFilter = {
+  label?: StringFilter | null | undefined;
+  type?: StringFilter | null | undefined;
+  link?: StringFilter | null | undefined;
+};
+
+export type PageBlocksTapdotlinksItemsFilter = {
+  icon?: PageBlocksTapdotlinksItemsIconFilter | null | undefined;
+  title?: StringFilter | null | undefined;
+  actions?: PageBlocksTapdotlinksItemsActionsFilter | null | undefined;
+};
+
+export type PageBlocksTapdotlinksFilter = {
+  background?: StringFilter | null | undefined;
+  items?: PageBlocksTapdotlinksItemsFilter | null | undefined;
+};
+
+export type PageBlocksAboutsectionsinfoItemsActionsFilter = {
+  label?: StringFilter | null | undefined;
+  type?: StringFilter | null | undefined;
+  link?: StringFilter | null | undefined;
+};
+
+export type PageBlocksAboutsectionsinfoItemsFilter = {
+  cover?: ImageFilter | null | undefined;
+  title?: StringFilter | null | undefined;
+  actions?: PageBlocksAboutsectionsinfoItemsActionsFilter | null | undefined;
+};
+
+export type PageBlocksAboutsectionsinfoFilter = {
+  background?: StringFilter | null | undefined;
+  headline?: StringFilter | null | undefined;
+  description?: StringFilter | null | undefined;
+  items?: PageBlocksAboutsectionsinfoItemsFilter | null | undefined;
+};
+
+export type PageBlocksAboutusActionsFilter = {
+  label?: StringFilter | null | undefined;
+  type?: StringFilter | null | undefined;
+  link?: StringFilter | null | undefined;
+};
+
+export type PageBlocksAboutusImageFilter = {
+  src?: ImageFilter | null | undefined;
+  alt?: StringFilter | null | undefined;
+  videoUrl?: StringFilter | null | undefined;
+};
+
+export type PageBlocksAboutusFilter = {
+  background?: StringFilter | null | undefined;
+  headline?: StringFilter | null | undefined;
+  tagline?: StringFilter | null | undefined;
+  description?: StringFilter | null | undefined;
+  actions?: PageBlocksAboutusActionsFilter | null | undefined;
+  image?: PageBlocksAboutusImageFilter | null | undefined;
+};
+
+export type PageBlocksCalloutFilter = {
+  background?: StringFilter | null | undefined;
+  text?: StringFilter | null | undefined;
+  url?: StringFilter | null | undefined;
+};
+
+export type RichTextFilter = {
+  startsWith?: string | null | undefined;
+  eq?: string | null | undefined;
+  exists?: boolean | null | undefined;
+};
+
+export type PageBlocksConnectionsItemsActionsFilter = {
+  label?: StringFilter | null | undefined;
+  type?: StringFilter | null | undefined;
+  link?: StringFilter | null | undefined;
+};
+
+export type PageBlocksConnectionsItemsFilter = {
+  cover?: ImageFilter | null | undefined;
+  title?: StringFilter | null | undefined;
+  text?: RichTextFilter | null | undefined;
+  actions?: PageBlocksConnectionsItemsActionsFilter | null | undefined;
+};
+
+export type PageBlocksConnectionsFilter = {
+  background?: StringFilter | null | undefined;
+  headline?: StringFilter | null | undefined;
+  tagline?: StringFilter | null | undefined;
+  description?: StringFilter | null | undefined;
+  items?: PageBlocksConnectionsItemsFilter | null | undefined;
+};
+
+export type PageBlocksFeaturesItemsIconFilter = {
+  name?: StringFilter | null | undefined;
+  color?: StringFilter | null | undefined;
+  style?: StringFilter | null | undefined;
+};
+
+export type PageBlocksFeaturesItemsFilter = {
+  icon?: PageBlocksFeaturesItemsIconFilter | null | undefined;
+  title?: StringFilter | null | undefined;
+  text?: RichTextFilter | null | undefined;
+};
+
+export type PageBlocksFeaturesFilter = {
+  background?: StringFilter | null | undefined;
+  headline?: StringFilter | null | undefined;
+  items?: PageBlocksFeaturesItemsFilter | null | undefined;
+};
+
+export type PageBlocksGroupsinfoItemsActionsFilter = {
+  label?: StringFilter | null | undefined;
+  type?: StringFilter | null | undefined;
+  link?: StringFilter | null | undefined;
+};
+
+export type PageBlocksGroupsinfoItemsFilter = {
+  cover?: ImageFilter | null | undefined;
+  title?: StringFilter | null | undefined;
+  text?: RichTextFilter | null | undefined;
+  actions?: PageBlocksGroupsinfoItemsActionsFilter | null | undefined;
+};
+
+export type PageBlocksGroupsinfoFilter = {
+  background?: StringFilter | null | undefined;
+  headline?: StringFilter | null | undefined;
+  tagline?: StringFilter | null | undefined;
+  description?: StringFilter | null | undefined;
+  items?: PageBlocksGroupsinfoItemsFilter | null | undefined;
+};
+
+export type NumberFilter = {
+  lt?: number | null | undefined;
+  lte?: number | null | undefined;
+  gte?: number | null | undefined;
+  gt?: number | null | undefined;
+  eq?: number | null | undefined;
+  exists?: boolean | null | undefined;
+  in?: Array<number | null | undefined> | null | undefined;
+};
+
+export type PageBlocksLatesteventsActionsFilter = {
+  label?: StringFilter | null | undefined;
+  type?: StringFilter | null | undefined;
+  link?: StringFilter | null | undefined;
+};
+
+export type PageBlocksLatesteventsFilter = {
+  background?: StringFilter | null | undefined;
+  headline?: StringFilter | null | undefined;
+  tagline?: StringFilter | null | undefined;
+  description?: StringFilter | null | undefined;
+  limit?: NumberFilter | null | undefined;
+  actions?: PageBlocksLatesteventsActionsFilter | null | undefined;
+};
+
+export type PageBlocksLatestmessagesActionsFilter = {
+  label?: StringFilter | null | undefined;
+  type?: StringFilter | null | undefined;
+  link?: StringFilter | null | undefined;
+};
+
+export type PageBlocksLatestmessagesFilter = {
+  background?: StringFilter | null | undefined;
+  headline?: StringFilter | null | undefined;
+  tagline?: StringFilter | null | undefined;
+  description?: StringFilter | null | undefined;
+  limit?: NumberFilter | null | undefined;
+  actions?: PageBlocksLatestmessagesActionsFilter | null | undefined;
+};
+
+export type PageBlocksContentBodyScriptCopyBlockFilter = {
+  codeLanguage?: StringFilter | null | undefined;
+  lightTheme?: StringFilter | null | undefined;
+  darkTheme?: StringFilter | null | undefined;
+  commandMap?: StringFilter | null | undefined;
+};
+
+export type PageBlocksContentBodyFilter = {
+  scriptCopyBlock?: PageBlocksContentBodyScriptCopyBlockFilter | null | undefined;
+};
+
+export type PageBlocksContentFilter = {
+  background?: StringFilter | null | undefined;
+  body?: PageBlocksContentBodyFilter | null | undefined;
+};
+
+export type PageBlocksCtaImageFilter = {
+  src?: ImageFilter | null | undefined;
+  alt?: StringFilter | null | undefined;
+  videoUrl?: StringFilter | null | undefined;
+};
+
+export type PageBlocksCtaActionsFilter = {
+  label?: StringFilter | null | undefined;
+  type?: StringFilter | null | undefined;
+  link?: StringFilter | null | undefined;
+};
+
+export type PageBlocksCtaFilter = {
+  background?: StringFilter | null | undefined;
+  headline?: StringFilter | null | undefined;
+  description?: StringFilter | null | undefined;
+  image?: PageBlocksCtaImageFilter | null | undefined;
+  actions?: PageBlocksCtaActionsFilter | null | undefined;
+};
+
+export type PageBlocksGroupGroupsIconFilter = {
+  name?: StringFilter | null | undefined;
+  color?: StringFilter | null | undefined;
+  style?: StringFilter | null | undefined;
+};
+
+export type PageBlocksGroupGroupsImageFilter = {
+  src?: ImageFilter | null | undefined;
+  alt?: StringFilter | null | undefined;
+  videoUrl?: StringFilter | null | undefined;
+};
+
+export type PageBlocksGroupGroupsActionsFilter = {
+  label?: StringFilter | null | undefined;
+  type?: StringFilter | null | undefined;
+  link?: StringFilter | null | undefined;
+};
+
+export type PageBlocksGroupGroupsFilter = {
+  title?: StringFilter | null | undefined;
+  description?: StringFilter | null | undefined;
+  icon?: PageBlocksGroupGroupsIconFilter | null | undefined;
+  image?: PageBlocksGroupGroupsImageFilter | null | undefined;
+  actions?: PageBlocksGroupGroupsActionsFilter | null | undefined;
+};
+
+export type PageBlocksGroupFilter = {
+  background?: StringFilter | null | undefined;
+  headline?: StringFilter | null | undefined;
+  description?: StringFilter | null | undefined;
+  groups?: PageBlocksGroupGroupsFilter | null | undefined;
+};
+
+export type BooleanFilter = {
+  eq?: boolean | null | undefined;
+  exists?: boolean | null | undefined;
+};
+
+export type PageBlocksVideoFilter = {
+  background?: StringFilter | null | undefined;
+  color?: StringFilter | null | undefined;
+  url?: StringFilter | null | undefined;
+  autoPlay?: BooleanFilter | null | undefined;
+  loop?: BooleanFilter | null | undefined;
+};
+
+export type PageBlocksHerocontentImageFilter = {
+  src?: ImageFilter | null | undefined;
+  alt?: StringFilter | null | undefined;
+  videoUrl?: StringFilter | null | undefined;
+};
+
+export type PageBlocksHerocontentFilter = {
+  background?: StringFilter | null | undefined;
+  headline?: StringFilter | null | undefined;
+  tagline?: StringFilter | null | undefined;
+  image?: PageBlocksHerocontentImageFilter | null | undefined;
+};
+
+export type PageBlocksHerodonationImageFilter = {
+  src?: ImageFilter | null | undefined;
+  alt?: StringFilter | null | undefined;
+  videoUrl?: StringFilter | null | undefined;
+};
+
+export type PageBlocksHerodonationFilter = {
+  background?: StringFilter | null | undefined;
+  headline?: StringFilter | null | undefined;
+  tagline?: StringFilter | null | undefined;
+  image?: PageBlocksHerodonationImageFilter | null | undefined;
+};
+
+export type PageBlocksProfileActionsFilter = {
+  label?: StringFilter | null | undefined;
+  type?: StringFilter | null | undefined;
+  link?: StringFilter | null | undefined;
+};
+
+export type PageBlocksProfileImageFilter = {
+  src?: ImageFilter | null | undefined;
+  alt?: StringFilter | null | undefined;
+  videoUrl?: StringFilter | null | undefined;
+};
+
+export type PageBlocksProfileFilter = {
+  background?: StringFilter | null | undefined;
+  headline?: StringFilter | null | undefined;
+  tagline?: StringFilter | null | undefined;
+  description?: StringFilter | null | undefined;
+  actions?: PageBlocksProfileActionsFilter | null | undefined;
+  image?: PageBlocksProfileImageFilter | null | undefined;
+};
+
+export type PageBlocksTeammemberTeammembersActionsFilter = {
+  label?: StringFilter | null | undefined;
+  type?: StringFilter | null | undefined;
+  link?: StringFilter | null | undefined;
+};
+
+export type PageBlocksTeammemberTeammembersFilter = {
+  quote?: StringFilter | null | undefined;
+  coordinator?: StringFilter | null | undefined;
+  role?: StringFilter | null | undefined;
+  avatar?: ImageFilter | null | undefined;
+  actions?: PageBlocksTeammemberTeammembersActionsFilter | null | undefined;
+};
+
+export type PageBlocksTeammemberFilter = {
+  background?: StringFilter | null | undefined;
+  headline?: StringFilter | null | undefined;
+  description?: StringFilter | null | undefined;
+  teammembers?: PageBlocksTeammemberTeammembersFilter | null | undefined;
+};
+
+export type PageBlocksContentandimagevariantContentandimagevariantsIconFilter = {
+  name?: StringFilter | null | undefined;
+  color?: StringFilter | null | undefined;
+  style?: StringFilter | null | undefined;
+};
+
+export type PageBlocksContentandimagevariantContentandimagevariantsImageFilter = {
+  src?: ImageFilter | null | undefined;
+  alt?: StringFilter | null | undefined;
+};
+
+export type PageBlocksContentandimagevariantContentandimagevariantsActionsFilter = {
+  label?: StringFilter | null | undefined;
+  type?: StringFilter | null | undefined;
+  link?: StringFilter | null | undefined;
+};
+
+export type PageBlocksContentandimagevariantContentandimagevariantsFilter = {
+  title?: StringFilter | null | undefined;
+  descriptionheading?: StringFilter | null | undefined;
+  description?: StringFilter | null | undefined;
+  description2?: StringFilter | null | undefined;
+  description3?: StringFilter | null | undefined;
+  descriptionheading2?: StringFilter | null | undefined;
+  icon?: PageBlocksContentandimagevariantContentandimagevariantsIconFilter | null | undefined;
+  details?: StringFilter | null | undefined;
+  image?: PageBlocksContentandimagevariantContentandimagevariantsImageFilter | null | undefined;
+  actions?: PageBlocksContentandimagevariantContentandimagevariantsActionsFilter | null | undefined;
+};
+
+export type PageBlocksContentandimagevariantFilter = {
+  background?: StringFilter | null | undefined;
+  headline?: StringFilter | null | undefined;
+  description?: StringFilter | null | undefined;
+  contentandimagevariants?: PageBlocksContentandimagevariantContentandimagevariantsFilter | null | undefined;
+};
+
+export type PageBlocksFreqaskedquestionsImageFilter = {
+  src?: ImageFilter | null | undefined;
+  alt?: StringFilter | null | undefined;
+  videoUrl?: StringFilter | null | undefined;
+};
+
+export type PageBlocksFreqaskedquestionsItemsIconFilter = {
+  name?: StringFilter | null | undefined;
+  color?: StringFilter | null | undefined;
+  style?: StringFilter | null | undefined;
+};
+
+export type PageBlocksFreqaskedquestionsItemsFilter = {
+  icon?: PageBlocksFreqaskedquestionsItemsIconFilter | null | undefined;
+  title?: StringFilter | null | undefined;
+  text?: RichTextFilter | null | undefined;
+};
+
+export type PageBlocksFreqaskedquestionsFilter = {
+  background?: StringFilter | null | undefined;
+  headline?: StringFilter | null | undefined;
+  tagline?: StringFilter | null | undefined;
+  description?: StringFilter | null | undefined;
+  image?: PageBlocksFreqaskedquestionsImageFilter | null | undefined;
+  items?: PageBlocksFreqaskedquestionsItemsFilter | null | undefined;
+};
+
+export type PageBlocksContentandimageContentandimagesImageFilter = {
+  src?: ImageFilter | null | undefined;
+  alt?: StringFilter | null | undefined;
+};
+
+export type PageBlocksContentandimageContentandimagesActionsFilter = {
+  label?: StringFilter | null | undefined;
+  type?: StringFilter | null | undefined;
+  link?: StringFilter | null | undefined;
+};
+
+export type PageBlocksContentandimageContentandimagesFilter = {
+  title?: StringFilter | null | undefined;
+  description?: StringFilter | null | undefined;
+  requirements?: StringFilter | null | undefined;
+  image?: PageBlocksContentandimageContentandimagesImageFilter | null | undefined;
+  actions?: PageBlocksContentandimageContentandimagesActionsFilter | null | undefined;
+};
+
+export type PageBlocksContentandimageFilter = {
+  background?: StringFilter | null | undefined;
+  headline?: StringFilter | null | undefined;
+  description?: StringFilter | null | undefined;
+  contentandimages?: PageBlocksContentandimageContentandimagesFilter | null | undefined;
+};
+
+export type PageBlocksVisionFilter = {
+  title?: StringFilter | null | undefined;
+  description?: StringFilter | null | undefined;
+};
+
+export type PageBlocksValuesFilter = {
+  headline?: StringFilter | null | undefined;
+  description?: StringFilter | null | undefined;
+};
+
+export type PageBlocksListcontentFilter = {
+  title?: StringFilter | null | undefined;
+  description1?: StringFilter | null | undefined;
+  description2?: StringFilter | null | undefined;
+};
+
+export type PageBlocksLeadershipActionsFilter = {
+  label?: StringFilter | null | undefined;
+  type?: StringFilter | null | undefined;
+  link?: StringFilter | null | undefined;
+};
+
+export type PageBlocksLeadershipImageFilter = {
+  src?: ImageFilter | null | undefined;
+  alt?: StringFilter | null | undefined;
+  videoUrl?: StringFilter | null | undefined;
+};
+
+export type PageBlocksLeadershipFilter = {
+  background?: StringFilter | null | undefined;
+  headline?: StringFilter | null | undefined;
+  tagline?: StringFilter | null | undefined;
+  description?: StringFilter | null | undefined;
+  actions?: PageBlocksLeadershipActionsFilter | null | undefined;
+  image?: PageBlocksLeadershipImageFilter | null | undefined;
+};
+
+export type PageBlocksNextstepsFilter = {
+  title?: StringFilter | null | undefined;
+  description?: StringFilter | null | undefined;
+  title1?: StringFilter | null | undefined;
+  description1?: StringFilter | null | undefined;
+  title2?: StringFilter | null | undefined;
+  description2?: StringFilter | null | undefined;
+  title3?: StringFilter | null | undefined;
+  description3?: StringFilter | null | undefined;
+  title4?: StringFilter | null | undefined;
+  description4?: StringFilter | null | undefined;
+};
+
+export type PageBlocksContactsectionActionsFilter = {
+  label?: StringFilter | null | undefined;
+  type?: StringFilter | null | undefined;
+  link?: StringFilter | null | undefined;
+};
+
+export type PageBlocksContactsectionFilter = {
+  headline?: StringFilter | null | undefined;
+  actions?: PageBlocksContactsectionActionsFilter | null | undefined;
+};
+
+export type PageBlocksFilter = {
+  hero?: PageBlocksHeroFilter | null | undefined;
+  ctalinks?: PageBlocksCtalinksFilter | null | undefined;
+  tapdotlinks?: PageBlocksTapdotlinksFilter | null | undefined;
+  aboutsectionsinfo?: PageBlocksAboutsectionsinfoFilter | null | undefined;
+  aboutus?: PageBlocksAboutusFilter | null | undefined;
+  callout?: PageBlocksCalloutFilter | null | undefined;
+  connections?: PageBlocksConnectionsFilter | null | undefined;
+  features?: PageBlocksFeaturesFilter | null | undefined;
+  groupsinfo?: PageBlocksGroupsinfoFilter | null | undefined;
+  latestevents?: PageBlocksLatesteventsFilter | null | undefined;
+  latestmessages?: PageBlocksLatestmessagesFilter | null | undefined;
+  content?: PageBlocksContentFilter | null | undefined;
+  cta?: PageBlocksCtaFilter | null | undefined;
+  group?: PageBlocksGroupFilter | null | undefined;
+  video?: PageBlocksVideoFilter | null | undefined;
+  herocontent?: PageBlocksHerocontentFilter | null | undefined;
+  herodonation?: PageBlocksHerodonationFilter | null | undefined;
+  profile?: PageBlocksProfileFilter | null | undefined;
+  teammember?: PageBlocksTeammemberFilter | null | undefined;
+  contentandimagevariant?: PageBlocksContentandimagevariantFilter | null | undefined;
+  freqaskedquestions?: PageBlocksFreqaskedquestionsFilter | null | undefined;
+  contentandimage?: PageBlocksContentandimageFilter | null | undefined;
+  vision?: PageBlocksVisionFilter | null | undefined;
+  values?: PageBlocksValuesFilter | null | undefined;
+  listcontent?: PageBlocksListcontentFilter | null | undefined;
+  leadership?: PageBlocksLeadershipFilter | null | undefined;
+  nextsteps?: PageBlocksNextstepsFilter | null | undefined;
+  contactsection?: PageBlocksContactsectionFilter | null | undefined;
+};
+
+export type Page_BodyBlockQuoteFilter = {
+  children?: RichTextFilter | null | undefined;
+  coordinatorName?: StringFilter | null | undefined;
+};
+
+export type Page_BodyDateTimeFilter = {
+  format?: StringFilter | null | undefined;
+};
+
+export type Page_BodyFtVisitorSignupFilter = {
+  children?: RichTextFilter | null | undefined;
+  placeholder?: StringFilter | null | undefined;
+  buttonText?: StringFilter | null | undefined;
+  disclaimer?: RichTextFilter | null | undefined;
+};
+
+export type Page_BodyResourcesSignupFilter = {
+  children?: RichTextFilter | null | undefined;
+  placeholder?: StringFilter | null | undefined;
+  buttonText?: StringFilter | null | undefined;
+  disclaimer?: RichTextFilter | null | undefined;
+};
+
+export type Page_BodyServeSignupFilter = {
+  children?: RichTextFilter | null | undefined;
+  placeholder?: StringFilter | null | undefined;
+  buttonText?: StringFilter | null | undefined;
+  disclaimer?: RichTextFilter | null | undefined;
+};
+
+export type Page_BodyPrayerSignupFilter = {
+  children?: RichTextFilter | null | undefined;
+  placeholder?: StringFilter | null | undefined;
+  buttonText?: StringFilter | null | undefined;
+  disclaimer?: RichTextFilter | null | undefined;
+};
+
+export type Page_BodyContactSignupFilter = {
+  children?: RichTextFilter | null | undefined;
+  placeholder?: StringFilter | null | undefined;
+  buttonText?: StringFilter | null | undefined;
+  disclaimer?: RichTextFilter | null | undefined;
+};
+
+export type Page_BodyVideoFilter = {
+  background?: StringFilter | null | undefined;
+  color?: StringFilter | null | undefined;
+  url?: StringFilter | null | undefined;
+  autoPlay?: BooleanFilter | null | undefined;
+  loop?: BooleanFilter | null | undefined;
+};
+
+export type Page_BodyFilter = {
+  BlockQuote?: Page_BodyBlockQuoteFilter | null | undefined;
+  DateTime?: Page_BodyDateTimeFilter | null | undefined;
+  FTVisitorSignup?: Page_BodyFtVisitorSignupFilter | null | undefined;
+  ResourcesSignup?: Page_BodyResourcesSignupFilter | null | undefined;
+  ServeSignup?: Page_BodyServeSignupFilter | null | undefined;
+  PrayerSignup?: Page_BodyPrayerSignupFilter | null | undefined;
+  ContactSignup?: Page_BodyContactSignupFilter | null | undefined;
+  video?: Page_BodyVideoFilter | null | undefined;
+};
+
+export type PageFilter = {
+  blocks?: PageBlocksFilter | null | undefined;
+  _body?: Page_BodyFilter | null | undefined;
+};
+
+export type MessageImageFilter = {
+  src?: ImageFilter | null | undefined;
+  alt?: StringFilter | null | undefined;
+  videoUrl?: StringFilter | null | undefined;
+  embeddable?: BooleanFilter | null | undefined;
+  autoPlay?: BooleanFilter | null | undefined;
+  loop?: BooleanFilter | null | undefined;
+};
+
+export type MessageCoordinatorFilter = {
+  coordinator?: CoordinatorFilter | null | undefined;
+};
+
+export type DatetimeFilter = {
+  after?: string | null | undefined;
+  before?: string | null | undefined;
+  eq?: string | null | undefined;
+  exists?: boolean | null | undefined;
+  in?: Array<string | null | undefined> | null | undefined;
+};
+
+export type MessageTagsTagFilter = {
+  tag?: TagFilter | null | undefined;
+};
+
+export type MessageTagsFilter = {
+  tag?: MessageTagsTagFilter | null | undefined;
+};
+
+export type Message_BodyBlockQuoteFilter = {
+  children?: RichTextFilter | null | undefined;
+  coordinatorName?: StringFilter | null | undefined;
+};
+
+export type Message_BodyDateTimeFilter = {
+  format?: StringFilter | null | undefined;
+};
+
+export type Message_BodyContactSignupFilter = {
+  children?: RichTextFilter | null | undefined;
+  placeholder?: StringFilter | null | undefined;
+  buttonText?: StringFilter | null | undefined;
+  disclaimer?: RichTextFilter | null | undefined;
+};
+
+export type Message_BodyVideoFilter = {
+  background?: StringFilter | null | undefined;
+  color?: StringFilter | null | undefined;
+  url?: StringFilter | null | undefined;
+  autoPlay?: BooleanFilter | null | undefined;
+  loop?: BooleanFilter | null | undefined;
+};
+
+export type Message_BodyFilter = {
+  BlockQuote?: Message_BodyBlockQuoteFilter | null | undefined;
+  DateTime?: Message_BodyDateTimeFilter | null | undefined;
+  ContactSignup?: Message_BodyContactSignupFilter | null | undefined;
+  video?: Message_BodyVideoFilter | null | undefined;
+};
+
+export type MessageFilter = {
+  color?: StringFilter | null | undefined;
+  title?: StringFilter | null | undefined;
+  image?: MessageImageFilter | null | undefined;
+  excerpt?: RichTextFilter | null | undefined;
+  coordinator?: MessageCoordinatorFilter | null | undefined;
+  date?: DatetimeFilter | null | undefined;
+  tags?: MessageTagsFilter | null | undefined;
+  _body?: Message_BodyFilter | null | undefined;
+};
+
+export type EventActionsIconFilter = {
+  name?: StringFilter | null | undefined;
+  color?: StringFilter | null | undefined;
+  style?: StringFilter | null | undefined;
+};
+
+export type EventActionsFilter = {
+  label?: StringFilter | null | undefined;
+  type?: StringFilter | null | undefined;
+  icon?: EventActionsIconFilter | null | undefined;
+  link?: StringFilter | null | undefined;
+};
+
+export type EventIconFilter = {
+  name?: StringFilter | null | undefined;
+  color?: StringFilter | null | undefined;
+  style?: StringFilter | null | undefined;
+};
+
+export type EventIcon2Filter = {
+  name?: StringFilter | null | undefined;
+  color?: StringFilter | null | undefined;
+  style?: StringFilter | null | undefined;
+};
+
+export type EventReccuringeventdetailsIcon2Filter = {
+  name?: StringFilter | null | undefined;
+  color?: StringFilter | null | undefined;
+  style?: StringFilter | null | undefined;
+};
+
+export type EventReccuringeventdetailsIconFilter = {
+  name?: StringFilter | null | undefined;
+  color?: StringFilter | null | undefined;
+  style?: StringFilter | null | undefined;
+};
+
+export type EventReccuringeventdetailsFilter = {
+  recurring?: BooleanFilter | null | undefined;
+  frequency?: StringFilter | null | undefined;
+  recstartdate?: DatetimeFilter | null | undefined;
+  recenddate?: DatetimeFilter | null | undefined;
+  icon2?: EventReccuringeventdetailsIcon2Filter | null | undefined;
+  label?: StringFilter | null | undefined;
+  type?: StringFilter | null | undefined;
+  icon?: EventReccuringeventdetailsIconFilter | null | undefined;
+  link?: StringFilter | null | undefined;
+};
+
+export type EventCoordinatorFilter = {
+  coordinator?: CoordinatorFilter | null | undefined;
+};
+
+export type EventLocationdetailsIconFilter = {
+  name?: StringFilter | null | undefined;
+  color?: StringFilter | null | undefined;
+  style?: StringFilter | null | undefined;
+};
+
+export type EventLocationdetailsFilter = {
+  location?: StringFilter | null | undefined;
+  label?: StringFilter | null | undefined;
+  type?: StringFilter | null | undefined;
+  icon?: EventLocationdetailsIconFilter | null | undefined;
+  link?: StringFilter | null | undefined;
+};
+
+export type EventTagsTagFilter = {
+  tag?: TagFilter | null | undefined;
+};
+
+export type EventTagsFilter = {
+  tag?: EventTagsTagFilter | null | undefined;
+};
+
+export type Event_BodyBlockQuoteFilter = {
+  children?: RichTextFilter | null | undefined;
+  coordinatorName?: StringFilter | null | undefined;
+};
+
+export type Event_BodyDateTimeFilter = {
+  format?: StringFilter | null | undefined;
+};
+
+export type Event_BodyContactSignupFilter = {
+  children?: RichTextFilter | null | undefined;
+  placeholder?: StringFilter | null | undefined;
+  buttonText?: StringFilter | null | undefined;
+  disclaimer?: RichTextFilter | null | undefined;
+};
+
+export type Event_BodyVideoFilter = {
+  background?: StringFilter | null | undefined;
+  color?: StringFilter | null | undefined;
+  url?: StringFilter | null | undefined;
+  autoPlay?: BooleanFilter | null | undefined;
+  loop?: BooleanFilter | null | undefined;
+};
+
+export type Event_BodyFilter = {
+  BlockQuote?: Event_BodyBlockQuoteFilter | null | undefined;
+  DateTime?: Event_BodyDateTimeFilter | null | undefined;
+  ContactSignup?: Event_BodyContactSignupFilter | null | undefined;
+  video?: Event_BodyVideoFilter | null | undefined;
+};
+
+export type EventFilter = {
+  title?: StringFilter | null | undefined;
+  heroImg?: ImageFilter | null | undefined;
+  description?: RichTextFilter | null | undefined;
+  actions?: EventActionsFilter | null | undefined;
+  date?: DatetimeFilter | null | undefined;
+  endtime?: DatetimeFilter | null | undefined;
+  icon?: EventIconFilter | null | undefined;
+  icon2?: EventIcon2Filter | null | undefined;
+  reccuringeventdetails?: EventReccuringeventdetailsFilter | null | undefined;
+  coordinator?: EventCoordinatorFilter | null | undefined;
+  locationdetails?: EventLocationdetailsFilter | null | undefined;
+  tags?: EventTagsFilter | null | undefined;
+  _body?: Event_BodyFilter | null | undefined;
+};
+
+export type CoordinatorFilter = {
+  name?: StringFilter | null | undefined;
+  avatar?: ImageFilter | null | undefined;
+};
+
+export type TagFilter = {
+  name?: StringFilter | null | undefined;
+};
+
+export type GlobalHeaderIconFilter = {
+  name?: StringFilter | null | undefined;
+  color?: StringFilter | null | undefined;
+  style?: StringFilter | null | undefined;
+};
+
+export type GlobalHeaderNavFilter = {
+  href?: StringFilter | null | undefined;
+  label?: StringFilter | null | undefined;
+};
+
+export type GlobalHeaderFilter = {
+  icon?: GlobalHeaderIconFilter | null | undefined;
+  name?: StringFilter | null | undefined;
+  color?: StringFilter | null | undefined;
+  nav?: GlobalHeaderNavFilter | null | undefined;
+};
+
+export type GlobalFooterSocialIconFilter = {
+  name?: StringFilter | null | undefined;
+  color?: StringFilter | null | undefined;
+  style?: StringFilter | null | undefined;
+};
+
+export type GlobalFooterSocialFilter = {
+  icon?: GlobalFooterSocialIconFilter | null | undefined;
+  url?: StringFilter | null | undefined;
+};
+
+export type GlobalFooterFilter = {
+  social?: GlobalFooterSocialFilter | null | undefined;
+};
+
+export type GlobalThemeFilter = {
+  color?: StringFilter | null | undefined;
+  font?: StringFilter | null | undefined;
+  darkMode?: StringFilter | null | undefined;
+};
+
+export type GlobalFilter = {
+  header?: GlobalHeaderFilter | null | undefined;
+  footer?: GlobalFooterFilter | null | undefined;
+  theme?: GlobalThemeFilter | null | undefined;
+};
+
+export type LayoutQueryFragmentFragment = { global: { __typename: 'Global', header: { __typename: 'GlobalHeader', name: string | null, color: string | null, icon: { __typename: 'GlobalHeaderIcon', name: string | null, color: string | null, style: string | null } | null, nav: Array<{ __typename: 'GlobalHeaderNav', href: string | null, label: string | null } | null> | null } | null, footer: { __typename: 'GlobalFooter', social: Array<{ __typename: 'GlobalFooterSocial', url: string | null, icon: { __typename: 'GlobalFooterSocialIcon', name: string | null, color: string | null, style: string | null } | null } | null> | null } | null, theme: { __typename: 'GlobalTheme', color: string | null, font: string | null, darkMode: string | null } | null } };
 
 export type PageQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type PageQueryQuery = { __typename?: 'Query', messageConnection: { __typename?: 'MessageConnection', edges?: Array<{ __typename?: 'MessageConnectionEdges', node?: { __typename?: 'Message', id: string, date: string, title: string, excerpt?: any | null, coordinator?: { __typename: 'Coordinator', name: string, avatar?: string | null } | null, _sys: { __typename?: 'SystemInfo', filename: string } } | null } | null> | null }, global: { __typename: 'Global', header?: { __typename: 'GlobalHeader', name?: string | null, color?: string | null, icon?: { __typename: 'GlobalHeaderIcon', name?: string | null, color?: string | null, style?: string | null } | null, nav?: Array<{ __typename: 'GlobalHeaderNav', href?: string | null, label?: string | null } | null> | null } | null, footer?: { __typename: 'GlobalFooter', social?: Array<{ __typename: 'GlobalFooterSocial', url?: string | null, icon?: { __typename: 'GlobalFooterSocialIcon', name?: string | null, color?: string | null, style?: string | null } | null } | null> | null } | null, theme?: { __typename: 'GlobalTheme', color?: string | null, font?: string | null, darkMode?: string | null } | null } };
+export type PageQueryQuery = { messageConnection: { edges: Array<{ node: { id: string, date: string, title: string, excerpt: TinaMarkdownContent | null, coordinator: { __typename: 'Coordinator', name: string, avatar: string | null } | null, _sys: { filename: string } } | null } | null> | null }, global: { __typename: 'Global', header: { __typename: 'GlobalHeader', name: string | null, color: string | null, icon: { __typename: 'GlobalHeaderIcon', name: string | null, color: string | null, style: string | null } | null, nav: Array<{ __typename: 'GlobalHeaderNav', href: string | null, label: string | null } | null> | null } | null, footer: { __typename: 'GlobalFooter', social: Array<{ __typename: 'GlobalFooterSocial', url: string | null, icon: { __typename: 'GlobalFooterSocialIcon', name: string | null, color: string | null, style: string | null } | null } | null> | null } | null, theme: { __typename: 'GlobalTheme', color: string | null, font: string | null, darkMode: string | null } | null } };
 
 export type ContentQueryQueryVariables = Exact<{
-  relativePath: Scalars['String']['input'];
+  relativePath: string;
 }>;
 
 
-export type ContentQueryQuery = { __typename?: 'Query', page: { __typename: 'Page', _body?: any | null, blocks?: Array<{ __typename: 'PageBlocksHero', background?: string | null, headline?: string | null, tagline?: string | null, actions?: Array<{ __typename: 'PageBlocksHeroActions', label?: string | null, type?: string | null, link?: string | null } | null> | null, image?: { __typename: 'PageBlocksHeroImage', src?: string | null, alt?: string | null, videoUrl?: string | null } | null } | { __typename: 'PageBlocksCtalinks', background?: string | null, items?: Array<{ __typename: 'PageBlocksCtalinksItems', title?: string | null, icon?: { __typename: 'PageBlocksCtalinksItemsIcon', name?: string | null, color?: string | null, style?: string | null } | null, actions?: Array<{ __typename: 'PageBlocksCtalinksItemsActions', label?: string | null, type?: string | null, link?: string | null } | null> | null } | null> | null } | { __typename: 'PageBlocksTapdotlinks', background?: string | null, items?: Array<{ __typename: 'PageBlocksTapdotlinksItems', title?: string | null, icon?: { __typename: 'PageBlocksTapdotlinksItemsIcon', name?: string | null, color?: string | null, style?: string | null } | null, actions?: Array<{ __typename: 'PageBlocksTapdotlinksItemsActions', label?: string | null, type?: string | null, link?: string | null } | null> | null } | null> | null } | { __typename: 'PageBlocksAboutsectionsinfo', background?: string | null, headline?: string | null, description?: string | null, items?: Array<{ __typename: 'PageBlocksAboutsectionsinfoItems', cover?: string | null, title?: string | null, actions?: Array<{ __typename: 'PageBlocksAboutsectionsinfoItemsActions', label?: string | null, type?: string | null, link?: string | null } | null> | null } | null> | null } | { __typename: 'PageBlocksAboutus', background?: string | null, headline?: string | null, tagline?: string | null, description?: string | null, actions?: Array<{ __typename: 'PageBlocksAboutusActions', label?: string | null, type?: string | null, link?: string | null } | null> | null, image?: { __typename: 'PageBlocksAboutusImage', src?: string | null, alt?: string | null, videoUrl?: string | null } | null } | { __typename: 'PageBlocksCallout', background?: string | null, text?: string | null, url?: string | null } | { __typename: 'PageBlocksConnections', background?: string | null, headline?: string | null, tagline?: string | null, description?: string | null, items?: Array<{ __typename: 'PageBlocksConnectionsItems', cover?: string | null, title?: string | null, text?: any | null, actions?: Array<{ __typename: 'PageBlocksConnectionsItemsActions', label?: string | null, type?: string | null, link?: string | null } | null> | null } | null> | null } | { __typename: 'PageBlocksFeatures', background?: string | null, headline?: string | null, items?: Array<{ __typename: 'PageBlocksFeaturesItems', title?: string | null, text?: any | null, icon?: { __typename: 'PageBlocksFeaturesItemsIcon', name?: string | null, color?: string | null, style?: string | null } | null } | null> | null } | { __typename: 'PageBlocksGroupsinfo', background?: string | null, headline?: string | null, tagline?: string | null, description?: string | null, items?: Array<{ __typename: 'PageBlocksGroupsinfoItems', cover?: string | null, title?: string | null, text?: any | null, actions?: Array<{ __typename: 'PageBlocksGroupsinfoItemsActions', label?: string | null, type?: string | null, link?: string | null } | null> | null } | null> | null } | { __typename: 'PageBlocksLatestevents', background?: string | null, headline?: string | null, tagline?: string | null, description?: string | null, limit?: number | null, actions?: Array<{ __typename: 'PageBlocksLatesteventsActions', label?: string | null, type?: string | null, link?: string | null } | null> | null } | { __typename: 'PageBlocksLatestmessages', background?: string | null, headline?: string | null, tagline?: string | null, description?: string | null, limit?: number | null, actions?: Array<{ __typename: 'PageBlocksLatestmessagesActions', label?: string | null, type?: string | null, link?: string | null } | null> | null } | { __typename: 'PageBlocksContent', background?: string | null, body?: any | null } | { __typename: 'PageBlocksCta', background?: string | null, headline?: string | null, description?: string | null, image?: { __typename: 'PageBlocksCtaImage', src?: string | null, alt?: string | null, videoUrl?: string | null } | null, actions?: Array<{ __typename: 'PageBlocksCtaActions', label?: string | null, type?: string | null, link?: string | null } | null> | null } | { __typename: 'PageBlocksGroup', background?: string | null, headline?: string | null, description?: string | null, groups?: Array<{ __typename: 'PageBlocksGroupGroups', title?: string | null, description?: string | null, icon?: { __typename: 'PageBlocksGroupGroupsIcon', name?: string | null, color?: string | null, style?: string | null } | null, image?: { __typename: 'PageBlocksGroupGroupsImage', src?: string | null, alt?: string | null, videoUrl?: string | null } | null, actions?: Array<{ __typename: 'PageBlocksGroupGroupsActions', label?: string | null, type?: string | null, link?: string | null } | null> | null } | null> | null } | { __typename: 'PageBlocksVideo', background?: string | null, color?: string | null, url?: string | null, autoPlay?: boolean | null, loop?: boolean | null } | { __typename: 'PageBlocksHerocontent', background?: string | null, headline?: string | null, tagline?: string | null, image?: { __typename: 'PageBlocksHerocontentImage', src?: string | null, alt?: string | null, videoUrl?: string | null } | null } | { __typename: 'PageBlocksHerodonation', background?: string | null, headline?: string | null, tagline?: string | null, image?: { __typename: 'PageBlocksHerodonationImage', src?: string | null, alt?: string | null, videoUrl?: string | null } | null } | { __typename: 'PageBlocksProfile', background?: string | null, headline?: string | null, tagline?: string | null, description?: string | null, actions?: Array<{ __typename: 'PageBlocksProfileActions', label?: string | null, type?: string | null, link?: string | null } | null> | null, image?: { __typename: 'PageBlocksProfileImage', src?: string | null, alt?: string | null, videoUrl?: string | null } | null } | { __typename: 'PageBlocksTeammember', background?: string | null, headline?: string | null, description?: string | null, teammembers?: Array<{ __typename: 'PageBlocksTeammemberTeammembers', quote?: string | null, coordinator?: string | null, role?: string | null, avatar?: string | null, actions?: Array<{ __typename: 'PageBlocksTeammemberTeammembersActions', label?: string | null, type?: string | null, link?: string | null } | null> | null } | null> | null } | { __typename: 'PageBlocksContentandimagevariant', background?: string | null, headline?: string | null, description?: string | null, contentandimagevariants?: Array<{ __typename: 'PageBlocksContentandimagevariantContentandimagevariants', title?: string | null, descriptionheading?: string | null, description?: string | null, description2?: string | null, description3?: string | null, descriptionheading2?: string | null, details?: string | null, icon?: { __typename: 'PageBlocksContentandimagevariantContentandimagevariantsIcon', name?: string | null, color?: string | null, style?: string | null } | null, image?: { __typename: 'PageBlocksContentandimagevariantContentandimagevariantsImage', src?: string | null, alt?: string | null } | null, actions?: Array<{ __typename: 'PageBlocksContentandimagevariantContentandimagevariantsActions', label?: string | null, type?: string | null, link?: string | null } | null> | null } | null> | null } | { __typename: 'PageBlocksFreqaskedquestions', background?: string | null, headline?: string | null, tagline?: string | null, description?: string | null, image?: { __typename: 'PageBlocksFreqaskedquestionsImage', src?: string | null, alt?: string | null, videoUrl?: string | null } | null, items?: Array<{ __typename: 'PageBlocksFreqaskedquestionsItems', title?: string | null, text?: any | null, icon?: { __typename: 'PageBlocksFreqaskedquestionsItemsIcon', name?: string | null, color?: string | null, style?: string | null } | null } | null> | null } | { __typename: 'PageBlocksContentandimage', background?: string | null, headline?: string | null, description?: string | null, contentandimages?: Array<{ __typename: 'PageBlocksContentandimageContentandimages', title?: string | null, description?: string | null, requirements?: string | null, image?: { __typename: 'PageBlocksContentandimageContentandimagesImage', src?: string | null, alt?: string | null } | null, actions?: Array<{ __typename: 'PageBlocksContentandimageContentandimagesActions', label?: string | null, type?: string | null, link?: string | null } | null> | null } | null> | null } | { __typename: 'PageBlocksVision', title?: string | null, description?: string | null } | { __typename: 'PageBlocksValues', headline?: string | null, description?: string | null } | { __typename: 'PageBlocksListcontent', title?: string | null, description1?: string | null, description2?: string | null } | { __typename: 'PageBlocksLeadership', background?: string | null, headline?: string | null, tagline?: string | null, description?: string | null, actions?: Array<{ __typename: 'PageBlocksLeadershipActions', label?: string | null, type?: string | null, link?: string | null } | null> | null, image?: { __typename: 'PageBlocksLeadershipImage', src?: string | null, alt?: string | null, videoUrl?: string | null } | null } | { __typename: 'PageBlocksNextsteps', title?: string | null, description?: string | null, title1?: string | null, description1?: string | null, title2?: string | null, description2?: string | null, title3?: string | null, description3?: string | null, title4?: string | null, description4?: string | null } | { __typename: 'PageBlocksContactsection', headline?: string | null, actions?: Array<{ __typename: 'PageBlocksContactsectionActions', label?: string | null, type?: string | null, link?: string | null } | null> | null } | null> | null }, global: { __typename: 'Global', header?: { __typename: 'GlobalHeader', name?: string | null, color?: string | null, icon?: { __typename: 'GlobalHeaderIcon', name?: string | null, color?: string | null, style?: string | null } | null, nav?: Array<{ __typename: 'GlobalHeaderNav', href?: string | null, label?: string | null } | null> | null } | null, footer?: { __typename: 'GlobalFooter', social?: Array<{ __typename: 'GlobalFooterSocial', url?: string | null, icon?: { __typename: 'GlobalFooterSocialIcon', name?: string | null, color?: string | null, style?: string | null } | null } | null> | null } | null, theme?: { __typename: 'GlobalTheme', color?: string | null, font?: string | null, darkMode?: string | null } | null } };
+export type ContentQueryQuery = { page: { __typename: 'Page', _body: TinaMarkdownContent | null, blocks: Array<
+      | { __typename: 'PageBlocksHero', background: string | null, headline: string | null, tagline: string | null, actions: Array<{ __typename: 'PageBlocksHeroActions', label: string | null, type: string | null, link: string | null } | null> | null, image: { __typename: 'PageBlocksHeroImage', src: string | null, alt: string | null, videoUrl: string | null } | null }
+      | { __typename: 'PageBlocksCtalinks', background: string | null, items: Array<{ __typename: 'PageBlocksCtalinksItems', title: string | null, icon: { __typename: 'PageBlocksCtalinksItemsIcon', name: string | null, color: string | null, style: string | null } | null, actions: Array<{ __typename: 'PageBlocksCtalinksItemsActions', label: string | null, type: string | null, link: string | null } | null> | null } | null> | null }
+      | { __typename: 'PageBlocksTapdotlinks', background: string | null, items: Array<{ __typename: 'PageBlocksTapdotlinksItems', title: string | null, icon: { __typename: 'PageBlocksTapdotlinksItemsIcon', name: string | null, color: string | null, style: string | null } | null, actions: Array<{ __typename: 'PageBlocksTapdotlinksItemsActions', label: string | null, type: string | null, link: string | null } | null> | null } | null> | null }
+      | { __typename: 'PageBlocksAboutsectionsinfo', background: string | null, headline: string | null, description: string | null, items: Array<{ __typename: 'PageBlocksAboutsectionsinfoItems', cover: string | null, title: string | null, actions: Array<{ __typename: 'PageBlocksAboutsectionsinfoItemsActions', label: string | null, type: string | null, link: string | null } | null> | null } | null> | null }
+      | { __typename: 'PageBlocksAboutus', background: string | null, headline: string | null, tagline: string | null, description: string | null, actions: Array<{ __typename: 'PageBlocksAboutusActions', label: string | null, type: string | null, link: string | null } | null> | null, image: { __typename: 'PageBlocksAboutusImage', src: string | null, alt: string | null, videoUrl: string | null } | null }
+      | { __typename: 'PageBlocksCallout', background: string | null, text: string | null, url: string | null }
+      | { __typename: 'PageBlocksConnections', background: string | null, headline: string | null, tagline: string | null, description: string | null, items: Array<{ __typename: 'PageBlocksConnectionsItems', cover: string | null, title: string | null, text: TinaMarkdownContent | null, actions: Array<{ __typename: 'PageBlocksConnectionsItemsActions', label: string | null, type: string | null, link: string | null } | null> | null } | null> | null }
+      | { __typename: 'PageBlocksFeatures', background: string | null, headline: string | null, items: Array<{ __typename: 'PageBlocksFeaturesItems', title: string | null, text: TinaMarkdownContent | null, icon: { __typename: 'PageBlocksFeaturesItemsIcon', name: string | null, color: string | null, style: string | null } | null } | null> | null }
+      | { __typename: 'PageBlocksGroupsinfo', background: string | null, headline: string | null, tagline: string | null, description: string | null, items: Array<{ __typename: 'PageBlocksGroupsinfoItems', cover: string | null, title: string | null, text: TinaMarkdownContent | null, actions: Array<{ __typename: 'PageBlocksGroupsinfoItemsActions', label: string | null, type: string | null, link: string | null } | null> | null } | null> | null }
+      | { __typename: 'PageBlocksLatestevents', background: string | null, headline: string | null, tagline: string | null, description: string | null, limit: number | null, actions: Array<{ __typename: 'PageBlocksLatesteventsActions', label: string | null, type: string | null, link: string | null } | null> | null }
+      | { __typename: 'PageBlocksLatestmessages', background: string | null, headline: string | null, tagline: string | null, description: string | null, limit: number | null, actions: Array<{ __typename: 'PageBlocksLatestmessagesActions', label: string | null, type: string | null, link: string | null } | null> | null }
+      | { __typename: 'PageBlocksContent', background: string | null, body: TinaMarkdownContent | null }
+      | { __typename: 'PageBlocksCta', background: string | null, headline: string | null, description: string | null, image: { __typename: 'PageBlocksCtaImage', src: string | null, alt: string | null, videoUrl: string | null } | null, actions: Array<{ __typename: 'PageBlocksCtaActions', label: string | null, type: string | null, link: string | null } | null> | null }
+      | { __typename: 'PageBlocksGroup', background: string | null, headline: string | null, description: string | null, groups: Array<{ __typename: 'PageBlocksGroupGroups', title: string | null, description: string | null, icon: { __typename: 'PageBlocksGroupGroupsIcon', name: string | null, color: string | null, style: string | null } | null, image: { __typename: 'PageBlocksGroupGroupsImage', src: string | null, alt: string | null, videoUrl: string | null } | null, actions: Array<{ __typename: 'PageBlocksGroupGroupsActions', label: string | null, type: string | null, link: string | null } | null> | null } | null> | null }
+      | { __typename: 'PageBlocksVideo', background: string | null, color: string | null, url: string | null, autoPlay: boolean | null, loop: boolean | null }
+      | { __typename: 'PageBlocksHerocontent', background: string | null, headline: string | null, tagline: string | null, image: { __typename: 'PageBlocksHerocontentImage', src: string | null, alt: string | null, videoUrl: string | null } | null }
+      | { __typename: 'PageBlocksHerodonation', background: string | null, headline: string | null, tagline: string | null, image: { __typename: 'PageBlocksHerodonationImage', src: string | null, alt: string | null, videoUrl: string | null } | null }
+      | { __typename: 'PageBlocksProfile', background: string | null, headline: string | null, tagline: string | null, description: string | null, actions: Array<{ __typename: 'PageBlocksProfileActions', label: string | null, type: string | null, link: string | null } | null> | null, image: { __typename: 'PageBlocksProfileImage', src: string | null, alt: string | null, videoUrl: string | null } | null }
+      | { __typename: 'PageBlocksTeammember', background: string | null, headline: string | null, description: string | null, teammembers: Array<{ __typename: 'PageBlocksTeammemberTeammembers', quote: string | null, coordinator: string | null, role: string | null, avatar: string | null, actions: Array<{ __typename: 'PageBlocksTeammemberTeammembersActions', label: string | null, type: string | null, link: string | null } | null> | null } | null> | null }
+      | { __typename: 'PageBlocksContentandimagevariant', background: string | null, headline: string | null, description: string | null, contentandimagevariants: Array<{ __typename: 'PageBlocksContentandimagevariantContentandimagevariants', title: string | null, descriptionheading: string | null, description: string | null, description2: string | null, description3: string | null, descriptionheading2: string | null, details: string | null, icon: { __typename: 'PageBlocksContentandimagevariantContentandimagevariantsIcon', name: string | null, color: string | null, style: string | null } | null, image: { __typename: 'PageBlocksContentandimagevariantContentandimagevariantsImage', src: string | null, alt: string | null } | null, actions: Array<{ __typename: 'PageBlocksContentandimagevariantContentandimagevariantsActions', label: string | null, type: string | null, link: string | null } | null> | null } | null> | null }
+      | { __typename: 'PageBlocksFreqaskedquestions', background: string | null, headline: string | null, tagline: string | null, description: string | null, image: { __typename: 'PageBlocksFreqaskedquestionsImage', src: string | null, alt: string | null, videoUrl: string | null } | null, items: Array<{ __typename: 'PageBlocksFreqaskedquestionsItems', title: string | null, text: TinaMarkdownContent | null, icon: { __typename: 'PageBlocksFreqaskedquestionsItemsIcon', name: string | null, color: string | null, style: string | null } | null } | null> | null }
+      | { __typename: 'PageBlocksContentandimage', background: string | null, headline: string | null, description: string | null, contentandimages: Array<{ __typename: 'PageBlocksContentandimageContentandimages', title: string | null, description: string | null, requirements: string | null, image: { __typename: 'PageBlocksContentandimageContentandimagesImage', src: string | null, alt: string | null } | null, actions: Array<{ __typename: 'PageBlocksContentandimageContentandimagesActions', label: string | null, type: string | null, link: string | null } | null> | null } | null> | null }
+      | { __typename: 'PageBlocksVision', title: string | null, description: string | null }
+      | { __typename: 'PageBlocksValues', headline: string | null, description: string | null }
+      | { __typename: 'PageBlocksListcontent', title: string | null, description1: string | null, description2: string | null }
+      | { __typename: 'PageBlocksLeadership', background: string | null, headline: string | null, tagline: string | null, description: string | null, actions: Array<{ __typename: 'PageBlocksLeadershipActions', label: string | null, type: string | null, link: string | null } | null> | null, image: { __typename: 'PageBlocksLeadershipImage', src: string | null, alt: string | null, videoUrl: string | null } | null }
+      | { __typename: 'PageBlocksNextsteps', title: string | null, description: string | null, title1: string | null, description1: string | null, title2: string | null, description2: string | null, title3: string | null, description3: string | null, title4: string | null, description4: string | null }
+      | { __typename: 'PageBlocksContactsection', headline: string | null, actions: Array<{ __typename: 'PageBlocksContactsectionActions', label: string | null, type: string | null, link: string | null } | null> | null }
+     | null> | null }, global: { __typename: 'Global', header: { __typename: 'GlobalHeader', name: string | null, color: string | null, icon: { __typename: 'GlobalHeaderIcon', name: string | null, color: string | null, style: string | null } | null, nav: Array<{ __typename: 'GlobalHeaderNav', href: string | null, label: string | null } | null> | null } | null, footer: { __typename: 'GlobalFooter', social: Array<{ __typename: 'GlobalFooterSocial', url: string | null, icon: { __typename: 'GlobalFooterSocialIcon', name: string | null, color: string | null, style: string | null } | null } | null> | null } | null, theme: { __typename: 'GlobalTheme', color: string | null, font: string | null, darkMode: string | null } | null } };
 
 export type BlogMessageQueryQueryVariables = Exact<{
-  relativePath: Scalars['String']['input'];
+  relativePath: string;
 }>;
 
 
-export type BlogMessageQueryQuery = { __typename?: 'Query', message: { __typename: 'Message', color?: string | null, title: string, excerpt?: any | null, date: string, _body?: any | null, coordinator?: { __typename: 'Coordinator', name: string, avatar?: string | null, id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null, image?: { __typename: 'MessageImage', src?: string | null, alt?: string | null, videoUrl?: string | null, embeddable?: boolean | null, autoPlay?: boolean | null, loop?: boolean | null } | null, tags?: Array<{ __typename: 'MessageTags', tag?: { __typename: 'Tag', name: string, id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null }, global: { __typename: 'Global', header?: { __typename: 'GlobalHeader', name?: string | null, color?: string | null, icon?: { __typename: 'GlobalHeaderIcon', name?: string | null, color?: string | null, style?: string | null } | null, nav?: Array<{ __typename: 'GlobalHeaderNav', href?: string | null, label?: string | null } | null> | null } | null, footer?: { __typename: 'GlobalFooter', social?: Array<{ __typename: 'GlobalFooterSocial', url?: string | null, icon?: { __typename: 'GlobalFooterSocialIcon', name?: string | null, color?: string | null, style?: string | null } | null } | null> | null } | null, theme?: { __typename: 'GlobalTheme', color?: string | null, font?: string | null, darkMode?: string | null } | null } };
+export type BlogMessageQueryQuery = { message: { __typename: 'Message', color: string | null, title: string, excerpt: TinaMarkdownContent | null, date: string, _body: TinaMarkdownContent | null, coordinator: { __typename: 'Coordinator', name: string, avatar: string | null, id: string, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null, image: { __typename: 'MessageImage', src: string | null, alt: string | null, videoUrl: string | null, embeddable: boolean | null, autoPlay: boolean | null, loop: boolean | null } | null, tags: Array<{ __typename: 'MessageTags', tag: { __typename: 'Tag', name: string, id: string, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null }, global: { __typename: 'Global', header: { __typename: 'GlobalHeader', name: string | null, color: string | null, icon: { __typename: 'GlobalHeaderIcon', name: string | null, color: string | null, style: string | null } | null, nav: Array<{ __typename: 'GlobalHeaderNav', href: string | null, label: string | null } | null> | null } | null, footer: { __typename: 'GlobalFooter', social: Array<{ __typename: 'GlobalFooterSocial', url: string | null, icon: { __typename: 'GlobalFooterSocialIcon', name: string | null, color: string | null, style: string | null } | null } | null> | null } | null, theme: { __typename: 'GlobalTheme', color: string | null, font: string | null, darkMode: string | null } | null } };
 
-export type PagePartsFragment = { __typename: 'Page', _body?: any | null, blocks?: Array<{ __typename: 'PageBlocksHero', background?: string | null, headline?: string | null, tagline?: string | null, actions?: Array<{ __typename: 'PageBlocksHeroActions', label?: string | null, type?: string | null, link?: string | null } | null> | null, image?: { __typename: 'PageBlocksHeroImage', src?: string | null, alt?: string | null, videoUrl?: string | null } | null } | { __typename: 'PageBlocksCtalinks', background?: string | null, items?: Array<{ __typename: 'PageBlocksCtalinksItems', title?: string | null, icon?: { __typename: 'PageBlocksCtalinksItemsIcon', name?: string | null, color?: string | null, style?: string | null } | null, actions?: Array<{ __typename: 'PageBlocksCtalinksItemsActions', label?: string | null, type?: string | null, link?: string | null } | null> | null } | null> | null } | { __typename: 'PageBlocksTapdotlinks', background?: string | null, items?: Array<{ __typename: 'PageBlocksTapdotlinksItems', title?: string | null, icon?: { __typename: 'PageBlocksTapdotlinksItemsIcon', name?: string | null, color?: string | null, style?: string | null } | null, actions?: Array<{ __typename: 'PageBlocksTapdotlinksItemsActions', label?: string | null, type?: string | null, link?: string | null } | null> | null } | null> | null } | { __typename: 'PageBlocksAboutsectionsinfo', background?: string | null, headline?: string | null, description?: string | null, items?: Array<{ __typename: 'PageBlocksAboutsectionsinfoItems', cover?: string | null, title?: string | null, actions?: Array<{ __typename: 'PageBlocksAboutsectionsinfoItemsActions', label?: string | null, type?: string | null, link?: string | null } | null> | null } | null> | null } | { __typename: 'PageBlocksAboutus', background?: string | null, headline?: string | null, tagline?: string | null, description?: string | null, actions?: Array<{ __typename: 'PageBlocksAboutusActions', label?: string | null, type?: string | null, link?: string | null } | null> | null, image?: { __typename: 'PageBlocksAboutusImage', src?: string | null, alt?: string | null, videoUrl?: string | null } | null } | { __typename: 'PageBlocksCallout', background?: string | null, text?: string | null, url?: string | null } | { __typename: 'PageBlocksConnections', background?: string | null, headline?: string | null, tagline?: string | null, description?: string | null, items?: Array<{ __typename: 'PageBlocksConnectionsItems', cover?: string | null, title?: string | null, text?: any | null, actions?: Array<{ __typename: 'PageBlocksConnectionsItemsActions', label?: string | null, type?: string | null, link?: string | null } | null> | null } | null> | null } | { __typename: 'PageBlocksFeatures', background?: string | null, headline?: string | null, items?: Array<{ __typename: 'PageBlocksFeaturesItems', title?: string | null, text?: any | null, icon?: { __typename: 'PageBlocksFeaturesItemsIcon', name?: string | null, color?: string | null, style?: string | null } | null } | null> | null } | { __typename: 'PageBlocksGroupsinfo', background?: string | null, headline?: string | null, tagline?: string | null, description?: string | null, items?: Array<{ __typename: 'PageBlocksGroupsinfoItems', cover?: string | null, title?: string | null, text?: any | null, actions?: Array<{ __typename: 'PageBlocksGroupsinfoItemsActions', label?: string | null, type?: string | null, link?: string | null } | null> | null } | null> | null } | { __typename: 'PageBlocksLatestevents', background?: string | null, headline?: string | null, tagline?: string | null, description?: string | null, limit?: number | null, actions?: Array<{ __typename: 'PageBlocksLatesteventsActions', label?: string | null, type?: string | null, link?: string | null } | null> | null } | { __typename: 'PageBlocksLatestmessages', background?: string | null, headline?: string | null, tagline?: string | null, description?: string | null, limit?: number | null, actions?: Array<{ __typename: 'PageBlocksLatestmessagesActions', label?: string | null, type?: string | null, link?: string | null } | null> | null } | { __typename: 'PageBlocksContent', background?: string | null, body?: any | null } | { __typename: 'PageBlocksCta', background?: string | null, headline?: string | null, description?: string | null, image?: { __typename: 'PageBlocksCtaImage', src?: string | null, alt?: string | null, videoUrl?: string | null } | null, actions?: Array<{ __typename: 'PageBlocksCtaActions', label?: string | null, type?: string | null, link?: string | null } | null> | null } | { __typename: 'PageBlocksGroup', background?: string | null, headline?: string | null, description?: string | null, groups?: Array<{ __typename: 'PageBlocksGroupGroups', title?: string | null, description?: string | null, icon?: { __typename: 'PageBlocksGroupGroupsIcon', name?: string | null, color?: string | null, style?: string | null } | null, image?: { __typename: 'PageBlocksGroupGroupsImage', src?: string | null, alt?: string | null, videoUrl?: string | null } | null, actions?: Array<{ __typename: 'PageBlocksGroupGroupsActions', label?: string | null, type?: string | null, link?: string | null } | null> | null } | null> | null } | { __typename: 'PageBlocksVideo', background?: string | null, color?: string | null, url?: string | null, autoPlay?: boolean | null, loop?: boolean | null } | { __typename: 'PageBlocksHerocontent', background?: string | null, headline?: string | null, tagline?: string | null, image?: { __typename: 'PageBlocksHerocontentImage', src?: string | null, alt?: string | null, videoUrl?: string | null } | null } | { __typename: 'PageBlocksHerodonation', background?: string | null, headline?: string | null, tagline?: string | null, image?: { __typename: 'PageBlocksHerodonationImage', src?: string | null, alt?: string | null, videoUrl?: string | null } | null } | { __typename: 'PageBlocksProfile', background?: string | null, headline?: string | null, tagline?: string | null, description?: string | null, actions?: Array<{ __typename: 'PageBlocksProfileActions', label?: string | null, type?: string | null, link?: string | null } | null> | null, image?: { __typename: 'PageBlocksProfileImage', src?: string | null, alt?: string | null, videoUrl?: string | null } | null } | { __typename: 'PageBlocksTeammember', background?: string | null, headline?: string | null, description?: string | null, teammembers?: Array<{ __typename: 'PageBlocksTeammemberTeammembers', quote?: string | null, coordinator?: string | null, role?: string | null, avatar?: string | null, actions?: Array<{ __typename: 'PageBlocksTeammemberTeammembersActions', label?: string | null, type?: string | null, link?: string | null } | null> | null } | null> | null } | { __typename: 'PageBlocksContentandimagevariant', background?: string | null, headline?: string | null, description?: string | null, contentandimagevariants?: Array<{ __typename: 'PageBlocksContentandimagevariantContentandimagevariants', title?: string | null, descriptionheading?: string | null, description?: string | null, description2?: string | null, description3?: string | null, descriptionheading2?: string | null, details?: string | null, icon?: { __typename: 'PageBlocksContentandimagevariantContentandimagevariantsIcon', name?: string | null, color?: string | null, style?: string | null } | null, image?: { __typename: 'PageBlocksContentandimagevariantContentandimagevariantsImage', src?: string | null, alt?: string | null } | null, actions?: Array<{ __typename: 'PageBlocksContentandimagevariantContentandimagevariantsActions', label?: string | null, type?: string | null, link?: string | null } | null> | null } | null> | null } | { __typename: 'PageBlocksFreqaskedquestions', background?: string | null, headline?: string | null, tagline?: string | null, description?: string | null, image?: { __typename: 'PageBlocksFreqaskedquestionsImage', src?: string | null, alt?: string | null, videoUrl?: string | null } | null, items?: Array<{ __typename: 'PageBlocksFreqaskedquestionsItems', title?: string | null, text?: any | null, icon?: { __typename: 'PageBlocksFreqaskedquestionsItemsIcon', name?: string | null, color?: string | null, style?: string | null } | null } | null> | null } | { __typename: 'PageBlocksContentandimage', background?: string | null, headline?: string | null, description?: string | null, contentandimages?: Array<{ __typename: 'PageBlocksContentandimageContentandimages', title?: string | null, description?: string | null, requirements?: string | null, image?: { __typename: 'PageBlocksContentandimageContentandimagesImage', src?: string | null, alt?: string | null } | null, actions?: Array<{ __typename: 'PageBlocksContentandimageContentandimagesActions', label?: string | null, type?: string | null, link?: string | null } | null> | null } | null> | null } | { __typename: 'PageBlocksVision', title?: string | null, description?: string | null } | { __typename: 'PageBlocksValues', headline?: string | null, description?: string | null } | { __typename: 'PageBlocksListcontent', title?: string | null, description1?: string | null, description2?: string | null } | { __typename: 'PageBlocksLeadership', background?: string | null, headline?: string | null, tagline?: string | null, description?: string | null, actions?: Array<{ __typename: 'PageBlocksLeadershipActions', label?: string | null, type?: string | null, link?: string | null } | null> | null, image?: { __typename: 'PageBlocksLeadershipImage', src?: string | null, alt?: string | null, videoUrl?: string | null } | null } | { __typename: 'PageBlocksNextsteps', title?: string | null, description?: string | null, title1?: string | null, description1?: string | null, title2?: string | null, description2?: string | null, title3?: string | null, description3?: string | null, title4?: string | null, description4?: string | null } | { __typename: 'PageBlocksContactsection', headline?: string | null, actions?: Array<{ __typename: 'PageBlocksContactsectionActions', label?: string | null, type?: string | null, link?: string | null } | null> | null } | null> | null };
+export type PagePartsFragment = { __typename: 'Page', _body: TinaMarkdownContent | null, blocks: Array<
+    | { __typename: 'PageBlocksHero', background: string | null, headline: string | null, tagline: string | null, actions: Array<{ __typename: 'PageBlocksHeroActions', label: string | null, type: string | null, link: string | null } | null> | null, image: { __typename: 'PageBlocksHeroImage', src: string | null, alt: string | null, videoUrl: string | null } | null }
+    | { __typename: 'PageBlocksCtalinks', background: string | null, items: Array<{ __typename: 'PageBlocksCtalinksItems', title: string | null, icon: { __typename: 'PageBlocksCtalinksItemsIcon', name: string | null, color: string | null, style: string | null } | null, actions: Array<{ __typename: 'PageBlocksCtalinksItemsActions', label: string | null, type: string | null, link: string | null } | null> | null } | null> | null }
+    | { __typename: 'PageBlocksTapdotlinks', background: string | null, items: Array<{ __typename: 'PageBlocksTapdotlinksItems', title: string | null, icon: { __typename: 'PageBlocksTapdotlinksItemsIcon', name: string | null, color: string | null, style: string | null } | null, actions: Array<{ __typename: 'PageBlocksTapdotlinksItemsActions', label: string | null, type: string | null, link: string | null } | null> | null } | null> | null }
+    | { __typename: 'PageBlocksAboutsectionsinfo', background: string | null, headline: string | null, description: string | null, items: Array<{ __typename: 'PageBlocksAboutsectionsinfoItems', cover: string | null, title: string | null, actions: Array<{ __typename: 'PageBlocksAboutsectionsinfoItemsActions', label: string | null, type: string | null, link: string | null } | null> | null } | null> | null }
+    | { __typename: 'PageBlocksAboutus', background: string | null, headline: string | null, tagline: string | null, description: string | null, actions: Array<{ __typename: 'PageBlocksAboutusActions', label: string | null, type: string | null, link: string | null } | null> | null, image: { __typename: 'PageBlocksAboutusImage', src: string | null, alt: string | null, videoUrl: string | null } | null }
+    | { __typename: 'PageBlocksCallout', background: string | null, text: string | null, url: string | null }
+    | { __typename: 'PageBlocksConnections', background: string | null, headline: string | null, tagline: string | null, description: string | null, items: Array<{ __typename: 'PageBlocksConnectionsItems', cover: string | null, title: string | null, text: TinaMarkdownContent | null, actions: Array<{ __typename: 'PageBlocksConnectionsItemsActions', label: string | null, type: string | null, link: string | null } | null> | null } | null> | null }
+    | { __typename: 'PageBlocksFeatures', background: string | null, headline: string | null, items: Array<{ __typename: 'PageBlocksFeaturesItems', title: string | null, text: TinaMarkdownContent | null, icon: { __typename: 'PageBlocksFeaturesItemsIcon', name: string | null, color: string | null, style: string | null } | null } | null> | null }
+    | { __typename: 'PageBlocksGroupsinfo', background: string | null, headline: string | null, tagline: string | null, description: string | null, items: Array<{ __typename: 'PageBlocksGroupsinfoItems', cover: string | null, title: string | null, text: TinaMarkdownContent | null, actions: Array<{ __typename: 'PageBlocksGroupsinfoItemsActions', label: string | null, type: string | null, link: string | null } | null> | null } | null> | null }
+    | { __typename: 'PageBlocksLatestevents', background: string | null, headline: string | null, tagline: string | null, description: string | null, limit: number | null, actions: Array<{ __typename: 'PageBlocksLatesteventsActions', label: string | null, type: string | null, link: string | null } | null> | null }
+    | { __typename: 'PageBlocksLatestmessages', background: string | null, headline: string | null, tagline: string | null, description: string | null, limit: number | null, actions: Array<{ __typename: 'PageBlocksLatestmessagesActions', label: string | null, type: string | null, link: string | null } | null> | null }
+    | { __typename: 'PageBlocksContent', background: string | null, body: TinaMarkdownContent | null }
+    | { __typename: 'PageBlocksCta', background: string | null, headline: string | null, description: string | null, image: { __typename: 'PageBlocksCtaImage', src: string | null, alt: string | null, videoUrl: string | null } | null, actions: Array<{ __typename: 'PageBlocksCtaActions', label: string | null, type: string | null, link: string | null } | null> | null }
+    | { __typename: 'PageBlocksGroup', background: string | null, headline: string | null, description: string | null, groups: Array<{ __typename: 'PageBlocksGroupGroups', title: string | null, description: string | null, icon: { __typename: 'PageBlocksGroupGroupsIcon', name: string | null, color: string | null, style: string | null } | null, image: { __typename: 'PageBlocksGroupGroupsImage', src: string | null, alt: string | null, videoUrl: string | null } | null, actions: Array<{ __typename: 'PageBlocksGroupGroupsActions', label: string | null, type: string | null, link: string | null } | null> | null } | null> | null }
+    | { __typename: 'PageBlocksVideo', background: string | null, color: string | null, url: string | null, autoPlay: boolean | null, loop: boolean | null }
+    | { __typename: 'PageBlocksHerocontent', background: string | null, headline: string | null, tagline: string | null, image: { __typename: 'PageBlocksHerocontentImage', src: string | null, alt: string | null, videoUrl: string | null } | null }
+    | { __typename: 'PageBlocksHerodonation', background: string | null, headline: string | null, tagline: string | null, image: { __typename: 'PageBlocksHerodonationImage', src: string | null, alt: string | null, videoUrl: string | null } | null }
+    | { __typename: 'PageBlocksProfile', background: string | null, headline: string | null, tagline: string | null, description: string | null, actions: Array<{ __typename: 'PageBlocksProfileActions', label: string | null, type: string | null, link: string | null } | null> | null, image: { __typename: 'PageBlocksProfileImage', src: string | null, alt: string | null, videoUrl: string | null } | null }
+    | { __typename: 'PageBlocksTeammember', background: string | null, headline: string | null, description: string | null, teammembers: Array<{ __typename: 'PageBlocksTeammemberTeammembers', quote: string | null, coordinator: string | null, role: string | null, avatar: string | null, actions: Array<{ __typename: 'PageBlocksTeammemberTeammembersActions', label: string | null, type: string | null, link: string | null } | null> | null } | null> | null }
+    | { __typename: 'PageBlocksContentandimagevariant', background: string | null, headline: string | null, description: string | null, contentandimagevariants: Array<{ __typename: 'PageBlocksContentandimagevariantContentandimagevariants', title: string | null, descriptionheading: string | null, description: string | null, description2: string | null, description3: string | null, descriptionheading2: string | null, details: string | null, icon: { __typename: 'PageBlocksContentandimagevariantContentandimagevariantsIcon', name: string | null, color: string | null, style: string | null } | null, image: { __typename: 'PageBlocksContentandimagevariantContentandimagevariantsImage', src: string | null, alt: string | null } | null, actions: Array<{ __typename: 'PageBlocksContentandimagevariantContentandimagevariantsActions', label: string | null, type: string | null, link: string | null } | null> | null } | null> | null }
+    | { __typename: 'PageBlocksFreqaskedquestions', background: string | null, headline: string | null, tagline: string | null, description: string | null, image: { __typename: 'PageBlocksFreqaskedquestionsImage', src: string | null, alt: string | null, videoUrl: string | null } | null, items: Array<{ __typename: 'PageBlocksFreqaskedquestionsItems', title: string | null, text: TinaMarkdownContent | null, icon: { __typename: 'PageBlocksFreqaskedquestionsItemsIcon', name: string | null, color: string | null, style: string | null } | null } | null> | null }
+    | { __typename: 'PageBlocksContentandimage', background: string | null, headline: string | null, description: string | null, contentandimages: Array<{ __typename: 'PageBlocksContentandimageContentandimages', title: string | null, description: string | null, requirements: string | null, image: { __typename: 'PageBlocksContentandimageContentandimagesImage', src: string | null, alt: string | null } | null, actions: Array<{ __typename: 'PageBlocksContentandimageContentandimagesActions', label: string | null, type: string | null, link: string | null } | null> | null } | null> | null }
+    | { __typename: 'PageBlocksVision', title: string | null, description: string | null }
+    | { __typename: 'PageBlocksValues', headline: string | null, description: string | null }
+    | { __typename: 'PageBlocksListcontent', title: string | null, description1: string | null, description2: string | null }
+    | { __typename: 'PageBlocksLeadership', background: string | null, headline: string | null, tagline: string | null, description: string | null, actions: Array<{ __typename: 'PageBlocksLeadershipActions', label: string | null, type: string | null, link: string | null } | null> | null, image: { __typename: 'PageBlocksLeadershipImage', src: string | null, alt: string | null, videoUrl: string | null } | null }
+    | { __typename: 'PageBlocksNextsteps', title: string | null, description: string | null, title1: string | null, description1: string | null, title2: string | null, description2: string | null, title3: string | null, description3: string | null, title4: string | null, description4: string | null }
+    | { __typename: 'PageBlocksContactsection', headline: string | null, actions: Array<{ __typename: 'PageBlocksContactsectionActions', label: string | null, type: string | null, link: string | null } | null> | null }
+   | null> | null };
 
-export type MessagePartsFragment = { __typename: 'Message', color?: string | null, title: string, excerpt?: any | null, date: string, _body?: any | null, image?: { __typename: 'MessageImage', src?: string | null, alt?: string | null, videoUrl?: string | null, embeddable?: boolean | null, autoPlay?: boolean | null, loop?: boolean | null } | null, coordinator?: { __typename: 'Coordinator', name: string, avatar?: string | null, id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null, tags?: Array<{ __typename: 'MessageTags', tag?: { __typename: 'Tag', name: string, id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null };
+export type MessagePartsFragment = { __typename: 'Message', color: string | null, title: string, excerpt: TinaMarkdownContent | null, date: string, _body: TinaMarkdownContent | null, image: { __typename: 'MessageImage', src: string | null, alt: string | null, videoUrl: string | null, embeddable: boolean | null, autoPlay: boolean | null, loop: boolean | null } | null, coordinator: { __typename: 'Coordinator', name: string, avatar: string | null, id: string, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null, tags: Array<{ __typename: 'MessageTags', tag: { __typename: 'Tag', name: string, id: string, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null };
 
-export type EventPartsFragment = { __typename: 'Event', title: string, heroImg?: string | null, description?: any | null, date: string, endtime?: string | null, _body?: any | null, actions?: Array<{ __typename: 'EventActions', label?: string | null, type?: string | null, link?: string | null, icon?: { __typename: 'EventActionsIcon', name?: string | null, color?: string | null, style?: string | null } | null } | null> | null, icon?: { __typename: 'EventIcon', name?: string | null, color?: string | null, style?: string | null } | null, icon2?: { __typename: 'EventIcon2', name?: string | null, color?: string | null, style?: string | null } | null, reccuringeventdetails?: Array<{ __typename: 'EventReccuringeventdetails', recurring?: boolean | null, frequency?: string | null, recstartdate?: string | null, recenddate?: string | null, label?: string | null, type?: string | null, link?: string | null, icon2?: { __typename: 'EventReccuringeventdetailsIcon2', name?: string | null, color?: string | null, style?: string | null } | null, icon?: { __typename: 'EventReccuringeventdetailsIcon', name?: string | null, color?: string | null, style?: string | null } | null } | null> | null, coordinator?: { __typename: 'Coordinator', name: string, avatar?: string | null, id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null, locationdetails?: Array<{ __typename: 'EventLocationdetails', location: string, label?: string | null, type?: string | null, link?: string | null, icon?: { __typename: 'EventLocationdetailsIcon', name?: string | null, color?: string | null, style?: string | null } | null } | null> | null, tags?: Array<{ __typename: 'EventTags', tag?: { __typename: 'Tag', name: string, id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null };
+export type EventPartsFragment = { __typename: 'Event', title: string, heroImg: string | null, description: TinaMarkdownContent | null, date: string, endtime: string | null, _body: TinaMarkdownContent | null, actions: Array<{ __typename: 'EventActions', label: string | null, type: string | null, link: string | null, icon: { __typename: 'EventActionsIcon', name: string | null, color: string | null, style: string | null } | null } | null> | null, icon: { __typename: 'EventIcon', name: string | null, color: string | null, style: string | null } | null, icon2: { __typename: 'EventIcon2', name: string | null, color: string | null, style: string | null } | null, reccuringeventdetails: Array<{ __typename: 'EventReccuringeventdetails', recurring: boolean | null, frequency: string | null, recstartdate: string | null, recenddate: string | null, label: string | null, type: string | null, link: string | null, icon2: { __typename: 'EventReccuringeventdetailsIcon2', name: string | null, color: string | null, style: string | null } | null, icon: { __typename: 'EventReccuringeventdetailsIcon', name: string | null, color: string | null, style: string | null } | null } | null> | null, coordinator: { __typename: 'Coordinator', name: string, avatar: string | null, id: string, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null, locationdetails: Array<{ __typename: 'EventLocationdetails', location: string, label: string | null, type: string | null, link: string | null, icon: { __typename: 'EventLocationdetailsIcon', name: string | null, color: string | null, style: string | null } | null } | null> | null, tags: Array<{ __typename: 'EventTags', tag: { __typename: 'Tag', name: string, id: string, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null };
 
-export type CoordinatorPartsFragment = { __typename: 'Coordinator', name: string, avatar?: string | null };
+export type CoordinatorPartsFragment = { __typename: 'Coordinator', name: string, avatar: string | null };
 
 export type TagPartsFragment = { __typename: 'Tag', name: string };
 
-export type GlobalPartsFragment = { __typename: 'Global', header?: { __typename: 'GlobalHeader', name?: string | null, color?: string | null, icon?: { __typename: 'GlobalHeaderIcon', name?: string | null, color?: string | null, style?: string | null } | null, nav?: Array<{ __typename: 'GlobalHeaderNav', href?: string | null, label?: string | null } | null> | null } | null, footer?: { __typename: 'GlobalFooter', social?: Array<{ __typename: 'GlobalFooterSocial', url?: string | null, icon?: { __typename: 'GlobalFooterSocialIcon', name?: string | null, color?: string | null, style?: string | null } | null } | null> | null } | null, theme?: { __typename: 'GlobalTheme', color?: string | null, font?: string | null, darkMode?: string | null } | null };
+export type GlobalPartsFragment = { __typename: 'Global', header: { __typename: 'GlobalHeader', name: string | null, color: string | null, icon: { __typename: 'GlobalHeaderIcon', name: string | null, color: string | null, style: string | null } | null, nav: Array<{ __typename: 'GlobalHeaderNav', href: string | null, label: string | null } | null> | null } | null, footer: { __typename: 'GlobalFooter', social: Array<{ __typename: 'GlobalFooterSocial', url: string | null, icon: { __typename: 'GlobalFooterSocialIcon', name: string | null, color: string | null, style: string | null } | null } | null> | null } | null, theme: { __typename: 'GlobalTheme', color: string | null, font: string | null, darkMode: string | null } | null };
 
 export type PageQueryVariables = Exact<{
-  relativePath: Scalars['String']['input'];
+  relativePath: string;
 }>;
 
 
-export type PageQuery = { __typename?: 'Query', page: { __typename: 'Page', id: string, _body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, blocks?: Array<{ __typename: 'PageBlocksHero', background?: string | null, headline?: string | null, tagline?: string | null, actions?: Array<{ __typename: 'PageBlocksHeroActions', label?: string | null, type?: string | null, link?: string | null } | null> | null, image?: { __typename: 'PageBlocksHeroImage', src?: string | null, alt?: string | null, videoUrl?: string | null } | null } | { __typename: 'PageBlocksCtalinks', background?: string | null, items?: Array<{ __typename: 'PageBlocksCtalinksItems', title?: string | null, icon?: { __typename: 'PageBlocksCtalinksItemsIcon', name?: string | null, color?: string | null, style?: string | null } | null, actions?: Array<{ __typename: 'PageBlocksCtalinksItemsActions', label?: string | null, type?: string | null, link?: string | null } | null> | null } | null> | null } | { __typename: 'PageBlocksTapdotlinks', background?: string | null, items?: Array<{ __typename: 'PageBlocksTapdotlinksItems', title?: string | null, icon?: { __typename: 'PageBlocksTapdotlinksItemsIcon', name?: string | null, color?: string | null, style?: string | null } | null, actions?: Array<{ __typename: 'PageBlocksTapdotlinksItemsActions', label?: string | null, type?: string | null, link?: string | null } | null> | null } | null> | null } | { __typename: 'PageBlocksAboutsectionsinfo', background?: string | null, headline?: string | null, description?: string | null, items?: Array<{ __typename: 'PageBlocksAboutsectionsinfoItems', cover?: string | null, title?: string | null, actions?: Array<{ __typename: 'PageBlocksAboutsectionsinfoItemsActions', label?: string | null, type?: string | null, link?: string | null } | null> | null } | null> | null } | { __typename: 'PageBlocksAboutus', background?: string | null, headline?: string | null, tagline?: string | null, description?: string | null, actions?: Array<{ __typename: 'PageBlocksAboutusActions', label?: string | null, type?: string | null, link?: string | null } | null> | null, image?: { __typename: 'PageBlocksAboutusImage', src?: string | null, alt?: string | null, videoUrl?: string | null } | null } | { __typename: 'PageBlocksCallout', background?: string | null, text?: string | null, url?: string | null } | { __typename: 'PageBlocksConnections', background?: string | null, headline?: string | null, tagline?: string | null, description?: string | null, items?: Array<{ __typename: 'PageBlocksConnectionsItems', cover?: string | null, title?: string | null, text?: any | null, actions?: Array<{ __typename: 'PageBlocksConnectionsItemsActions', label?: string | null, type?: string | null, link?: string | null } | null> | null } | null> | null } | { __typename: 'PageBlocksFeatures', background?: string | null, headline?: string | null, items?: Array<{ __typename: 'PageBlocksFeaturesItems', title?: string | null, text?: any | null, icon?: { __typename: 'PageBlocksFeaturesItemsIcon', name?: string | null, color?: string | null, style?: string | null } | null } | null> | null } | { __typename: 'PageBlocksGroupsinfo', background?: string | null, headline?: string | null, tagline?: string | null, description?: string | null, items?: Array<{ __typename: 'PageBlocksGroupsinfoItems', cover?: string | null, title?: string | null, text?: any | null, actions?: Array<{ __typename: 'PageBlocksGroupsinfoItemsActions', label?: string | null, type?: string | null, link?: string | null } | null> | null } | null> | null } | { __typename: 'PageBlocksLatestevents', background?: string | null, headline?: string | null, tagline?: string | null, description?: string | null, limit?: number | null, actions?: Array<{ __typename: 'PageBlocksLatesteventsActions', label?: string | null, type?: string | null, link?: string | null } | null> | null } | { __typename: 'PageBlocksLatestmessages', background?: string | null, headline?: string | null, tagline?: string | null, description?: string | null, limit?: number | null, actions?: Array<{ __typename: 'PageBlocksLatestmessagesActions', label?: string | null, type?: string | null, link?: string | null } | null> | null } | { __typename: 'PageBlocksContent', background?: string | null, body?: any | null } | { __typename: 'PageBlocksCta', background?: string | null, headline?: string | null, description?: string | null, image?: { __typename: 'PageBlocksCtaImage', src?: string | null, alt?: string | null, videoUrl?: string | null } | null, actions?: Array<{ __typename: 'PageBlocksCtaActions', label?: string | null, type?: string | null, link?: string | null } | null> | null } | { __typename: 'PageBlocksGroup', background?: string | null, headline?: string | null, description?: string | null, groups?: Array<{ __typename: 'PageBlocksGroupGroups', title?: string | null, description?: string | null, icon?: { __typename: 'PageBlocksGroupGroupsIcon', name?: string | null, color?: string | null, style?: string | null } | null, image?: { __typename: 'PageBlocksGroupGroupsImage', src?: string | null, alt?: string | null, videoUrl?: string | null } | null, actions?: Array<{ __typename: 'PageBlocksGroupGroupsActions', label?: string | null, type?: string | null, link?: string | null } | null> | null } | null> | null } | { __typename: 'PageBlocksVideo', background?: string | null, color?: string | null, url?: string | null, autoPlay?: boolean | null, loop?: boolean | null } | { __typename: 'PageBlocksHerocontent', background?: string | null, headline?: string | null, tagline?: string | null, image?: { __typename: 'PageBlocksHerocontentImage', src?: string | null, alt?: string | null, videoUrl?: string | null } | null } | { __typename: 'PageBlocksHerodonation', background?: string | null, headline?: string | null, tagline?: string | null, image?: { __typename: 'PageBlocksHerodonationImage', src?: string | null, alt?: string | null, videoUrl?: string | null } | null } | { __typename: 'PageBlocksProfile', background?: string | null, headline?: string | null, tagline?: string | null, description?: string | null, actions?: Array<{ __typename: 'PageBlocksProfileActions', label?: string | null, type?: string | null, link?: string | null } | null> | null, image?: { __typename: 'PageBlocksProfileImage', src?: string | null, alt?: string | null, videoUrl?: string | null } | null } | { __typename: 'PageBlocksTeammember', background?: string | null, headline?: string | null, description?: string | null, teammembers?: Array<{ __typename: 'PageBlocksTeammemberTeammembers', quote?: string | null, coordinator?: string | null, role?: string | null, avatar?: string | null, actions?: Array<{ __typename: 'PageBlocksTeammemberTeammembersActions', label?: string | null, type?: string | null, link?: string | null } | null> | null } | null> | null } | { __typename: 'PageBlocksContentandimagevariant', background?: string | null, headline?: string | null, description?: string | null, contentandimagevariants?: Array<{ __typename: 'PageBlocksContentandimagevariantContentandimagevariants', title?: string | null, descriptionheading?: string | null, description?: string | null, description2?: string | null, description3?: string | null, descriptionheading2?: string | null, details?: string | null, icon?: { __typename: 'PageBlocksContentandimagevariantContentandimagevariantsIcon', name?: string | null, color?: string | null, style?: string | null } | null, image?: { __typename: 'PageBlocksContentandimagevariantContentandimagevariantsImage', src?: string | null, alt?: string | null } | null, actions?: Array<{ __typename: 'PageBlocksContentandimagevariantContentandimagevariantsActions', label?: string | null, type?: string | null, link?: string | null } | null> | null } | null> | null } | { __typename: 'PageBlocksFreqaskedquestions', background?: string | null, headline?: string | null, tagline?: string | null, description?: string | null, image?: { __typename: 'PageBlocksFreqaskedquestionsImage', src?: string | null, alt?: string | null, videoUrl?: string | null } | null, items?: Array<{ __typename: 'PageBlocksFreqaskedquestionsItems', title?: string | null, text?: any | null, icon?: { __typename: 'PageBlocksFreqaskedquestionsItemsIcon', name?: string | null, color?: string | null, style?: string | null } | null } | null> | null } | { __typename: 'PageBlocksContentandimage', background?: string | null, headline?: string | null, description?: string | null, contentandimages?: Array<{ __typename: 'PageBlocksContentandimageContentandimages', title?: string | null, description?: string | null, requirements?: string | null, image?: { __typename: 'PageBlocksContentandimageContentandimagesImage', src?: string | null, alt?: string | null } | null, actions?: Array<{ __typename: 'PageBlocksContentandimageContentandimagesActions', label?: string | null, type?: string | null, link?: string | null } | null> | null } | null> | null } | { __typename: 'PageBlocksVision', title?: string | null, description?: string | null } | { __typename: 'PageBlocksValues', headline?: string | null, description?: string | null } | { __typename: 'PageBlocksListcontent', title?: string | null, description1?: string | null, description2?: string | null } | { __typename: 'PageBlocksLeadership', background?: string | null, headline?: string | null, tagline?: string | null, description?: string | null, actions?: Array<{ __typename: 'PageBlocksLeadershipActions', label?: string | null, type?: string | null, link?: string | null } | null> | null, image?: { __typename: 'PageBlocksLeadershipImage', src?: string | null, alt?: string | null, videoUrl?: string | null } | null } | { __typename: 'PageBlocksNextsteps', title?: string | null, description?: string | null, title1?: string | null, description1?: string | null, title2?: string | null, description2?: string | null, title3?: string | null, description3?: string | null, title4?: string | null, description4?: string | null } | { __typename: 'PageBlocksContactsection', headline?: string | null, actions?: Array<{ __typename: 'PageBlocksContactsectionActions', label?: string | null, type?: string | null, link?: string | null } | null> | null } | null> | null } };
+export type PageQuery = { page: { __typename: 'Page', id: string, _body: TinaMarkdownContent | null, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, blocks: Array<
+      | { __typename: 'PageBlocksHero', background: string | null, headline: string | null, tagline: string | null, actions: Array<{ __typename: 'PageBlocksHeroActions', label: string | null, type: string | null, link: string | null } | null> | null, image: { __typename: 'PageBlocksHeroImage', src: string | null, alt: string | null, videoUrl: string | null } | null }
+      | { __typename: 'PageBlocksCtalinks', background: string | null, items: Array<{ __typename: 'PageBlocksCtalinksItems', title: string | null, icon: { __typename: 'PageBlocksCtalinksItemsIcon', name: string | null, color: string | null, style: string | null } | null, actions: Array<{ __typename: 'PageBlocksCtalinksItemsActions', label: string | null, type: string | null, link: string | null } | null> | null } | null> | null }
+      | { __typename: 'PageBlocksTapdotlinks', background: string | null, items: Array<{ __typename: 'PageBlocksTapdotlinksItems', title: string | null, icon: { __typename: 'PageBlocksTapdotlinksItemsIcon', name: string | null, color: string | null, style: string | null } | null, actions: Array<{ __typename: 'PageBlocksTapdotlinksItemsActions', label: string | null, type: string | null, link: string | null } | null> | null } | null> | null }
+      | { __typename: 'PageBlocksAboutsectionsinfo', background: string | null, headline: string | null, description: string | null, items: Array<{ __typename: 'PageBlocksAboutsectionsinfoItems', cover: string | null, title: string | null, actions: Array<{ __typename: 'PageBlocksAboutsectionsinfoItemsActions', label: string | null, type: string | null, link: string | null } | null> | null } | null> | null }
+      | { __typename: 'PageBlocksAboutus', background: string | null, headline: string | null, tagline: string | null, description: string | null, actions: Array<{ __typename: 'PageBlocksAboutusActions', label: string | null, type: string | null, link: string | null } | null> | null, image: { __typename: 'PageBlocksAboutusImage', src: string | null, alt: string | null, videoUrl: string | null } | null }
+      | { __typename: 'PageBlocksCallout', background: string | null, text: string | null, url: string | null }
+      | { __typename: 'PageBlocksConnections', background: string | null, headline: string | null, tagline: string | null, description: string | null, items: Array<{ __typename: 'PageBlocksConnectionsItems', cover: string | null, title: string | null, text: TinaMarkdownContent | null, actions: Array<{ __typename: 'PageBlocksConnectionsItemsActions', label: string | null, type: string | null, link: string | null } | null> | null } | null> | null }
+      | { __typename: 'PageBlocksFeatures', background: string | null, headline: string | null, items: Array<{ __typename: 'PageBlocksFeaturesItems', title: string | null, text: TinaMarkdownContent | null, icon: { __typename: 'PageBlocksFeaturesItemsIcon', name: string | null, color: string | null, style: string | null } | null } | null> | null }
+      | { __typename: 'PageBlocksGroupsinfo', background: string | null, headline: string | null, tagline: string | null, description: string | null, items: Array<{ __typename: 'PageBlocksGroupsinfoItems', cover: string | null, title: string | null, text: TinaMarkdownContent | null, actions: Array<{ __typename: 'PageBlocksGroupsinfoItemsActions', label: string | null, type: string | null, link: string | null } | null> | null } | null> | null }
+      | { __typename: 'PageBlocksLatestevents', background: string | null, headline: string | null, tagline: string | null, description: string | null, limit: number | null, actions: Array<{ __typename: 'PageBlocksLatesteventsActions', label: string | null, type: string | null, link: string | null } | null> | null }
+      | { __typename: 'PageBlocksLatestmessages', background: string | null, headline: string | null, tagline: string | null, description: string | null, limit: number | null, actions: Array<{ __typename: 'PageBlocksLatestmessagesActions', label: string | null, type: string | null, link: string | null } | null> | null }
+      | { __typename: 'PageBlocksContent', background: string | null, body: TinaMarkdownContent | null }
+      | { __typename: 'PageBlocksCta', background: string | null, headline: string | null, description: string | null, image: { __typename: 'PageBlocksCtaImage', src: string | null, alt: string | null, videoUrl: string | null } | null, actions: Array<{ __typename: 'PageBlocksCtaActions', label: string | null, type: string | null, link: string | null } | null> | null }
+      | { __typename: 'PageBlocksGroup', background: string | null, headline: string | null, description: string | null, groups: Array<{ __typename: 'PageBlocksGroupGroups', title: string | null, description: string | null, icon: { __typename: 'PageBlocksGroupGroupsIcon', name: string | null, color: string | null, style: string | null } | null, image: { __typename: 'PageBlocksGroupGroupsImage', src: string | null, alt: string | null, videoUrl: string | null } | null, actions: Array<{ __typename: 'PageBlocksGroupGroupsActions', label: string | null, type: string | null, link: string | null } | null> | null } | null> | null }
+      | { __typename: 'PageBlocksVideo', background: string | null, color: string | null, url: string | null, autoPlay: boolean | null, loop: boolean | null }
+      | { __typename: 'PageBlocksHerocontent', background: string | null, headline: string | null, tagline: string | null, image: { __typename: 'PageBlocksHerocontentImage', src: string | null, alt: string | null, videoUrl: string | null } | null }
+      | { __typename: 'PageBlocksHerodonation', background: string | null, headline: string | null, tagline: string | null, image: { __typename: 'PageBlocksHerodonationImage', src: string | null, alt: string | null, videoUrl: string | null } | null }
+      | { __typename: 'PageBlocksProfile', background: string | null, headline: string | null, tagline: string | null, description: string | null, actions: Array<{ __typename: 'PageBlocksProfileActions', label: string | null, type: string | null, link: string | null } | null> | null, image: { __typename: 'PageBlocksProfileImage', src: string | null, alt: string | null, videoUrl: string | null } | null }
+      | { __typename: 'PageBlocksTeammember', background: string | null, headline: string | null, description: string | null, teammembers: Array<{ __typename: 'PageBlocksTeammemberTeammembers', quote: string | null, coordinator: string | null, role: string | null, avatar: string | null, actions: Array<{ __typename: 'PageBlocksTeammemberTeammembersActions', label: string | null, type: string | null, link: string | null } | null> | null } | null> | null }
+      | { __typename: 'PageBlocksContentandimagevariant', background: string | null, headline: string | null, description: string | null, contentandimagevariants: Array<{ __typename: 'PageBlocksContentandimagevariantContentandimagevariants', title: string | null, descriptionheading: string | null, description: string | null, description2: string | null, description3: string | null, descriptionheading2: string | null, details: string | null, icon: { __typename: 'PageBlocksContentandimagevariantContentandimagevariantsIcon', name: string | null, color: string | null, style: string | null } | null, image: { __typename: 'PageBlocksContentandimagevariantContentandimagevariantsImage', src: string | null, alt: string | null } | null, actions: Array<{ __typename: 'PageBlocksContentandimagevariantContentandimagevariantsActions', label: string | null, type: string | null, link: string | null } | null> | null } | null> | null }
+      | { __typename: 'PageBlocksFreqaskedquestions', background: string | null, headline: string | null, tagline: string | null, description: string | null, image: { __typename: 'PageBlocksFreqaskedquestionsImage', src: string | null, alt: string | null, videoUrl: string | null } | null, items: Array<{ __typename: 'PageBlocksFreqaskedquestionsItems', title: string | null, text: TinaMarkdownContent | null, icon: { __typename: 'PageBlocksFreqaskedquestionsItemsIcon', name: string | null, color: string | null, style: string | null } | null } | null> | null }
+      | { __typename: 'PageBlocksContentandimage', background: string | null, headline: string | null, description: string | null, contentandimages: Array<{ __typename: 'PageBlocksContentandimageContentandimages', title: string | null, description: string | null, requirements: string | null, image: { __typename: 'PageBlocksContentandimageContentandimagesImage', src: string | null, alt: string | null } | null, actions: Array<{ __typename: 'PageBlocksContentandimageContentandimagesActions', label: string | null, type: string | null, link: string | null } | null> | null } | null> | null }
+      | { __typename: 'PageBlocksVision', title: string | null, description: string | null }
+      | { __typename: 'PageBlocksValues', headline: string | null, description: string | null }
+      | { __typename: 'PageBlocksListcontent', title: string | null, description1: string | null, description2: string | null }
+      | { __typename: 'PageBlocksLeadership', background: string | null, headline: string | null, tagline: string | null, description: string | null, actions: Array<{ __typename: 'PageBlocksLeadershipActions', label: string | null, type: string | null, link: string | null } | null> | null, image: { __typename: 'PageBlocksLeadershipImage', src: string | null, alt: string | null, videoUrl: string | null } | null }
+      | { __typename: 'PageBlocksNextsteps', title: string | null, description: string | null, title1: string | null, description1: string | null, title2: string | null, description2: string | null, title3: string | null, description3: string | null, title4: string | null, description4: string | null }
+      | { __typename: 'PageBlocksContactsection', headline: string | null, actions: Array<{ __typename: 'PageBlocksContactsectionActions', label: string | null, type: string | null, link: string | null } | null> | null }
+     | null> | null } };
 
 export type PageConnectionQueryVariables = Exact<{
-  before?: InputMaybe<Scalars['String']['input']>;
-  after?: InputMaybe<Scalars['String']['input']>;
-  first?: InputMaybe<Scalars['Float']['input']>;
-  last?: InputMaybe<Scalars['Float']['input']>;
-  sort?: InputMaybe<Scalars['String']['input']>;
-  filter?: InputMaybe<PageFilter>;
+  before?: string | null | undefined;
+  after?: string | null | undefined;
+  first?: number | null | undefined;
+  last?: number | null | undefined;
+  sort?: string | null | undefined;
+  filter?: PageFilter | null | undefined;
 }>;
 
 
-export type PageConnectionQuery = { __typename?: 'Query', pageConnection: { __typename?: 'PageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'PageConnectionEdges', cursor: string, node?: { __typename: 'Page', id: string, _body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, blocks?: Array<{ __typename: 'PageBlocksHero', background?: string | null, headline?: string | null, tagline?: string | null, actions?: Array<{ __typename: 'PageBlocksHeroActions', label?: string | null, type?: string | null, link?: string | null } | null> | null, image?: { __typename: 'PageBlocksHeroImage', src?: string | null, alt?: string | null, videoUrl?: string | null } | null } | { __typename: 'PageBlocksCtalinks', background?: string | null, items?: Array<{ __typename: 'PageBlocksCtalinksItems', title?: string | null, icon?: { __typename: 'PageBlocksCtalinksItemsIcon', name?: string | null, color?: string | null, style?: string | null } | null, actions?: Array<{ __typename: 'PageBlocksCtalinksItemsActions', label?: string | null, type?: string | null, link?: string | null } | null> | null } | null> | null } | { __typename: 'PageBlocksTapdotlinks', background?: string | null, items?: Array<{ __typename: 'PageBlocksTapdotlinksItems', title?: string | null, icon?: { __typename: 'PageBlocksTapdotlinksItemsIcon', name?: string | null, color?: string | null, style?: string | null } | null, actions?: Array<{ __typename: 'PageBlocksTapdotlinksItemsActions', label?: string | null, type?: string | null, link?: string | null } | null> | null } | null> | null } | { __typename: 'PageBlocksAboutsectionsinfo', background?: string | null, headline?: string | null, description?: string | null, items?: Array<{ __typename: 'PageBlocksAboutsectionsinfoItems', cover?: string | null, title?: string | null, actions?: Array<{ __typename: 'PageBlocksAboutsectionsinfoItemsActions', label?: string | null, type?: string | null, link?: string | null } | null> | null } | null> | null } | { __typename: 'PageBlocksAboutus', background?: string | null, headline?: string | null, tagline?: string | null, description?: string | null, actions?: Array<{ __typename: 'PageBlocksAboutusActions', label?: string | null, type?: string | null, link?: string | null } | null> | null, image?: { __typename: 'PageBlocksAboutusImage', src?: string | null, alt?: string | null, videoUrl?: string | null } | null } | { __typename: 'PageBlocksCallout', background?: string | null, text?: string | null, url?: string | null } | { __typename: 'PageBlocksConnections', background?: string | null, headline?: string | null, tagline?: string | null, description?: string | null, items?: Array<{ __typename: 'PageBlocksConnectionsItems', cover?: string | null, title?: string | null, text?: any | null, actions?: Array<{ __typename: 'PageBlocksConnectionsItemsActions', label?: string | null, type?: string | null, link?: string | null } | null> | null } | null> | null } | { __typename: 'PageBlocksFeatures', background?: string | null, headline?: string | null, items?: Array<{ __typename: 'PageBlocksFeaturesItems', title?: string | null, text?: any | null, icon?: { __typename: 'PageBlocksFeaturesItemsIcon', name?: string | null, color?: string | null, style?: string | null } | null } | null> | null } | { __typename: 'PageBlocksGroupsinfo', background?: string | null, headline?: string | null, tagline?: string | null, description?: string | null, items?: Array<{ __typename: 'PageBlocksGroupsinfoItems', cover?: string | null, title?: string | null, text?: any | null, actions?: Array<{ __typename: 'PageBlocksGroupsinfoItemsActions', label?: string | null, type?: string | null, link?: string | null } | null> | null } | null> | null } | { __typename: 'PageBlocksLatestevents', background?: string | null, headline?: string | null, tagline?: string | null, description?: string | null, limit?: number | null, actions?: Array<{ __typename: 'PageBlocksLatesteventsActions', label?: string | null, type?: string | null, link?: string | null } | null> | null } | { __typename: 'PageBlocksLatestmessages', background?: string | null, headline?: string | null, tagline?: string | null, description?: string | null, limit?: number | null, actions?: Array<{ __typename: 'PageBlocksLatestmessagesActions', label?: string | null, type?: string | null, link?: string | null } | null> | null } | { __typename: 'PageBlocksContent', background?: string | null, body?: any | null } | { __typename: 'PageBlocksCta', background?: string | null, headline?: string | null, description?: string | null, image?: { __typename: 'PageBlocksCtaImage', src?: string | null, alt?: string | null, videoUrl?: string | null } | null, actions?: Array<{ __typename: 'PageBlocksCtaActions', label?: string | null, type?: string | null, link?: string | null } | null> | null } | { __typename: 'PageBlocksGroup', background?: string | null, headline?: string | null, description?: string | null, groups?: Array<{ __typename: 'PageBlocksGroupGroups', title?: string | null, description?: string | null, icon?: { __typename: 'PageBlocksGroupGroupsIcon', name?: string | null, color?: string | null, style?: string | null } | null, image?: { __typename: 'PageBlocksGroupGroupsImage', src?: string | null, alt?: string | null, videoUrl?: string | null } | null, actions?: Array<{ __typename: 'PageBlocksGroupGroupsActions', label?: string | null, type?: string | null, link?: string | null } | null> | null } | null> | null } | { __typename: 'PageBlocksVideo', background?: string | null, color?: string | null, url?: string | null, autoPlay?: boolean | null, loop?: boolean | null } | { __typename: 'PageBlocksHerocontent', background?: string | null, headline?: string | null, tagline?: string | null, image?: { __typename: 'PageBlocksHerocontentImage', src?: string | null, alt?: string | null, videoUrl?: string | null } | null } | { __typename: 'PageBlocksHerodonation', background?: string | null, headline?: string | null, tagline?: string | null, image?: { __typename: 'PageBlocksHerodonationImage', src?: string | null, alt?: string | null, videoUrl?: string | null } | null } | { __typename: 'PageBlocksProfile', background?: string | null, headline?: string | null, tagline?: string | null, description?: string | null, actions?: Array<{ __typename: 'PageBlocksProfileActions', label?: string | null, type?: string | null, link?: string | null } | null> | null, image?: { __typename: 'PageBlocksProfileImage', src?: string | null, alt?: string | null, videoUrl?: string | null } | null } | { __typename: 'PageBlocksTeammember', background?: string | null, headline?: string | null, description?: string | null, teammembers?: Array<{ __typename: 'PageBlocksTeammemberTeammembers', quote?: string | null, coordinator?: string | null, role?: string | null, avatar?: string | null, actions?: Array<{ __typename: 'PageBlocksTeammemberTeammembersActions', label?: string | null, type?: string | null, link?: string | null } | null> | null } | null> | null } | { __typename: 'PageBlocksContentandimagevariant', background?: string | null, headline?: string | null, description?: string | null, contentandimagevariants?: Array<{ __typename: 'PageBlocksContentandimagevariantContentandimagevariants', title?: string | null, descriptionheading?: string | null, description?: string | null, description2?: string | null, description3?: string | null, descriptionheading2?: string | null, details?: string | null, icon?: { __typename: 'PageBlocksContentandimagevariantContentandimagevariantsIcon', name?: string | null, color?: string | null, style?: string | null } | null, image?: { __typename: 'PageBlocksContentandimagevariantContentandimagevariantsImage', src?: string | null, alt?: string | null } | null, actions?: Array<{ __typename: 'PageBlocksContentandimagevariantContentandimagevariantsActions', label?: string | null, type?: string | null, link?: string | null } | null> | null } | null> | null } | { __typename: 'PageBlocksFreqaskedquestions', background?: string | null, headline?: string | null, tagline?: string | null, description?: string | null, image?: { __typename: 'PageBlocksFreqaskedquestionsImage', src?: string | null, alt?: string | null, videoUrl?: string | null } | null, items?: Array<{ __typename: 'PageBlocksFreqaskedquestionsItems', title?: string | null, text?: any | null, icon?: { __typename: 'PageBlocksFreqaskedquestionsItemsIcon', name?: string | null, color?: string | null, style?: string | null } | null } | null> | null } | { __typename: 'PageBlocksContentandimage', background?: string | null, headline?: string | null, description?: string | null, contentandimages?: Array<{ __typename: 'PageBlocksContentandimageContentandimages', title?: string | null, description?: string | null, requirements?: string | null, image?: { __typename: 'PageBlocksContentandimageContentandimagesImage', src?: string | null, alt?: string | null } | null, actions?: Array<{ __typename: 'PageBlocksContentandimageContentandimagesActions', label?: string | null, type?: string | null, link?: string | null } | null> | null } | null> | null } | { __typename: 'PageBlocksVision', title?: string | null, description?: string | null } | { __typename: 'PageBlocksValues', headline?: string | null, description?: string | null } | { __typename: 'PageBlocksListcontent', title?: string | null, description1?: string | null, description2?: string | null } | { __typename: 'PageBlocksLeadership', background?: string | null, headline?: string | null, tagline?: string | null, description?: string | null, actions?: Array<{ __typename: 'PageBlocksLeadershipActions', label?: string | null, type?: string | null, link?: string | null } | null> | null, image?: { __typename: 'PageBlocksLeadershipImage', src?: string | null, alt?: string | null, videoUrl?: string | null } | null } | { __typename: 'PageBlocksNextsteps', title?: string | null, description?: string | null, title1?: string | null, description1?: string | null, title2?: string | null, description2?: string | null, title3?: string | null, description3?: string | null, title4?: string | null, description4?: string | null } | { __typename: 'PageBlocksContactsection', headline?: string | null, actions?: Array<{ __typename: 'PageBlocksContactsectionActions', label?: string | null, type?: string | null, link?: string | null } | null> | null } | null> | null } | null } | null> | null } };
+export type PageConnectionQuery = { pageConnection: { totalCount: number, pageInfo: { hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges: Array<{ cursor: string, node: { __typename: 'Page', id: string, _body: TinaMarkdownContent | null, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, blocks: Array<
+          | { __typename: 'PageBlocksHero', background: string | null, headline: string | null, tagline: string | null, actions: Array<{ __typename: 'PageBlocksHeroActions', label: string | null, type: string | null, link: string | null } | null> | null, image: { __typename: 'PageBlocksHeroImage', src: string | null, alt: string | null, videoUrl: string | null } | null }
+          | { __typename: 'PageBlocksCtalinks', background: string | null, items: Array<{ __typename: 'PageBlocksCtalinksItems', title: string | null, icon: { __typename: 'PageBlocksCtalinksItemsIcon', name: string | null, color: string | null, style: string | null } | null, actions: Array<{ __typename: 'PageBlocksCtalinksItemsActions', label: string | null, type: string | null, link: string | null } | null> | null } | null> | null }
+          | { __typename: 'PageBlocksTapdotlinks', background: string | null, items: Array<{ __typename: 'PageBlocksTapdotlinksItems', title: string | null, icon: { __typename: 'PageBlocksTapdotlinksItemsIcon', name: string | null, color: string | null, style: string | null } | null, actions: Array<{ __typename: 'PageBlocksTapdotlinksItemsActions', label: string | null, type: string | null, link: string | null } | null> | null } | null> | null }
+          | { __typename: 'PageBlocksAboutsectionsinfo', background: string | null, headline: string | null, description: string | null, items: Array<{ __typename: 'PageBlocksAboutsectionsinfoItems', cover: string | null, title: string | null, actions: Array<{ __typename: 'PageBlocksAboutsectionsinfoItemsActions', label: string | null, type: string | null, link: string | null } | null> | null } | null> | null }
+          | { __typename: 'PageBlocksAboutus', background: string | null, headline: string | null, tagline: string | null, description: string | null, actions: Array<{ __typename: 'PageBlocksAboutusActions', label: string | null, type: string | null, link: string | null } | null> | null, image: { __typename: 'PageBlocksAboutusImage', src: string | null, alt: string | null, videoUrl: string | null } | null }
+          | { __typename: 'PageBlocksCallout', background: string | null, text: string | null, url: string | null }
+          | { __typename: 'PageBlocksConnections', background: string | null, headline: string | null, tagline: string | null, description: string | null, items: Array<{ __typename: 'PageBlocksConnectionsItems', cover: string | null, title: string | null, text: TinaMarkdownContent | null, actions: Array<{ __typename: 'PageBlocksConnectionsItemsActions', label: string | null, type: string | null, link: string | null } | null> | null } | null> | null }
+          | { __typename: 'PageBlocksFeatures', background: string | null, headline: string | null, items: Array<{ __typename: 'PageBlocksFeaturesItems', title: string | null, text: TinaMarkdownContent | null, icon: { __typename: 'PageBlocksFeaturesItemsIcon', name: string | null, color: string | null, style: string | null } | null } | null> | null }
+          | { __typename: 'PageBlocksGroupsinfo', background: string | null, headline: string | null, tagline: string | null, description: string | null, items: Array<{ __typename: 'PageBlocksGroupsinfoItems', cover: string | null, title: string | null, text: TinaMarkdownContent | null, actions: Array<{ __typename: 'PageBlocksGroupsinfoItemsActions', label: string | null, type: string | null, link: string | null } | null> | null } | null> | null }
+          | { __typename: 'PageBlocksLatestevents', background: string | null, headline: string | null, tagline: string | null, description: string | null, limit: number | null, actions: Array<{ __typename: 'PageBlocksLatesteventsActions', label: string | null, type: string | null, link: string | null } | null> | null }
+          | { __typename: 'PageBlocksLatestmessages', background: string | null, headline: string | null, tagline: string | null, description: string | null, limit: number | null, actions: Array<{ __typename: 'PageBlocksLatestmessagesActions', label: string | null, type: string | null, link: string | null } | null> | null }
+          | { __typename: 'PageBlocksContent', background: string | null, body: TinaMarkdownContent | null }
+          | { __typename: 'PageBlocksCta', background: string | null, headline: string | null, description: string | null, image: { __typename: 'PageBlocksCtaImage', src: string | null, alt: string | null, videoUrl: string | null } | null, actions: Array<{ __typename: 'PageBlocksCtaActions', label: string | null, type: string | null, link: string | null } | null> | null }
+          | { __typename: 'PageBlocksGroup', background: string | null, headline: string | null, description: string | null, groups: Array<{ __typename: 'PageBlocksGroupGroups', title: string | null, description: string | null, icon: { __typename: 'PageBlocksGroupGroupsIcon', name: string | null, color: string | null, style: string | null } | null, image: { __typename: 'PageBlocksGroupGroupsImage', src: string | null, alt: string | null, videoUrl: string | null } | null, actions: Array<{ __typename: 'PageBlocksGroupGroupsActions', label: string | null, type: string | null, link: string | null } | null> | null } | null> | null }
+          | { __typename: 'PageBlocksVideo', background: string | null, color: string | null, url: string | null, autoPlay: boolean | null, loop: boolean | null }
+          | { __typename: 'PageBlocksHerocontent', background: string | null, headline: string | null, tagline: string | null, image: { __typename: 'PageBlocksHerocontentImage', src: string | null, alt: string | null, videoUrl: string | null } | null }
+          | { __typename: 'PageBlocksHerodonation', background: string | null, headline: string | null, tagline: string | null, image: { __typename: 'PageBlocksHerodonationImage', src: string | null, alt: string | null, videoUrl: string | null } | null }
+          | { __typename: 'PageBlocksProfile', background: string | null, headline: string | null, tagline: string | null, description: string | null, actions: Array<{ __typename: 'PageBlocksProfileActions', label: string | null, type: string | null, link: string | null } | null> | null, image: { __typename: 'PageBlocksProfileImage', src: string | null, alt: string | null, videoUrl: string | null } | null }
+          | { __typename: 'PageBlocksTeammember', background: string | null, headline: string | null, description: string | null, teammembers: Array<{ __typename: 'PageBlocksTeammemberTeammembers', quote: string | null, coordinator: string | null, role: string | null, avatar: string | null, actions: Array<{ __typename: 'PageBlocksTeammemberTeammembersActions', label: string | null, type: string | null, link: string | null } | null> | null } | null> | null }
+          | { __typename: 'PageBlocksContentandimagevariant', background: string | null, headline: string | null, description: string | null, contentandimagevariants: Array<{ __typename: 'PageBlocksContentandimagevariantContentandimagevariants', title: string | null, descriptionheading: string | null, description: string | null, description2: string | null, description3: string | null, descriptionheading2: string | null, details: string | null, icon: { __typename: 'PageBlocksContentandimagevariantContentandimagevariantsIcon', name: string | null, color: string | null, style: string | null } | null, image: { __typename: 'PageBlocksContentandimagevariantContentandimagevariantsImage', src: string | null, alt: string | null } | null, actions: Array<{ __typename: 'PageBlocksContentandimagevariantContentandimagevariantsActions', label: string | null, type: string | null, link: string | null } | null> | null } | null> | null }
+          | { __typename: 'PageBlocksFreqaskedquestions', background: string | null, headline: string | null, tagline: string | null, description: string | null, image: { __typename: 'PageBlocksFreqaskedquestionsImage', src: string | null, alt: string | null, videoUrl: string | null } | null, items: Array<{ __typename: 'PageBlocksFreqaskedquestionsItems', title: string | null, text: TinaMarkdownContent | null, icon: { __typename: 'PageBlocksFreqaskedquestionsItemsIcon', name: string | null, color: string | null, style: string | null } | null } | null> | null }
+          | { __typename: 'PageBlocksContentandimage', background: string | null, headline: string | null, description: string | null, contentandimages: Array<{ __typename: 'PageBlocksContentandimageContentandimages', title: string | null, description: string | null, requirements: string | null, image: { __typename: 'PageBlocksContentandimageContentandimagesImage', src: string | null, alt: string | null } | null, actions: Array<{ __typename: 'PageBlocksContentandimageContentandimagesActions', label: string | null, type: string | null, link: string | null } | null> | null } | null> | null }
+          | { __typename: 'PageBlocksVision', title: string | null, description: string | null }
+          | { __typename: 'PageBlocksValues', headline: string | null, description: string | null }
+          | { __typename: 'PageBlocksListcontent', title: string | null, description1: string | null, description2: string | null }
+          | { __typename: 'PageBlocksLeadership', background: string | null, headline: string | null, tagline: string | null, description: string | null, actions: Array<{ __typename: 'PageBlocksLeadershipActions', label: string | null, type: string | null, link: string | null } | null> | null, image: { __typename: 'PageBlocksLeadershipImage', src: string | null, alt: string | null, videoUrl: string | null } | null }
+          | { __typename: 'PageBlocksNextsteps', title: string | null, description: string | null, title1: string | null, description1: string | null, title2: string | null, description2: string | null, title3: string | null, description3: string | null, title4: string | null, description4: string | null }
+          | { __typename: 'PageBlocksContactsection', headline: string | null, actions: Array<{ __typename: 'PageBlocksContactsectionActions', label: string | null, type: string | null, link: string | null } | null> | null }
+         | null> | null } | null } | null> | null } };
 
 export type MessageQueryVariables = Exact<{
-  relativePath: Scalars['String']['input'];
+  relativePath: string;
 }>;
 
 
-export type MessageQuery = { __typename?: 'Query', message: { __typename: 'Message', id: string, color?: string | null, title: string, excerpt?: any | null, date: string, _body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, image?: { __typename: 'MessageImage', src?: string | null, alt?: string | null, videoUrl?: string | null, embeddable?: boolean | null, autoPlay?: boolean | null, loop?: boolean | null } | null, coordinator?: { __typename: 'Coordinator', name: string, avatar?: string | null, id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null, tags?: Array<{ __typename: 'MessageTags', tag?: { __typename: 'Tag', name: string, id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
+export type MessageQuery = { message: { __typename: 'Message', id: string, color: string | null, title: string, excerpt: TinaMarkdownContent | null, date: string, _body: TinaMarkdownContent | null, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, image: { __typename: 'MessageImage', src: string | null, alt: string | null, videoUrl: string | null, embeddable: boolean | null, autoPlay: boolean | null, loop: boolean | null } | null, coordinator: { __typename: 'Coordinator', name: string, avatar: string | null, id: string, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null, tags: Array<{ __typename: 'MessageTags', tag: { __typename: 'Tag', name: string, id: string, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
 
 export type MessageConnectionQueryVariables = Exact<{
-  before?: InputMaybe<Scalars['String']['input']>;
-  after?: InputMaybe<Scalars['String']['input']>;
-  first?: InputMaybe<Scalars['Float']['input']>;
-  last?: InputMaybe<Scalars['Float']['input']>;
-  sort?: InputMaybe<Scalars['String']['input']>;
-  filter?: InputMaybe<MessageFilter>;
+  before?: string | null | undefined;
+  after?: string | null | undefined;
+  first?: number | null | undefined;
+  last?: number | null | undefined;
+  sort?: string | null | undefined;
+  filter?: MessageFilter | null | undefined;
 }>;
 
 
-export type MessageConnectionQuery = { __typename?: 'Query', messageConnection: { __typename?: 'MessageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'MessageConnectionEdges', cursor: string, node?: { __typename: 'Message', id: string, color?: string | null, title: string, excerpt?: any | null, date: string, _body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, image?: { __typename: 'MessageImage', src?: string | null, alt?: string | null, videoUrl?: string | null, embeddable?: boolean | null, autoPlay?: boolean | null, loop?: boolean | null } | null, coordinator?: { __typename: 'Coordinator', name: string, avatar?: string | null, id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null, tags?: Array<{ __typename: 'MessageTags', tag?: { __typename: 'Tag', name: string, id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } | null } | null> | null } };
+export type MessageConnectionQuery = { messageConnection: { totalCount: number, pageInfo: { hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges: Array<{ cursor: string, node: { __typename: 'Message', id: string, color: string | null, title: string, excerpt: TinaMarkdownContent | null, date: string, _body: TinaMarkdownContent | null, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, image: { __typename: 'MessageImage', src: string | null, alt: string | null, videoUrl: string | null, embeddable: boolean | null, autoPlay: boolean | null, loop: boolean | null } | null, coordinator: { __typename: 'Coordinator', name: string, avatar: string | null, id: string, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null, tags: Array<{ __typename: 'MessageTags', tag: { __typename: 'Tag', name: string, id: string, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } | null } | null> | null } };
 
 export type EventQueryVariables = Exact<{
-  relativePath: Scalars['String']['input'];
+  relativePath: string;
 }>;
 
 
-export type EventQuery = { __typename?: 'Query', event: { __typename: 'Event', id: string, title: string, heroImg?: string | null, description?: any | null, date: string, endtime?: string | null, _body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, actions?: Array<{ __typename: 'EventActions', label?: string | null, type?: string | null, link?: string | null, icon?: { __typename: 'EventActionsIcon', name?: string | null, color?: string | null, style?: string | null } | null } | null> | null, icon?: { __typename: 'EventIcon', name?: string | null, color?: string | null, style?: string | null } | null, icon2?: { __typename: 'EventIcon2', name?: string | null, color?: string | null, style?: string | null } | null, reccuringeventdetails?: Array<{ __typename: 'EventReccuringeventdetails', recurring?: boolean | null, frequency?: string | null, recstartdate?: string | null, recenddate?: string | null, label?: string | null, type?: string | null, link?: string | null, icon2?: { __typename: 'EventReccuringeventdetailsIcon2', name?: string | null, color?: string | null, style?: string | null } | null, icon?: { __typename: 'EventReccuringeventdetailsIcon', name?: string | null, color?: string | null, style?: string | null } | null } | null> | null, coordinator?: { __typename: 'Coordinator', name: string, avatar?: string | null, id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null, locationdetails?: Array<{ __typename: 'EventLocationdetails', location: string, label?: string | null, type?: string | null, link?: string | null, icon?: { __typename: 'EventLocationdetailsIcon', name?: string | null, color?: string | null, style?: string | null } | null } | null> | null, tags?: Array<{ __typename: 'EventTags', tag?: { __typename: 'Tag', name: string, id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
+export type EventQuery = { event: { __typename: 'Event', id: string, title: string, heroImg: string | null, description: TinaMarkdownContent | null, date: string, endtime: string | null, _body: TinaMarkdownContent | null, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, actions: Array<{ __typename: 'EventActions', label: string | null, type: string | null, link: string | null, icon: { __typename: 'EventActionsIcon', name: string | null, color: string | null, style: string | null } | null } | null> | null, icon: { __typename: 'EventIcon', name: string | null, color: string | null, style: string | null } | null, icon2: { __typename: 'EventIcon2', name: string | null, color: string | null, style: string | null } | null, reccuringeventdetails: Array<{ __typename: 'EventReccuringeventdetails', recurring: boolean | null, frequency: string | null, recstartdate: string | null, recenddate: string | null, label: string | null, type: string | null, link: string | null, icon2: { __typename: 'EventReccuringeventdetailsIcon2', name: string | null, color: string | null, style: string | null } | null, icon: { __typename: 'EventReccuringeventdetailsIcon', name: string | null, color: string | null, style: string | null } | null } | null> | null, coordinator: { __typename: 'Coordinator', name: string, avatar: string | null, id: string, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null, locationdetails: Array<{ __typename: 'EventLocationdetails', location: string, label: string | null, type: string | null, link: string | null, icon: { __typename: 'EventLocationdetailsIcon', name: string | null, color: string | null, style: string | null } | null } | null> | null, tags: Array<{ __typename: 'EventTags', tag: { __typename: 'Tag', name: string, id: string, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
 
 export type EventConnectionQueryVariables = Exact<{
-  before?: InputMaybe<Scalars['String']['input']>;
-  after?: InputMaybe<Scalars['String']['input']>;
-  first?: InputMaybe<Scalars['Float']['input']>;
-  last?: InputMaybe<Scalars['Float']['input']>;
-  sort?: InputMaybe<Scalars['String']['input']>;
-  filter?: InputMaybe<EventFilter>;
+  before?: string | null | undefined;
+  after?: string | null | undefined;
+  first?: number | null | undefined;
+  last?: number | null | undefined;
+  sort?: string | null | undefined;
+  filter?: EventFilter | null | undefined;
 }>;
 
 
-export type EventConnectionQuery = { __typename?: 'Query', eventConnection: { __typename?: 'EventConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'EventConnectionEdges', cursor: string, node?: { __typename: 'Event', id: string, title: string, heroImg?: string | null, description?: any | null, date: string, endtime?: string | null, _body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, actions?: Array<{ __typename: 'EventActions', label?: string | null, type?: string | null, link?: string | null, icon?: { __typename: 'EventActionsIcon', name?: string | null, color?: string | null, style?: string | null } | null } | null> | null, icon?: { __typename: 'EventIcon', name?: string | null, color?: string | null, style?: string | null } | null, icon2?: { __typename: 'EventIcon2', name?: string | null, color?: string | null, style?: string | null } | null, reccuringeventdetails?: Array<{ __typename: 'EventReccuringeventdetails', recurring?: boolean | null, frequency?: string | null, recstartdate?: string | null, recenddate?: string | null, label?: string | null, type?: string | null, link?: string | null, icon2?: { __typename: 'EventReccuringeventdetailsIcon2', name?: string | null, color?: string | null, style?: string | null } | null, icon?: { __typename: 'EventReccuringeventdetailsIcon', name?: string | null, color?: string | null, style?: string | null } | null } | null> | null, coordinator?: { __typename: 'Coordinator', name: string, avatar?: string | null, id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null, locationdetails?: Array<{ __typename: 'EventLocationdetails', location: string, label?: string | null, type?: string | null, link?: string | null, icon?: { __typename: 'EventLocationdetailsIcon', name?: string | null, color?: string | null, style?: string | null } | null } | null> | null, tags?: Array<{ __typename: 'EventTags', tag?: { __typename: 'Tag', name: string, id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } | null } | null> | null } };
+export type EventConnectionQuery = { eventConnection: { totalCount: number, pageInfo: { hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges: Array<{ cursor: string, node: { __typename: 'Event', id: string, title: string, heroImg: string | null, description: TinaMarkdownContent | null, date: string, endtime: string | null, _body: TinaMarkdownContent | null, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, actions: Array<{ __typename: 'EventActions', label: string | null, type: string | null, link: string | null, icon: { __typename: 'EventActionsIcon', name: string | null, color: string | null, style: string | null } | null } | null> | null, icon: { __typename: 'EventIcon', name: string | null, color: string | null, style: string | null } | null, icon2: { __typename: 'EventIcon2', name: string | null, color: string | null, style: string | null } | null, reccuringeventdetails: Array<{ __typename: 'EventReccuringeventdetails', recurring: boolean | null, frequency: string | null, recstartdate: string | null, recenddate: string | null, label: string | null, type: string | null, link: string | null, icon2: { __typename: 'EventReccuringeventdetailsIcon2', name: string | null, color: string | null, style: string | null } | null, icon: { __typename: 'EventReccuringeventdetailsIcon', name: string | null, color: string | null, style: string | null } | null } | null> | null, coordinator: { __typename: 'Coordinator', name: string, avatar: string | null, id: string, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null, locationdetails: Array<{ __typename: 'EventLocationdetails', location: string, label: string | null, type: string | null, link: string | null, icon: { __typename: 'EventLocationdetailsIcon', name: string | null, color: string | null, style: string | null } | null } | null> | null, tags: Array<{ __typename: 'EventTags', tag: { __typename: 'Tag', name: string, id: string, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } | null } | null> | null } };
 
 export type CoordinatorQueryVariables = Exact<{
-  relativePath: Scalars['String']['input'];
+  relativePath: string;
 }>;
 
 
-export type CoordinatorQuery = { __typename?: 'Query', coordinator: { __typename: 'Coordinator', id: string, name: string, avatar?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+export type CoordinatorQuery = { coordinator: { __typename: 'Coordinator', id: string, name: string, avatar: string | null, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
 
 export type CoordinatorConnectionQueryVariables = Exact<{
-  before?: InputMaybe<Scalars['String']['input']>;
-  after?: InputMaybe<Scalars['String']['input']>;
-  first?: InputMaybe<Scalars['Float']['input']>;
-  last?: InputMaybe<Scalars['Float']['input']>;
-  sort?: InputMaybe<Scalars['String']['input']>;
-  filter?: InputMaybe<CoordinatorFilter>;
+  before?: string | null | undefined;
+  after?: string | null | undefined;
+  first?: number | null | undefined;
+  last?: number | null | undefined;
+  sort?: string | null | undefined;
+  filter?: CoordinatorFilter | null | undefined;
 }>;
 
 
-export type CoordinatorConnectionQuery = { __typename?: 'Query', coordinatorConnection: { __typename?: 'CoordinatorConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'CoordinatorConnectionEdges', cursor: string, node?: { __typename: 'Coordinator', id: string, name: string, avatar?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
+export type CoordinatorConnectionQuery = { coordinatorConnection: { totalCount: number, pageInfo: { hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges: Array<{ cursor: string, node: { __typename: 'Coordinator', id: string, name: string, avatar: string | null, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
 
 export type TagQueryVariables = Exact<{
-  relativePath: Scalars['String']['input'];
+  relativePath: string;
 }>;
 
 
-export type TagQuery = { __typename?: 'Query', tag: { __typename: 'Tag', id: string, name: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+export type TagQuery = { tag: { __typename: 'Tag', id: string, name: string, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
 
 export type TagConnectionQueryVariables = Exact<{
-  before?: InputMaybe<Scalars['String']['input']>;
-  after?: InputMaybe<Scalars['String']['input']>;
-  first?: InputMaybe<Scalars['Float']['input']>;
-  last?: InputMaybe<Scalars['Float']['input']>;
-  sort?: InputMaybe<Scalars['String']['input']>;
-  filter?: InputMaybe<TagFilter>;
+  before?: string | null | undefined;
+  after?: string | null | undefined;
+  first?: number | null | undefined;
+  last?: number | null | undefined;
+  sort?: string | null | undefined;
+  filter?: TagFilter | null | undefined;
 }>;
 
 
-export type TagConnectionQuery = { __typename?: 'Query', tagConnection: { __typename?: 'TagConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'TagConnectionEdges', cursor: string, node?: { __typename: 'Tag', id: string, name: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
+export type TagConnectionQuery = { tagConnection: { totalCount: number, pageInfo: { hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges: Array<{ cursor: string, node: { __typename: 'Tag', id: string, name: string, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
 
 export type GlobalQueryVariables = Exact<{
-  relativePath: Scalars['String']['input'];
+  relativePath: string;
 }>;
 
 
-export type GlobalQuery = { __typename?: 'Query', global: { __typename: 'Global', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, header?: { __typename: 'GlobalHeader', name?: string | null, color?: string | null, icon?: { __typename: 'GlobalHeaderIcon', name?: string | null, color?: string | null, style?: string | null } | null, nav?: Array<{ __typename: 'GlobalHeaderNav', href?: string | null, label?: string | null } | null> | null } | null, footer?: { __typename: 'GlobalFooter', social?: Array<{ __typename: 'GlobalFooterSocial', url?: string | null, icon?: { __typename: 'GlobalFooterSocialIcon', name?: string | null, color?: string | null, style?: string | null } | null } | null> | null } | null, theme?: { __typename: 'GlobalTheme', color?: string | null, font?: string | null, darkMode?: string | null } | null } };
+export type GlobalQuery = { global: { __typename: 'Global', id: string, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, header: { __typename: 'GlobalHeader', name: string | null, color: string | null, icon: { __typename: 'GlobalHeaderIcon', name: string | null, color: string | null, style: string | null } | null, nav: Array<{ __typename: 'GlobalHeaderNav', href: string | null, label: string | null } | null> | null } | null, footer: { __typename: 'GlobalFooter', social: Array<{ __typename: 'GlobalFooterSocial', url: string | null, icon: { __typename: 'GlobalFooterSocialIcon', name: string | null, color: string | null, style: string | null } | null } | null> | null } | null, theme: { __typename: 'GlobalTheme', color: string | null, font: string | null, darkMode: string | null } | null } };
 
 export type GlobalConnectionQueryVariables = Exact<{
-  before?: InputMaybe<Scalars['String']['input']>;
-  after?: InputMaybe<Scalars['String']['input']>;
-  first?: InputMaybe<Scalars['Float']['input']>;
-  last?: InputMaybe<Scalars['Float']['input']>;
-  sort?: InputMaybe<Scalars['String']['input']>;
-  filter?: InputMaybe<GlobalFilter>;
+  before?: string | null | undefined;
+  after?: string | null | undefined;
+  first?: number | null | undefined;
+  last?: number | null | undefined;
+  sort?: string | null | undefined;
+  filter?: GlobalFilter | null | undefined;
 }>;
 
 
-export type GlobalConnectionQuery = { __typename?: 'Query', globalConnection: { __typename?: 'GlobalConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'GlobalConnectionEdges', cursor: string, node?: { __typename: 'Global', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, header?: { __typename: 'GlobalHeader', name?: string | null, color?: string | null, icon?: { __typename: 'GlobalHeaderIcon', name?: string | null, color?: string | null, style?: string | null } | null, nav?: Array<{ __typename: 'GlobalHeaderNav', href?: string | null, label?: string | null } | null> | null } | null, footer?: { __typename: 'GlobalFooter', social?: Array<{ __typename: 'GlobalFooterSocial', url?: string | null, icon?: { __typename: 'GlobalFooterSocialIcon', name?: string | null, color?: string | null, style?: string | null } | null } | null> | null } | null, theme?: { __typename: 'GlobalTheme', color?: string | null, font?: string | null, darkMode?: string | null } | null } | null } | null> | null } };
+export type GlobalConnectionQuery = { globalConnection: { totalCount: number, pageInfo: { hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges: Array<{ cursor: string, node: { __typename: 'Global', id: string, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, header: { __typename: 'GlobalHeader', name: string | null, color: string | null, icon: { __typename: 'GlobalHeaderIcon', name: string | null, color: string | null, style: string | null } | null, nav: Array<{ __typename: 'GlobalHeaderNav', href: string | null, label: string | null } | null> | null } | null, footer: { __typename: 'GlobalFooter', social: Array<{ __typename: 'GlobalFooterSocial', url: string | null, icon: { __typename: 'GlobalFooterSocialIcon', name: string | null, color: string | null, style: string | null } | null } | null> | null } | null, theme: { __typename: 'GlobalTheme', color: string | null, font: string | null, darkMode: string | null } | null } | null } | null> | null } };
 
 export const GlobalPartsFragmentDoc = gql`
     fragment GlobalParts on Global {
@@ -3013,7 +4010,7 @@ export const LayoutQueryFragmentFragmentDoc = gql`
     ...GlobalParts
   }
 }
-    ${GlobalPartsFragmentDoc}`;
+    `;
 export const PagePartsFragmentDoc = gql`
     fragment PageParts on Page {
   __typename
@@ -3642,6 +4639,7 @@ export const PageQueryDocument = gql`
   }
 }
     ${LayoutQueryFragmentFragmentDoc}
+${GlobalPartsFragmentDoc}
 ${CoordinatorPartsFragmentDoc}`;
 export const ContentQueryDocument = gql`
     query contentQuery($relativePath: String!) {
@@ -3651,6 +4649,7 @@ export const ContentQueryDocument = gql`
   }
 }
     ${LayoutQueryFragmentFragmentDoc}
+${GlobalPartsFragmentDoc}
 ${PagePartsFragmentDoc}`;
 export const BlogMessageQueryDocument = gql`
     query blogMessageQuery($relativePath: String!) {
@@ -3666,6 +4665,7 @@ export const BlogMessageQueryDocument = gql`
   }
 }
     ${LayoutQueryFragmentFragmentDoc}
+${GlobalPartsFragmentDoc}
 ${MessagePartsFragmentDoc}`;
 export const PageDocument = gql`
     query page($relativePath: String!) {
@@ -4116,5 +5116,7 @@ export const queries = (
   const requester = generateRequester(client)
   return getSdk(requester)
 }
+
+export type { Exact };
 
   
