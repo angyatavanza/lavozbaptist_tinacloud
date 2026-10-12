@@ -64,6 +64,9 @@ export default async function MessagePage({
         videoUrl: fbVideo.videoUrl,
         src: fbVideo.thumbnailUrl,
         embeddable: fbVideo.embeddableUrl,
+        alt: null,
+        autoPlay: false,
+        loop: false,
       },
 
       color: "blue",
