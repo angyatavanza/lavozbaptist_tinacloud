@@ -29,6 +29,11 @@ export const createNavigation = (latestMessageUrl?: string): NavigationSection[]
             Mensaje más reciente <span aria-hidden="true">&rarr;</span>
           </>
         ), href: latestMessageUrl || "/messages" },
+        { title: (
+          <>
+            Mensaje en vivo <span aria-hidden="true">&rarr;</span>
+          </>
+        ), href: latestMessageUrl || "/messages" },
       { title: "Horario de reuniones", href: "/service-times" },
     ],
   },

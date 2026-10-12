@@ -1469,6 +1469,10 @@ var createNavigation = (latestMessageUrl) => [
         "Mensaje m\xE1s reciente ",
         jsx8("span", { "aria-hidden": "true", children: "\u2192" })
       ] }), href: latestMessageUrl || "/messages" },
+      { title: jsxs4(Fragment, { children: [
+        "Mensaje en vivo ",
+        jsx8("span", { "aria-hidden": "true", children: "\u2192" })
+      ] }), href: latestMessageUrl || "/messages" },
       { title: "Horario de reuniones", href: "/service-times" }
     ]
   },
