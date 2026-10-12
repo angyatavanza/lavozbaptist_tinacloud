@@ -27,7 +27,7 @@ export const TapDotLinks = ({ data }: { data: PageBlocksTapdotlinks }) => {
 
 export const Tapdotlink: React.FC<PageBlocksTapdotlinksItems> = (data) => {
   return (
-    <Card className="col-span-2 md:col-span-4 lg:col-span-4 3xl:col-span-4 group overflow-hidden bg-sidebar-background hover:bg-sidebar-accent transition-colors duration-200 shadow-none">
+    <Card className="col-span-2 md:col-span-3 lg:col-span-3 3xl:col-span-3 group overflow-hidden bg-sidebar-background hover:bg-sidebar-accent transition-colors duration-200 shadow-none">
       <CardHeader className="pb-3">
         <div className="flex flex-col items-center text-center">
           {data.icon && (
@@ -39,6 +39,13 @@ export const Tapdotlink: React.FC<PageBlocksTapdotlinksItems> = (data) => {
               />
             </div>
           )}
+        </div>
+        <div className="flex flex-col items-center justify-center gap-5 md:gap-5 md:flex-row min-w-0">
+          {data.title && (
+            <div className="mb-4">
+              <span className="font-roboto inline-flex items-center justify-center min-w-25 gap-3 whitespace-nowrap rounded-sm font-semibold transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive text-base leading-[24px] text-sidebar-foreground hover:text-sidebar-primary transition-colors max-w-full text-center break-words">{data.title}</span>
+            </div>
+            )}
         </div>
         <div className="flex flex-col items-center justify-center gap-5 md:gap-5 md:flex-row min-w-0">
           {data.actions &&

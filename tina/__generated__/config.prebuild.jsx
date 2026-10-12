@@ -97,7 +97,7 @@ import { twMerge } from "tailwind-merge";
 // tina/__generated__/client.ts
 import { createClient as createClient2 } from "tinacms/dist/client";
 
-// tina/__generated__/types.ts
+// tina/__generated__/types.js
 import { createClient } from "tinacms/dist/client";
 function gql(strings, ...args) {
   let str = "";
@@ -152,7 +152,7 @@ var LayoutQueryFragmentFragmentDoc = gql`
     ...GlobalParts
   }
 }
-    ${GlobalPartsFragmentDoc}`;
+    `;
 var PagePartsFragmentDoc = gql`
     fragment PageParts on Page {
   __typename
@@ -781,6 +781,7 @@ var PageQueryDocument = gql`
   }
 }
     ${LayoutQueryFragmentFragmentDoc}
+${GlobalPartsFragmentDoc}
 ${CoordinatorPartsFragmentDoc}`;
 var ContentQueryDocument = gql`
     query contentQuery($relativePath: String!) {
@@ -790,6 +791,7 @@ var ContentQueryDocument = gql`
   }
 }
     ${LayoutQueryFragmentFragmentDoc}
+${GlobalPartsFragmentDoc}
 ${PagePartsFragmentDoc}`;
 var BlogMessageQueryDocument = gql`
     query blogMessageQuery($relativePath: String!) {
@@ -805,6 +807,7 @@ var BlogMessageQueryDocument = gql`
   }
 }
     ${LayoutQueryFragmentFragmentDoc}
+${GlobalPartsFragmentDoc}
 ${MessagePartsFragmentDoc}`;
 var PageDocument = gql`
     query page($relativePath: String!) {
