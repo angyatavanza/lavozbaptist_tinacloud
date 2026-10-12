@@ -1472,7 +1472,7 @@ var createNavigation = (latestMessageUrl) => [
       { title: jsxs4(Fragment, { children: [
         "Mensaje en vivo ",
         jsx8("span", { "aria-hidden": "true", children: "\u2192" })
-      ] }), href: latestMessageUrl || "/messages" },
+      ] }), href: "https://www.facebook.com/igle/live_videos" },
       { title: "Horario de reuniones", href: "/service-times" }
     ]
   },

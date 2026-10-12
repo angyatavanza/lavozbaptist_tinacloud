@@ -33,7 +33,7 @@ export const createNavigation = (latestMessageUrl?: string): NavigationSection[]
           <>
             Mensaje en vivo <span aria-hidden="true">&rarr;</span>
           </>
-        ), href: latestMessageUrl || "/messages" },
+        ), href: "https://www.facebook.com/igle/live_videos" },
       { title: "Horario de reuniones", href: "/service-times" },
     ],
   },
