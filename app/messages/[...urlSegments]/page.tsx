@@ -70,16 +70,34 @@ export default async function MessagePage({
       },
 
       color: "blue",
-
+      tags: [
+        {
+          __typename: "MessageTags",
+          tag: {
+            __typename: "Tag",
+            name: "en línea",
+            id: `fb-${fbVideo.id}`,
+            _sys: {
+              filename: `fb-${fbVideo.id}`,
+              basename: `fb-${fbVideo.id}`,
+              hasReferences: false,
+              breadcrumbs: [filepath],
+              path: `fb-${fbVideo.id}`,
+              relativePath: `fb-${fbVideo.id}.mdx`,
+              extension: "mdx",
+            },
+          },
+        },
+      ],
       coordinator: {
         __typename: "Coordinator",
         name: "La Voz De La Esperanza was live",
         avatar: "/ve_logo.png",
         id: `fb-${fbVideo.id}`,
         _sys: {
-          __typename: "SystemInfo",
           filename: `fb-${fbVideo.id}`,
           basename: `fb-${fbVideo.id}`,
+          hasReferences: false,
           breadcrumbs: [filepath],
           path: `fb-${fbVideo.id}`,
           relativePath: `fb-${fbVideo.id}.mdx`,
@@ -88,9 +106,9 @@ export default async function MessagePage({
       },
 
       _sys: {
-        __typename: "SystemInfo",
         filename: filepath,
         basename: filepath,
+        hasReferences: false,
         path: filepath,
         relativePath: filepath + ".mdx",
         extension: "mdx",
