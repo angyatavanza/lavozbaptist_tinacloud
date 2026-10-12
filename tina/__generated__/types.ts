@@ -759,11 +759,20 @@ export type PageBlocksValues = {
   description?: Maybe<Scalars['String']['output']>;
 };
 
+export type PageBlocksListcontentActions = {
+  __typename?: 'PageBlocksListcontentActions';
+  label?: Maybe<Scalars['String']['output']>;
+  type?: Maybe<Scalars['String']['output']>;
+  link?: Maybe<Scalars['String']['output']>;
+};
+
 export type PageBlocksListcontent = {
   __typename?: 'PageBlocksListcontent';
+  background?: Maybe<Scalars['String']['output']>;
   title?: Maybe<Scalars['String']['output']>;
   description1?: Maybe<Scalars['String']['output']>;
   description2?: Maybe<Scalars['String']['output']>;
+  actions?: Maybe<Array<Maybe<PageBlocksListcontentActions>>>;
 };
 
 export type PageBlocksLeadershipActions = {
@@ -1310,10 +1319,18 @@ export type PageBlocksValuesFilter = {
   description?: InputMaybe<StringFilter>;
 };
 
+export type PageBlocksListcontentActionsFilter = {
+  label?: InputMaybe<StringFilter>;
+  type?: InputMaybe<StringFilter>;
+  link?: InputMaybe<StringFilter>;
+};
+
 export type PageBlocksListcontentFilter = {
+  background?: InputMaybe<StringFilter>;
   title?: InputMaybe<StringFilter>;
   description1?: InputMaybe<StringFilter>;
   description2?: InputMaybe<StringFilter>;
+  actions?: InputMaybe<PageBlocksListcontentActionsFilter>;
 };
 
 export type PageBlocksLeadershipActionsFilter = {
@@ -2574,10 +2591,18 @@ export type PageBlocksValuesMutation = {
   description?: InputMaybe<Scalars['String']['input']>;
 };
 
+export type PageBlocksListcontentActionsMutation = {
+  label?: InputMaybe<Scalars['String']['input']>;
+  type?: InputMaybe<Scalars['String']['input']>;
+  link?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type PageBlocksListcontentMutation = {
+  background?: InputMaybe<Scalars['String']['input']>;
   title?: InputMaybe<Scalars['String']['input']>;
   description1?: InputMaybe<Scalars['String']['input']>;
   description2?: InputMaybe<Scalars['String']['input']>;
+  actions?: InputMaybe<Array<InputMaybe<PageBlocksListcontentActionsMutation>>>;
 };
 
 export type PageBlocksLeadershipActionsMutation = {
@@ -3304,10 +3329,18 @@ export type PageBlocksValuesFilter = {
   description?: StringFilter | null | undefined;
 };
 
+export type PageBlocksListcontentActionsFilter = {
+  label?: StringFilter | null | undefined;
+  type?: StringFilter | null | undefined;
+  link?: StringFilter | null | undefined;
+};
+
 export type PageBlocksListcontentFilter = {
+  background?: StringFilter | null | undefined;
   title?: StringFilter | null | undefined;
   description1?: StringFilter | null | undefined;
   description2?: StringFilter | null | undefined;
+  actions?: PageBlocksListcontentActionsFilter | null | undefined;
 };
 
 export type PageBlocksLeadershipActionsFilter = {
@@ -3738,7 +3771,7 @@ export type ContentQueryQuery = { page: { __typename: 'Page', _body: TinaMarkdow
       | { __typename: 'PageBlocksContentandimage', background: string | null, headline: string | null, description: string | null, contentandimages: Array<{ __typename: 'PageBlocksContentandimageContentandimages', title: string | null, description: string | null, requirements: string | null, image: { __typename: 'PageBlocksContentandimageContentandimagesImage', src: string | null, alt: string | null } | null, actions: Array<{ __typename: 'PageBlocksContentandimageContentandimagesActions', label: string | null, type: string | null, link: string | null } | null> | null } | null> | null }
       | { __typename: 'PageBlocksVision', title: string | null, description: string | null }
       | { __typename: 'PageBlocksValues', headline: string | null, description: string | null }
-      | { __typename: 'PageBlocksListcontent', title: string | null, description1: string | null, description2: string | null }
+      | { __typename: 'PageBlocksListcontent', background: string | null, title: string | null, description1: string | null, description2: string | null, actions: Array<{ __typename: 'PageBlocksListcontentActions', label: string | null, type: string | null, link: string | null } | null> | null }
       | { __typename: 'PageBlocksLeadership', background: string | null, headline: string | null, tagline: string | null, description: string | null, actions: Array<{ __typename: 'PageBlocksLeadershipActions', label: string | null, type: string | null, link: string | null } | null> | null, image: { __typename: 'PageBlocksLeadershipImage', src: string | null, alt: string | null, videoUrl: string | null } | null }
       | { __typename: 'PageBlocksNextsteps', title: string | null, description: string | null, title1: string | null, description1: string | null, title2: string | null, description2: string | null, title3: string | null, description3: string | null, title4: string | null, description4: string | null }
       | { __typename: 'PageBlocksContactsection', headline: string | null, actions: Array<{ __typename: 'PageBlocksContactsectionActions', label: string | null, type: string | null, link: string | null } | null> | null }
@@ -3776,7 +3809,7 @@ export type PagePartsFragment = { __typename: 'Page', _body: TinaMarkdownContent
     | { __typename: 'PageBlocksContentandimage', background: string | null, headline: string | null, description: string | null, contentandimages: Array<{ __typename: 'PageBlocksContentandimageContentandimages', title: string | null, description: string | null, requirements: string | null, image: { __typename: 'PageBlocksContentandimageContentandimagesImage', src: string | null, alt: string | null } | null, actions: Array<{ __typename: 'PageBlocksContentandimageContentandimagesActions', label: string | null, type: string | null, link: string | null } | null> | null } | null> | null }
     | { __typename: 'PageBlocksVision', title: string | null, description: string | null }
     | { __typename: 'PageBlocksValues', headline: string | null, description: string | null }
-    | { __typename: 'PageBlocksListcontent', title: string | null, description1: string | null, description2: string | null }
+    | { __typename: 'PageBlocksListcontent', background: string | null, title: string | null, description1: string | null, description2: string | null, actions: Array<{ __typename: 'PageBlocksListcontentActions', label: string | null, type: string | null, link: string | null } | null> | null }
     | { __typename: 'PageBlocksLeadership', background: string | null, headline: string | null, tagline: string | null, description: string | null, actions: Array<{ __typename: 'PageBlocksLeadershipActions', label: string | null, type: string | null, link: string | null } | null> | null, image: { __typename: 'PageBlocksLeadershipImage', src: string | null, alt: string | null, videoUrl: string | null } | null }
     | { __typename: 'PageBlocksNextsteps', title: string | null, description: string | null, title1: string | null, description1: string | null, title2: string | null, description2: string | null, title3: string | null, description3: string | null, title4: string | null, description4: string | null }
     | { __typename: 'PageBlocksContactsection', headline: string | null, actions: Array<{ __typename: 'PageBlocksContactsectionActions', label: string | null, type: string | null, link: string | null } | null> | null }
@@ -3822,7 +3855,7 @@ export type PageQuery = { page: { __typename: 'Page', id: string, _body: TinaMar
       | { __typename: 'PageBlocksContentandimage', background: string | null, headline: string | null, description: string | null, contentandimages: Array<{ __typename: 'PageBlocksContentandimageContentandimages', title: string | null, description: string | null, requirements: string | null, image: { __typename: 'PageBlocksContentandimageContentandimagesImage', src: string | null, alt: string | null } | null, actions: Array<{ __typename: 'PageBlocksContentandimageContentandimagesActions', label: string | null, type: string | null, link: string | null } | null> | null } | null> | null }
       | { __typename: 'PageBlocksVision', title: string | null, description: string | null }
       | { __typename: 'PageBlocksValues', headline: string | null, description: string | null }
-      | { __typename: 'PageBlocksListcontent', title: string | null, description1: string | null, description2: string | null }
+      | { __typename: 'PageBlocksListcontent', background: string | null, title: string | null, description1: string | null, description2: string | null, actions: Array<{ __typename: 'PageBlocksListcontentActions', label: string | null, type: string | null, link: string | null } | null> | null }
       | { __typename: 'PageBlocksLeadership', background: string | null, headline: string | null, tagline: string | null, description: string | null, actions: Array<{ __typename: 'PageBlocksLeadershipActions', label: string | null, type: string | null, link: string | null } | null> | null, image: { __typename: 'PageBlocksLeadershipImage', src: string | null, alt: string | null, videoUrl: string | null } | null }
       | { __typename: 'PageBlocksNextsteps', title: string | null, description: string | null, title1: string | null, description1: string | null, title2: string | null, description2: string | null, title3: string | null, description3: string | null, title4: string | null, description4: string | null }
       | { __typename: 'PageBlocksContactsection', headline: string | null, actions: Array<{ __typename: 'PageBlocksContactsectionActions', label: string | null, type: string | null, link: string | null } | null> | null }
@@ -3863,7 +3896,7 @@ export type PageConnectionQuery = { pageConnection: { totalCount: number, pageIn
           | { __typename: 'PageBlocksContentandimage', background: string | null, headline: string | null, description: string | null, contentandimages: Array<{ __typename: 'PageBlocksContentandimageContentandimages', title: string | null, description: string | null, requirements: string | null, image: { __typename: 'PageBlocksContentandimageContentandimagesImage', src: string | null, alt: string | null } | null, actions: Array<{ __typename: 'PageBlocksContentandimageContentandimagesActions', label: string | null, type: string | null, link: string | null } | null> | null } | null> | null }
           | { __typename: 'PageBlocksVision', title: string | null, description: string | null }
           | { __typename: 'PageBlocksValues', headline: string | null, description: string | null }
-          | { __typename: 'PageBlocksListcontent', title: string | null, description1: string | null, description2: string | null }
+          | { __typename: 'PageBlocksListcontent', background: string | null, title: string | null, description1: string | null, description2: string | null, actions: Array<{ __typename: 'PageBlocksListcontentActions', label: string | null, type: string | null, link: string | null } | null> | null }
           | { __typename: 'PageBlocksLeadership', background: string | null, headline: string | null, tagline: string | null, description: string | null, actions: Array<{ __typename: 'PageBlocksLeadershipActions', label: string | null, type: string | null, link: string | null } | null> | null, image: { __typename: 'PageBlocksLeadershipImage', src: string | null, alt: string | null, videoUrl: string | null } | null }
           | { __typename: 'PageBlocksNextsteps', title: string | null, description: string | null, title1: string | null, description1: string | null, title2: string | null, description2: string | null, title3: string | null, description3: string | null, title4: string | null, description4: string | null }
           | { __typename: 'PageBlocksContactsection', headline: string | null, actions: Array<{ __typename: 'PageBlocksContactsectionActions', label: string | null, type: string | null, link: string | null } | null> | null }
@@ -4387,9 +4420,16 @@ export const PagePartsFragmentDoc = gql`
       description
     }
     ... on PageBlocksListcontent {
+      background
       title
       description1
       description2
+      actions {
+        __typename
+        label
+        type
+        link
+      }
     }
     ... on PageBlocksLeadership {
       background
@@ -5104,7 +5144,7 @@ export const ExperimentalGetTinaClient = () =>
   getSdk(
     generateRequester(
       createClient({
-        url: "https://content.tinajs.io/4.0/content/49245b1e-a7ee-4385-98f5-befbf4d19b59/github/tinaCloud_live",
+        url: "http://localhost:4001/graphql",
         queries,
       })
     )

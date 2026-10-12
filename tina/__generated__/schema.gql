@@ -541,10 +541,18 @@ type PageBlocksValues {
   description: String
 }
 
+type PageBlocksListcontentActions {
+  label: String
+  type: String
+  link: String
+}
+
 type PageBlocksListcontent {
+  background: String
   title: String
   description1: String
   description2: String
+  actions: [PageBlocksListcontentActions]
 }
 
 type PageBlocksLeadershipActions {
@@ -1084,10 +1092,18 @@ input PageBlocksValuesFilter {
   description: StringFilter
 }
 
+input PageBlocksListcontentActionsFilter {
+  label: StringFilter
+  type: StringFilter
+  link: StringFilter
+}
+
 input PageBlocksListcontentFilter {
+  background: StringFilter
   title: StringFilter
   description1: StringFilter
   description2: StringFilter
+  actions: PageBlocksListcontentActionsFilter
 }
 
 input PageBlocksLeadershipActionsFilter {
@@ -2206,10 +2222,18 @@ input PageBlocksValuesMutation {
   description: String
 }
 
+input PageBlocksListcontentActionsMutation {
+  label: String
+  type: String
+  link: String
+}
+
 input PageBlocksListcontentMutation {
+  background: String
   title: String
   description1: String
   description2: String
+  actions: [PageBlocksListcontentActionsMutation]
 }
 
 input PageBlocksLeadershipActionsMutation {

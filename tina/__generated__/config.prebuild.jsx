@@ -529,9 +529,16 @@ var PagePartsFragmentDoc = gql`
       description
     }
     ... on PageBlocksListcontent {
+      background
       title
       description1
       description2
+      actions {
+        __typename
+        label
+        type
+        link
+      }
     }
     ... on PageBlocksLeadership {
       background
@@ -5164,6 +5171,7 @@ import clsx13 from "clsx";
 import { jsx as jsx68, jsxs as jsxs47 } from "react/jsx-runtime";
 
 // components/blocks/section-listcontent.tsx
+import Link25 from "next/link";
 import { jsx as jsx69, jsxs as jsxs48 } from "react/jsx-runtime";
 var listcontentBlockSchema = {
   name: "listcontent",
@@ -5177,6 +5185,7 @@ var listcontentBlockSchema = {
     }
   },
   fields: [
+    sectionBlockSchemaField,
     {
       type: "string",
       label: "Title",
@@ -5197,6 +5206,41 @@ var listcontentBlockSchema = {
       ui: {
         component: "textarea"
       }
+    },
+    {
+      label: "Actions",
+      name: "actions",
+      type: "object",
+      list: true,
+      ui: {
+        defaultItem: {
+          label: "Action Label",
+          type: "button",
+          link: "/"
+        },
+        itemProps: (item) => ({ label: item.label })
+      },
+      fields: [
+        {
+          label: "Label",
+          name: "label",
+          type: "string"
+        },
+        {
+          label: "Type",
+          name: "type",
+          type: "string",
+          options: [
+            { label: "Button", value: "button" },
+            { label: "Link", value: "link" }
+          ]
+        },
+        {
+          label: "Link",
+          name: "link",
+          type: "string"
+        }
+      ]
     }
   ]
 };
@@ -5217,23 +5261,23 @@ import Image20 from "next/image";
 import { Prism } from "tinacms/dist/rich-text/prism";
 
 // components/forms/contact-details.tsx
-import Link25 from "next/link";
+import Link26 from "next/link";
 import { jsx as jsx71, jsxs as jsxs50 } from "react/jsx-runtime";
 
 // components/forms/serve-details.tsx
-import Link26 from "next/link";
+import Link27 from "next/link";
 import { jsx as jsx72, jsxs as jsxs51 } from "react/jsx-runtime";
 
 // components/forms/prayer-details.tsx
-import Link27 from "next/link";
+import Link28 from "next/link";
 import { jsx as jsx73, jsxs as jsxs52 } from "react/jsx-runtime";
 
 // components/forms/resources-details.tsx
-import Link28 from "next/link";
+import Link29 from "next/link";
 import { jsx as jsx74, jsxs as jsxs53 } from "react/jsx-runtime";
 
 // components/forms/visitor-details.tsx
-import Link29 from "next/link";
+import Link30 from "next/link";
 import { jsx as jsx75, jsxs as jsxs54 } from "react/jsx-runtime";
 
 // components/forms/contact-form.tsx
@@ -5361,7 +5405,7 @@ var nextstepsBlockSchema = {
 };
 
 // components/blocks/section-contact.tsx
-import Link30 from "next/link";
+import Link31 from "next/link";
 import { tinaField as tinaField27 } from "tinacms/dist/react";
 import { jsx as jsx87, jsxs as jsxs65 } from "react/jsx-runtime";
 var contactsectionBlockSchema = {

@@ -373,9 +373,16 @@ fragment PageParts on Page {
       description
     }
     ... on PageBlocksListcontent {
+      background
       title
       description1
       description2
+      actions {
+        __typename
+        label
+        type
+        link
+      }
     }
     ... on PageBlocksLeadership {
       background

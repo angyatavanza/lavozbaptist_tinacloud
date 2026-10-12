@@ -25,9 +25,9 @@ interface ListItemProps {
 
 export const ListItem = ({ title, children }: ListItemProps) => {
   return (
-    <li className="group mt-10 first:mt-0">
+    <li className="group mt-5 first:mt-0">
       <FadeIn>
-        <Border className="pt-10 group-first:pt-0 group-first:before:hidden group-first:after:hidden">
+        <Border className="pt-5 group-first:pt-0 group-first:before:hidden group-first:after:hidden">
           {title && (
             <strong className="font-medium text-primary">{`${title}. `}</strong>
           )}
