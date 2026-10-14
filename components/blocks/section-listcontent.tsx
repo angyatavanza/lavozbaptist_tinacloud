@@ -5,6 +5,7 @@ import { TagList, TagListItem } from "@/components/ui/tag-list";
 import { List, ListItem } from "@/components/ui/list";
 import type { Template } from "tinacms";
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
 import Link from "next/link";
 import { AnimatedGroup } from "../motion-primitives/animated-group";
 import { Section, sectionBlockSchemaField } from "@/components/layout/section";
@@ -43,7 +44,7 @@ export const Listcontent = ({ data }: { data: PageBlocksListcontent }) => {
     <div className="mx-auto px-4 md:px-5 mt-24 mb-10 md:mb-15 lg:mb-20 space-y-24 [counter-reset:section] md:mt-32 md:space-y-32 lg:mt-40 lg:space-y-40">
       <SectionIntro
         title={data.title ?? "Servicio comunitario"}
-        image={{ src: "/uploads/pages/LaVoz_Recursos_Comunitarios.jpeg", shape: 1 }}
+        image={{ src: "/uploads/pages/LaVoz_Recursos_Comunitarios.jpeg", shape: 1  }}
         data-tina-field={tinaField(data, "title")}
       >
         <div className="space-y-6 text-base text-body-foreground">
@@ -55,7 +56,18 @@ export const Listcontent = ({ data }: { data: PageBlocksListcontent }) => {
           </p>
         </div>
         <h3 className="mt-12 text-base font-nunito font-medium text-primary">
-          Ofrecemos suministros esenciales como:
+          Conectamos a las familias con recursos comunitarios como:
+        </h3>
+        <List className="mt-4">
+          <ListItem title="">Clínicas de salud</ListItem>
+          <ListItem title="">Campaña de útiles escolares</ListItem>
+          <ListItem title="">Clases de computacion y Ingles</ListItem>
+          <ListItem title="">Bancos de comida incluyendo el Día de Acción de Gracias</ListItem>
+          <ListItem title="">HUB - Apoyo para mamás embarazadas y/o con bebés de hasta 12 meses</ListItem>
+          <ListItem title="">Otros programas de apoyo local</ListItem>
+        </List>
+         <h3 className="mt-12 text-base font-nunito font-medium text-primary">
+          A través de nuestro HUB mensual, ofrecemos suministros esenciales como:
         </h3>
         <TagList className="mt-4">
           <TagListItem>Pañales</TagListItem>
@@ -64,14 +76,6 @@ export const Listcontent = ({ data }: { data: PageBlocksListcontent }) => {
           <TagListItem>Toallitas húmedas</TagListItem>
           <TagListItem>Otros artículos de primera necesidad</TagListItem>
         </TagList>
-        <h3 className="mt-12 text-base font-nunito font-medium text-primary">
-          Además, conectamos a las familias con recursos comunitarios como:
-        </h3>
-        <List className="mt-4">
-          <ListItem title="">Clínicas de salud</ListItem>
-          <ListItem title="">Bancos de comida</ListItem>
-          <ListItem title="">Programas de apoyo local</ListItem>
-        </List>
         <AnimatedGroup
           variants={transitionVariants}
           className="flex flex-row items-start justify-start mt-12 gap-5"
