@@ -2768,7 +2768,7 @@ var buttonVariants = cva(
 // components/blocks/section-cta-links.tsx
 import { jsx as jsx34, jsxs as jsxs19 } from "react/jsx-runtime";
 var defaultCtalink = {
-  title: "Recursos comunitarios",
+  title: "Alcance comunitario",
   icon: {
     color: "purple",
     style: "float",

@@ -62,7 +62,7 @@ export const Ctalink: React.FC<PageBlocksCtalinksItems> = (data) => {
 };
 
 const defaultCtalink = {
-  title: "Recursos comunitarios",
+  title: "Alcance comunitario",
   icon: {
     color: "purple",
     style: "float",

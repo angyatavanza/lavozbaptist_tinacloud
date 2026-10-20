@@ -69,7 +69,7 @@ export const Tapdotlink: React.FC<PageBlocksTapdotlinksItems> = (data) => {
 };
 
 const defaultTapdotlink = {
-  title: "Recursos comunitarios",
+  title: "Alcance comunitario",
   icon: {
     color: "purple",
     style: "float",

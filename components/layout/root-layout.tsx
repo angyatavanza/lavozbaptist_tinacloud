@@ -49,7 +49,7 @@ const Navigation = () => {
         <NavigationItem href="/serve">Servir</NavigationItem>
       </NavigationRow>
        <NavigationRow  className="hidden md:block">
-        <NavigationItem href="/community-resources">Recursos comunitarios</NavigationItem> 
+        <NavigationItem href="/community-resources">Alcance comunitario</NavigationItem> 
         <NavigationItem href="/donations">Haz tu donación</NavigationItem>
       </NavigationRow>
     </nav>
