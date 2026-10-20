@@ -2875,7 +2875,7 @@ import Link10 from "next/link";
 import { tinaField as tinaField3 } from "tinacms/dist/react";
 import { jsx as jsx35, jsxs as jsxs20 } from "react/jsx-runtime";
 var defaultTapdotlink = {
-  title: "Recursos comunitarios",
+  title: "Alcance comunitario",
   icon: {
     color: "purple",
     style: "float",
