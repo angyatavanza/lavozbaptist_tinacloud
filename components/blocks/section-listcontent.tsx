@@ -44,7 +44,7 @@ export const Listcontent = ({ data }: { data: PageBlocksListcontent }) => {
     <div className="mx-auto px-4 md:px-5 mt-24 mb-10 md:mb-15 lg:mb-20 space-y-24 [counter-reset:section] md:mt-32 md:space-y-32 lg:mt-40 lg:space-y-40">
       <SectionIntro
         title={data.title ?? "Servicio comunitario"}
-        image={{ src: "/uploads/pages/LaVoz_Recursos_Comunitarios.jpeg", shape: 1  }}
+        image={{ src: "/uploads/pages/LaVoz_MinisterioAlcance_Hub.jpeg", shape: 2  }}
         data-tina-field={tinaField(data, "title")}
       >
         <div className="space-y-6 text-base text-body-foreground">
