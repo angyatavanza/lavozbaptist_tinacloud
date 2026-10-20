@@ -1479,19 +1479,20 @@ var createNavigation = (latestMessageUrl) => [
   {
     title: "Con\xE9ctate",
     links: [
-      { title: "Petici\xF3n de oraci\xF3n", href: "/prayer-request" },
       { title: "Primeros pasos", href: "/first-steps" },
+      { title: "Petici\xF3n de oraci\xF3n", href: "/prayer-request" },
       { title: "Grupos", href: "/groups" },
       { title: "Servir", href: "/serve" },
       { title: "Eventos", href: "/events" }
     ]
   },
   {
-    title: "Recursos comunitarios",
+    title: "Alcance",
     links: [
-      { title: "Recursos comunitarios", href: "/community-resources" },
-      { title: "Acceso a recursos", href: "/community-resources-form" },
-      { title: "Haz tu donaci\xF3n en l\xEDnea", href: "/donations" }
+      { title: "Alcance comunitario", href: "/community-resources" },
+      { title: "La Voz Community Foundation", href: "https://lavozcommunityfoundation.org/" },
+      { title: "Petici\xF3n de asistencia", href: "/community-resources-form" },
+      { title: "Haz tu donaci\xF3n", href: "/donations" }
     ]
   }
 ];
@@ -5166,17 +5167,13 @@ import { jsx as jsx66, jsxs as jsxs46 } from "react/jsx-runtime";
 // components/blocks/section-listcontent.tsx
 import { tinaField as tinaField25 } from "tinacms/dist/react";
 
-// components/ui/tag-list.tsx
-import clsx12 from "clsx";
-import { jsx as jsx67 } from "react/jsx-runtime";
-
 // components/ui/list.tsx
-import clsx13 from "clsx";
-import { jsx as jsx68, jsxs as jsxs47 } from "react/jsx-runtime";
+import clsx12 from "clsx";
+import { jsx as jsx67, jsxs as jsxs47 } from "react/jsx-runtime";
 
 // components/blocks/section-listcontent.tsx
 import Link25 from "next/link";
-import { jsx as jsx69, jsxs as jsxs48 } from "react/jsx-runtime";
+import { jsx as jsx68, jsxs as jsxs48 } from "react/jsx-runtime";
 var listcontentBlockSchema = {
   name: "listcontent",
   label: "Listcontent",
@@ -5250,7 +5247,7 @@ var listcontentBlockSchema = {
 };
 
 // components/layout/steps-section.tsx
-import { jsx as jsx70, jsxs as jsxs49 } from "react/jsx-runtime";
+import { jsx as jsx69, jsxs as jsxs49 } from "react/jsx-runtime";
 
 // components/blocks/section-first-steps.tsx
 import { tinaField as tinaField26 } from "tinacms/dist/react";
@@ -5266,69 +5263,69 @@ import { Prism } from "tinacms/dist/rich-text/prism";
 
 // components/forms/contact-details.tsx
 import Link26 from "next/link";
-import { jsx as jsx71, jsxs as jsxs50 } from "react/jsx-runtime";
+import { jsx as jsx70, jsxs as jsxs50 } from "react/jsx-runtime";
 
 // components/forms/serve-details.tsx
 import Link27 from "next/link";
-import { jsx as jsx72, jsxs as jsxs51 } from "react/jsx-runtime";
+import { jsx as jsx71, jsxs as jsxs51 } from "react/jsx-runtime";
 
 // components/forms/prayer-details.tsx
 import Link28 from "next/link";
-import { jsx as jsx73, jsxs as jsxs52 } from "react/jsx-runtime";
+import { jsx as jsx72, jsxs as jsxs52 } from "react/jsx-runtime";
 
 // components/forms/resources-details.tsx
 import Link29 from "next/link";
-import { jsx as jsx74, jsxs as jsxs53 } from "react/jsx-runtime";
+import { jsx as jsx73, jsxs as jsxs53 } from "react/jsx-runtime";
 
 // components/forms/visitor-details.tsx
 import Link30 from "next/link";
-import { jsx as jsx75, jsxs as jsxs54 } from "react/jsx-runtime";
+import { jsx as jsx74, jsxs as jsxs54 } from "react/jsx-runtime";
 
 // components/forms/contact-form.tsx
 import { useForm } from "react-hook-form";
 
 // components/forms/text-input.tsx
 import { useId as useId3 } from "react";
-import { jsx as jsx76, jsxs as jsxs55 } from "react/jsx-runtime";
+import { jsx as jsx75, jsxs as jsxs55 } from "react/jsx-runtime";
 
 // components/forms/radio-input.tsx
-import { jsx as jsx77, jsxs as jsxs56 } from "react/jsx-runtime";
+import { jsx as jsx76, jsxs as jsxs56 } from "react/jsx-runtime";
 
 // components/layout/wrapper.tsx
-import { jsx as jsx78 } from "react/jsx-runtime";
+import { jsx as jsx77 } from "react/jsx-runtime";
 
 // components/forms/mail-sent-state.tsx
-import { jsx as jsx79, jsxs as jsxs57 } from "react/jsx-runtime";
+import { jsx as jsx78, jsxs as jsxs57 } from "react/jsx-runtime";
 
 // components/forms/contact-form.tsx
 import { useState as useState7 } from "react";
-import { jsx as jsx80, jsxs as jsxs58 } from "react/jsx-runtime";
+import { jsx as jsx79, jsxs as jsxs58 } from "react/jsx-runtime";
 
 // components/forms/prayer-form.tsx
 import { useForm as useForm2 } from "react-hook-form";
 import { useState as useState8 } from "react";
-import { jsx as jsx81, jsxs as jsxs59 } from "react/jsx-runtime";
+import { jsx as jsx80, jsxs as jsxs59 } from "react/jsx-runtime";
 
 // components/forms/resources-form.tsx
 import { useForm as useForm3 } from "react-hook-form";
 import { useState as useState9 } from "react";
-import { jsx as jsx82, jsxs as jsxs60 } from "react/jsx-runtime";
+import { jsx as jsx81, jsxs as jsxs60 } from "react/jsx-runtime";
 
 // components/forms/serve-form.tsx
 import { useForm as useForm4 } from "react-hook-form";
 import { useState as useState10 } from "react";
-import { jsx as jsx83, jsxs as jsxs61 } from "react/jsx-runtime";
+import { jsx as jsx82, jsxs as jsxs61 } from "react/jsx-runtime";
 
 // components/forms/visitor-form.tsx
 import { useForm as useForm5 } from "react-hook-form";
 import { useState as useState11 } from "react";
-import { jsx as jsx84, jsxs as jsxs62 } from "react/jsx-runtime";
+import { jsx as jsx83, jsxs as jsxs62 } from "react/jsx-runtime";
 
 // components/mdx-components.tsx
-import { Fragment as Fragment12, jsx as jsx85, jsxs as jsxs63 } from "react/jsx-runtime";
+import { Fragment as Fragment12, jsx as jsx84, jsxs as jsxs63 } from "react/jsx-runtime";
 
 // components/blocks/section-first-steps.tsx
-import { jsx as jsx86, jsxs as jsxs64 } from "react/jsx-runtime";
+import { jsx as jsx85, jsxs as jsxs64 } from "react/jsx-runtime";
 var nextstepsBlockSchema = {
   name: "nextsteps",
   label: "Nextsteps",
@@ -5411,7 +5408,7 @@ var nextstepsBlockSchema = {
 // components/blocks/section-contact.tsx
 import Link31 from "next/link";
 import { tinaField as tinaField27 } from "tinacms/dist/react";
-import { jsx as jsx87, jsxs as jsxs65 } from "react/jsx-runtime";
+import { jsx as jsx86, jsxs as jsxs65 } from "react/jsx-runtime";
 var contactsectionBlockSchema = {
   name: "contactsection",
   label: "Contactsection",

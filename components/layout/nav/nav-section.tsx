@@ -40,19 +40,20 @@ export const createNavigation = (latestMessageUrl?: string): NavigationSection[]
   {
     title: "Conéctate",
     links: [
-      { title: "Petición de oración", href: "/prayer-request" },
       { title: "Primeros pasos", href: "/first-steps" },
+      { title: "Petición de oración", href: "/prayer-request" },
       { title: "Grupos", href: "/groups" },
       { title: "Servir", href: "/serve" },
       { title: "Eventos", href: "/events" },
     ],
   },
   {
-    title: "Recursos comunitarios",
+    title: "Alcance",
     links: [
-      { title: "Recursos comunitarios", href: "/community-resources" },
-      { title: "Acceso a recursos", href: "/community-resources-form" },
-      { title: "Haz tu donación en línea", href: "/donations" },
+      { title: "Alcance comunitario", href: "/community-resources" },
+      { title: "La Voz Community Foundation", href: "https://lavozcommunityfoundation.org/" },
+      { title: "Petición de asistencia", href: "/community-resources-form" },
+      { title: "Haz tu donación", href: "/donations" },
     ],
   },
 ];

@@ -56,17 +56,17 @@ export const Listcontent = ({ data }: { data: PageBlocksListcontent }) => {
           </p>
         </div>
         <h3 className="mt-12 text-base font-nunito font-medium text-primary">
-          Conectamos a las familias con recursos comunitarios como:
+          En colaboración con La Voz Community Foundation, conectamos a las familias con recursos comunitarios como:
         </h3>
         <List className="mt-4">
           <ListItem title="">Clínicas de salud</ListItem>
-          <ListItem title="">Campaña de útiles escolares</ListItem>
           <ListItem title="">Clases de computacion y Ingles</ListItem>
-          <ListItem title="">Bancos de comida incluyendo el Día de Acción de Gracias</ListItem>
-          <ListItem title="">HUB - Apoyo para mamás embarazadas y/o con bebés de hasta 12 meses</ListItem>
+          <ListItem title="">Campaña de entrega de útiles escolares</ListItem>
+          <ListItem title="">Campaña de entrega de alimentos</ListItem>
+          <ListItem title="">Apoyo para mamás embarazadas y/o con bebés</ListItem>
           <ListItem title="">Otros programas de apoyo local</ListItem>
         </List>
-         <h3 className="mt-12 text-base font-nunito font-medium text-primary">
+        {/* <h3 className="mt-12 text-base font-nunito font-medium text-primary">
           A través de nuestro HUB mensual, ofrecemos suministros esenciales como:
         </h3>
         <TagList className="mt-4">
@@ -75,7 +75,7 @@ export const Listcontent = ({ data }: { data: PageBlocksListcontent }) => {
           <TagListItem>Shampoo y jabón para bebé</TagListItem>
           <TagListItem>Toallitas húmedas</TagListItem>
           <TagListItem>Otros artículos de primera necesidad</TagListItem>
-        </TagList>
+        </TagList> */}
         <AnimatedGroup
           variants={transitionVariants}
           className="flex flex-row items-start justify-start mt-12 gap-5"
