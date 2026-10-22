@@ -51,7 +51,7 @@ export const createNavigation = (latestMessageUrl?: string): NavigationSection[]
     title: "Alcance",
     links: [
       { title: "Alcance comunitario", href: "/community-resources" },
-      { title: "La Voz Community Foundation", href: "https://lavozcommunityfoundation.org/" },
+      { title: "La Voz Community Foundation", href: "https://lavozcommunityfoundation.org" },
       { title: "Petición de asistencia", href: "/community-resources-form" },
       { title: "Haz tu donación", href: "/donations" },
     ],
